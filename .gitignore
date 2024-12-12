@@ -1,2 +1,5 @@
-data/
+data/census
+data/ethnicity
+data/geo
+
 gis/
