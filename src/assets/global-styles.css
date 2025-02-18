@@ -1,0 +1,69 @@
+@font-face {
+	font-family: TradeGothicBold;
+	src: url("Trade Gothic LT Bold.ttf");
+}
+
+@font-face {
+	font-family: RobotoRegular;
+	src: url("roboto/Roboto-Regular.ttf");
+}
+
+@font-face {
+	font-family: RobotoBold;
+	src: url("roboto/Roboto-Bold.ttf");
+}
+
+@font-face {
+	font-family: SourceSerif;
+	src: url("source-serif-pro/SourceSerifPro-Regular.otf");
+}
+
+@font-face {
+	font-family: SourceSerifBold;
+	src: url("source-serif-pro/SourceSerifPro-SemiBold.otf");
+}
+
+:root {
+	font-family: Roboto, sans-serif;
+	--brandDarkBlue: #1E3765;
+	--brandMedBlue: #007FA3;
+	--brandLightBlue: #6FC7EA;
+	--brandPurple: #6D247A;
+	--brandPink: #AB1368;
+	--brandDarkGreen: #0D534D;
+	--brandMedGreen: #00A189;
+	--brandLightGreen: #8DBF2E;
+	--brandRed: #DC4633;
+	--brandYellow: #F1C500;
+	--brandBlack: #000000;
+	--brandWhite: #ffffff;
+	--brandGray: #D0D1C9;
+	--brandGray70: #4d4d4d;
+	--brandGray80: #333333;
+	--brandGray90: #191919;
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	/* background-color: #01062f; */
+	overflow-x: hidden;
+}
+
+@media (max-width: 400px) {
+	body {
+		overflow-x: scroll;
+	}
+}
+
+main {
+	margin: 0 auto;
+	padding: 0px;
+	width: calc(100%);
+	min-width: 360px;
+	max-width: 1920px;
+	margin-bottom: 100px;
+	position: relative;
+	/* background: #01062f; */
+}
+
