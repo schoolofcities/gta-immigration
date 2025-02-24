@@ -25,3 +25,6 @@ vite.config.ts.timestamp-*
 *.sln
 *.sw?
 
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
