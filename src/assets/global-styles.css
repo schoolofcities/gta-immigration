@@ -1,6 +1,16 @@
 @font-face {
+	font-family: TradeGothicLTLightOblique;
+	src: url("trade-gothic/Trade Gothic LT Light Oblique.ttf");
+}
+
+@font-face {
+	font-family: TradeGothicLTLight;
+	src: url("trade-gothic/Trade Gothic LT Light.ttf");
+}
+
+@font-face {
 	font-family: TradeGothicBold;
-	src: url("Trade Gothic LT Bold.ttf");
+	src: url("trade-gothic/Trade Gothic LT Bold.ttf");
 }
 
 @font-face {
@@ -46,24 +56,103 @@
 body {
 	padding: 0px;
 	margin: 0px;
-	/* background-color: #01062f; */
-	overflow-x: hidden;
-}
-
-@media (max-width: 400px) {
-	body {
-		overflow-x: scroll;
-	}
+	background-color: var(--brandWhite);
+	min-width: 350px;
 }
 
 main {
 	margin: 0 auto;
-	padding: 0px;
-	width: calc(100%);
-	min-width: 360px;
-	max-width: 1920px;
-	margin-bottom: 100px;
+	width: 100%;
+	min-width: 320px;
+	max-width: 100%;
 	position: relative;
-	/* background: #01062f; */
 }
 
+.top-image {
+	padding-top: 100px;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.top-image img {
+	max-width: 100%;
+	height: auto;
+}
+
+.title {
+	background-color: none;
+	max-width: 700px;
+	margin: 0 auto;
+	margin-top: 50px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-bottom: 0px;
+	position: relative;
+	border-bottom: solid 1px var(--brandBlack);
+}
+
+.title p {
+	margin-top: 50px;
+    line-height: 18px;
+    font-size: 15px;
+	margin-bottom: 24px;
+}
+
+.text {
+	background-color: none;
+	max-width: 700px;
+	margin: 0 auto;
+	position: relative;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+h1 {
+	font-family: TradeGothicBold;
+	font-size: 46px;
+	color: var(--brandDarkBlue);
+	border-bottom: solid 1px var(--brandGray);
+	text-decoration: none;
+	margin-bottom: 10px;
+	padding: 0px;
+}
+
+h2 {
+	text-align: left;
+	font-family: TradeGothicBold;
+	font-size: 29.5px;
+	margin-top: 0px;
+	color: var(--brandDarkGreen);
+}
+
+h3 {
+	text-align: left;
+	font-family: TradeGothicBold;
+	font-size: 24px;
+	border-bottom: solid 1px var(--brandGray);
+	color: var(--brandBlack);
+}
+
+p {
+	font-family: SourceSerif;
+    color: var(--brandBlack);
+    text-align: left;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+b {
+	font-family: SourceSerifBold;
+}
+
+a {
+	color: var(--brandDarkBlue);
+	text-decoration: underline;
+	font-family: SourceSerif;
+}
+
+a:hover {
+	color: var(--brandMedBlue);
+}
