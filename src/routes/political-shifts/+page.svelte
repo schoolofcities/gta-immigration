@@ -1,4 +1,5 @@
 <script>
+    import CensusVoteMaps from '$lib/CensusVoteMaps.svelte';
 </script>
 
 <main>
@@ -16,6 +17,7 @@
     </div>
 
     <!-- Dual panel of constituency maps: vote share & immigrant percent -->
+    <CensusVoteMaps />
 
     <!-- View correlation for any given election -->
 
