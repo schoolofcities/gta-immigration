@@ -22,6 +22,9 @@
     let years = $state(FELXN_YEARS);
     let geoJsonData = $state(null);
 
+    let parties = $state([]);
+    let censusVariables = $state([]);
+
     function syncMaps(movingMap, targetMap) {
         movingMap.on("move", () => {
             if (!syncing) {
@@ -35,6 +38,22 @@
         });
     }
 
+    function updateSelectOptions() {
+        if (geoJsonData && geoJsonData.features.length > 0) {
+            const properties = geoJsonData.features[0].properties;
+
+            parties = [];
+            if (properties.lib_pct !== null) parties.push("Liberals");
+            if (properties.cons1_pct !== null) parties.push("Conservatives");
+            if (properties.ndp_pct !== null) parties.push("New Democrats");
+            if (properties.cons2_pct !== null) parties.push("Reform/Alliance");
+
+            censusVariables = [];
+            if (properties.pct_imm !== null) censusVariables.push("Percent immigrants");
+            if (properties.avg_hou_inc !== null) censusVariables.push("Average Household Income");
+        }
+    }
+
     function loadGeoJson() {
         const filePath = `/data/elections/${region}_stats_${year}.geojson`;
         fetch(filePath)
@@ -42,6 +61,7 @@
             .then(data => {
                 geoJsonData = data;
                 console.log($state.snapshot(geoJsonData));
+                updateSelectOptions();
             });
     }
 
@@ -101,13 +121,21 @@
 <div class="map-container">
     <div class="map-section">
         <div class="map-controls">
-            <select></select>
+            <select>
+                {#each parties as party}
+                    <option value={party}>{party}</option>
+                {/each}
+            </select>
         </div>
         <div id="map1" class="map"></div>
     </div>
     <div class="map-section">
         <div class="map-controls">
-            <select></select>
+            <select>
+                {#each censusVariables as variable}
+                    <option value={variable}>{variable}</option>
+                {/each}
+            </select>
         </div>
         <div id="map2" class="map"></div>
     </div>
