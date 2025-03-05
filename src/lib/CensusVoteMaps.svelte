@@ -17,10 +17,10 @@
     // Prevent infinite update loops
     let syncing = false;
 
-    let region = "fed";
-    let year = 2021;
-    let years = FELXN_YEARS;
-    let geoJsonData = null;
+    let region = $state("fed");
+    let year = $state(2021);
+    let years = $state(FELXN_YEARS);
+    let geoJsonData = $state(null);
 
     function syncMaps(movingMap, targetMap) {
         movingMap.on("move", () => {
@@ -41,7 +41,7 @@
             .then(response => response.json())
             .then(data => {
                 geoJsonData = data;
-                console.log(geoJsonData);
+                console.log($state.snapshot(geoJsonData));
             });
     }
 
@@ -87,11 +87,11 @@
 </script>
 
 <div class="controls">
-    <select on:change={handleRegionChange}>
+    <select onchange={handleRegionChange}>
         <option value="fed" selected>Federal</option>
         <option value="ont-ed">Ontario</option>
     </select>
-    <select on:change={handleYearChange}>
+    <select onchange={handleYearChange}>
         {#each years as y}
             <option value={y} selected={y === year}>{y}</option>
         {/each}
