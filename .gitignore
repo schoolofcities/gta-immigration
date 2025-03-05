@@ -1,7 +1,6 @@
 # Project specific
-/data/
-!/data/static/
-/static/data/
+data/
+!static/data
 gis/
 vis/
 
