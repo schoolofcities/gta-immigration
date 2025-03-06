@@ -43,14 +43,14 @@
             const properties = geoJsonData.features[0].properties;
 
             parties = [];
-            if (properties.lib_pct !== null) parties.push("Liberals");
-            if (properties.cons1_pct !== null) parties.push("Conservatives");
-            if (properties.ndp_pct !== null) parties.push("New Democrats");
-            if (properties.cons2_pct !== null) parties.push("Reform/Alliance");
+            if (properties.lib_pct !== null) parties.push({ name: "Liberals", property: "lib_pct" });
+            if (properties.cons1_pct !== null) parties.push({ name: "Conservatives", property: "cons1_pct" });
+            if (properties.ndp_pct !== null) parties.push({ name: "New Democrats", property: "ndp_pct" });
+            if (properties.cons2_pct !== null) parties.push({ name: "Reform/Alliance", property: "cons2_pct" });
 
             censusVariables = [];
-            if (properties.pct_imm !== null) censusVariables.push("Percent immigrants");
-            if (properties.avg_hou_inc !== null) censusVariables.push("Average Household Income");
+            if (properties.pct_imm !== null) censusVariables.push({ name: "Percent immigrants", property: "pct_imm" });
+            if (properties.avg_hou_inc !== null) censusVariables.push({ name: "Average Household Income", property: "avg_hou_inc" });
         }
     }
 
@@ -123,7 +123,7 @@
         <div class="map-controls">
             <select>
                 {#each parties as party}
-                    <option value={party}>{party}</option>
+                    <option value={party.property}>{party.name}</option>
                 {/each}
             </select>
         </div>
@@ -133,7 +133,7 @@
         <div class="map-controls">
             <select>
                 {#each censusVariables as variable}
-                    <option value={variable}>{variable}</option>
+                    <option value={variable.property}>{variable.name}</option>
                 {/each}
             </select>
         </div>
