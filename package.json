@@ -17,6 +17,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"d3": "^7.9.0",
 		"maplibre-gl": "^5.2.0",
 		"pmtiles": "^4.3.0",
 		"protomaps-themes-base": "^4.5.0"
