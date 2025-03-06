@@ -66,6 +66,14 @@
             censusVariables = [];
             if (properties.pct_imm !== null) censusVariables.push({ name: "Percent immigrants", property: "pct_imm" });
             if (properties.avg_hou_inc !== null) censusVariables.push({ name: "Average Household Income", property: "avg_hou_inc" });
+
+            // Ensure selectedParty and selectedCensusVariable are valid
+            if (!parties.some(p => p.property === selectedParty)) {
+                selectedParty = parties.length > 0 ? parties[0].property : null;
+            }
+            if (!censusVariables.some(v => v.property === selectedCensusVariable)) {
+                selectedCensusVariable = censusVariables.length > 0 ? censusVariables[0].property : null;
+            }
         }
     }
 
@@ -77,6 +85,8 @@
                 geoJsonData = data;
                 console.log($state.snapshot(geoJsonData));
                 updateSelectOptions();
+                updatePartyMapLayer();
+                updateCensusMapLayer();
             });
     }
 
