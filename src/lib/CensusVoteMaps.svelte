@@ -25,6 +25,15 @@
     let parties = $state([]);
     let censusVariables = $state([]);
 
+    let selectedParty = $state("lib_pct");
+
+    const partyColors = {
+        lib_pct: ["#f5c3c5", "#f1a6a9", "#ec888c", "#e76a6f", "#e34d53", "#de2f36", "#da121a", "#be0f16"],
+        cons1_pct: ["#c4c9d2", "#a7aebb", "#8a93a5", "#6c788f", "#4f5d78", "#324262", "#15284c", "#122342"],
+        ndp_pct: ["#fbdebf", "#f9cd9f", "#f7bd7f", "#f5ad5f", "#f39c3f", "#f18c1f", "#f07c00", "#d26c00"],
+        cons2_pct: ["#caecda", "#b0e3c7", "#96dab5", "#7bd0a2", "#61c790", "#47be7d", "#2db56b", "#279e5d"]
+    };
+
     function syncMaps(movingMap, targetMap) {
         movingMap.on("move", () => {
             if (!syncing) {
@@ -77,6 +86,65 @@
         loadGeoJson();
     }
 
+    function updatePartyMapLayer() {
+        if (map1.getLayer("party-vote-share-boundary")) {
+            map1.removeLayer("party-vote-share-boundary");
+        }
+        if (map1.getLayer("party-vote-share")) {
+            map1.removeLayer("party-vote-share");
+        }
+        if (map1.getSource("party-vote-share")) {
+            map1.removeSource("party-vote-share");
+        }
+
+        map1.addSource("party-vote-share", {
+            type: "geojson",
+            data: geoJsonData
+        });
+
+        map1.addLayer({
+            id: "party-vote-share",
+            type: "fill",
+            source: "party-vote-share",
+            paint: {
+                "fill-color": [
+                    "step",
+                    ["get", selectedParty],
+                    partyColors[selectedParty][0], 0,
+                    partyColors[selectedParty][1], 10,
+                    partyColors[selectedParty][2], 20,
+                    partyColors[selectedParty][3], 30,
+                    partyColors[selectedParty][4], 40,
+                    partyColors[selectedParty][5], 50,
+                    partyColors[selectedParty][6], 60,
+                    partyColors[selectedParty][7] // above 60
+                ],
+                "fill-opacity": 0.75
+            }
+        });
+
+        map1.addLayer({
+            id: "party-vote-share-boundary",
+            type: "line",
+            source: "party-vote-share",
+            paint: {
+                "line-color": "#000000",
+                "line-width": 0.5
+            }
+        });
+    }
+
+    $effect(() => {
+        if (geoJsonData) {
+            updatePartyMapLayer();
+        }
+    });
+
+    function handlePartyChange(event) {
+        selectedParty = event.target.value;
+        updatePartyMapLayer();
+    }
+
     onMount(() => {
         map1 = new maplibregl.Map({
             container: "map1",
@@ -121,7 +189,7 @@
 <div class="map-container">
     <div class="map-section">
         <div class="map-controls">
-            <select>
+            <select onchange={handlePartyChange}>
                 {#each parties as party}
                     <option value={party.property}>{party.name}</option>
                 {/each}
