@@ -26,12 +26,18 @@
     let censusVariables = $state([]);
 
     let selectedParty = $state("lib_pct");
+    let selectedCensusVariable = $state("pct_imm");
 
     const partyColors = {
         lib_pct: ["#f5c3c5", "#f1a6a9", "#ec888c", "#e76a6f", "#e34d53", "#de2f36", "#da121a", "#be0f16"],
         cons1_pct: ["#c4c9d2", "#a7aebb", "#8a93a5", "#6c788f", "#4f5d78", "#324262", "#15284c", "#122342"],
         ndp_pct: ["#fbdebf", "#f9cd9f", "#f7bd7f", "#f5ad5f", "#f39c3f", "#f18c1f", "#f07c00", "#d26c00"],
         cons2_pct: ["#caecda", "#b0e3c7", "#96dab5", "#7bd0a2", "#61c790", "#47be7d", "#2db56b", "#279e5d"]
+    };
+
+    const censusColors = {
+        pct_imm: ["#dfe7e2", "#bfd0c6", "#9fb8a9", "#7fa18d", "#5f8a70", "#3f7254", "#1f5b37", "#00441b"], // Darker green
+        avg_hou_inc: ["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#f03b20", "#d95f0e"] // Not very dark yellow
     };
 
     function syncMaps(movingMap, targetMap) {
@@ -134,15 +140,93 @@
         });
     }
 
+    function updateCensusMapLayer() {
+        if (map2.getLayer("census-variable-boundary")) {
+            map2.removeLayer("census-variable-boundary");
+        }
+        if (map2.getLayer("census-variable")) {
+            map2.removeLayer("census-variable");
+        }
+        if (map2.getSource("census-variable")) {
+            map2.removeSource("census-variable");
+        }
+
+        map2.addSource("census-variable", {
+            type: "geojson",
+            data: geoJsonData
+        });
+
+        let paintConfig;
+        if (selectedCensusVariable === "pct_imm") {
+            paintConfig = [
+                "step",
+                ["get", selectedCensusVariable],
+                censusColors.pct_imm[0], 0,
+                censusColors.pct_imm[1], 0.1,
+                censusColors.pct_imm[2], 0.2,
+                censusColors.pct_imm[3], 0.3,
+                censusColors.pct_imm[4], 0.4,
+                censusColors.pct_imm[5], 0.5,
+                censusColors.pct_imm[6], 0.6,
+                censusColors.pct_imm[7], 0.7,
+                censusColors.pct_imm[7] // above 0.7
+            ];
+        } else if (selectedCensusVariable === "avg_hou_inc") {
+            const values = geoJsonData.features.map(f => f.properties.avg_hou_inc);
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+            const step = (max - min) / 6;
+
+            paintConfig = [
+                "interpolate",
+                ["linear"],
+                ["get", selectedCensusVariable],
+                min, censusColors.avg_hou_inc[0],
+                min + step, censusColors.avg_hou_inc[1],
+                min + 2 * step, censusColors.avg_hou_inc[2],
+                min + 3 * step, censusColors.avg_hou_inc[3],
+                min + 4 * step, censusColors.avg_hou_inc[4],
+                min + 5 * step, censusColors.avg_hou_inc[5],
+                max, censusColors.avg_hou_inc[6]
+            ];
+        }
+
+        map2.addLayer({
+            id: "census-variable",
+            type: "fill",
+            source: "census-variable",
+            paint: {
+                "fill-color": paintConfig,
+                "fill-opacity": 0.75
+            }
+        });
+
+        map2.addLayer({
+            id: "census-variable-boundary",
+            type: "line",
+            source: "census-variable",
+            paint: {
+                "line-color": "#000000",
+                "line-width": 0.5
+            }
+        });
+    }
+
     $effect(() => {
         if (geoJsonData) {
             updatePartyMapLayer();
+            updateCensusMapLayer();
         }
     });
 
     function handlePartyChange(event) {
         selectedParty = event.target.value;
         updatePartyMapLayer();
+    }
+
+    function handleCensusVariableChange(event) {
+        selectedCensusVariable = event.target.value;
+        updateCensusMapLayer();
     }
 
     onMount(() => {
@@ -199,7 +283,7 @@
     </div>
     <div class="map-section">
         <div class="map-controls">
-            <select>
+            <select onchange={handleCensusVariableChange}>
                 {#each censusVariables as variable}
                     <option value={variable.property}>{variable.name}</option>
                 {/each}
