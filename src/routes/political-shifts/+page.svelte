@@ -16,13 +16,25 @@
         </p>
     </div>
 
+    <div class="text">
+        <h2>How do ridings compare?</h2>
+        <p>text here</p>
+    </div>
     <!-- Dual panel of constituency maps: vote share & immigrant percent -->
     <CensusVoteMaps />
 
+    <div class="text">
+        <h2>Does party vote share correspond to where immigrants live?</h2>
+        <p>text here</p>
+    </div>
     <!-- View correlation for any given election -->
 
     <!-- View trend line of mean correlation (choose party) -->
 
+    <div class="text">
+        <h2>How has party vote share changed in immigrant dominated ridings?</h2>
+        <p>text here</p>
+    </div>
     <!-- View trend line mean vote share (choose party) for high immigrant ridings -->
 </main>
 
