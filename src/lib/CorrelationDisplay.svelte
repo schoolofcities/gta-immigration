@@ -70,30 +70,43 @@
         }));
 
         const svg = d3.select("#scatter-display").html("").append("svg")
-            .attr("width", 500)
+            .attr("width", "100%")
             .attr("height", 500);
 
-        const margin = { top: 20, right: 30, bottom: 40, left: 40 };
-        const width = +svg.attr("width") - margin.left - margin.right;
+        const margin = { top: 20, right: 30, bottom: 60, left: 60 };
+        const width = svg.node().getBoundingClientRect().width - margin.left - margin.right;
         const height = +svg.attr("height") - margin.top - margin.bottom;
 
         const x = d3.scaleLinear()
-            .domain(d3.extent(data, d => d.x)).nice()
+            .domain([0, 80])
             .range([margin.left, width - margin.right]);
 
         const y = d3.scaleLinear()
-            .domain(d3.extent(data, d => d.y)).nice()
+            .domain([0, 0.7])
             .range([height - margin.bottom, margin.top]);
 
         const xAxis = g => g
             .attr("transform", `translate(0,${height - margin.bottom})`)
-            .call(d3.axisBottom(x).ticks(width / 80))
-            .call(g => g.select(".domain").remove());
+            .call(d3.axisBottom(x).ticks(8))
+            .call(g => g.select(".domain").remove())
+            .append("text")
+            .attr("x", width / 2)
+            .attr("y", 40)
+            .attr("fill", "black")
+            .attr("text-anchor", "middle")
+            .text(parties.find(p => p.property === curParty)?.name + " vote percent");
 
         const yAxis = g => g
             .attr("transform", `translate(${margin.left},0)`)
-            .call(d3.axisLeft(y))
-            .call(g => g.select(".domain").remove());
+            .call(d3.axisLeft(y).ticks(7))
+            .call(g => g.select(".domain").remove())
+            .append("text")
+            .attr("x", -height / 2)
+            .attr("y", -40)
+            .attr("fill", "black")
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .text("Proportion of immigrants");
 
         svg.append("g").call(xAxis);
         svg.append("g").call(yAxis);

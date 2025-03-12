@@ -29,8 +29,11 @@
         <h2>Does party vote share correspond to where immigrants live?</h2>
         <p>text here</p>
     </div>
+    
     <!-- View graph of all data points and correlation year (choose party+year) -->
-    <CorrelationDisplay />
+    <div class="container">
+        <CorrelationDisplay />
+    </div>
 
     <!-- View trend line of correlation (choose party) -->
     <CorrelationTimeline />

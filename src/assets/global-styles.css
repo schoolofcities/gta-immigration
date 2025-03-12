@@ -108,6 +108,16 @@ main {
 	padding-top: 15px;
 }
 
+.container {
+	background-color: none;
+	max-width: 700px;
+	margin: 0 auto;
+	position: relative;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 15px;
+}
+
 h1 {
 	font-family: TradeGothicBold;
 	font-size: 46px;
