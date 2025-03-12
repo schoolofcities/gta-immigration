@@ -83,7 +83,7 @@
             .then(response => response.json())
             .then(data => {
                 geoJsonData = data;
-                console.log($state.snapshot(geoJsonData));
+                // console.log($state.snapshot(geoJsonData));
                 updateSelectOptions();
                 updatePartyMapLayer();
                 updateCensusMapLayer();
