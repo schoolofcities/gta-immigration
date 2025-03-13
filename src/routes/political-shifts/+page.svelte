@@ -35,8 +35,14 @@
         <CorrelationDisplay />
     </div>
 
+    <div class="text">
+        <p>text here</p>
+    </div>
+
     <!-- View trend line of correlation (choose party) -->
-    <CorrelationTimeline />
+    <div class="container">
+        <CorrelationTimeline />
+    </div>
 
     <div class="text">
         <h2>How has party vote share changed in immigrant dominated ridings?</h2>

@@ -9,6 +9,7 @@
     let parties = $state([]);
     let curParty = $state("lib_pct");
     let geoJsonData = $state(null);
+    let correlation = $state(0);
 
     const partyColors = {
         lib_pct: "#da121a",
@@ -23,9 +24,9 @@
             .then(response => response.json())
             .then(data => {
                 geoJsonData = data;
-                console.log($state.snapshot(geoJsonData));
+                // console.log($state.snapshot(geoJsonData));
                 updateSelectOptions();
-                renderScatterPlot();
+                loadCorrelation();
             });
     }
 
@@ -58,7 +59,34 @@
 
     function handlePartyChange(event) {
         curParty = event.target.value;
-        renderScatterPlot();
+        loadCorrelation();
+    }
+
+    function loadCorrelation() {
+        // Load the CSV file using a Promise
+        d3.csv(`/data/elections_analysis/ed_corrs.csv`)
+            .then(data => {
+                const normalizedRegion = region === 'ont-ed' ? 'ontario' : region === 'fed' ? 'federal' : region;
+                const party = curParty.split('_')[0];
+                const columnName = `corr_pct_imm_${party}`;
+
+                // Find the row that matches the curYear and normalizedRegion
+                const row = data.find(d => d.year === curYear.toString() && d.region === normalizedRegion);
+
+                // Set the correlation value
+                if (row && row[columnName]) {
+                    correlation = parseFloat(row[columnName]);
+                } else {
+                    correlation = 0; // Set to zero if no value is found
+                }
+
+                // console.log($state.snapshot(correlation));
+                renderScatterPlot();
+            })
+            .catch(error => {
+                console.error('Error loading CSV file:', error);
+                correlation = 0; // Set to zero in case of an error
+            });
     }
 
     function renderScatterPlot() {
@@ -121,6 +149,38 @@
             .attr("cy", d => y(d.y))
             .attr("r", 3)
             .attr("fill", partyColors[curParty]);
+
+        // Add correlation line
+        const line = d3.line()
+            .x(d => x(d.x))
+            .y(d => y(d.y));
+
+        const xMean = d3.mean(data, d => d.x);
+        const yMean = d3.mean(data, d => d.y);
+        const slope = correlation * (d3.deviation(data, d => d.y) / d3.deviation(data, d => d.x));
+        const intercept = yMean - slope * xMean;
+
+        const lineData = [
+            { x: 0, y: intercept },
+            { x: 80, y: intercept + slope * 80 }
+        ];
+
+        svg.append("path")
+            .datum(lineData)
+            .attr("fill", "none")
+            .attr("stroke", "purple")
+            .attr("stroke-width", 2)
+            .attr("stroke-dasharray", "4,4")
+            .attr("clip-path", "url(#clip)")
+            .attr("d", line);
+
+        svg.append("defs").append("clipPath")
+            .attr("id", "clip")
+            .append("rect")
+            .attr("x", margin.left)
+            .attr("y", margin.top)
+            .attr("width", width - margin.left - margin.right)
+            .attr("height", height - margin.top - margin.bottom);
     }
 
     onMount(() => {
