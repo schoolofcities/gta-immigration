@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import { FELXN_YEARS, ONTELXN_YEARS } from "../lib/constants.js";
+    import { FELXN_YEARS, ONTELXN_YEARS, PARTY_COLOURS } from "../lib/constants.js";
     import * as d3 from 'd3';
 
     let region = $state("fed");
@@ -10,13 +10,6 @@
     let curParty = $state("lib_pct");
     let geoJsonData = $state(null);
     let correlation = $state(0);
-
-    const partyColors = {
-        lib_pct: "#da121a",
-        cons1_pct: "#15284c", 
-        ndp_pct: "#f07c00", 
-        cons2_pct: "#2db56b", 
-    };
 
     function loadGeoJson() {
         const filePath = `/data/elections/${region}_stats_${curYear}.geojson`;
@@ -148,7 +141,7 @@
             .attr("cx", d => x(d.x))
             .attr("cy", d => y(d.y))
             .attr("r", 3)
-            .attr("fill", partyColors[curParty]);
+            .attr("fill", PARTY_COLOURS[curParty]);
 
         // Add correlation line
         const line = d3.line()

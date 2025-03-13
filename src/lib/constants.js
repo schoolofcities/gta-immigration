@@ -7,3 +7,10 @@ export const ONTELXN_YEARS = [
     1963, 1967, 1971, 1975, 1977, 1981, 1985, 1987, 1990, 1995, 
     1999, 2003, 2007, 2011, 2014, 2018, 2022
 ];
+
+export const PARTY_COLOURS = {
+    lib_pct: "#da121a",
+    cons1_pct: "#15284c", 
+    ndp_pct: "#f07c00", 
+    cons2_pct: "#2db56b", 
+};
