@@ -10,6 +10,7 @@
     let curParty = $state("lib_pct");
     let geoJsonData = $state(null);
     let correlation = $state(0);
+    let hoveredPoint = $state(null);
 
     function loadGeoJson() {
         const filePath = `/data/elections/${region}_stats_${curYear}.geojson`;
@@ -17,7 +18,7 @@
             .then(response => response.json())
             .then(data => {
                 geoJsonData = data;
-                // console.log($state.snapshot(geoJsonData));
+                console.log($state.snapshot(geoJsonData));
                 updateSelectOptions();
                 loadCorrelation();
             });
@@ -87,7 +88,8 @@
 
         const data = geoJsonData.features.map(d => ({
             x: d.properties[curParty],
-            y: d.properties.pct_imm
+            y: d.properties.pct_imm,
+            geoname: d.properties.geoname
         }));
 
         const svg = d3.select("#scatter-display").html("").append("svg")
@@ -141,7 +143,15 @@
             .attr("cx", d => x(d.x))
             .attr("cy", d => y(d.y))
             .attr("r", 3)
-            .attr("fill", PARTY_COLOURS[curParty]);
+            .attr("fill", PARTY_COLOURS[curParty])
+            .on("mouseover", (event, d) => {
+                hoveredPoint = d;
+                d3.select(event.target).attr("r", 6).attr("stroke", "red").attr("stroke-width", 2);
+            })
+            .on("mouseout", (event, d) => {
+                hoveredPoint = null;
+                d3.select(event.target).attr("r", 3).attr("stroke", "black").attr("stroke-width", 1.5).attr("fill", PARTY_COLOURS[curParty]);
+            });
 
         // Add correlation line
         const line = d3.line()
@@ -200,11 +210,24 @@
     </select>
 
     <div id='scatter-display'></div>
+
+    <div class="hover-panel">
+        <div><strong>Riding:</strong> {#if hoveredPoint} {hoveredPoint.geoname} {/if}</div>
+        <div><strong>Vote Share:</strong> {#if hoveredPoint} {hoveredPoint.x}% {/if}</div>
+        <div><strong>Proportion of Immigrants:</strong> {#if hoveredPoint} {hoveredPoint.y} {/if}</div>
+    </div>
 </div>
 
 <style>
     select {
         width: 100%;
         margin-bottom: 10px;
+    }
+
+    .hover-panel {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
     }
 </style>
