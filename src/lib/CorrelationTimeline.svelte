@@ -11,7 +11,7 @@
     const parties = ["Liberals", "Conservatives", "New Democrats"];
 
     let curRegion = $state("fed");
-    let curParties = $state([]);
+    let curParties = $state(parties);
     let curCorrs = $state({
         "Liberals": [],  // contains elements of the form [year, corr]
         "Conservatives": [],
