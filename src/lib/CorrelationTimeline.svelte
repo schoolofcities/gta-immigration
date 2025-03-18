@@ -10,7 +10,7 @@
     };
     const parties = ["Liberals", "Conservatives", "New Democrats"];
 
-    let region = $state("fed");
+    let curRegion = $state("fed");
     let curParties = $state([]);
     let curCorrs = $state({
         "Liberals": [],  // contains elements of the form [year, corr]
@@ -20,9 +20,9 @@
 
     let svg; // Reference to the SVG element
 
-    // Function to handle region change
+    // Function to handle curRegion change
     function handleRegionChange(event) {
-        region = event.target.value;
+        curRegion = event.target.value;
         updateCorrelations();
     }
 
@@ -36,10 +36,10 @@
         drawGraph(); // Redraw the graph when parties change
     }
 
-    // Function to update correlations based on the selected region
+    // Function to update correlations based on the selected curRegion
     function updateCorrelations() {
         d3.csv('/data/elections_analysis/ed_corrs.csv').then(data => {
-            const regionFilter = region === 'fed' ? 'federal' : 'ontario';
+            const regionFilter = curRegion === 'fed' ? 'federal' : 'ontario';
             const filteredData = data.filter(row => row.region === regionFilter);
 
             // Update the curCorrs state variable

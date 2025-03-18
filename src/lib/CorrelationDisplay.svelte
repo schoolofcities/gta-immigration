@@ -3,7 +3,7 @@
     import { FELXN_YEARS, ONTELXN_YEARS, PARTY_COLOURS } from "../lib/constants.js";
     import * as d3 from 'd3';
 
-    let region = $state("fed");
+    let curRegion = $state("fed");
     let years = $state(FELXN_YEARS);
     let curYear = $state(2021);
     let parties = $state([]);
@@ -13,12 +13,12 @@
     let hoveredPoint = $state(null);
 
     function loadGeoJson() {
-        const filePath = `/data/elections/${region}_stats_${curYear}.geojson`;
+        const filePath = `/data/elections/${curRegion}_stats_${curYear}.geojson`;
         fetch(filePath)
             .then(response => response.json())
             .then(data => {
                 geoJsonData = data;
-                console.log($state.snapshot(geoJsonData));
+                // console.log($state.snapshot(geoJsonData));
                 updateSelectOptions();
                 loadCorrelation();
             });
@@ -40,8 +40,8 @@
     }
 
     function handleRegionChange(event) {
-        region = event.target.value;
-        years = region === "fed" ? FELXN_YEARS : ONTELXN_YEARS;
+        curRegion = event.target.value;
+        years = curRegion === "fed" ? FELXN_YEARS : ONTELXN_YEARS;
         curYear = years[years.length - 1];
         loadGeoJson();
     }
@@ -60,7 +60,7 @@
         // Load the CSV file using a Promise
         d3.csv(`/data/elections_analysis/ed_corrs.csv`)
             .then(data => {
-                const normalizedRegion = region === 'ont-ed' ? 'ontario' : region === 'fed' ? 'federal' : region;
+                const normalizedRegion = curRegion === 'ont-ed' ? 'ontario' : curRegion === 'fed' ? 'federal' : curRegion;
                 const party = curParty.split('_')[0];
                 const columnName = `corr_pct_imm_${party}`;
 

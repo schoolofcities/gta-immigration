@@ -17,16 +17,16 @@
     // Prevent infinite update loops
     let syncing = false;
 
-    let region = $state("fed");
-    let year = $state(2021);
+    let curRegion = $state("fed");
+    let curYear = $state(2021);
     let years = $state(FELXN_YEARS);
     let geoJsonData = $state(null);
 
     let parties = $state([]);
     let censusVariables = $state([]);
 
-    let selectedParty = $state("lib_pct");
-    let selectedCensusVariable = $state("pct_imm");
+    let curParty = $state("lib_pct");
+    let curCensusVariable = $state("pct_imm");
 
     const partyColors = {
         lib_pct: ["#f5c3c5", "#f1a6a9", "#ec888c", "#e76a6f", "#e34d53", "#de2f36", "#da121a", "#be0f16"],
@@ -67,18 +67,18 @@
             if (properties.pct_imm !== null) censusVariables.push({ name: "Percent immigrants", property: "pct_imm" });
             if (properties.avg_hou_inc !== null) censusVariables.push({ name: "Average Household Income", property: "avg_hou_inc" });
 
-            // Ensure selectedParty and selectedCensusVariable are valid
-            if (!parties.some(p => p.property === selectedParty)) {
-                selectedParty = parties.length > 0 ? parties[0].property : null;
+            // Ensure curParty and curCensusVariable are valid
+            if (!parties.some(p => p.property === curParty)) {
+                curParty = parties.length > 0 ? parties[0].property : null;
             }
-            if (!censusVariables.some(v => v.property === selectedCensusVariable)) {
-                selectedCensusVariable = censusVariables.length > 0 ? censusVariables[0].property : null;
+            if (!censusVariables.some(v => v.property === curCensusVariable)) {
+                curCensusVariable = censusVariables.length > 0 ? censusVariables[0].property : null;
             }
         }
     }
 
     function loadGeoJson() {
-        const filePath = `/data/elections/${region}_stats_${year}.geojson`;
+        const filePath = `/data/elections/${curRegion}_stats_${curYear}.geojson`;
         fetch(filePath)
             .then(response => response.json())
             .then(data => {
@@ -91,14 +91,14 @@
     }
 
     function handleRegionChange(event) {
-        region = event.target.value;
-        years = region === "fed" ? FELXN_YEARS : ONTELXN_YEARS;
-        year = years[years.length - 1];
+        curRegion = event.target.value;
+        years = curRegion === "fed" ? FELXN_YEARS : ONTELXN_YEARS;
+        curYear = years[years.length - 1];
         loadGeoJson();
     }
 
     function handleYearChange(event) {
-        year = event.target.value;
+        curYear = event.target.value;
         loadGeoJson();
     }
 
@@ -125,15 +125,15 @@
             paint: {
                 "fill-color": [
                     "step",
-                    ["get", selectedParty],
-                    partyColors[selectedParty][0], 0,
-                    partyColors[selectedParty][1], 10,
-                    partyColors[selectedParty][2], 20,
-                    partyColors[selectedParty][3], 30,
-                    partyColors[selectedParty][4], 40,
-                    partyColors[selectedParty][5], 50,
-                    partyColors[selectedParty][6], 60,
-                    partyColors[selectedParty][7] // above 60
+                    ["get", curParty],
+                    partyColors[curParty][0], 0,
+                    partyColors[curParty][1], 10,
+                    partyColors[curParty][2], 20,
+                    partyColors[curParty][3], 30,
+                    partyColors[curParty][4], 40,
+                    partyColors[curParty][5], 50,
+                    partyColors[curParty][6], 60,
+                    partyColors[curParty][7] // above 60
                 ],
                 "fill-opacity": 0.75
             }
@@ -167,10 +167,10 @@
         });
 
         let paintConfig;
-        if (selectedCensusVariable === "pct_imm") {
+        if (curCensusVariable === "pct_imm") {
             paintConfig = [
                 "step",
-                ["get", selectedCensusVariable],
+                ["get", curCensusVariable],
                 censusColors.pct_imm[0], 0,
                 censusColors.pct_imm[1], 0.1,
                 censusColors.pct_imm[2], 0.2,
@@ -181,7 +181,7 @@
                 censusColors.pct_imm[7], 0.7,
                 censusColors.pct_imm[7] // above 0.7
             ];
-        } else if (selectedCensusVariable === "avg_hou_inc") {
+        } else if (curCensusVariable === "avg_hou_inc") {
             const values = geoJsonData.features.map(f => f.properties.avg_hou_inc);
             const min = Math.min(...values);
             const max = Math.max(...values);
@@ -190,7 +190,7 @@
             paintConfig = [
                 "interpolate",
                 ["linear"],
-                ["get", selectedCensusVariable],
+                ["get", curCensusVariable],
                 min, censusColors.avg_hou_inc[0],
                 min + step, censusColors.avg_hou_inc[1],
                 min + 2 * step, censusColors.avg_hou_inc[2],
@@ -230,12 +230,12 @@
     });
 
     function handlePartyChange(event) {
-        selectedParty = event.target.value;
+        curParty = event.target.value;
         updatePartyMapLayer();
     }
 
     function handleCensusVariableChange(event) {
-        selectedCensusVariable = event.target.value;
+        curCensusVariable = event.target.value;
         updateCensusMapLayer();
     }
 
@@ -275,7 +275,7 @@
     </select>
     <select onchange={handleYearChange}>
         {#each years as y}
-            <option value={y} selected={y === year}>{y}</option>
+            <option value={y} selected={y === curYear}>{y}</option>
         {/each}
     </select>
 </div>
