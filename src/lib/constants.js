@@ -5,7 +5,7 @@ export const FELXN_YEARS = [
 
 export const ONTELXN_YEARS = [
     1963, 1967, 1971, 1975, 1977, 1981, 1985, 1987, 1990, 1995, 
-    1999, 2003, 2007, 2011, 2014, 2018, 2022
+    1999, 2003, 2007, 2011, 2014, 2018, 2022, 2025
 ];
 
 export const PARTY_COLOURS = {

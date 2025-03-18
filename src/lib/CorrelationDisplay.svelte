@@ -105,7 +105,7 @@
             .range([margin.left, width - margin.right]);
 
         const y = d3.scaleLinear()
-            .domain([0, 0.7])
+            .domain([0, 70])
             .range([height - margin.bottom, margin.top]);
 
         const xAxis = g => g

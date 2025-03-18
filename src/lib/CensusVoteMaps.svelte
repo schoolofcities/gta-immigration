@@ -172,14 +172,14 @@
                 "step",
                 ["get", curCensusVariable],
                 censusColors.pct_imm[0], 0,
-                censusColors.pct_imm[1], 0.1,
-                censusColors.pct_imm[2], 0.2,
-                censusColors.pct_imm[3], 0.3,
-                censusColors.pct_imm[4], 0.4,
-                censusColors.pct_imm[5], 0.5,
-                censusColors.pct_imm[6], 0.6,
-                censusColors.pct_imm[7], 0.7,
-                censusColors.pct_imm[7] // above 0.7
+                censusColors.pct_imm[1], 10,
+                censusColors.pct_imm[2], 20,
+                censusColors.pct_imm[3], 30,
+                censusColors.pct_imm[4], 40,
+                censusColors.pct_imm[5], 50,
+                censusColors.pct_imm[6], 60,
+                censusColors.pct_imm[7], 70,
+                censusColors.pct_imm[7] // above 70
             ];
         } else if (curCensusVariable === "avg_hou_inc") {
             const values = geoJsonData.features.map(f => f.properties.avg_hou_inc);
