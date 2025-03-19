@@ -93,7 +93,7 @@
             .attr("x", width / 2)
             .attr("y", 40)
             .attr("text-anchor", "middle")
-            .text("Election Years");
+            .text("Election year");
 
         g.append("g")
             .call(d3.axisLeft(y))
@@ -104,7 +104,7 @@
             .attr("x", -height / 2)
             .attr("dy", "0.71em")
             .attr("text-anchor", "middle")
-            .text("Vote Share Difference");
+            .text("Vote share difference");
 
         // Add dotted black line at y = 0
         g.append("line")

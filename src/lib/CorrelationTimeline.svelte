@@ -50,15 +50,15 @@
     // Function to draw the line graph
     function drawGraph() {
         // Clear the existing SVG content
-        d3.select("#graph").selectAll("*").remove();
+        d3.select("#correlation-line-graph").selectAll("*").remove();
 
         // Set up SVG dimensions
-        const width = 600;
+        const width = document.getElementById("correlation-line-graph").clientWidth;
         const height = 400;
-        const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+        const margin = { top: 20, right: 30, bottom: 50, left: 60 };
 
         // Create the SVG container
-        svg = d3.select("#graph")
+        svg = d3.select("#correlation-line-graph")
             .attr("width", width)
             .attr("height", height);
 
@@ -78,13 +78,29 @@
         const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d")); // Format years as integers
         const yAxis = d3.axisLeft(yScale);
 
+        // Add the x-axis
         svg.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`)
-            .call(xAxis);
+            .call(xAxis)
+            .append("text")
+            .attr("fill", "#000")
+            .attr("x", width / 2)
+            .attr("y", 40)
+            .attr("text-anchor", "middle")
+            .text("Election year");
 
+        // Add the y-axis
         svg.append("g")
             .attr("transform", `translate(${margin.left},0)`)
-            .call(yAxis);
+            .call(yAxis)
+            .append("text")
+            .attr("fill", "#000")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -50)
+            .attr("x", -height / 2)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "middle")
+            .text("Correlation");
 
         // Define a line generator
         const line = d3.line()
@@ -139,7 +155,7 @@
 </div>
 
 <!-- SVG container for the graph -->
-<svg id="graph"></svg>
+<svg id="correlation-line-graph"></svg>
 
 <style>
     select {
@@ -157,5 +173,8 @@
     }
     button.active {
         background-color: blue;
+    }
+    svg {
+        width: 100%;
     }
 </style>

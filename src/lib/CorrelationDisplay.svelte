@@ -87,41 +87,54 @@
         if (!geoJsonData) return;
 
         const data = geoJsonData.features.map(d => ({
-            x: d.properties[curParty],
-            y: d.properties.pct_imm,
+            x: d.properties.pct_imm,  // Swapped
+            y: d.properties[curParty], // Swapped
             geoname: d.properties.geoname
         }));
 
-        const svg = d3.select("#scatter-display").html("").append("svg")
-            .attr("width", "100%")
-            .attr("height", 500);
+        // Clear previous SVG content
+        const container = d3.select("#scatter-display");
+        container.html("");
 
-        const margin = { top: 20, right: 30, bottom: 60, left: 60 };
-        const width = svg.node().getBoundingClientRect().width - margin.left - margin.right;
-        const height = +svg.attr("height") - margin.top - margin.bottom;
+        const margin = { top: 20, right: 20, bottom: 60, left: 60 };
+        
+        // Create SVG with a viewBox for better responsiveness
+        const svg = container.append("svg")
+            .attr("width", "100%")
+            .attr("height", 500)
+            .attr("preserveAspectRatio", "xMinYMin meet");
+
+        // Get the actual width of the container
+        const containerWidth = container.node().getBoundingClientRect().width;
+        const width = containerWidth - margin.left - margin.right;
+        const height = 500 - margin.top - margin.bottom;
+
+        // Create the main group element that will contain the plot
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
 
         const x = d3.scaleLinear()
-            .domain([0, 80])
-            .range([margin.left, width - margin.right]);
+            .domain([0, 70])  // Changed domain for immigrant percentage
+            .range([0, width]);
 
         const y = d3.scaleLinear()
-            .domain([0, 70])
-            .range([height - margin.bottom, margin.top]);
+            .domain([0, 80])  // Changed domain for vote percentage
+            .range([height, 0]);
 
         const xAxis = g => g
-            .attr("transform", `translate(0,${height - margin.bottom})`)
-            .call(d3.axisBottom(x).ticks(8))
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x).ticks(7))
             .call(g => g.select(".domain").remove())
             .append("text")
             .attr("x", width / 2)
             .attr("y", 40)
             .attr("fill", "black")
             .attr("text-anchor", "middle")
-            .text(parties.find(p => p.property === curParty)?.name + " vote percent");
+            .text("Percentage of immigrants");  // Swapped label
 
         const yAxis = g => g
-            .attr("transform", `translate(${margin.left},0)`)
-            .call(d3.axisLeft(y).ticks(7))
+            .attr("transform", `translate(0,0)`)
+            .call(d3.axisLeft(y).ticks(8))
             .call(g => g.select(".domain").remove())
             .append("text")
             .attr("x", -height / 2)
@@ -129,12 +142,14 @@
             .attr("fill", "black")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .text("Proportion of immigrants");
+            .text("Party vote share");  // Swapped label
 
-        svg.append("g").call(xAxis);
-        svg.append("g").call(yAxis);
+        // Append axes to the main group
+        g.append("g").call(xAxis);
+        g.append("g").call(yAxis);
 
-        svg.append("g")
+        // Append points to the main group
+        g.append("g")
             .attr("stroke", "black")
             .attr("stroke-width", 1.5)
             .selectAll("circle")
@@ -165,25 +180,17 @@
 
         const lineData = [
             { x: 0, y: intercept },
-            { x: 80, y: intercept + slope * 80 }
+            { x: 70, y: intercept + slope * 70 }  // Changed x range to match new domain
         ];
 
-        svg.append("path")
+        // Add the correlation line to the main group
+        g.append("path")
             .datum(lineData)
             .attr("fill", "none")
             .attr("stroke", "purple")
             .attr("stroke-width", 2)
             .attr("stroke-dasharray", "4,4")
-            .attr("clip-path", "url(#clip)")
             .attr("d", line);
-
-        svg.append("defs").append("clipPath")
-            .attr("id", "clip")
-            .append("rect")
-            .attr("x", margin.left)
-            .attr("y", margin.top)
-            .attr("width", width - margin.left - margin.right)
-            .attr("height", height - margin.top - margin.bottom);
     }
 
     onMount(() => {
@@ -213,8 +220,8 @@
 
     <div class="hover-panel">
         <div><strong>Riding:</strong> {#if hoveredPoint} {hoveredPoint.geoname} {/if}</div>
-        <div><strong>Vote Share:</strong> {#if hoveredPoint} {hoveredPoint.x}% {/if}</div>
-        <div><strong>Proportion of Immigrants:</strong> {#if hoveredPoint} {hoveredPoint.y} {/if}</div>
+        <div><strong>Vote Share:</strong> {#if hoveredPoint} {hoveredPoint.y}% {/if}</div>
+        <div><strong>Proportion of Immigrants:</strong> {#if hoveredPoint} {hoveredPoint.x} {/if}</div>
     </div>
 </div>
 
