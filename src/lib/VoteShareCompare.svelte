@@ -1,19 +1,15 @@
 <script>
-    import { PARTY_COLOURS, PARTY_TAG_MAP } from "../lib/constants.js";
+    import { PARTIES_INFO, PARTY_COLOURS, PARTY_TAG_MAP } from "../lib/constants.js";
     import * as d3 from 'd3';
-
-    const parties = [
-        { name: "Liberals", tag: "lib" },
-        { name: "Conservatives", tag: "cons1" },
-        { name: "New Democrats", tag: "ndp" },
-    ];
 
     // State variables
     let curRegion = $state("federal");
     let curParty = $state("lib");
     let curScope = $state("gta");
-    let curVoteShares = $state([]); // To store the processed data
+
+    let curVoteShares = $state([]); 
     let windowWidth = $state(window.innerWidth);
+    
     window.addEventListener('resize', () => windowWidth = window.innerWidth);
 
     function handleRegionChange(event) {
@@ -176,8 +172,10 @@
     </select>
 
     <select onchange={handlePartyChange}>
-        {#each parties as party}
-            <option value={party.tag}>{party.name}</option>
+        {#each PARTIES_INFO as party}
+            {#if party.tag !== 'cons2'}
+                <option value={party.tag}>{party.name}</option>
+            {/if}
         {/each}
     </select>
 

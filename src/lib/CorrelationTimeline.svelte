@@ -1,15 +1,17 @@
 <script>
     import { onMount } from "svelte";
-    import { PARTY_COLOURS, PARTY_TAG_MAP, PARTIES } from "../lib/constants.js";
+    import { PARTIES_INFO, PARTY_COLOURS, PARTY_TAG_MAP } from "../lib/constants.js";
     import * as d3 from 'd3';
 
-    let curRegion = $state("fed");
-    let curParties = $state(PARTIES);
+    let curRegion = $state("federal");
+    let pickedParties = $state(PARTIES_INFO.map(party => party.name).filter(party => party !== 'Reform/Alliance'));
+    
     let curCorrs = $state({
         "Liberals": [],  // contains elements of the form [year, corr]
         "Conservatives": [],
         "New Democrats": [],
     });
+    
     let windowWidth = $state(window.innerWidth);
 
     window.addEventListener('resize', () => windowWidth = window.innerWidth);
@@ -20,18 +22,17 @@
 
     // Function to toggle a party on/off
     function toggleParty(party) {
-        if (curParties.includes(party)) {
-            curParties = curParties.filter(p => p !== party);
+        if (pickedParties.includes(party)) {
+            pickedParties = pickedParties.filter(p => p !== party);
         } else {
-            curParties = [...curParties, party];
+            pickedParties = [...pickedParties, party];
         }
     }
 
     // Function to update correlations based on the selected curRegion
     function updateCorrelations() {
         d3.csv('/data/elections_analysis/ed_corrs.csv').then(data => {
-            const regionFilter = curRegion === 'fed' ? 'federal' : 'ontario';
-            const filteredData = data.filter(row => row.region === regionFilter);
+            const filteredData = data.filter(row => row.region === curRegion);
 
             // Update the curCorrs state variable
             curCorrs = {
@@ -114,7 +115,7 @@
             .y(d => yScale(d[1]));
 
         // Draw lines and dots for each selected party
-        curParties.forEach(party => {
+        pickedParties.forEach(party => {
             const data = curCorrs[party];
             if (!data) return;
 
@@ -142,7 +143,7 @@
     $effect(() => {
         windowWidth;
         curCorrs;
-        curParties;
+        pickedParties;
         if (Object.values(curCorrs).some(arr => arr.length > 0)) {
             drawGraph();
         }
@@ -156,16 +157,18 @@
 
 <div>
     <select onchange={handleRegionChange}>
-        <option value="fed" selected>Federal</option>
-        <option value="ont-ed">Ontario</option>
+        <option value="federal" selected>Federal</option>
+        <option value="ontario">Ontario</option>
     </select>
-    {#each PARTIES as party}
-        <button 
-            onclick={() => toggleParty(party)} 
-            class:active={curParties.includes(party)}
-        >
-            {party}
-        </button>
+    {#each PARTIES_INFO as party}
+        {#if party.tag !== 'cons2'}
+            <button 
+                onclick={() => toggleParty(party.name)} 
+                class:active={pickedParties.includes(party.name)}
+            >
+                {party.name}
+            </button>
+        {/if}
     {/each}
 </div>
 

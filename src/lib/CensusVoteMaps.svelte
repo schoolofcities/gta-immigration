@@ -2,7 +2,8 @@
     import { onMount } from "svelte";
     import maplibregl from "maplibre-gl";
     import "maplibre-gl/dist/maplibre-gl.css";
-    import { FELXN_YEARS, ONTELXN_YEARS } from "../lib/constants.js";
+    import { FELXN_YEARS, ONTELXN_YEARS, PARTY_SHADES, CENSUS_SHADES, PARTIES_INFO } from "../lib/constants.js";
+    import { getRegionTag, updateCensusVarOptions, updatePartyOptions } from "./utils.js";
 
     let map1, map2;
     const defaultCenter = [-79.3832, 43.6532];
@@ -14,32 +15,22 @@
         [-78.0, 45.0]   // Northeast corner (north of Peterborough)
     ];
 
-    // Prevent infinite update loops
-    let syncing = false;
+    let curRegion = $state("federal");
+    let curRegionTag = $derived(getRegionTag(curRegion));
 
-    let curRegion = $state("fed");
     let curYear = $state(2021);
     let years = $state(FELXN_YEARS);
+
     let geoJsonData = $state(null);
 
-    let parties = $state([]);
-    let censusVariables = $state([]);
+    let curParties = $derived(updatePartyOptions(geoJsonData));
+    let curParty = $state("lib");
 
-    let curParty = $state("lib_pct");
+    let curCensusVars = $derived(updateCensusVarOptions(geoJsonData));
     let curCensusVariable = $state("pct_imm");
 
-    const partyColors = {
-        lib_pct: ["#f5c3c5", "#f1a6a9", "#ec888c", "#e76a6f", "#e34d53", "#de2f36", "#da121a", "#be0f16"],
-        cons1_pct: ["#c4c9d2", "#a7aebb", "#8a93a5", "#6c788f", "#4f5d78", "#324262", "#15284c", "#122342"],
-        ndp_pct: ["#fbdebf", "#f9cd9f", "#f7bd7f", "#f5ad5f", "#f39c3f", "#f18c1f", "#f07c00", "#d26c00"],
-        cons2_pct: ["#caecda", "#b0e3c7", "#96dab5", "#7bd0a2", "#61c790", "#47be7d", "#2db56b", "#279e5d"]
-    };
-
-    const censusColors = {
-        pct_imm: ["#dfe7e2", "#bfd0c6", "#9fb8a9", "#7fa18d", "#5f8a70", "#3f7254", "#1f5b37", "#00441b"], // Darker green
-        avg_hou_inc: ["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#f03b20", "#d95f0e"] // Not very dark yellow
-    };
-
+    // Prevent infinite update loops
+    let syncing = false;
     function syncMaps(movingMap, targetMap) {
         movingMap.on("move", () => {
             if (!syncing) {
@@ -53,32 +44,8 @@
         });
     }
 
-    function updateSelectOptions() {
-        if (geoJsonData && geoJsonData.features.length > 0) {
-            const properties = geoJsonData.features[0].properties;
-
-            parties = [];
-            if (properties.lib_pct !== null) parties.push({ name: "Liberals", property: "lib_pct" });
-            if (properties.cons1_pct !== null) parties.push({ name: "Conservatives", property: "cons1_pct" });
-            if (properties.ndp_pct !== null) parties.push({ name: "New Democrats", property: "ndp_pct" });
-            if (properties.cons2_pct !== null) parties.push({ name: "Reform/Alliance", property: "cons2_pct" });
-
-            censusVariables = [];
-            if (properties.pct_imm !== null) censusVariables.push({ name: "Percent immigrants", property: "pct_imm" });
-            if (properties.avg_hou_inc !== null) censusVariables.push({ name: "Average Household Income", property: "avg_hou_inc" });
-
-            // Ensure curParty and curCensusVariable are valid
-            if (!parties.some(p => p.property === curParty)) {
-                curParty = parties.length > 0 ? parties[0].property : null;
-            }
-            if (!censusVariables.some(v => v.property === curCensusVariable)) {
-                curCensusVariable = censusVariables.length > 0 ? censusVariables[0].property : null;
-            }
-        }
-    }
-
     function loadGeoJson() {
-        const filePath = `/data/elections/${curRegion}_stats_${curYear}.geojson`;
+        const filePath = `/data/elections/${curRegionTag}_stats_${curYear}.geojson`;
         fetch(filePath)
             .then(response => response.json())
             .then(data => {
@@ -90,9 +57,21 @@
             });
     }
 
+    function updateSelectOptions() {
+        if (geoJsonData && geoJsonData.features.length > 0) {
+            // Ensure curParty and curCensusVariable are valid
+            if (!curParties.some(p => p.tag === curParty)) {
+                curParty = curParties.length > 0 ? curParties[0].tag : null;
+            }
+            if (!curCensusVars.some(v => v.propertyTag === curCensusVariable)) {
+                curCensusVariable = curCensusVars.length > 0 ? curCensusVars[0].propertyTag : null;
+            }
+        }
+    }
+
     function handleRegionChange(event) {
         curRegion = event.target.value;
-        years = curRegion === "fed" ? FELXN_YEARS : ONTELXN_YEARS;
+        years = curRegion === "federal" ? FELXN_YEARS : ONTELXN_YEARS;
         curYear = years[years.length - 1];
         loadGeoJson();
     }
@@ -128,6 +107,8 @@
             data: geoJsonData
         });
 
+        const partyPropertyTag = PARTIES_INFO.find(party => party.tag === curParty).propertyTag;
+
         map1.addLayer({
             id: "party-vote-share",
             type: "fill",
@@ -135,15 +116,15 @@
             paint: {
                 "fill-color": [
                     "step",
-                    ["get", curParty],
-                    partyColors[curParty][0], 0,
-                    partyColors[curParty][1], 10,
-                    partyColors[curParty][2], 20,
-                    partyColors[curParty][3], 30,
-                    partyColors[curParty][4], 40,
-                    partyColors[curParty][5], 50,
-                    partyColors[curParty][6], 60,
-                    partyColors[curParty][7] // above 60
+                    ["get", partyPropertyTag],
+                    PARTY_SHADES[curParty][0], 0,
+                    PARTY_SHADES[curParty][1], 10,
+                    PARTY_SHADES[curParty][2], 20,
+                    PARTY_SHADES[curParty][3], 30,
+                    PARTY_SHADES[curParty][4], 40,
+                    PARTY_SHADES[curParty][5], 50,
+                    PARTY_SHADES[curParty][6], 60,
+                    PARTY_SHADES[curParty][7] // above 60
                 ],
                 "fill-opacity": 0.75
             }
@@ -181,15 +162,15 @@
             paintConfig = [
                 "step",
                 ["get", curCensusVariable],
-                censusColors.pct_imm[0], 0,
-                censusColors.pct_imm[1], 10,
-                censusColors.pct_imm[2], 20,
-                censusColors.pct_imm[3], 30,
-                censusColors.pct_imm[4], 40,
-                censusColors.pct_imm[5], 50,
-                censusColors.pct_imm[6], 60,
-                censusColors.pct_imm[7], 70,
-                censusColors.pct_imm[7] // above 70
+                CENSUS_SHADES.pct_imm[0], 0,
+                CENSUS_SHADES.pct_imm[1], 10,
+                CENSUS_SHADES.pct_imm[2], 20,
+                CENSUS_SHADES.pct_imm[3], 30,
+                CENSUS_SHADES.pct_imm[4], 40,
+                CENSUS_SHADES.pct_imm[5], 50,
+                CENSUS_SHADES.pct_imm[6], 60,
+                CENSUS_SHADES.pct_imm[7], 70,
+                CENSUS_SHADES.pct_imm[7] // above 70
             ];
         } else if (curCensusVariable === "avg_hou_inc") {
             const values = geoJsonData.features.map(f => f.properties.avg_hou_inc);
@@ -201,13 +182,13 @@
                 "interpolate",
                 ["linear"],
                 ["get", curCensusVariable],
-                min, censusColors.avg_hou_inc[0],
-                min + step, censusColors.avg_hou_inc[1],
-                min + 2 * step, censusColors.avg_hou_inc[2],
-                min + 3 * step, censusColors.avg_hou_inc[3],
-                min + 4 * step, censusColors.avg_hou_inc[4],
-                min + 5 * step, censusColors.avg_hou_inc[5],
-                max, censusColors.avg_hou_inc[6]
+                min, CENSUS_SHADES.avg_hou_inc[0],
+                min + step, CENSUS_SHADES.avg_hou_inc[1],
+                min + 2 * step, CENSUS_SHADES.avg_hou_inc[2],
+                min + 3 * step, CENSUS_SHADES.avg_hou_inc[3],
+                min + 4 * step, CENSUS_SHADES.avg_hou_inc[4],
+                min + 5 * step, CENSUS_SHADES.avg_hou_inc[5],
+                max, CENSUS_SHADES.avg_hou_inc[6]
             ];
         }
 
@@ -270,8 +251,8 @@
 
 <div class="controls">
     <select onchange={handleRegionChange}>
-        <option value="fed" selected>Federal</option>
-        <option value="ont-ed">Ontario</option>
+        <option value="federal" selected>Federal</option>
+        <option value="ontario">Ontario</option>
     </select>
     <select onchange={handleYearChange}>
         {#each years as y}
@@ -284,8 +265,8 @@
     <div class="map-section">
         <div class="map-controls">
             <select onchange={handlePartyChange}>
-                {#each parties as party}
-                    <option value={party.property}>{party.name}</option>
+                {#each curParties as party}
+                    <option value={party.tag}>{party.name}</option>
                 {/each}
             </select>
         </div>
@@ -294,8 +275,8 @@
     <div class="map-section">
         <div class="map-controls">
             <select onchange={handleCensusVariableChange}>
-                {#each censusVariables as variable}
-                    <option value={variable.property}>{variable.name}</option>
+                {#each curCensusVars as variable}
+                    <option value={variable.propertyTag}>{variable.name}</option>
                 {/each}
             </select>
         </div>

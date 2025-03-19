@@ -1,22 +1,29 @@
 <script>
     import { onMount } from 'svelte';
-    import { FELXN_YEARS, ONTELXN_YEARS, PARTY_COLOURS } from "../lib/constants.js";
+    import { FELXN_YEARS, ONTELXN_YEARS, PARTY_COLOURS, PARTIES_INFO } from "../lib/constants.js";
+    import { getRegionTag, updatePartyOptions } from "./utils.js";
     import * as d3 from 'd3';
 
-    let curRegion = $state("fed");
+    let curRegion = $state("federal");
+    let curRegionTag = $derived(getRegionTag(curRegion));
+
     let years = $state(FELXN_YEARS);
     let curYear = $state(2021);
-    let parties = $state([]);
-    let curParty = $state("lib_pct");
+
     let geoJsonData = $state(null);
+
+    let curParties = $derived(updatePartyOptions(geoJsonData));
+    let curParty = $state("lib");
+
     let correlation = $state(0);
     let hoveredPoint = $state(null);
+
     let windowWidth = $state(window.innerWidth);
     
     window.addEventListener('resize', () => windowWidth = window.innerWidth);
     
     function loadGeoJson() {
-        const filePath = `/data/elections/${curRegion}_stats_${curYear}.geojson`;
+        const filePath = `/data/elections/${curRegionTag}_stats_${curYear}.geojson`;
         fetch(filePath)
             .then(response => response.json())
             .then(data => {
@@ -29,22 +36,15 @@
 
     function updateSelectOptions() {
         if (geoJsonData && geoJsonData.features.length > 0) {
-            const properties = geoJsonData.features[0].properties;
-            parties = [];
-            if (properties.lib_pct !== null) parties.push({ name: "Liberals", property: "lib_pct" });
-            if (properties.cons1_pct !== null) parties.push({ name: "Conservatives", property: "cons1_pct" });
-            if (properties.ndp_pct !== null) parties.push({ name: "New Democrats", property: "ndp_pct" });
-            if (properties.cons2_pct !== null) parties.push({ name: "Reform/Alliance", property: "cons2_pct" });
-
-            if (!parties.some(p => p.property === curParty)) {
-                curParty = parties.length > 0 ? parties[0].property : null;
+            if (!curParties.some(p => p.tag === curParty)) {
+                curParty = curParties.length > 0 ? curParties[0].tag : null;
             }
         }
     }
 
     function handleRegionChange(event) {
         curRegion = event.target.value;
-        years = curRegion === "fed" ? FELXN_YEARS : ONTELXN_YEARS;
+        years = curRegion === "federal" ? FELXN_YEARS : ONTELXN_YEARS;
         curYear = years[years.length - 1];
         loadGeoJson();
     }
@@ -63,12 +63,11 @@
         // Load the CSV file using a Promise
         d3.csv(`/data/elections_analysis/ed_corrs.csv`)
             .then(data => {
-                const normalizedRegion = curRegion === 'ont-ed' ? 'ontario' : curRegion === 'fed' ? 'federal' : curRegion;
-                const party = curParty.split('_')[0];
-                const columnName = `corr_pct_imm_${party}`;
+                // const party = curParty.split('_')[0];
+                const columnName = `corr_pct_imm_${curParty}`;
 
-                // Find the row that matches the curYear and normalizedRegion
-                const row = data.find(d => d.year === curYear.toString() && d.region === normalizedRegion);
+                // Find the row that matches the curYear and curRegion
+                const row = data.find(d => d.year === curYear.toString() && d.region === curRegion);
 
                 // Set the correlation value
                 if (row && row[columnName]) {
@@ -89,9 +88,11 @@
     function renderScatterPlot() {
         if (!geoJsonData) return;
 
+        const partyPropertyTag = PARTIES_INFO.find(party => party.tag === curParty).propertyTag;
+        
         const data = geoJsonData.features.map(d => ({
             x: d.properties.pct_imm,  // Swapped
-            y: d.properties[curParty], // Swapped
+            y: d.properties[partyPropertyTag], // Swapped
             geoname: d.properties.geoname
         }));
 
@@ -161,7 +162,7 @@
             .attr("cx", d => x(d.x))
             .attr("cy", d => y(d.y))
             .attr("r", 3)
-            .attr("fill", PARTY_COLOURS[curParty])
+            .attr("fill", PARTY_COLOURS[partyPropertyTag])
             .on("mouseover", (event, d) => {
                 hoveredPoint = d;
                 d3.select(event.target).attr("r", 6).attr("stroke", "red").attr("stroke-width", 2);
@@ -208,8 +209,8 @@
 
 <div>
     <select onchange={handleRegionChange}>
-        <option value="fed" selected>Federal</option>
-        <option value="ont-ed">Ontario</option>
+        <option value="federal" selected>Federal</option>
+        <option value="ontario">Ontario</option>
     </select>
 
     <select onchange={handleYearChange}>
@@ -219,8 +220,8 @@
     </select>
 
     <select onchange={handlePartyChange}>
-        {#each parties as party}
-            <option value={party.property}>{party.name}</option>
+        {#each curParties as party}
+            <option value={party.tag}>{party.name}</option>
         {/each}
     </select>
 
