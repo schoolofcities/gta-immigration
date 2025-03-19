@@ -1,17 +1,10 @@
 <script>
     import { onMount } from "svelte";
-    import { PARTY_COLOURS } from "../lib/constants.js";
+    import { PARTY_COLOURS, PARTY_TAG_MAP, PARTIES } from "../lib/constants.js";
     import * as d3 from 'd3';
 
-    const partyTagMap = {
-        "Liberals": "lib_pct",
-        "Conservatives": "cons1_pct",
-        "New Democrats": "ndp_pct"
-    };
-    const parties = ["Liberals", "Conservatives", "New Democrats"];
-
     let curRegion = $state("fed");
-    let curParties = $state(parties);
+    let curParties = $state(PARTIES);
     let curCorrs = $state({
         "Liberals": [],  // contains elements of the form [year, corr]
         "Conservatives": [],
@@ -33,7 +26,7 @@
         } else {
             curParties = [...curParties, party];
         }
-        drawGraph(); // Redraw the graph when parties change
+        drawGraph(); // Redraw the graph when PARTIES change
     }
 
     // Function to update correlations based on the selected curRegion
@@ -107,7 +100,7 @@
             svg.append("path")
                 .datum(data)
                 .attr("fill", "none")
-                .attr("stroke", PARTY_COLOURS[partyTagMap[party]] || "black") // Fallback to black if color is missing
+                .attr("stroke", PARTY_COLOURS[PARTY_TAG_MAP[party]] || "black") // Fallback to black if color is missing
                 .attr("stroke-width", 2)
                 .attr("d", line);
 
@@ -120,7 +113,7 @@
                 .attr("cx", d => xScale(d[0]))
                 .attr("cy", d => yScale(d[1]))
                 .attr("r", 4)
-                .attr("fill", PARTY_COLOURS[partyTagMap[party]] || "black"); // Fallback to black if color is missing
+                .attr("fill", PARTY_COLOURS[PARTY_TAG_MAP[party]] || "black"); // Fallback to black if color is missing
         });
     }
 
@@ -135,7 +128,7 @@
         <option value="fed" selected>Federal</option>
         <option value="ont-ed">Ontario</option>
     </select>
-    {#each parties as party}
+    {#each PARTIES as party}
         <button 
             onclick={() => toggleParty(party)} 
             class:active={curParties.includes(party)}

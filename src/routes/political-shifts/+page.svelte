@@ -2,6 +2,7 @@
     import CensusVoteMaps from '$lib/CensusVoteMaps.svelte';
     import CorrelationDisplay from '$lib/CorrelationDisplay.svelte';
     import CorrelationTimeline from '$lib/CorrelationTimeline.svelte';
+    import VoteShareCompare from '$lib/VoteShareCompare.svelte';
 </script>
 
 <main>
@@ -45,10 +46,14 @@
     </div>
 
     <div class="text">
-        <h2>How has party vote share changed in immigrant dominated ridings?</h2>
+        <h2>How does party vote compare in immigrant dominated ridings?</h2>
         <p>text here</p>
     </div>
+
     <!-- View trend line mean vote share (choose party) for high immigrant ridings -->
+    <div class="container">
+        <VoteShareCompare />
+    </div>
 
     <div class="text">
         <h2>Data & Methods</h2>

@@ -8,9 +8,17 @@ export const ONTELXN_YEARS = [
     1999, 2003, 2007, 2011, 2014, 2018, 2022, 2025
 ];
 
+export const PARTIES = ["Liberals", "Conservatives", "New Democrats"];
+
 export const PARTY_COLOURS = {
     lib_pct: "#da121a",
     cons1_pct: "#15284c", 
     ndp_pct: "#f07c00", 
     cons2_pct: "#2db56b", 
+};
+
+export const PARTY_TAG_MAP = {
+    "Liberals": "lib_pct",
+    "Conservatives": "cons1_pct",
+    "New Democrats": "ndp_pct"
 };
