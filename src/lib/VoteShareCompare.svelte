@@ -16,17 +16,14 @@
     let windowWidth = $state(window.innerWidth);
     window.addEventListener('resize', () => windowWidth = window.innerWidth);
 
-    // Function to handle curRegion change
     function handleRegionChange(event) {
         curRegion = event.target.value;
     }
 
-    // Function to handle curParty change
     function handlePartyChange(event) {
         curParty = event.target.value;
     }
 
-    // Function to handle curScope change
     function handleScopeChange(event) {
         curScope = event.target.value;
     }
@@ -59,7 +56,6 @@
                     });
                 });
 
-                // Save the result to curVoteShares 
                 curVoteShares = result;
                 // console.log($state.snapshot(curVoteShares));
             })
@@ -67,12 +63,6 @@
                 console.error('Error parsing CSV:', error);
             });
     }
-
-    $effect(() => {
-        curVoteShares;
-        windowWidth;
-        drawGraph();
-    });
 
     function drawGraph() {
         const svg = d3.select("#vote-share-graph");
@@ -165,13 +155,16 @@
             .attr("fill", PARTY_COLOURS[`${curParty}_pct`]);
     }
 
-    // Load the CSV when the component mounts or when state variables change
+    $effect(() => {
+        curVoteShares;
+        windowWidth;
+        drawGraph();
+    });
+
     $effect(() => {
         curRegion;
         curParty;
         curScope;
-
-        // Call the function
         loadVoteShares();
     });
 </script>

@@ -12,6 +12,7 @@
     let correlation = $state(0);
     let hoveredPoint = $state(null);
     let windowWidth = $state(window.innerWidth);
+    
     window.addEventListener('resize', () => windowWidth = window.innerWidth);
     
     function loadGeoJson() {
@@ -84,11 +85,6 @@
                 correlation = 0; // Set to zero in case of an error
             });
     }
-
-    $effect(() => {
-        windowWidth;
-        renderScatterPlot();
-    });
 
     function renderScatterPlot() {
         if (!geoJsonData) return;
@@ -199,6 +195,11 @@
             .attr("stroke-dasharray", "4,4")
             .attr("d", line);
     }
+
+    $effect(() => {
+        windowWidth;
+        renderScatterPlot();
+    });
 
     onMount(() => {
         loadGeoJson();

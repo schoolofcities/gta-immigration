@@ -102,6 +102,16 @@
         loadGeoJson();
     }
 
+    function handlePartyChange(event) {
+        curParty = event.target.value;
+        updatePartyMapLayer();
+    }
+
+    function handleCensusVariableChange(event) {
+        curCensusVariable = event.target.value;
+        updateCensusMapLayer();
+    }
+
     function updatePartyMapLayer() {
         if (map1.getLayer("party-vote-share-boundary")) {
             map1.removeLayer("party-vote-share-boundary");
@@ -228,16 +238,6 @@
             updateCensusMapLayer();
         }
     });
-
-    function handlePartyChange(event) {
-        curParty = event.target.value;
-        updatePartyMapLayer();
-    }
-
-    function handleCensusVariableChange(event) {
-        curCensusVariable = event.target.value;
-        updateCensusMapLayer();
-    }
 
     onMount(() => {
         map1 = new maplibregl.Map({

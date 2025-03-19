@@ -11,13 +11,11 @@
         "New Democrats": [],
     });
     let windowWidth = $state(window.innerWidth);
-    window.addEventListener('resize', () => windowWidth = window.innerWidth);
-    let svg;
 
-    // Function to handle curRegion change
+    window.addEventListener('resize', () => windowWidth = window.innerWidth);
+
     function handleRegionChange(event) {
         curRegion = event.target.value;
-        updateCorrelations();
     }
 
     // Function to toggle a party on/off
@@ -58,7 +56,7 @@
         const margin = { top: 20, right: 30, bottom: 50, left: 60 };
 
         // Create the SVG container with viewBox for responsiveness
-        svg = d3.select("#correlation-line-graph")
+        const svg = d3.select("#correlation-line-graph")
             .attr("viewBox", `0 0 ${width} ${height}`)
             .attr("preserveAspectRatio", "xMidYMid meet");
 
@@ -141,7 +139,6 @@
         });
     }
 
-    // Comprehensive effect that handles all graph updates
     $effect(() => {
         windowWidth;
         curCorrs;
@@ -151,8 +148,8 @@
         }
     });
 
-    // Simplified onMount
-    onMount(() => {
+    $effect(() => {
+        curRegion;
         updateCorrelations();
     });
 </script>
