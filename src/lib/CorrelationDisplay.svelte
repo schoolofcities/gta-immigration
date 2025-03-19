@@ -169,7 +169,11 @@
             })
             .on("mouseout", (event, d) => {
                 hoveredPoint = null;
-                d3.select(event.target).attr("r", 3).attr("stroke", "black").attr("stroke-width", 1.5).attr("fill", PARTY_COLOURS[curParty]);
+                d3.select(event.target)
+                    .attr("r", 3)
+                    .attr("stroke", "black")
+                    .attr("stroke-width", 1.5)
+                    .attr("fill", PARTY_COLOURS[partyPropertyTag]);  // Changed from curParty to partyPropertyTag
             });
 
         // Add correlation line
