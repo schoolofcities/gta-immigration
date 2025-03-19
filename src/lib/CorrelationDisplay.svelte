@@ -11,7 +11,9 @@
     let geoJsonData = $state(null);
     let correlation = $state(0);
     let hoveredPoint = $state(null);
-
+    let windowWidth = $state(window.innerWidth);
+    window.addEventListener('resize', () => windowWidth = window.innerWidth);
+    
     function loadGeoJson() {
         const filePath = `/data/elections/${curRegion}_stats_${curYear}.geojson`;
         fetch(filePath)
@@ -83,6 +85,11 @@
             });
     }
 
+    $effect(() => {
+        windowWidth;
+        renderScatterPlot();
+    });
+
     function renderScatterPlot() {
         if (!geoJsonData) return;
 
@@ -99,15 +106,15 @@
         const margin = { top: 20, right: 20, bottom: 60, left: 60 };
         
         // Create SVG with a viewBox for better responsiveness
-        const svg = container.append("svg")
-            .attr("width", "100%")
-            .attr("height", 500)
-            .attr("preserveAspectRatio", "xMinYMin meet");
-
-        // Get the actual width of the container
-        const containerWidth = container.node().getBoundingClientRect().width;
+        const containerWidth = Math.min(700, container.node().getBoundingClientRect().width);
         const width = containerWidth - margin.left - margin.right;
         const height = 500 - margin.top - margin.bottom;
+
+        const svg = container.append("svg")
+            .attr("width", containerWidth)
+            .attr("height", 500)
+            .attr("viewBox", `0 0 ${containerWidth} 500`)
+            .attr("preserveAspectRatio", "xMinYMin meet");
 
         // Create the main group element that will contain the plot
         const g = svg.append("g")
@@ -236,5 +243,10 @@
         padding: 10px;
         border: 1px solid #ccc;
         background-color: #f9f9f9;
+    }
+
+    #scatter-display {
+        width: 100%;
+        max-width: 700px;
     }
 </style>

@@ -1,5 +1,4 @@
 <script>
-    import { onMount } from "svelte";
     import { PARTY_COLOURS, PARTY_TAG_MAP } from "../lib/constants.js";
     import * as d3 from 'd3';
 
@@ -14,6 +13,8 @@
     let curParty = $state("lib");
     let curScope = $state("gta");
     let curVoteShares = $state([]); // To store the processed data
+    let windowWidth = $state(window.innerWidth);
+    window.addEventListener('resize', () => windowWidth = window.innerWidth);
 
     // Function to handle curRegion change
     function handleRegionChange(event) {
@@ -67,15 +68,31 @@
             });
     }
 
-    // Function to draw the graph
+    $effect(() => {
+        curVoteShares;
+        windowWidth;
+        drawGraph();
+    });
+
     function drawGraph() {
         const svg = d3.select("#vote-share-graph");
-        svg.selectAll("*").remove(); // Clear previous content
+        svg.selectAll("*").remove();
 
-        const margin = { top: 20, right: 30, bottom: 50, left: 60 };
-        const width = svg.node().getBoundingClientRect().width - margin.left - margin.right;
-        const height = +svg.attr("height") - margin.top - margin.bottom;
-        const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+        const containerWidth = svg.node().parentElement.getBoundingClientRect().width || 700;
+        const margin = { 
+            top: 20, 
+            right: containerWidth <= 700 ? 40 : 30, // Increase right margin for smaller screens
+            bottom: 50, 
+            left: 60 
+        };
+        const width = Math.min(containerWidth, 700) - margin.left - margin.right;
+        const height = 400 - margin.top - margin.bottom;
+
+        svg.attr("width", width + margin.left + margin.right)
+           .attr("height", height + margin.top + margin.bottom);
+
+        const g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
 
         const x = d3.scalePoint()
             .domain(curVoteShares.map(d => d[0]))
@@ -85,14 +102,23 @@
             .domain([-25, 35])
             .range([height, 0]);
 
+        // Modified x-axis
         g.append("g")
             .attr("transform", `translate(0,${height})`)
             .call(d3.axisBottom(x).tickFormat(d3.format("d")))
-            .append("text")
+            .selectAll("text")
+            .style("text-anchor", containerWidth <= 700 ? "end" : "middle")
+            .attr("dx", containerWidth <= 700 ? "-0.8em" : "0")
+            .attr("dy", containerWidth <= 700 ? "0.15em" : "0.71em")
+            .attr("transform", containerWidth <= 700 ? "rotate(-45)" : "rotate(0)");
+
+        // Year label
+        g.append("text")
             .attr("fill", "#000")
             .attr("x", width / 2)
-            .attr("y", 40)
+            .attr("y", height + (containerWidth <= 700 ? 45 : 40))
             .attr("text-anchor", "middle")
+            .style("font-size", "11px")
             .text("Election year");
 
         g.append("g")
@@ -104,6 +130,7 @@
             .attr("x", -height / 2)
             .attr("dy", "0.71em")
             .attr("text-anchor", "middle")
+            .style("font-size", "11px")
             .text("Vote share difference");
 
         // Add dotted black line at y = 0
@@ -147,12 +174,6 @@
         // Call the function
         loadVoteShares();
     });
-
-    // Redraw the graph whenever curVoteShares is updated
-    $effect(() => {
-        curVoteShares;
-        drawGraph();
-    });
 </script>
 
 <div>
@@ -173,18 +194,14 @@
     </select>
 </div>
 
-<!-- {#if curVoteShares.length > 0}
-    <div>
-        <pre>{JSON.stringify(curVoteShares, null, 2)}</pre>
-    </div>
-{/if} -->
-
-<!-- SVG container for the graph -->
-<svg id="vote-share-graph" width="100%" height="400"></svg>
+<svg id="vote-share-graph" height="400"></svg>
 
 <style>
     select {
         width: 100%;
         margin-bottom: 10px;
+    }
+    svg {
+        max-width: 100%;
     }
 </style>

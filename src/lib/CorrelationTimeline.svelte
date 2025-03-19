@@ -10,8 +10,9 @@
         "Conservatives": [],
         "New Democrats": [],
     });
-
-    let svg; // Reference to the SVG element
+    let windowWidth = $state(window.innerWidth);
+    window.addEventListener('resize', () => windowWidth = window.innerWidth);
+    let svg;
 
     // Function to handle curRegion change
     function handleRegionChange(event) {
@@ -26,7 +27,6 @@
         } else {
             curParties = [...curParties, party];
         }
-        drawGraph(); // Redraw the graph when PARTIES change
     }
 
     // Function to update correlations based on the selected curRegion
@@ -41,7 +41,6 @@
                 "Conservatives": filteredData.map(row => [parseInt(row.year), parseFloat(row.corr_pct_imm_cons1)]),
                 "New Democrats": filteredData.map(row => [parseInt(row.year), parseFloat(row.corr_pct_imm_ndp)]),
             };
-            drawGraph(); // Redraw the graph with the new data
         }).catch(error => {
             console.error('Error loading or processing CSV data:', error);
         });
@@ -53,14 +52,15 @@
         d3.select("#correlation-line-graph").selectAll("*").remove();
 
         // Set up SVG dimensions
-        const width = document.getElementById("correlation-line-graph").clientWidth;
+        const container = document.getElementById("correlation-line-graph").parentElement;
+        const width = container.clientWidth;
         const height = 400;
         const margin = { top: 20, right: 30, bottom: 50, left: 60 };
 
-        // Create the SVG container
+        // Create the SVG container with viewBox for responsiveness
         svg = d3.select("#correlation-line-graph")
-            .attr("width", width)
-            .attr("height", height);
+            .attr("viewBox", `0 0 ${width} ${height}`)
+            .attr("preserveAspectRatio", "xMidYMid meet");
 
         // Get all unique years from curCorrs
         const allYears = [...new Set(Object.values(curCorrs).flatMap(data => data.map(d => d[0])))];
@@ -78,14 +78,22 @@
         const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d")); // Format years as integers
         const yAxis = d3.axisLeft(yScale);
 
-        // Add the x-axis
-        svg.append("g")
+        // Modify x-axis rendering - separate ticks and label
+        const xAxisGroup = svg.append("g")
             .attr("transform", `translate(0,${height - margin.bottom})`)
-            .call(xAxis)
-            .append("text")
+            .call(xAxis);
+        
+        // Style the tick labels
+        xAxisGroup.selectAll("text")
+            .style("text-anchor", width <= 700 ? "end" : "middle")
+            .attr("dx", width <= 700 ? "-0.8em" : "0")
+            .attr("dy", width <= 700 ? "0.15em" : "0.71em")
+            .attr("transform", width <= 700 ? "rotate(-45)" : "rotate(0)");
+
+        // Add x-axis label separately
+        xAxisGroup.append("text")
             .attr("fill", "#000")
-            .attr("x", width / 2)
-            .attr("y", 40)
+            .attr("transform", `translate(${(width - margin.left - margin.right) / 2 + margin.left}, 40)`)
             .attr("text-anchor", "middle")
             .text("Election year");
 
@@ -133,7 +141,17 @@
         });
     }
 
-    // Initialize the graph on mount
+    // Comprehensive effect that handles all graph updates
+    $effect(() => {
+        windowWidth;
+        curCorrs;
+        curParties;
+        if (Object.values(curCorrs).some(arr => arr.length > 0)) {
+            drawGraph();
+        }
+    });
+
+    // Simplified onMount
     onMount(() => {
         updateCorrelations();
     });
@@ -176,5 +194,7 @@
     }
     svg {
         width: 100%;
+        height: auto;
+        max-width: 100%;
     }
 </style>
