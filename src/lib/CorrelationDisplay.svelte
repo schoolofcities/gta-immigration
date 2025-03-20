@@ -171,21 +171,24 @@
         g.append("g")
             .attr("stroke", "black")
             .attr("stroke-width", 1.5)
-            .selectAll("circle")
+            .selectAll(".scatter-correlation-dot")  // Add specific class
             .data(data)
             .join("circle")
+            .attr("class", "scatter-correlation-dot")  // Add specific class
             .attr("cx", d => x(d.x))
             .attr("cy", d => y(d.y))
             .attr("r", 3)
             .attr("fill", PARTY_COLOURS[curParty])
             .on("mouseover", (event, d) => {
                 // Reset any previously hovered point (if not selected)
-                d3.selectAll("circle").each(function(pd) {
-                    if (!selectedPoint || 
-                        pd.geoname !== selectedPoint.geoname) {
-                        resetPointStyle(d3.select(this));
-                    }
-                });
+                d3.select("#scatter-display")
+                    .selectAll("circle")
+                    .each(function(pd) {
+                        if (!selectedPoint || 
+                            pd.geoname !== selectedPoint.geoname) {
+                            resetPointStyle(d3.select(this));
+                        }
+                    });
                 
                 hoveredPoint = d;
                 if (!selectedPoint || d.geoname !== selectedPoint.geoname) {
@@ -202,9 +205,11 @@
             })
             .on("click", (event, d) => {
                 // Reset all points first
-                d3.selectAll("circle").each(function() {
-                    resetPointStyle(d3.select(this));
-                });
+                d3.select("#scatter-display")
+                    .selectAll("circle")
+                    .each(function() {
+                        resetPointStyle(d3.select(this));
+                    });
 
                 // If clicking the same point that's selected, unselect it
                 if (selectedPoint && selectedPoint.geoname === d.geoname) {

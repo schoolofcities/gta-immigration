@@ -129,12 +129,12 @@
                 .attr("stroke-width", 2)
                 .attr("d", line);
 
-            // Draw dots for each data point
-            svg.selectAll(`.timeline-dot-${party}`)  // Changed class name to be more specific
+            // Draw dots for each data point with a more specific class name
+            svg.selectAll(`.timeline-correlation-dot-${partyTag}`)
                 .data(data)
                 .enter()
                 .append("circle")
-                .attr("class", `timeline-dot-${party}`)  // Changed class name to be more specific
+                .attr("class", `timeline-correlation-dot-${partyTag}`)
                 .attr("cx", d => xScale(d[0]))
                 .attr("cy", d => yScale(d[1]))
                 .attr("r", 4)
