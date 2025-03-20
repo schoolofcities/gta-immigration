@@ -109,6 +109,16 @@
             .attr("text-anchor", "middle")
             .text("Correlation");
 
+        // Add dotted black line at y = 0
+        svg.append("line")
+            .attr("x1", margin.left)
+            .attr("x2", width - margin.right)
+            .attr("y1", yScale(0))
+            .attr("y2", yScale(0))
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("stroke-dasharray", "4,4");
+
         // Define a line generator
         const line = d3.line()
             .x(d => xScale(d[0]))
