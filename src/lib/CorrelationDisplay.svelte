@@ -259,57 +259,54 @@
     });
 </script>
 
+<div class="sentence-controls">
+    <p>
+        I want to see
+        <select onchange={handleYearChange} class="inline-select">
+            {#each years as y}
+                <option value={y} selected={y === curYear}>{y}</option>
+            {/each}
+        </select>
+        <select onchange={handleRegionChange} class="inline-select">
+            <option value="federal" selected>federal</option>
+            <option value="ontario">ontario</option>
+        </select>
+        election correlation plot. Show me the party correlation for the
+        <select onchange={handlePartyChange} class="inline-select">
+            {#each curParties as party}
+                <option value={party.tag}>{party.name}</option>
+            {/each}
+        </select>.
+    </p>
+</div>
+
+<div id='scatter-display'></div>
+
 <div>
-    <select onchange={handleRegionChange}>
-        <option value="federal" selected>Federal</option>
-        <option value="ontario">Ontario</option>
-    </select>
-
-    <select onchange={handleYearChange}>
-        {#each years as y}
-            <option value={y} selected={y === curYear}>{y}</option>
-        {/each}
-    </select>
-
-    <select onchange={handlePartyChange}>
-        {#each curParties as party}
-            <option value={party.tag}>{party.name}</option>
-        {/each}
-    </select>
-
-    <div id='scatter-display'></div>
-
-    <div>
-        <div class="info-row">
-            {#if hoveredPoint || selectedPoint}
-                <p><b>{(hoveredPoint || selectedPoint).geoname}</b></p>
-            {:else}
-                <p><i>Hover/click on a point</i></p>
-            {/if}
-        </div>
-        <div class="info-row">
-            {#if hoveredPoint || selectedPoint}
-                <p>Vote share = <b>{((hoveredPoint || selectedPoint).y).toFixed(1)}%</b></p>
-            {:else} 
-                <p>Vote share = <b>N/A</b></p>
-            {/if}
-        </div>
-        <div class="info-row">
-            {#if hoveredPoint || selectedPoint}
-                <p>Percent immigrants = <b>{((hoveredPoint || selectedPoint).x).toFixed(1)}%</b></p>
-            {:else} 
-                <p>Percent immigrants = <b>N/A</b></p>
-            {/if}
-        </div>
+    <div class="info-row">
+        {#if hoveredPoint || selectedPoint}
+            <p><b>{(hoveredPoint || selectedPoint).geoname}</b></p>
+        {:else}
+            <p><i>Hover/click on a point</i></p>
+        {/if}
+    </div>
+    <div class="info-row">
+        {#if hoveredPoint || selectedPoint}
+            <p>Vote share = <b>{((hoveredPoint || selectedPoint).y).toFixed(1)}%</b></p>
+        {:else} 
+            <p>Vote share = <b>N/A</b></p>
+        {/if}
+    </div>
+    <div class="info-row">
+        {#if hoveredPoint || selectedPoint}
+            <p>Percent immigrants = <b>{((hoveredPoint || selectedPoint).x).toFixed(1)}%</b></p>
+        {:else} 
+            <p>Percent immigrants = <b>N/A</b></p>
+        {/if}
     </div>
 </div>
 
 <style>
-    select {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
     #scatter-display {
         width: 100%;
         max-width: 700px;

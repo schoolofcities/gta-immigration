@@ -408,30 +408,32 @@
 </script>
 
 <div class="container">
-    <div class="controls">
-        <div class="control-row">
-            <select onchange={handleRegionChange}>
-                <option value="federal" selected>Federal</option>
-                <option value="ontario">Ontario</option>
-            </select>
-            <select onchange={handleYearChange}>
+    <div class="sentence-controls">
+        <p>
+            I want to see
+            <select onchange={handleYearChange} class="inline-select">
                 {#each years as y}
                     <option value={y} selected={y === curYear}>{y}</option>
                 {/each}
             </select>
-        </div>
-        <div class="control-row">
-            <select onchange={handlePartyChange}>
+            <select onchange={handleRegionChange} class="inline-select">
+                <option value="federal" selected>federal</option>
+                <option value="ontario">ontario</option>
+            </select>
+            election results.
+            Show me the party vote for the
+            <select onchange={handlePartyChange} class="inline-select">
                 {#each curParties as party}
                     <option value={party.tag}>{party.name}</option>
                 {/each}
             </select>
-            <select onchange={handleCensusVariableChange}>
+            with the census data for
+            <select onchange={handleCensusVariableChange} class="inline-select">
                 {#each curCensusVars as variable}
-                    <option value={variable.propertyTag}>{variable.name}</option>
+                    <option value={variable.propertyTag}>{variable.name.toLowerCase()}</option>
                 {/each}
-            </select>
-        </div>
+            </select>.
+        </p>
     </div>
 </div>
 
@@ -508,14 +510,14 @@
 <style>
     .map-container {
         display: flex;
-        gap: 10px; /* Maintains the 10px gap between the maps */
-        margin: 0 10px; /* Adds 10px margin on the left and right sides of the container */
-        width: calc(100% - 20px); /* Adjusts the width to account for the margin */
+        gap: 10px;
+        margin: 0 10px;
+        width: calc(100% - 20px);
     }
 
     .map-section {
-        flex: 1; /* Ensures both map sections take up equal space */
-        min-width: 0; /* Prevents flex items from overflowing */
+        flex: 1;
+        min-width: 0;
     }
 
     .map {
@@ -525,29 +527,14 @@
 
     @media (max-width: 700px) {
         .map-container {
-            flex-direction: column; /* Stacks the maps vertically */
-            gap: 10px; /* Maintains the gap between stacked maps */
-            margin: 10px; /* Adds margin around the container */
-            width: calc(100% - 20px); /* Adjusts the width to account for the margin */
+            flex-direction: column;
+            gap: 10px;
+            margin: 10px;
+            width: calc(100% - 20px);
         }
 
         .map-section {
-            width: 100%; /* Ensures each map takes up the full width */
+            width: 100%;
         }
-    }
-
-    .controls {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-    .control-row {
-        display: flex;
-        gap: 10px;
-        justify-content: space-between;
-    }
-    .control-row select {
-        width: 48%;
     }
 </style>

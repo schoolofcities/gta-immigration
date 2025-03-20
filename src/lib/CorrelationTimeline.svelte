@@ -169,10 +169,16 @@
 </script>
 
 <div>
-    <select onchange={handleRegionChange}>
-        <option value="federal" selected>Federal</option>
-        <option value="ontario">Ontario</option>
-    </select>
+    <div class="sentence-controls">
+        <p>
+            Show me the correlation between party vote share and percent immigrants over time for the
+            <select onchange={handleRegionChange} class="inline-select">
+                <option value="federal" selected>federal</option>
+                <option value="ontario">ontario</option>
+            </select>
+            level.
+        </p>
+    </div>
     {#each PARTIES_INFO as party}
         {#if party.tag !== 'cons2'}
             <button 
@@ -189,11 +195,6 @@
 <svg id="correlation-line-graph"></svg>
 
 <style>
-    select {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
     button {
         background-color: gray;
         color: white;

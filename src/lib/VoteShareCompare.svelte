@@ -165,33 +165,33 @@
     });
 </script>
 
-<div>
-    <select onchange={handleRegionChange}>
-        <option value="federal" selected>Federal</option>
-        <option value="ontario">Ontario</option>
-    </select>
-
-    <select onchange={handlePartyChange}>
-        {#each PARTIES_INFO as party}
-            {#if party.tag !== 'cons2'}
-                <option value={party.tag}>{party.name}</option>
-            {/if}
-        {/each}
-    </select>
-
-    <select onchange={handleScopeChange}>
-        <option value="gta" selected>GTA</option>
-        <option value="full">Full</option>
-    </select>
+<div class="sentence-controls">
+    <p>
+        I want to see vote share difference for
+        <select onchange={handleRegionChange} class="inline-select">
+            <option value="federal" selected>federal</option>
+            <option value="ontario">ontario</option>
+        </select>
+        elections. Show me the difference for the
+        <select onchange={handlePartyChange} class="inline-select">
+            {#each PARTIES_INFO as party}
+                {#if party.tag !== 'cons2'}
+                    <option value={party.tag}>{party.name}</option>
+                {/if}
+            {/each}
+        </select>
+        in the
+        <select onchange={handleScopeChange} class="inline-select">
+            <option value="gta" selected>GTA</option>
+            <option value="full">full</option>
+        </select>
+        {curScope === 'gta' ? 'only' : 'results'}.
+    </p>
 </div>
 
 <svg id="vote-share-graph" height="400"></svg>
 
 <style>
-    select {
-        width: 100%;
-        margin-bottom: 10px;
-    }
     svg {
         max-width: 100%;
     }
