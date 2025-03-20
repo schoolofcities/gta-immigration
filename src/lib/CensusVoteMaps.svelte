@@ -6,15 +6,35 @@
     import { getRegionTag, updateCensusVarOptions, updatePartyOptions } from "./utils.js";
 
     let map1, map2;
-    const defaultCenter = [-79.3832, 43.6532];
-    const defaultZoom = 9;
-    const defaultMinZoom = 8;
-    const defaultMaxZoom = 11;
-    const maxBounds = [
-        [-81.0, 42.5],  // Southwest corner (near London, ON)
-        [-78.0, 45.0]   // Northeast corner (north of Peterborough)
-    ];
 
+    // Map config objects
+    const mapConfig = {
+        style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+        center: [-79.3832, 43.6532],
+        zoom: 9,
+        maxZoom: 11,
+        minZoom: 8,
+        maxBounds: [
+            [-81.0, 42.5],  // Southwest corner (near London, ON)
+            [-78.0, 45.0]   // Northeast corner (north of Peterborough)
+        ],
+        bearing: -17.194,  // https://glaikit.org/2010/03/10/torontos-angles/
+        dragRotate: true,
+        pitchWithRotate: false,
+        touchZoomRotate: true
+    };
+
+    const navControlConfig = {
+        showCompass: true,
+        visualizePitch: false
+    };
+
+    const scaleControlConfig = {
+        maxWidth: 100,
+        unit: 'metric'
+    };
+
+    // State variables
     let curRegion = $state("federal");
     let curRegionTag = $derived(getRegionTag(curRegion));
 
@@ -341,23 +361,19 @@
     onMount(() => {
         map1 = new maplibregl.Map({
             container: "map1",
-            style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
-            center: defaultCenter, // Example: Toronto
-            zoom: defaultZoom,
-            maxZoom: defaultMaxZoom,
-            minZoom: defaultMinZoom,
-            maxBounds: maxBounds,
+            ...mapConfig
         });
+
+        map1.addControl(new maplibregl.NavigationControl(navControlConfig), 'top-right');
+        map1.addControl(new maplibregl.ScaleControl(scaleControlConfig), 'bottom-left');
 
         map2 = new maplibregl.Map({
             container: "map2",
-            style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
-            center: defaultCenter, // Same starting position
-            zoom: defaultZoom,
-            maxZoom: defaultMaxZoom,
-            minZoom: defaultMinZoom,
-            maxBounds: maxBounds,
+            ...mapConfig
         });
+
+        map2.addControl(new maplibregl.NavigationControl(navControlConfig), 'top-right');
+        map2.addControl(new maplibregl.ScaleControl(scaleControlConfig), 'bottom-left');
 
         // Sync both maps
         syncMaps(map1, map2);
