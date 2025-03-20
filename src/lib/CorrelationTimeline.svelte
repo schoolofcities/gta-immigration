@@ -130,15 +130,16 @@
                 .attr("d", line);
 
             // Draw dots for each data point
-            svg.selectAll(`.dot-${party}`)
+            svg.selectAll(`.timeline-dot-${party}`)  // Changed class name to be more specific
                 .data(data)
                 .enter()
                 .append("circle")
-                .attr("class", `dot-${party}`)
+                .attr("class", `timeline-dot-${party}`)  // Changed class name to be more specific
                 .attr("cx", d => xScale(d[0]))
                 .attr("cy", d => yScale(d[1]))
                 .attr("r", 4)
-                .attr("fill", PARTY_COLOURS[partyTag] || "black"); // Fallback to black if color is missing
+                .attr("fill", PARTY_COLOURS[partyTag])
+                .attr("stroke", "none");  // Explicitly set no stroke
         });
     }
 
