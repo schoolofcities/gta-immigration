@@ -15,24 +15,18 @@ export const PARTIES_INFO = [
     {"name": "New Democrats", "tag": "ndp", "propertyTag": "ndp_pct"},
 ]
 
-export const PARTY_TAG_MAP = {
-    "Liberals": "lib_pct",
-    "Conservatives": "cons1_pct",
-    "New Democrats": "ndp_pct"
-};
-
 export const PARTY_COLOURS = {
-    lib_pct: "#da121a",
-    cons1_pct: "#15284c", 
-    ndp_pct: "#f07c00", 
-    cons2_pct: "#2db56b", 
+    lib: "#da121a",
+    cons1: "#15284c", 
+    cons2: "#2db56b", 
+    ndp: "#f07c00", 
 };
 
 export const PARTY_SHADES = {
     lib: ["#f5c3c5", "#f1a6a9", "#ec888c", "#e76a6f", "#e34d53", "#de2f36", "#da121a", "#be0f16"],
     cons1: ["#c4c9d2", "#a7aebb", "#8a93a5", "#6c788f", "#4f5d78", "#324262", "#15284c", "#122342"],
+    cons2: ["#caecda", "#b0e3c7", "#96dab5", "#7bd0a2", "#61c790", "#47be7d", "#2db56b", "#279e5d"],
     ndp: ["#fbdebf", "#f9cd9f", "#f7bd7f", "#f5ad5f", "#f39c3f", "#f18c1f", "#f07c00", "#d26c00"],
-    cons2: ["#caecda", "#b0e3c7", "#96dab5", "#7bd0a2", "#61c790", "#47be7d", "#2db56b", "#279e5d"]
 };
 
 export const CENSUS_SHADES = {

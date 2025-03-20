@@ -1,5 +1,5 @@
 <script>
-    import { PARTIES_INFO, PARTY_COLOURS, PARTY_TAG_MAP } from "../lib/constants.js";
+    import { PARTIES_INFO, PARTY_COLOURS } from "../lib/constants.js";
     import * as d3 from 'd3';
 
     // State variables
@@ -137,7 +137,7 @@
         g.append("path")
             .datum(curVoteShares)
             .attr("fill", "none")
-            .attr("stroke", PARTY_COLOURS[`${curParty}_pct`])
+            .attr("stroke", PARTY_COLOURS[curParty])
             .attr("stroke-width", 1.5)
             .attr("stroke-dasharray", "3,3")
             .attr("d", line);
@@ -148,7 +148,7 @@
             .attr("r", 3.5)
             .attr("cx", d => x(d[0]))
             .attr("cy", d => y(d[1] - d[2]))
-            .attr("fill", PARTY_COLOURS[`${curParty}_pct`]);
+            .attr("fill", PARTY_COLOURS[curParty]);
     }
 
     $effect(() => {

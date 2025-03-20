@@ -63,7 +63,6 @@
         // Load the CSV file using a Promise
         d3.csv(`/data/elections_analysis/ed_corrs.csv`)
             .then(data => {
-                // const party = curParty.split('_')[0];
                 const columnName = `corr_pct_imm_${curParty}`;
 
                 // Find the row that matches the curYear and curRegion
@@ -73,7 +72,7 @@
                 if (row && row[columnName]) {
                     correlation = parseFloat(row[columnName]);
                 } else {
-                    correlation = 0; // Set to zero if no value is found
+                    correlation = 0; 
                 }
 
                 // console.log($state.snapshot(correlation));
@@ -81,7 +80,7 @@
             })
             .catch(error => {
                 console.error('Error loading CSV file:', error);
-                correlation = 0; // Set to zero in case of an error
+                correlation = 0; 
             });
     }
 
@@ -91,8 +90,8 @@
         const partyPropertyTag = PARTIES_INFO.find(party => party.tag === curParty).propertyTag;
         
         const data = geoJsonData.features.map(d => ({
-            x: d.properties.pct_imm,  // Swapped
-            y: d.properties[partyPropertyTag], // Swapped
+            x: d.properties.pct_imm, 
+            y: d.properties[partyPropertyTag],
             geoname: d.properties.geoname
         }));
 
@@ -118,11 +117,11 @@
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
         const x = d3.scaleLinear()
-            .domain([0, 70])  // Changed domain for immigrant percentage
+            .domain([0, 70])  
             .range([0, width]);
 
         const y = d3.scaleLinear()
-            .domain([0, 80])  // Changed domain for vote percentage
+            .domain([0, 80])  
             .range([height, 0]);
 
         const xAxis = g => g
@@ -134,7 +133,7 @@
             .attr("y", 40)
             .attr("fill", "black")
             .attr("text-anchor", "middle")
-            .text("Percentage of immigrants");  // Swapped label
+            .text("Percentage of immigrants");  
 
         const yAxis = g => g
             .attr("transform", `translate(0,0)`)
@@ -146,7 +145,7 @@
             .attr("fill", "black")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .text("Party vote share");  // Swapped label
+            .text("Party vote share");  
 
         // Append axes to the main group
         g.append("g").call(xAxis);
@@ -162,7 +161,7 @@
             .attr("cx", d => x(d.x))
             .attr("cy", d => y(d.y))
             .attr("r", 3)
-            .attr("fill", PARTY_COLOURS[partyPropertyTag])
+            .attr("fill", PARTY_COLOURS[curParty])
             .on("mouseover", (event, d) => {
                 hoveredPoint = d;
                 d3.select(event.target).attr("r", 6).attr("stroke", "red").attr("stroke-width", 2);
@@ -173,7 +172,7 @@
                     .attr("r", 3)
                     .attr("stroke", "black")
                     .attr("stroke-width", 1.5)
-                    .attr("fill", PARTY_COLOURS[partyPropertyTag]);  // Changed from curParty to partyPropertyTag
+                    .attr("fill", PARTY_COLOURS[curParty]);  
             });
 
         // Add correlation line
@@ -188,7 +187,7 @@
 
         const lineData = [
             { x: 0, y: intercept },
-            { x: 70, y: intercept + slope * 70 }  // Changed x range to match new domain
+            { x: 70, y: intercept + slope * 70 } 
         ];
 
         // Add the correlation line to the main group

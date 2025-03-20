@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { PARTIES_INFO, PARTY_COLOURS, PARTY_TAG_MAP } from "../lib/constants.js";
+    import { PARTIES_INFO, PARTY_COLOURS } from "../lib/constants.js";
     import * as d3 from 'd3';
 
     let curRegion = $state("federal");
@@ -119,11 +119,13 @@
             const data = curCorrs[party];
             if (!data) return;
 
+            const partyTag = PARTIES_INFO.find(p => p.name === party).tag;
+
             // Draw the line
             svg.append("path")
                 .datum(data)
                 .attr("fill", "none")
-                .attr("stroke", PARTY_COLOURS[PARTY_TAG_MAP[party]] || "black") // Fallback to black if color is missing
+                .attr("stroke", PARTY_COLOURS[partyTag] || "black") // Fallback to black if color is missing
                 .attr("stroke-width", 2)
                 .attr("d", line);
 
@@ -136,7 +138,7 @@
                 .attr("cx", d => xScale(d[0]))
                 .attr("cy", d => yScale(d[1]))
                 .attr("r", 4)
-                .attr("fill", PARTY_COLOURS[PARTY_TAG_MAP[party]] || "black"); // Fallback to black if color is missing
+                .attr("fill", PARTY_COLOURS[partyTag] || "black"); // Fallback to black if color is missing
         });
     }
 
