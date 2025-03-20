@@ -17,6 +17,7 @@
 
     let correlation = $state(0);
     let hoveredPoint = $state(null);
+    let selectedPoint = $state(null);  
 
     let windowWidth = $state(window.innerWidth);
     
@@ -82,6 +83,21 @@
                 console.error('Error loading CSV file:', error);
                 correlation = 0; 
             });
+    }
+
+    function resetPointStyle(selection) {
+        selection
+            .attr("r", 3)
+            .attr("stroke", "black")
+            .attr("stroke-width", 1.5)
+            .attr("fill", PARTY_COLOURS[curParty]);
+    }
+
+    function highlightPoint(selection) {
+        selection
+            .attr("r", 6)
+            .attr("stroke", "red")
+            .attr("stroke-width", 2);
     }
 
     function renderScatterPlot() {
@@ -163,16 +179,44 @@
             .attr("r", 3)
             .attr("fill", PARTY_COLOURS[curParty])
             .on("mouseover", (event, d) => {
+                // Reset any previously hovered point (if not selected)
+                d3.selectAll("circle").each(function(pd) {
+                    if (!selectedPoint || 
+                        pd.geoname !== selectedPoint.geoname) {
+                        resetPointStyle(d3.select(this));
+                    }
+                });
+                
                 hoveredPoint = d;
-                d3.select(event.target).attr("r", 6).attr("stroke", "red").attr("stroke-width", 2);
+                if (!selectedPoint || d.geoname !== selectedPoint.geoname) {
+                    highlightPoint(d3.select(event.target));
+                }
             })
             .on("mouseout", (event, d) => {
-                hoveredPoint = null;
-                d3.select(event.target)
-                    .attr("r", 3)
-                    .attr("stroke", "black")
-                    .attr("stroke-width", 1.5)
-                    .attr("fill", PARTY_COLOURS[curParty]);  
+                if (!selectedPoint || d.geoname !== selectedPoint.geoname) {
+                    resetPointStyle(d3.select(event.target));
+                }
+                if (!selectedPoint) {
+                    hoveredPoint = null;
+                }
+            })
+            .on("click", (event, d) => {
+                // Reset all points first
+                d3.selectAll("circle").each(function() {
+                    resetPointStyle(d3.select(this));
+                });
+
+                // If clicking the same point that's selected, unselect it
+                if (selectedPoint && selectedPoint.geoname === d.geoname) {
+                    selectedPoint = null;
+                    hoveredPoint = null;
+                    resetPointStyle(d3.select(event.target));
+                } else {
+                    // Select new point
+                    selectedPoint = d;
+                    hoveredPoint = d;
+                    highlightPoint(d3.select(event.target));
+                }
             });
 
         // Add correlation line
@@ -230,10 +274,28 @@
 
     <div id='scatter-display'></div>
 
-    <div class="hover-panel">
-        <div><strong>Riding:</strong> {#if hoveredPoint} {hoveredPoint.geoname} {/if}</div>
-        <div><strong>Vote Share:</strong> {#if hoveredPoint} {hoveredPoint.y}% {/if}</div>
-        <div><strong>Proportion of Immigrants:</strong> {#if hoveredPoint} {hoveredPoint.x} {/if}</div>
+    <div>
+        <div class="info-row">
+            {#if hoveredPoint || selectedPoint}
+                <p><b>{(hoveredPoint || selectedPoint).geoname}</b></p>
+            {:else}
+                <p><i>Hover/click on a point</i></p>
+            {/if}
+        </div>
+        <div class="info-row">
+            {#if hoveredPoint || selectedPoint}
+                <p>Vote share = <b>{((hoveredPoint || selectedPoint).y).toFixed(1)}%</b></p>
+            {:else} 
+                <p>Vote share = <b>N/A</b></p>
+            {/if}
+        </div>
+        <div class="info-row">
+            {#if hoveredPoint || selectedPoint}
+                <p>Percent immigrants = <b>{((hoveredPoint || selectedPoint).x).toFixed(1)}%</b></p>
+            {:else} 
+                <p>Percent immigrants = <b>N/A</b></p>
+            {/if}
+        </div>
     </div>
 </div>
 
@@ -241,13 +303,6 @@
     select {
         width: 100%;
         margin-bottom: 10px;
-    }
-
-    .hover-panel {
-        margin-top: 10px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        background-color: #f9f9f9;
     }
 
     #scatter-display {

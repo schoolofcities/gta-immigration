@@ -550,34 +550,4 @@
     .control-row select {
         width: 48%;
     }
-
-    .info-row {
-        border-bottom: solid 1px var(--brandGray);
-        box-shadow: 0 2px 0 0 rgba(224, 224, 224, 0.268);
-        margin: 0 auto;
-        max-width: 1000px;
-        width: 100%;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .info-row p {
-        font-family: 'Roboto', sans-serif;
-        margin: 0;
-        font-weight: normal;
-        font-size: 15px;
-        color: var(--brandDarkBlue);
-        text-align: center;
-    }
-
-    .info-row b {
-        font-family: 'RobotoBold', sans-serif;
-    }
-
-    .info-row i {
-        font-style: italic;
-        color: #666;
-    }
 </style>
