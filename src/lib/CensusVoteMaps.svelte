@@ -249,37 +249,39 @@
     });
 </script>
 
-<div class="controls">
-    <select onchange={handleRegionChange}>
-        <option value="federal" selected>Federal</option>
-        <option value="ontario">Ontario</option>
-    </select>
-    <select onchange={handleYearChange}>
-        {#each years as y}
-            <option value={y} selected={y === curYear}>{y}</option>
-        {/each}
-    </select>
-</div>
-
-<div class="map-container">
-    <div class="map-section">
-        <div class="map-controls">
+<div class="container">
+    <div class="controls">
+        <div class="control-row">
+            <select onchange={handleRegionChange}>
+                <option value="federal" selected>Federal</option>
+                <option value="ontario">Ontario</option>
+            </select>
+            <select onchange={handleYearChange}>
+                {#each years as y}
+                    <option value={y} selected={y === curYear}>{y}</option>
+                {/each}
+            </select>
+        </div>
+        <div class="control-row">
             <select onchange={handlePartyChange}>
                 {#each curParties as party}
                     <option value={party.tag}>{party.name}</option>
                 {/each}
             </select>
-        </div>
-        <div id="map1" class="map"></div>
-    </div>
-    <div class="map-section">
-        <div class="map-controls">
             <select onchange={handleCensusVariableChange}>
                 {#each curCensusVars as variable}
                     <option value={variable.propertyTag}>{variable.name}</option>
                 {/each}
             </select>
         </div>
+    </div>
+</div>
+
+<div class="map-container">
+    <div class="map-section">
+        <div id="map1" class="map"></div>
+    </div>
+    <div class="map-section">
         <div id="map2" class="map"></div>
     </div>
 </div>
@@ -299,14 +301,26 @@
         gap: 10px;
         margin-bottom: 10px;
     }
-    .map-controls {
+    .control-row {
         display: flex;
+        gap: 10px;
         justify-content: space-between;
-        margin-bottom: 10px;
+    }
+    .control-row select {
+        width: 48%;
     }
     .map-section {
         display: flex;
         flex-direction: column;
         width: 50%;
+    }
+
+    @media (max-width: 700px) {
+        .map-container {
+            flex-direction: column;
+        }
+        .map-section {
+            width: 100%;
+        }
     }
 </style>

@@ -7,7 +7,7 @@
     let curParty = $state("lib");
     let curScope = $state("gta");
 
-    let curVoteShares = $state([]); 
+    let curVoteShares = $state([]); // elements of the form [year, top_5_imm_pct, scope_pct]
     let windowWidth = $state(window.innerWidth);
     
     window.addEventListener('resize', () => windowWidth = window.innerWidth);
