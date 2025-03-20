@@ -29,6 +29,10 @@
     let curCensusVars = $derived(updateCensusVarOptions(geoJsonData));
     let curCensusVariable = $state("pct_imm");
 
+    // State for hovered/tapped riding
+    let hoveredRidingId = $state(null);
+    let hoveredRidingData = $state(null);
+
     // Prevent infinite update loops
     let syncing = false;
     function syncMaps(movingMap, targetMap) {
@@ -49,8 +53,14 @@
         fetch(filePath)
             .then(response => response.json())
             .then(data => {
+                // Add an id to each feature if it doesn't already have one
+                data.features = data.features.map((feature, index) => {
+                    if (!feature.id) {
+                        feature.id = index; // Use index as a fallback ID
+                    }
+                    return feature;
+                });
                 geoJsonData = data;
-                // console.log($state.snapshot(geoJsonData));
                 updateSelectOptions();
                 updatePartyMapLayer();
                 updateCensusMapLayer();
@@ -136,7 +146,12 @@
             source: "party-vote-share",
             paint: {
                 "line-color": "#000000",
-                "line-width": 0.5
+                "line-width": [
+                    "case",
+                    ["boolean", ["feature-state", "hover"], false],
+                    2, // Highlighted line width
+                    0.5 // Default line width
+                ]
             }
         });
     }
@@ -208,15 +223,118 @@
             source: "census-variable",
             paint: {
                 "line-color": "#000000",
-                "line-width": 0.5
+                "line-width": [
+                    "case",
+                    ["boolean", ["feature-state", "hover"], false],
+                    2, // Highlighted line width
+                    0.5 // Default line width
+                ]
             }
         });
+    }
+
+    // Function to handle hover and click events
+    function handleRidingInteraction(map, event) {
+        const layersToQuery = map === map1 ? ["party-vote-share"] : ["census-variable"];
+        const existingLayers = layersToQuery.filter(layer => map.getLayer(layer));
+
+        if (existingLayers.length === 0) return;
+
+        const features = map.queryRenderedFeatures(event.point, {
+            layers: existingLayers
+        });
+
+        // Reset the hover state for the previously highlighted riding
+        if (hoveredRidingId !== null) {
+            if (map1.getLayer("party-vote-share")) {
+                map1.setFeatureState(
+                    { source: "party-vote-share", id: hoveredRidingId },
+                    { hover: false }
+                );
+            }
+            if (map2.getLayer("census-variable")) {
+                map2.setFeatureState(
+                    { source: "census-variable", id: hoveredRidingId },
+                    { hover: false }
+                );
+            }
+        }
+
+        if (features.length > 0) {
+            const feature = features[0];
+            hoveredRidingId = feature.id; // Use feature.id
+            hoveredRidingData = feature.properties;
+
+            // Ensure the name property is correctly accessed
+            hoveredRidingData.name = feature.properties.geoname || "Unknown Riding";
+
+            // Highlight the riding on both maps
+            if (map1.getLayer("party-vote-share")) {
+                map1.setFeatureState(
+                    { source: "party-vote-share", id: hoveredRidingId },
+                    { hover: true }
+                );
+            }
+            if (map2.getLayer("census-variable")) {
+                map2.setFeatureState(
+                    { source: "census-variable", id: hoveredRidingId },
+                    { hover: true }
+                );
+            }
+        } else {
+            // If no riding is hovered, reset the hover state
+            hoveredRidingId = null;
+            hoveredRidingData = null;
+        }
     }
 
     $effect(() => {
         if (geoJsonData) {
             updatePartyMapLayer();
             updateCensusMapLayer();
+
+            // Add hover and click event listeners to both maps
+            map1.on("mousemove", (e) => handleRidingInteraction(map1, e));
+            map1.on("mouseleave", () => {
+                if (hoveredRidingId !== null) {
+                    if (map1.getLayer("party-vote-share")) {
+                        map1.setFeatureState(
+                            { source: "party-vote-share", id: hoveredRidingId },
+                            { hover: false }
+                        );
+                    }
+                    if (map2.getLayer("census-variable")) {
+                        map2.setFeatureState(
+                            { source: "census-variable", id: hoveredRidingId },
+                            { hover: false }
+                        );
+                    }
+                    hoveredRidingId = null;
+                    hoveredRidingData = null;
+                }
+            });
+            map1.on("click", (e) => handleRidingInteraction(map1, e));
+
+            map2.on("mousemove", (e) => handleRidingInteraction(map2, e));
+            map2.on("mouseleave", () => {
+                if (hoveredRidingId !== null) {
+                    if (map1.getLayer("party-vote-share")) {
+                        map1.setFeatureState(
+                            { source: "party-vote-share", id: hoveredRidingId },
+                            { hover: false }
+                        );
+                    }
+                    if (map2.getLayer("census-variable")) {
+                        map2.setFeatureState(
+                            { source: "census-variable", id: hoveredRidingId },
+                            { hover: false }
+                        );
+                    }
+                    hoveredRidingId = null;
+                    hoveredRidingData = null;
+                }
+            });
+            map2.on("click", (e) => handleRidingInteraction(map2, e));
         }
     });
 
@@ -286,15 +404,88 @@
     </div>
 </div>
 
+<div class="container">
+    <!-- First Row: Riding Name -->
+    <div class="info-row">
+        {#if hoveredRidingData}
+            <p><b>{hoveredRidingData.name}</b></p>
+        {:else}
+            <p><i>Hover/click on a riding</i></p>
+        {/if}
+    </div>
+
+    <!-- Second Row: Party Vote -->
+    <div class="info-row">
+        {#if PARTIES_INFO}
+            {#if hoveredRidingData}
+                {@const party = PARTIES_INFO.find(p => p.tag === curParty)}
+                {#if hoveredRidingData[party.propertyTag] !== undefined}
+                    <p>{party.name} vote = <b>{(hoveredRidingData[party.propertyTag]).toFixed(2)}%</b></p>
+                {:else}
+                    <p>{party.name} vote = <b>N/A</b></p>
+                {/if}
+            {:else}
+                {@const party = PARTIES_INFO.find(p => p.tag === curParty)}
+                <p>{party.name} vote = <b>N/A</b></p>
+            {/if}
+        {/if}
+    </div>
+
+    <!-- Third Row: Census Variable -->
+    <div class="info-row">
+        {#if curCensusVars}
+            {#if hoveredRidingData}
+                {@const censusVar = curCensusVars.find(v => v.propertyTag === curCensusVariable)}
+                {#if hoveredRidingData[curCensusVariable] !== undefined}
+                    {#if curCensusVariable === 'pct_imm'}
+                        <p>{censusVar.name} = <b>{(hoveredRidingData[curCensusVariable]).toFixed(2)}%</b></p>
+                    {:else if curCensusVariable === 'avg_hou_inc'}
+                        <p>{censusVar.name} = <b>${hoveredRidingData[curCensusVariable].toFixed(0)}</b></p>
+                    {:else}
+                        <p>{censusVar.name} = <b>N/A</b></p>
+                    {/if}
+                {:else}
+                    <p>{censusVar.name} = <b>N/A</b></p>
+                {/if}
+            {:else}
+                {@const censusVar = curCensusVars.find(v => v.propertyTag === curCensusVariable)}
+                <p>{censusVar.name} = <b>N/A</b></p>
+            {/if}
+        {/if}
+    </div>
+</div>
+
 <style>
     .map-container {
         display: flex;
-        gap: 10px;
+        gap: 10px; /* Maintains the 10px gap between the maps */
+        margin: 0 10px; /* Adds 10px margin on the left and right sides of the container */
+        width: calc(100% - 20px); /* Adjusts the width to account for the margin */
     }
+
+    .map-section {
+        flex: 1; /* Ensures both map sections take up equal space */
+        min-width: 0; /* Prevents flex items from overflowing */
+    }
+
     .map {
         width: 100%;
         height: 500px;
     }
+
+    @media (max-width: 700px) {
+        .map-container {
+            flex-direction: column; /* Stacks the maps vertically */
+            gap: 10px; /* Maintains the gap between stacked maps */
+            margin: 10px; /* Adds margin around the container */
+            width: calc(100% - 20px); /* Adjusts the width to account for the margin */
+        }
+
+        .map-section {
+            width: 100%; /* Ensures each map takes up the full width */
+        }
+    }
+
     .controls {
         display: flex;
         flex-direction: column;
@@ -309,18 +500,34 @@
     .control-row select {
         width: 48%;
     }
-    .map-section {
+
+    .info-row {
+        border-bottom: solid 1px var(--brandGray);
+        box-shadow: 0 2px 0 0 rgba(224, 224, 224, 0.268);
+        margin: 0 auto;
+        max-width: 1000px;
+        width: 100%;
+        height: 30px;
         display: flex;
-        flex-direction: column;
-        width: 50%;
+        align-items: center;
+        justify-content: center;
     }
 
-    @media (max-width: 700px) {
-        .map-container {
-            flex-direction: column;
-        }
-        .map-section {
-            width: 100%;
-        }
+    .info-row p {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        font-weight: normal;
+        font-size: 15px;
+        color: var(--brandDarkBlue);
+        text-align: center;
+    }
+
+    .info-row b {
+        font-family: 'RobotoBold', sans-serif;
+    }
+
+    .info-row i {
+        font-style: italic;
+        color: #666;
     }
 </style>
