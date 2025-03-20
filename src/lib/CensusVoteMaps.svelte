@@ -4,6 +4,7 @@
     import "maplibre-gl/dist/maplibre-gl.css";
     import { FELXN_YEARS, ONTELXN_YEARS, PARTY_SHADES, CENSUS_SHADES, PARTIES_INFO } from "../lib/constants.js";
     import { getRegionTag, updateCensusVarOptions, updatePartyOptions } from "./utils.js";
+    import Legend from './Legend.svelte';
 
     let map1, map2;
 
@@ -53,6 +54,14 @@
     let hoveredRidingId = $state(null);
     let hoveredRidingData = $state(null);
 
+    // Generate party vote share labels (0-60%)
+    let partyLabels = $derived(generateLabels(0, 60, 7));
+
+    // Generate census variable labels based on the current variable
+    let censusLabels = $derived(curCensusVariable === 'pct_imm' 
+        ? generateLabels(0, 70, 7)
+        : (geoJsonData ? generateHouseholdIncomeLabels() : []));
+
     // Prevent infinite update loops
     let syncing = false;
     function syncMaps(movingMap, targetMap) {
@@ -97,6 +106,24 @@
                 curCensusVariable = curCensusVars.length > 0 ? curCensusVars[0].propertyTag : null;
             }
         }
+    }
+
+    // Helper function to generate legend labels
+    function generateLabels(min, max, steps) {
+        return Array.from({length: steps}, (_, i) => 
+            i === steps - 1 ? `${min + (i * 10)}%+` : `${min + (i * 10)}%`
+        );
+    }
+    
+    function generateHouseholdIncomeLabels() {
+        const values = geoJsonData.features.map(f => f.properties.avg_hou_inc);
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        const step = (max - min) / 6;
+        return Array.from({length: 7}, (_, i) => 
+            i === 6 ? `$${Math.round((min + (i * step)) / 1000)}K+` 
+                   : `$${Math.round((min + (i * step)) / 1000)}K`
+        );
     }
 
     function handleRegionChange(event) {
@@ -147,14 +174,13 @@
                 "fill-color": [
                     "step",
                     ["get", partyPropertyTag],
-                    PARTY_SHADES[curParty][0], 0,
-                    PARTY_SHADES[curParty][1], 10,
-                    PARTY_SHADES[curParty][2], 20,
-                    PARTY_SHADES[curParty][3], 30,
-                    PARTY_SHADES[curParty][4], 40,
-                    PARTY_SHADES[curParty][5], 50,
-                    PARTY_SHADES[curParty][6], 60,
-                    PARTY_SHADES[curParty][7] // above 60
+                    PARTY_SHADES[curParty][0],  // 0-10%
+                    10, PARTY_SHADES[curParty][1],  // 10-20%
+                    20, PARTY_SHADES[curParty][2],  // 20-30%
+                    30, PARTY_SHADES[curParty][3],  // 30-40%
+                    40, PARTY_SHADES[curParty][4],  // 40-50%
+                    50, PARTY_SHADES[curParty][5],  // 50-60%
+                    60, PARTY_SHADES[curParty][6]   // 60%+
                 ],
                 "fill-opacity": 0.75
             }
@@ -197,15 +223,13 @@
             paintConfig = [
                 "step",
                 ["get", curCensusVariable],
-                CENSUS_SHADES.pct_imm[0], 0,
-                CENSUS_SHADES.pct_imm[1], 10,
-                CENSUS_SHADES.pct_imm[2], 20,
-                CENSUS_SHADES.pct_imm[3], 30,
-                CENSUS_SHADES.pct_imm[4], 40,
-                CENSUS_SHADES.pct_imm[5], 50,
-                CENSUS_SHADES.pct_imm[6], 60,
-                CENSUS_SHADES.pct_imm[7], 70,
-                CENSUS_SHADES.pct_imm[7] // above 70
+                CENSUS_SHADES.pct_imm[0],  // 0-10%
+                10, CENSUS_SHADES.pct_imm[1],  // 10-20%
+                20, CENSUS_SHADES.pct_imm[2],  // 20-30%
+                30, CENSUS_SHADES.pct_imm[3],  // 30-40%
+                40, CENSUS_SHADES.pct_imm[4],  // 40-50%
+                50, CENSUS_SHADES.pct_imm[5],  // 50-60%
+                60, CENSUS_SHADES.pct_imm[6],  // 60%+
             ];
         } else if (curCensusVariable === "avg_hou_inc") {
             const values = geoJsonData.features.map(f => f.properties.avg_hou_inc);
@@ -413,9 +437,19 @@
 
 <div class="map-container">
     <div class="map-section">
+        <Legend 
+            title="% Party Vote" 
+            colors={PARTY_SHADES[curParty]} 
+            labels={partyLabels}
+        />
         <div id="map1" class="map"></div>
     </div>
     <div class="map-section">
+        <Legend 
+            title={curCensusVariable === 'pct_imm' ? '% Immigrants' : 'Avg. Household Income'} 
+            colors={CENSUS_SHADES[curCensusVariable]} 
+            labels={censusLabels}
+        />
         <div id="map2" class="map"></div>
     </div>
 </div>
