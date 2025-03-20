@@ -470,7 +470,7 @@
             {#if hoveredRidingData}
                 {@const party = PARTIES_INFO.find(p => p.tag === curParty)}
                 {#if hoveredRidingData[party.propertyTag] !== undefined}
-                    <p>{party.name} vote = <b>{(hoveredRidingData[party.propertyTag]).toFixed(2)}%</b></p>
+                    <p>{party.name} vote = <b>{(hoveredRidingData[party.propertyTag]).toFixed(1)}%</b></p>
                 {:else}
                     <p>{party.name} vote = <b>N/A</b></p>
                 {/if}
@@ -488,7 +488,7 @@
                 {@const censusVar = curCensusVars.find(v => v.propertyTag === curCensusVariable)}
                 {#if hoveredRidingData[curCensusVariable] !== undefined}
                     {#if curCensusVariable === 'pct_imm'}
-                        <p>{censusVar.name} = <b>{(hoveredRidingData[curCensusVariable]).toFixed(2)}%</b></p>
+                        <p>{censusVar.name} = <b>{(hoveredRidingData[curCensusVariable]).toFixed(1)}%</b></p>
                     {:else if curCensusVariable === 'avg_hou_inc'}
                         <p>{censusVar.name} = <b>${hoveredRidingData[curCensusVariable].toFixed(0)}</b></p>
                     {:else}
