@@ -213,10 +213,10 @@ a:hover {
     font-family: inherit;
     font-size: inherit;
     color: var(--brandDarkBlue);
-    border: none;
-    border-bottom: 1px dashed var(--brandDarkBlue);
+    /* border: none; */
+    border: 1px dashed var(--brandDarkBlue);
     background: transparent;
-    padding: 2px 20px 2px 2px;
+    padding: 0px 20px 0px 5px;
     margin: 0 4px;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -229,7 +229,7 @@ a:hover {
 }
 
 .inline-select:hover {
-    border-bottom: 1px solid var(--brandMedBlue);
+    border: 1px solid var(--brandMedBlue);
     color: var(--brandMedBlue);
 }
 

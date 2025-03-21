@@ -5,13 +5,28 @@
     import { FELXN_YEARS, ONTELXN_YEARS, PARTY_SHADES, CENSUS_SHADES, PARTIES_INFO } from "../lib/constants.js";
     import { getRegionTag, updateCensusVarOptions, updatePartyOptions } from "./utils.js";
     import Legend from './Legend.svelte';
+    import PlaceLabels from '../assets/municipality-place-labels.geo.json';
 
     let map1, map2;
 
     // Map config objects
     const mapConfig = {
-        style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
-        center: [-79.3832, 43.6532],
+        style: {
+            version: 8, 
+            sources: {}, 
+            glyphs: "https://schoolofcities.github.io/fonts/fonts/{fontstack}/{range}.pbf",
+            layers: [
+                {
+                    id: 'background', 
+                    type: 'background', 
+                    paint: {
+                        'background-color': '#fcfcfc' 
+                    }
+                }
+            ] // empty layers
+        },
+        // style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+        center: [-79.386, 43.702],
         zoom: 9,
         maxZoom: 11,
         minZoom: 8,
@@ -19,10 +34,12 @@
             [-81.0, 42.5],  // Southwest corner (near London, ON)
             [-78.0, 45.0]   // Northeast corner (north of Peterborough)
         ],
-        bearing: -17.194,  // https://glaikit.org/2010/03/10/torontos-angles/
-        dragRotate: true,
+        bearing: -17.2,
+        dragRotate: false,
         pitchWithRotate: false,
-        touchZoomRotate: true
+        touchZoomRotate: true,
+        attributionControl: false,
+        scrollZoom: false
     };
 
     const navControlConfig = {
@@ -184,22 +201,22 @@
                 ],
                 "fill-opacity": 0.75
             }
-        });
+        }, 'labels-layer');
 
         map1.addLayer({
             id: "party-vote-share-boundary",
             type: "line",
             source: "party-vote-share",
             paint: {
-                "line-color": "#000000",
+                "line-color": "#fff",
                 "line-width": [
                     "case",
                     ["boolean", ["feature-state", "hover"], false],
-                    2, // Highlighted line width
+                    3, // Highlighted line width
                     0.5 // Default line width
                 ]
             }
-        });
+        }, 'labels-layer');
     }
 
     function updateCensusMapLayer() {
@@ -259,22 +276,22 @@
                 "fill-color": paintConfig,
                 "fill-opacity": 0.75
             }
-        });
+        }, 'labels-layer');
 
         map2.addLayer({
             id: "census-variable-boundary",
             type: "line",
             source: "census-variable",
             paint: {
-                "line-color": "#000000",
+                "line-color": "#ffffff",
                 "line-width": [
                     "case",
                     ["boolean", ["feature-state", "hover"], false],
-                    2, // Highlighted line width
+                    3, // Highlighted line width
                     0.5 // Default line width
                 ]
             }
-        });
+        }, 'labels-layer');
     }
 
     // Function to handle hover and click events
@@ -391,6 +408,7 @@
         map1.addControl(new maplibregl.NavigationControl(navControlConfig), 'top-right');
         map1.addControl(new maplibregl.ScaleControl(scaleControlConfig), 'bottom-left');
 
+        
         map2 = new maplibregl.Map({
             container: "map2",
             ...mapConfig
@@ -402,6 +420,36 @@
         // Sync both maps
         syncMaps(map1, map2);
         syncMaps(map2, map1);
+
+        for (const m of [map1, map2]) {
+            m.on('load', () => {
+                m.addSource('labels-source', {
+                    type: 'geojson',
+                    data: PlaceLabels 
+                });
+                m.addLayer({
+                    id: 'labels-layer',
+                    type: 'symbol',
+                    source: 'labels-source',
+                    layout: {
+                        'text-field': ['get', 'name'], 
+                        'text-size': 12, 
+                        'text-offset': [0, 0], 
+                        'text-anchor': 'top', 
+                        'text-allow-overlap': false, 
+                        'text-font': ['TradeGothic LT Bold'] 
+                    },
+                    paint: {
+                        'text-color': '#1E3765', 
+                        'text-halo-color': '#FFFFFF', 
+                        'text-halo-width': 1,
+                        'text-opacity': 0.7
+                    }
+                });
+            });
+        }
+
+
 
         loadGeoJson();
     });
@@ -509,9 +557,10 @@
 
 <style>
     .map-container {
+        max-width: 1600px;
         display: flex;
         gap: 10px;
-        margin: 0 10px;
+        margin: 0 auto;
         width: calc(100% - 20px);
     }
 
@@ -523,6 +572,7 @@
     .map {
         width: 100%;
         height: 500px;
+        border: solid 1px black;
     }
 
     @media (max-width: 700px) {
