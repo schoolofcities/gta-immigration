@@ -87,16 +87,16 @@
 
     function resetPointStyle(selection) {
         selection
-            .attr("r", 3)
-            .attr("stroke", "black")
-            .attr("stroke-width", 1.5)
+            .attr("r", 5)
+            .attr("stroke", "#1E3765")
+            .attr("stroke-width", 0)
             .attr("fill", PARTY_COLOURS[curParty]);
     }
 
     function highlightPoint(selection) {
         selection
             .attr("r", 6)
-            .attr("stroke", "red")
+            .attr("stroke", "#1E3765")
             .attr("stroke-width", 2);
     }
 
@@ -144,24 +144,44 @@
             .attr("transform", `translate(0,${height})`)
             .call(d3.axisBottom(x).ticks(7))
             .call(g => g.select(".domain").remove())
+            .call(g => g.selectAll(".tick line")
+                .clone()
+                .attr("y2", -height) 
+                .attr("stroke", "#D0D1C9") 
+                .attr("stroke-width", 1) 
+                .attr("stroke-opacity", 0.1)) 
+            .call(g => g.selectAll(".tick line") 
+                .attr("stroke", "#1E3765")) 
+            .call(g => g.selectAll(".tick text") 
+                .attr("fill", "#1E3765")) 
             .append("text")
-            .attr("x", width / 2)
-            .attr("y", 40)
-            .attr("fill", "black")
-            .attr("text-anchor", "middle")
-            .text("Percentage of immigrants");  
+                .attr("x", width / 2)
+                .attr("y", 40)
+                .attr("fill", "#1E3765")
+                .attr("text-anchor", "middle")
+                .text("Percentage of immigrants (%)");  
 
         const yAxis = g => g
             .attr("transform", `translate(0,0)`)
             .call(d3.axisLeft(y).ticks(8))
             .call(g => g.select(".domain").remove())
+            .call(g => g.selectAll(".tick line")
+                .clone()
+                .attr("x2", width) 
+                .attr("stroke", "#ccc") 
+                .attr("stroke-width", 1) 
+                .attr("stroke-opacity", 0.1))
+            .call(g => g.selectAll(".tick line") 
+                .attr("stroke", "#1E3765")) 
+            .call(g => g.selectAll(".tick text") 
+                .attr("fill", "#1E3765")) 
             .append("text")
-            .attr("x", -height / 2)
-            .attr("y", -40)
-            .attr("fill", "black")
-            .attr("text-anchor", "middle")
-            .attr("transform", "rotate(-90)")
-            .text("Party vote share");  
+                .attr("x", -height / 2)
+                .attr("y", -40)
+                .attr("fill", "#1E3765")
+                .attr("text-anchor", "middle")
+                .attr("transform", "rotate(-90)")
+                .text("Party vote share (%)");  
 
         // Append axes to the main group
         g.append("g").call(xAxis);
@@ -169,15 +189,15 @@
 
         // Append points to the main group
         g.append("g")
-            .attr("stroke", "black")
-            .attr("stroke-width", 1.5)
+            .attr("stroke", "#1E3765")
+            .attr("stroke-width", 0)
             .selectAll(".scatter-correlation-dot")  // Add specific class
             .data(data)
             .join("circle")
             .attr("class", "scatter-correlation-dot")  // Add specific class
             .attr("cx", d => x(d.x))
             .attr("cy", d => y(d.y))
-            .attr("r", 3)
+            .attr("r", 5)
             .attr("fill", PARTY_COLOURS[curParty])
             .on("mouseover", (event, d) => {
                 // Reset any previously hovered point (if not selected)
@@ -243,9 +263,9 @@
         g.append("path")
             .datum(lineData)
             .attr("fill", "none")
-            .attr("stroke", "purple")
-            .attr("stroke-width", 2)
-            .attr("stroke-dasharray", "4,4")
+            .attr("stroke", "#00A189")
+            .attr("stroke-width", 3)
+            .attr("stroke-dasharray", "3,3")
             .attr("d", line);
     }
 

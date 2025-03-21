@@ -572,7 +572,7 @@
     .map {
         width: 100%;
         height: 500px;
-        border: solid 1px black;
+        border: solid 1px var(--brandGray);
     }
 
     @media (max-width: 700px) {

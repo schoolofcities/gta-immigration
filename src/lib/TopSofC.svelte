@@ -19,7 +19,7 @@
 		height: 50px;
 		background-color: var(--brandWhite);
 		margin-bottom: 20px;
-		border-bottom: 1px solid var(--brandBlack);
+		border-bottom: 1px solid var(--brandDarkBlue);
 		width: 100%;
 		min-width: 200px;
 		padding-left: 0px;
