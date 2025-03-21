@@ -1,4 +1,5 @@
 <script>
+    import TopSofC from '$lib/TopSofC.svelte';
     import CensusVoteMaps from '$lib/CensusVoteMaps.svelte';
     import CorrelationDisplay from '$lib/CorrelationDisplay.svelte';
     import CorrelationTimeline from '$lib/CorrelationTimeline.svelte';
@@ -6,9 +7,11 @@
 </script>
 
 <main>
+
+    <TopSofC/>
     <div class="title">
-        <h1>Immigrant Political Shifts</h1>
-        <h2>Changes in immigrant vote patterns in the GTA</h2>
+        <!-- <h1>Immigrant Political Shifts</h1> -->
+        <h1>Changes in immigrant voting patterns in the Greater Toronto Area</h1>
         <p>
             Aniket Kali,
             Serene Tan,
@@ -20,8 +23,17 @@
     </div>
 
     <div class="text">
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <p>
+            At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. 
+        </p>
+    </div>
+
+    <div class="text">
         <h2>How do ridings compare?</h2>
-        <p>text here</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
     <!-- Dual panel of constituency maps: vote share & immigrant percent -->
     <CensusVoteMaps />
