@@ -31,7 +31,7 @@
 
     // Function to update correlations based on the selected curRegion
     function updateCorrelations() {
-        d3.csv('/data/elections_analysis/ed_corrs.csv').then(data => {
+        d3.csv('/gta-immigration/data/elections_analysis/ed_corrs.csv').then(data => {
             const filteredData = data.filter(row => row.region === curRegion);
 
             // Update the curCorrs state variable

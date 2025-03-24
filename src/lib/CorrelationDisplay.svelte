@@ -24,7 +24,7 @@
     window.addEventListener('resize', () => windowWidth = window.innerWidth);
     
     function loadGeoJson() {
-        const filePath = `/data/elections/${curRegionTag}_stats_${curYear}.geojson`;
+        const filePath = `/gta-immigration/data/elections/${curRegionTag}_stats_${curYear}.geojson`;
         fetch(filePath)
             .then(response => response.json())
             .then(data => {
@@ -62,7 +62,7 @@
 
     function loadCorrelation() {
         // Load the CSV file using a Promise
-        d3.csv(`/data/elections_analysis/ed_corrs.csv`)
+        d3.csv(`/gta-immigration/data/elections_analysis/ed_corrs.csv`)
             .then(data => {
                 const columnName = `corr_pct_imm_${curParty}`;
 

@@ -26,7 +26,7 @@
 
     // Function to load and process the CSV
     function loadVoteShares() {
-        const csvPath = "/data/elections_analysis/ed_top_5_imm_results.csv"; // Static path to the CSV file
+        const csvPath = "/gta-immigration/data/elections_analysis/ed_top_5_imm_results.csv"; // Static path to the CSV file
 
         d3.csv(csvPath)
             .then((data) => {

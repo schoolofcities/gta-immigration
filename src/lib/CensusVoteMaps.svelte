@@ -95,7 +95,7 @@
     }
 
     function loadGeoJson() {
-        const filePath = `/data/elections/${curRegionTag}_stats_${curYear}.geojson`;
+        const filePath = `/gta-immigration/data/elections/${curRegionTag}_stats_${curYear}.geojson`;
         fetch(filePath)
             .then(response => response.json())
             .then(data => {
