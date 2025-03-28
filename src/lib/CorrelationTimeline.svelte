@@ -3,30 +3,20 @@
     import { PARTIES_INFO, PARTY_COLOURS } from "../lib/constants.js";
     import * as d3 from 'd3';
 
+    const parties = PARTIES_INFO.filter(party => party.name !== 'Reform/Alliance');
+
     let curRegion = $state("federal");
-    let pickedParties = $state(PARTIES_INFO.map(party => party.name).filter(party => party !== 'Reform/Alliance'));
-    
     let curCorrs = $state({
         "Liberals": [],  // contains elements of the form [year, corr]
         "Conservatives": [],
         "New Democrats": [],
     });
-    
     let windowWidth = $state(window.innerWidth);
 
     window.addEventListener('resize', () => windowWidth = window.innerWidth);
 
     function handleRegionChange(event) {
         curRegion = event.target.value;
-    }
-
-    // Function to toggle a party on/off
-    function toggleParty(party) {
-        if (pickedParties.includes(party)) {
-            pickedParties = pickedParties.filter(p => p !== party);
-        } else {
-            pickedParties = [...pickedParties, party];
-        }
     }
 
     // Function to update correlations based on the selected curRegion
@@ -125,30 +115,28 @@
             .y(d => yScale(d[1]));
 
         // Draw lines and dots for each selected party
-        pickedParties.forEach(party => {
-            const data = curCorrs[party];
+        parties.forEach(party => {
+            const data = curCorrs[party.name];
             if (!data) return;
-
-            const partyTag = PARTIES_INFO.find(p => p.name === party).tag;
 
             // Draw the line
             svg.append("path")
                 .datum(data)
                 .attr("fill", "none")
-                .attr("stroke", PARTY_COLOURS[partyTag] || "black") // Fallback to black if color is missing
+                .attr("stroke", PARTY_COLOURS[party.tag] || "black") // Fallback to black if color is missing
                 .attr("stroke-width", 2)
                 .attr("d", line);
 
             // Draw dots for each data point with a more specific class name
-            svg.selectAll(`.timeline-correlation-dot-${partyTag}`)
+            svg.selectAll(`.timeline-correlation-dot-${party.tag}`)
                 .data(data)
                 .enter()
                 .append("circle")
-                .attr("class", `timeline-correlation-dot-${partyTag}`)
+                .attr("class", `timeline-correlation-dot-${party.tag}`)
                 .attr("cx", d => xScale(d[0]))
                 .attr("cy", d => yScale(d[1]))
                 .attr("r", 4)
-                .attr("fill", PARTY_COLOURS[partyTag])
+                .attr("fill", PARTY_COLOURS[party.tag])
                 .attr("stroke", "none");  // Explicitly set no stroke
         });
     }
@@ -156,7 +144,6 @@
     $effect(() => {
         windowWidth;
         curCorrs;
-        pickedParties;
         if (Object.values(curCorrs).some(arr => arr.length > 0)) {
             drawGraph();
         }
@@ -179,33 +166,12 @@
             level.
         </p>
     </div>
-    {#each PARTIES_INFO as party}
-        {#if party.tag !== 'cons2'}
-            <button 
-                onclick={() => toggleParty(party.name)} 
-                class:active={pickedParties.includes(party.name)}
-            >
-                {party.name}
-            </button>
-        {/if}
-    {/each}
 </div>
 
 <!-- SVG container for the graph -->
 <svg id="correlation-line-graph"></svg>
 
 <style>
-    button {
-        background-color: gray;
-        color: white;
-        margin-right: 10px;
-        padding: 10px;
-        border: none;
-        cursor: pointer;
-    }
-    button.active {
-        background-color: blue;
-    }
     svg {
         width: 100%;
         height: auto;
