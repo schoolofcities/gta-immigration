@@ -128,8 +128,9 @@
             .style("font-size", "11px")
             .text("Election year");
 
+        // Modified y-axis with ticks every 10 units
         g.append("g")
-            .call(d3.axisLeft(y))
+            .call(d3.axisLeft(y).ticks(6)) // This will create ticks at -20, -10, 0, 10, 20, 30
             .append("text")
             .attr("fill", "#000")
             .attr("transform", "rotate(-90)")
@@ -149,6 +150,76 @@
             .attr("stroke", "black")
             .attr("stroke-width", 1)
             .attr("stroke-dasharray", "4,4");
+
+        // Add arrowhead definition
+        svg.append("defs").append("marker")
+            .attr("id", "arrowhead")
+            .attr("viewBox", "0 -5 10 10")
+            .attr("refX", 5)
+            .attr("refY", 0)
+            .attr("markerWidth", 6)
+            .attr("markerHeight", 6)
+            .attr("orient", "auto")
+            .append("path")
+            .attr("d", "M0,-5L10,0L0,5")
+            .attr("fill", "black");
+
+        // Position arrows based on screen width
+        const arrowX = windowWidth <= 700 ? 10 : 20;
+        const lineHeight = 12; // Height between text lines
+        const textOffset = windowWidth <= 700 ? 3 : 5; // Smaller offset on mobile
+
+        // Add up arrow (Overperforming)
+        g.append("line")
+            .attr("x1", arrowX)
+            .attr("x2", arrowX)
+            .attr("y1", y(5))
+            .attr("y2", y(30))
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("marker-end", "url(#arrowhead)");
+
+        // Overperforming label - line 1
+        g.append("text")
+            .attr("x", arrowX + textOffset)
+            .attr("y", y(28))
+            .attr("dy", "0")
+            .style("font-size", "10px")
+            .text("More votes in");
+        
+        // Overperforming label - line 2
+        g.append("text")
+            .attr("x", arrowX + textOffset)
+            .attr("y", y(28))
+            .attr("dy", lineHeight + "px")
+            .style("font-size", "10px")
+            .text("high-immigrant ridings");
+
+        // Add down arrow (Underperforming)
+        g.append("line")
+            .attr("x1", arrowX)
+            .attr("x2", arrowX)
+            .attr("y1", y(-5))
+            .attr("y2", y(-20))
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("marker-end", "url(#arrowhead)");
+
+        // Underperforming label - line 1
+        g.append("text")
+            .attr("x", arrowX + textOffset)
+            .attr("y", y(-18))
+            .attr("dy", "0")
+            .style("font-size", "10px")
+            .text("Less votes in");
+        
+        // Underperforming label - line 2
+        g.append("text")
+            .attr("x", arrowX + textOffset)
+            .attr("y", y(-18))
+            .attr("dy", lineHeight + "px")
+            .style("font-size", "10px")
+            .text("high-immigrant ridings");
 
         const line = d3.line()
             .x(d => x(d[0]))
