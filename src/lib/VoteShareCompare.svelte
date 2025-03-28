@@ -2,22 +2,23 @@
     import { PARTIES_INFO, PARTY_COLOURS } from "../lib/constants.js";
     import * as d3 from 'd3';
 
+    const parties = PARTIES_INFO.filter(party => party.name !== 'Reform/Alliance');
+
     // State variables
     let curRegion = $state("federal");
-    let curParty = $state("lib");
     let curScope = $state("gta");
 
-    let curVoteShares = $state([]); // elements of the form [year, top_5_imm_pct, scope_pct]
+    let curVoteShares = $state({
+        "Liberals": [],
+        "Conservatives": [],
+        "New Democrats": []
+    });
     let windowWidth = $state(window.innerWidth);
     
     window.addEventListener('resize', () => windowWidth = window.innerWidth);
 
     function handleRegionChange(event) {
         curRegion = event.target.value;
-    }
-
-    function handlePartyChange(event) {
-        curParty = event.target.value;
     }
 
     function handleScopeChange(event) {
@@ -30,30 +31,39 @@
 
         d3.csv(csvPath)
             .then((data) => {
-                // Filter rows based on curRegion and curParty
-                const filteredData = data.filter(
-                    (row) => row.region === curRegion && row.party === curParty
-                );
+                const newVoteShares = {
+                    "Liberals": [],
+                    "Conservatives": [],
+                    "New Democrats": []
+                };
 
-                // Group by year and extract the required columns
-                const result = [];
-                const years = new Set(filteredData.map((row) => row.year));
+                parties.forEach(party => {
+                    // Filter rows based on curRegion and current party
+                    const filteredData = data.filter(
+                        (row) => row.region === curRegion && row.party === party.tag
+                    );
 
-                years.forEach((year) => {
-                    const yearData = filteredData.filter((row) => row.year === year);
-                    yearData.forEach((row) => {
-                        const firstElement = parseFloat(row.top_5_imm_pct); // Convert to number
-                        const secondElement = curScope === 'gta' 
-                            ? parseFloat(row.gta_pct) 
-                            : parseFloat(row.full_pct); // Convert to number
-                        if (!isNaN(firstElement) && !isNaN(secondElement)) {
-                            result.push([parseFloat(year), firstElement, secondElement]);
-                        }
+                    // Group by year and extract the required columns
+                    const result = [];
+                    const years = new Set(filteredData.map((row) => row.year));
+
+                    years.forEach((year) => {
+                        const yearData = filteredData.filter((row) => row.year === year);
+                        yearData.forEach((row) => {
+                            const firstElement = parseFloat(row.top_5_imm_pct); // Convert to number
+                            const secondElement = curScope === 'gta' 
+                                ? parseFloat(row.gta_pct) 
+                                : parseFloat(row.full_pct); // Convert to number
+                            if (!isNaN(firstElement) && !isNaN(secondElement)) {
+                                result.push([parseFloat(year), firstElement, secondElement]);
+                            }
+                        });
                     });
+
+                    newVoteShares[party.name] = result;
                 });
 
-                curVoteShares = result;
-                // console.log($state.snapshot(curVoteShares));
+                curVoteShares = newVoteShares;
             })
             .catch((error) => {
                 console.error('Error parsing CSV:', error);
@@ -80,8 +90,19 @@
         const g = svg.append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
+        // Get all years from all parties' data
+        const allYears = [];
+        Object.values(curVoteShares).forEach(partyData => {
+            partyData.forEach(item => {
+                if (!allYears.includes(item[0])) {
+                    allYears.push(item[0]);
+                }
+            });
+        });
+        allYears.sort();
+
         const x = d3.scalePoint()
-            .domain(curVoteShares.map(d => d[0]))
+            .domain(allYears)
             .range([0, width]);
 
         const y = d3.scaleLinear()
@@ -134,21 +155,27 @@
             .y(d => y(d[1] - d[2]))
             .curve(d3.curveMonotoneX);
 
-        g.append("path")
-            .datum(curVoteShares)
-            .attr("fill", "none")
-            .attr("stroke", PARTY_COLOURS[curParty])
-            .attr("stroke-width", 1.5)
-            .attr("stroke-dasharray", "3,3")
-            .attr("d", line);
+        // Draw lines and dots for each party
+        parties.forEach(party => {
+            const partyData = curVoteShares[party.name];
+            if (!partyData || partyData.length === 0) return;
 
-        g.selectAll("dot")
-            .data(curVoteShares)
-            .enter().append("circle")
-            .attr("r", 3.5)
-            .attr("cx", d => x(d[0]))
-            .attr("cy", d => y(d[1] - d[2]))
-            .attr("fill", PARTY_COLOURS[curParty]);
+            g.append("path")
+                .datum(partyData)
+                .attr("fill", "none")
+                .attr("stroke", PARTY_COLOURS[party.tag])
+                .attr("stroke-width", 1.5)
+                .attr("stroke-dasharray", "3,3")
+                .attr("d", line);
+
+            g.selectAll(`dot-${party.tag}`)
+                .data(partyData)
+                .enter().append("circle")
+                .attr("r", 3.5)
+                .attr("cx", d => x(d[0]))
+                .attr("cy", d => y(d[1] - d[2]))
+                .attr("fill", PARTY_COLOURS[party.tag]);
+        });
     }
 
     $effect(() => {
@@ -159,7 +186,6 @@
 
     $effect(() => {
         curRegion;
-        curParty;
         curScope;
         loadVoteShares();
     });
@@ -172,15 +198,7 @@
             <option value="federal" selected>federal</option>
             <option value="ontario">ontario</option>
         </select>
-        elections. Show me the difference for the
-        <select onchange={handlePartyChange} class="inline-select">
-            {#each PARTIES_INFO as party}
-                {#if party.tag !== 'cons2'}
-                    <option value={party.tag}>{party.name}</option>
-                {/if}
-            {/each}
-        </select>
-        in the
+        elections in the
         <select onchange={handleScopeChange} class="inline-select">
             <option value="gta" selected>GTA</option>
             <option value="full">full</option>
