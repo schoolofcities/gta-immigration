@@ -239,9 +239,10 @@
                 .attr("stroke-dasharray", "3,3")
                 .attr("d", line);
 
-            g.selectAll(`dot-${party.tag}`)
+            g.selectAll(`vote-share-compare-dot-${party.tag}`)
                 .data(partyData)
                 .enter().append("circle")
+                .attr("class", `vote-share-compare-dot-${party.tag}`)
                 .attr("r", 3.5)
                 .attr("cx", d => xScale(d[0]))
                 .attr("cy", d => yScale(d[1] - d[2]))
