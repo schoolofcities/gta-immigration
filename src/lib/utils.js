@@ -24,7 +24,8 @@ export function updateCensusVarOptions(geoJsonData) {
         
         let censusVars = [];
         if (properties.pct_imm !== null) censusVars.push({ name: "Percent immigrants", propertyTag: "pct_imm" });
-        if (properties.avg_hou_inc !== null) censusVars.push({ name: "Average Household Income", propertyTag: "avg_hou_inc" });
+        if (properties.pct_vm !== null) censusVars.push({ name: "Percent visible minorities", propertyTag: "pct_vm" });
+        if (properties.avg_hou_inc !== null) censusVars.push({ name: "Average household income", propertyTag: "avg_hou_inc" });
 
         return censusVars;
     }

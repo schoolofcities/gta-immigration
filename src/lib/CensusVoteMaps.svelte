@@ -71,13 +71,15 @@
     let hoveredRidingId = $state(null);
     let hoveredRidingData = $state(null);
 
-    // Generate party vote share labels (0-60%)
-    let partyLabels = $derived(generateLabels(0, 60, 7));
-
     // Generate census variable labels based on the current variable
-    let censusLabels = $derived(curCensusVariable === 'pct_imm' 
-        ? generateLabels(0, 70, 7)
-        : (geoJsonData ? generateHouseholdIncomeLabels() : []));
+    let censusLabels = $derived(
+        curCensusVariable === 'pct_imm' ? generateLabels(0, 60, 7) : // if 
+        curCensusVariable === 'pct_vm' ? generateLabels(0, 90, 7) : // else if 
+        (geoJsonData ? generateHouseholdIncomeLabels() : []) // else 
+    );
+    
+    // Generate party vote share labels (0-60%)
+    const partyLabels = generateLabels(0, 60, 7);
 
     // Prevent infinite update loops
     let syncing = false;
@@ -160,8 +162,9 @@
 
     // Helper function to generate legend labels
     function generateLabels(min, max, steps) {
+        const stepSize = (max - min) / (steps - 1);
         return Array.from({length: steps}, (_, i) => 
-            i === steps - 1 ? `${min + (i * 10)}%+` : `${min + (i * 10)}%`
+            i === steps - 1 ? `${min + (i * stepSize)}%+` : `${min + (i * stepSize)}%`
         );
     }
     
@@ -281,7 +284,20 @@
                 50, CENSUS_SHADES.pct_imm[5], // 50-60%
                 60, CENSUS_SHADES.pct_imm[6], // 60%+
             ];
-        } else if (curCensusVariable === "avg_hou_inc") {
+        } else if (curCensusVariable === "pct_vm") {
+            paintConfig = [
+                "step",
+                ["get", curCensusVariable],
+                CENSUS_SHADES.pct_vm[0], // 0-15%
+                15, CENSUS_SHADES.pct_vm[1], // 15-30%
+                30, CENSUS_SHADES.pct_vm[2], // 30-45%
+                45, CENSUS_SHADES.pct_vm[3], // 45-60%
+                60, CENSUS_SHADES.pct_vm[4], // 60-75%
+                75, CENSUS_SHADES.pct_vm[5], // 75-90%
+                90, CENSUS_SHADES.pct_vm[6], // 90%+
+            ];
+        }
+        else if (curCensusVariable === "avg_hou_inc") {
             const values = geoJsonData.features.map(f => f.properties.avg_hou_inc);
             const min = Math.min(...values);
             const max = Math.max(...values);
@@ -505,7 +521,12 @@
     </div>
     <div class="map-section">
         <Legend 
-            title={curCensusVariable === 'pct_imm' ? '% Immigrants' : 'Avg. Household Income'} 
+            title={(
+                curCensusVariable === 'pct_imm' ? '% Immigrants' : // if 
+                curCensusVariable === 'pct_vm' ? "% Visible Minorities" : // else if 
+                curCensusVariable === 'avg_hou_inc' ? 'Avg. Household Income' : // else if 
+                null // else 
+            )}
             colors={CENSUS_SHADES[curCensusVariable]} 
             labels={censusLabels}
         />
@@ -550,6 +571,8 @@
                         <p>{censusVar.name} = <b>{censusVal.toFixed(1)}%</b></p>
                     {:else if curCensusVariable === 'avg_hou_inc'}
                         <p>{censusVar.name} = <b>${Math.round(censusVal / 1000)}K</b></p>
+                    {:else if curCensusVariable === 'pct_vm'}
+                        <p>{censusVar.name} = <b>{censusVal.toFixed(1)}%</b></p>
                     {:else}
                         <p>{censusVar.name} = <b>N/A</b></p>
                     {/if}
