@@ -30,6 +30,6 @@ export const PARTY_SHADES = {
 };
 
 export const CENSUS_SHADES = {
-    pct_imm: ["#dfe7e2", "#bfd0c6", "#9fb8a9", "#7fa18d", "#5f8a70", "#3f7254", "#1f5b37"], // Darker green
-    avg_hou_inc: ["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#f03b20", "#d95f0e"] // Not very dark yellow
+    pct_imm: ["#dfe7e2", "#bfd0c6", "#9fb8a9", "#7fa18d", "#5f8a70", "#3f7254", "#1f5b37"], // Green
+    avg_hou_inc: ["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#a63603"] // Yellow
 };

@@ -171,7 +171,7 @@
         const max = Math.max(...values);
         const step = (max - min) / 6;
         return Array.from({length: 7}, (_, i) => 
-            i === 6 ? `$${Math.round((min + (i * step)) / 1000)}K+` 
+            i === 6 ? `$${Math.round((min + (i * step)) / 1000)}K` 
                    : `$${Math.round((min + (i * step)) / 1000)}K`
         );
     }
@@ -529,13 +529,12 @@
             {#if hoveredRidingData}
                 {@const party = PARTIES_INFO.find(p => p.tag === curParty)}
                 {#if hoveredRidingData[party.propertyTag] !== undefined}
-                    <p>{party.name} vote = <b>{(hoveredRidingData[party.propertyTag]).toFixed(1)}%</b></p>
+                    <p>Vote share = <b>{(hoveredRidingData[party.propertyTag]).toFixed(1)}%</b></p>
                 {:else}
-                    <p>{party.name} vote = <b>N/A</b></p>
+                    <p>Vote share = <b>N/A</b></p>
                 {/if}
             {:else}
-                {@const party = PARTIES_INFO.find(p => p.tag === curParty)}
-                <p>{party.name} vote = <b>N/A</b></p>
+                <p>Vote share = <b>N/A</b></p>
             {/if}
         {/if}
     </div>
@@ -546,10 +545,11 @@
             {#if hoveredRidingData}
                 {@const censusVar = curCensusVars.find(v => v.propertyTag === curCensusVariable)}
                 {#if hoveredRidingData[curCensusVariable] !== undefined}
+                    {@const censusVal = hoveredRidingData[curCensusVariable]}
                     {#if curCensusVariable === 'pct_imm'}
-                        <p>{censusVar.name} = <b>{(hoveredRidingData[curCensusVariable]).toFixed(1)}%</b></p>
+                        <p>{censusVar.name} = <b>{censusVal.toFixed(1)}%</b></p>
                     {:else if curCensusVariable === 'avg_hou_inc'}
-                        <p>{censusVar.name} = <b>${hoveredRidingData[curCensusVariable].toFixed(0)}</b></p>
+                        <p>{censusVar.name} = <b>${Math.round(censusVal / 1000)}K</b></p>
                     {:else}
                         <p>{censusVar.name} = <b>N/A</b></p>
                     {/if}
