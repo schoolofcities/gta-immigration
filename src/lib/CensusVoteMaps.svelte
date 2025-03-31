@@ -31,8 +31,8 @@
         maxZoom: 11,
         minZoom: 8,
         maxBounds: [
-            [-81.0, 42.5],  // Southwest corner (near London, ON)
-            [-78.0, 45.0]   // Northeast corner (north of Peterborough)
+            [-81.0, 42.5], // Southwest corner (near London, ON)
+            [-78.0, 45.0] // Northeast corner (north of Peterborough)
         ],
         bearing: -17.2,
         dragRotate: false,
@@ -94,6 +94,37 @@
         });
     }
 
+    // Consolidated function to add labels to a map
+    function addLabelsToMap(map, loadDataCallback = null) {
+        map.addSource('labels-source', {
+            type: 'geojson',
+            data: PlaceLabels 
+        });
+        map.addLayer({
+            id: 'labels-layer',
+            type: 'symbol',
+            source: 'labels-source',
+            layout: {
+                'text-field': ['get', 'name'], 
+                'text-size': 12, 
+                'text-offset': [0, 0], 
+                'text-anchor': 'top', 
+                'text-allow-overlap': false, 
+                'text-font': ['TradeGothic LT Bold'] 
+            },
+            paint: {
+                'text-color': '#1E3765', 
+                'text-halo-color': '#FFFFFF', 
+                'text-halo-width': 1,
+                'text-opacity': 0.7
+            }
+        });
+        
+        if (loadDataCallback) {
+            loadDataCallback();
+        }
+    }
+
     function loadGeoJson() {
         const filePath = `/gta-immigration/data/elections/${curRegionTag}_stats_${curYear}.geojson`;
         fetch(filePath)
@@ -108,8 +139,10 @@
                 });
                 geoJsonData = data;
                 updateSelectOptions();
-                updatePartyMapLayer();
-                updateCensusMapLayer();
+                
+                // Update layers only if labels exist
+                if (map1 && map1.getLayer('labels-layer')) updatePartyMapLayer();
+                if (map2 && map2.getLayer('labels-layer')) updateCensusMapLayer();
             });
     }
 
@@ -191,15 +224,15 @@
                 "fill-color": [
                     "step",
                     ["get", partyPropertyTag],
-                    PARTY_SHADES[curParty][0],  // 0-10%
-                    10, PARTY_SHADES[curParty][1],  // 10-20%
-                    20, PARTY_SHADES[curParty][2],  // 20-30%
-                    30, PARTY_SHADES[curParty][3],  // 30-40%
-                    40, PARTY_SHADES[curParty][4],  // 40-50%
-                    50, PARTY_SHADES[curParty][5],  // 50-60%
-                    60, PARTY_SHADES[curParty][6]   // 60%+
+                    PARTY_SHADES[curParty][0], // 0-10%
+                    10, PARTY_SHADES[curParty][1], // 10-20%
+                    20, PARTY_SHADES[curParty][2], // 20-30%
+                    30, PARTY_SHADES[curParty][3], // 30-40%
+                    40, PARTY_SHADES[curParty][4], // 40-50%
+                    50, PARTY_SHADES[curParty][5], // 50-60%
+                    60, PARTY_SHADES[curParty][6] // 60%+
                 ],
-                "fill-opacity": 0.75
+                "fill-opacity": 0.9
             }
         }, 'labels-layer');
 
@@ -240,13 +273,13 @@
             paintConfig = [
                 "step",
                 ["get", curCensusVariable],
-                CENSUS_SHADES.pct_imm[0],  // 0-10%
-                10, CENSUS_SHADES.pct_imm[1],  // 10-20%
-                20, CENSUS_SHADES.pct_imm[2],  // 20-30%
-                30, CENSUS_SHADES.pct_imm[3],  // 30-40%
-                40, CENSUS_SHADES.pct_imm[4],  // 40-50%
-                50, CENSUS_SHADES.pct_imm[5],  // 50-60%
-                60, CENSUS_SHADES.pct_imm[6],  // 60%+
+                CENSUS_SHADES.pct_imm[0], // 0-10%
+                10, CENSUS_SHADES.pct_imm[1], // 10-20%
+                20, CENSUS_SHADES.pct_imm[2], // 20-30%
+                30, CENSUS_SHADES.pct_imm[3], // 30-40%
+                40, CENSUS_SHADES.pct_imm[4], // 40-50%
+                50, CENSUS_SHADES.pct_imm[5], // 50-60%
+                60, CENSUS_SHADES.pct_imm[6], // 60%+
             ];
         } else if (curCensusVariable === "avg_hou_inc") {
             const values = geoJsonData.features.map(f => f.properties.avg_hou_inc);
@@ -274,7 +307,7 @@
             source: "census-variable",
             paint: {
                 "fill-color": paintConfig,
-                "fill-opacity": 0.75
+                "fill-opacity": 0.9
             }
         }, 'labels-layer');
 
@@ -408,7 +441,6 @@
         map1.addControl(new maplibregl.NavigationControl(navControlConfig), 'top-right');
         map1.addControl(new maplibregl.ScaleControl(scaleControlConfig), 'bottom-left');
 
-        
         map2 = new maplibregl.Map({
             container: "map2",
             ...mapConfig
@@ -421,37 +453,14 @@
         syncMaps(map1, map2);
         syncMaps(map2, map1);
 
-        for (const m of [map1, map2]) {
-            m.on('load', () => {
-                m.addSource('labels-source', {
-                    type: 'geojson',
-                    data: PlaceLabels 
-                });
-                m.addLayer({
-                    id: 'labels-layer',
-                    type: 'symbol',
-                    source: 'labels-source',
-                    layout: {
-                        'text-field': ['get', 'name'], 
-                        'text-size': 12, 
-                        'text-offset': [0, 0], 
-                        'text-anchor': 'top', 
-                        'text-allow-overlap': false, 
-                        'text-font': ['TradeGothic LT Bold'] 
-                    },
-                    paint: {
-                        'text-color': '#1E3765', 
-                        'text-halo-color': '#FFFFFF', 
-                        'text-halo-width': 1,
-                        'text-opacity': 0.7
-                    }
-                });
-            });
-        }
+        // Use the consolidated function to add labels
+        map1.on('load', () => {
+            addLabelsToMap(map1, loadGeoJson);
+        });
 
-
-
-        loadGeoJson();
+        map2.on('load', () => {
+            addLabelsToMap(map2);
+        });
     });
 </script>
 
