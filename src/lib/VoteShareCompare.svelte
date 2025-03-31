@@ -101,18 +101,18 @@
         });
         allYears.sort();
 
-        const x = d3.scalePoint()
+        const xScale = d3.scalePoint()
             .domain(allYears)
             .range([0, width]);
 
-        const y = d3.scaleLinear()
+        const yScale = d3.scaleLinear()
             .domain([-25, 35])
             .range([height, 0]);
 
         // Modified x-axis
         g.append("g")
             .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(x).tickFormat(d3.format("d")))
+            .call(d3.axisBottom(xScale).tickFormat(d3.format("d")))
             .selectAll("text")
             .style("text-anchor", containerWidth <= 700 ? "end" : "middle")
             .attr("dx", containerWidth <= 700 ? "-0.8em" : "0")
@@ -130,7 +130,7 @@
 
         // Modified y-axis with ticks every 10 units
         g.append("g")
-            .call(d3.axisLeft(y).ticks(6)) // This will create ticks at -20, -10, 0, 10, 20, 30
+            .call(d3.axisLeft(yScale).ticks(6)) // This will create ticks at -20, -10, 0, 10, 20, 30
             .append("text")
             .attr("fill", "#000")
             .attr("transform", "rotate(-90)")
@@ -145,8 +145,8 @@
         g.append("line")
             .attr("x1", 0)
             .attr("x2", width)
-            .attr("y1", y(0))
-            .attr("y2", y(0))
+            .attr("y1", yScale(0))
+            .attr("y2", yScale(0))
             .attr("stroke", "black")
             .attr("stroke-width", 1)
             .attr("stroke-dasharray", "4,4");
@@ -173,8 +173,8 @@
         g.append("line")
             .attr("x1", arrowX)
             .attr("x2", arrowX)
-            .attr("y1", y(5))
-            .attr("y2", y(30))
+            .attr("y1", yScale(5))
+            .attr("y2", yScale(30))
             .attr("stroke", "black")
             .attr("stroke-width", 1)
             .attr("marker-end", "url(#arrowhead)");
@@ -182,15 +182,15 @@
         // Overperforming label - line 1
         g.append("text")
             .attr("x", arrowX + textOffset)
-            .attr("y", y(28))
+            .attr("y", yScale(28))
             .attr("dy", "0")
             .style("font-size", "10px")
-            .text("More votes in");
+            .text("Overperforming in");
         
         // Overperforming label - line 2
         g.append("text")
             .attr("x", arrowX + textOffset)
-            .attr("y", y(28))
+            .attr("y", yScale(28))
             .attr("dy", lineHeight + "px")
             .style("font-size", "10px")
             .text("high-immigrant ridings");
@@ -199,8 +199,8 @@
         g.append("line")
             .attr("x1", arrowX)
             .attr("x2", arrowX)
-            .attr("y1", y(-5))
-            .attr("y2", y(-20))
+            .attr("y1", yScale(-5))
+            .attr("y2", yScale(-20))
             .attr("stroke", "black")
             .attr("stroke-width", 1)
             .attr("marker-end", "url(#arrowhead)");
@@ -208,22 +208,22 @@
         // Underperforming label - line 1
         g.append("text")
             .attr("x", arrowX + textOffset)
-            .attr("y", y(-18))
+            .attr("y", yScale(-18))
             .attr("dy", "0")
             .style("font-size", "10px")
-            .text("Less votes in");
+            .text("Underperforming in");
         
         // Underperforming label - line 2
         g.append("text")
             .attr("x", arrowX + textOffset)
-            .attr("y", y(-18))
+            .attr("y", yScale(-18))
             .attr("dy", lineHeight + "px")
             .style("font-size", "10px")
             .text("high-immigrant ridings");
 
         const line = d3.line()
-            .x(d => x(d[0]))
-            .y(d => y(d[1] - d[2]))
+            .x(d => xScale(d[0]))
+            .y(d => yScale(d[1] - d[2]))
             .curve(d3.curveMonotoneX);
 
         // Draw lines and dots for each party
@@ -243,8 +243,8 @@
                 .data(partyData)
                 .enter().append("circle")
                 .attr("r", 3.5)
-                .attr("cx", d => x(d[0]))
-                .attr("cy", d => y(d[1] - d[2]))
+                .attr("cx", d => xScale(d[0]))
+                .attr("cy", d => yScale(d[1] - d[2]))
                 .attr("fill", PARTY_COLOURS[party.tag]);
         });
     }

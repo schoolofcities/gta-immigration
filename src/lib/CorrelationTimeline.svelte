@@ -109,10 +109,68 @@
             .attr("stroke-width", 1)
             .attr("stroke-dasharray", "4,4");
 
+        // Position arrows based on screen width
+        const arrowX = margin.left + (windowWidth <= 700 ? 10 : 20);  // Position relative to y-axis
+        const lineHeight = 12; // Height between text lines
+        const textOffset = windowWidth <= 700 ? 3 : 5; // Smaller offset on mobile
+
+        // Add up arrow (Overperforming)
+        svg.append("line")
+            .attr("x1", arrowX)
+            .attr("x2", arrowX)
+            .attr("y1", yScale(0.2))  // Start just above 0
+            .attr("y2", yScale(0.9))   // End higher up
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("marker-end", "url(#arrowhead)");
+
+        // Overperforming label - line 1
+        svg.append("text")
+            .attr("x", arrowX + textOffset)
+            .attr("y", yScale(0.85))
+            .attr("dy", "0")
+            .style("font-size", "10px")
+            .text("More votes where");
+            
+        // Overperforming label - line 2
+        svg.append("text")
+            .attr("x", arrowX + textOffset)
+            .attr("y", yScale(0.85))
+            .attr("dy", lineHeight + "px")
+            .style("font-size", "10px")
+            .text("immigrants live");
+
+        // Add down arrow (Underperforming)
+        svg.append("line")
+            .attr("x1", arrowX)
+            .attr("x2", arrowX)
+            .attr("y1", yScale(-0.2))  // Start just below 0
+            .attr("y2", yScale(-0.9))   // End lower down
+            .attr("stroke", "black")
+            .attr("stroke-width", 1)
+            .attr("marker-end", "url(#arrowhead)");
+
+        // Underperforming label - line 1
+        svg.append("text")
+            .attr("x", arrowX + textOffset)
+            .attr("y", yScale(-0.85))
+            .attr("dy", "0")
+            .style("font-size", "10px")
+            .text("Less votes where");
+            
+        // Underperforming label - line 2
+        svg.append("text")
+            .attr("x", arrowX + textOffset)
+            .attr("y", yScale(-0.85))
+            .attr("dy", lineHeight + "px")
+            .style("font-size", "10px")
+            .text("immigrants live");
+
         // Define a line generator
         const line = d3.line()
             .x(d => xScale(d[0]))
-            .y(d => yScale(d[1]));
+            .y(d => yScale(d[1]))
+            .curve(d3.curveMonotoneX);
 
         // Draw lines and dots for each selected party
         parties.forEach(party => {
