@@ -323,7 +323,7 @@
         Show me how the major parties perform in the top 5 most immigrant ridings over time for 
         <select onchange={handleRegionChange} class="inline-select">
             <option value="federal" selected>federal</option>
-            <option value="ontario">ontario</option>
+            <option value="ontario">Ontario</option>
         </select>
         elections, compared to their performance in the 
         <select onchange={handleScopeChange} class="inline-select">

@@ -302,7 +302,7 @@
         </select>
         <select onchange={handleRegionChange} class="inline-select">
             <option value="federal" selected>federal</option>
-            <option value="ontario">ontario</option>
+            <option value="ontario">Ontario</option>
         </select>
         election.
     </p>
