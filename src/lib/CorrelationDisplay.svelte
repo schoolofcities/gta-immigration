@@ -16,8 +16,7 @@
     let curParty = $state("lib");
 
     let correlation = $state(0);
-    let hoveredPoint = $state(null);
-    let selectedPoint = $state(null);  
+    let activePoint = $state(null); 
 
     let windowWidth = $state(window.innerWidth);
     
@@ -47,20 +46,20 @@
         curRegion = event.target.value;
         years = curRegion === "federal" ? FELXN_YEARS : ONTELXN_YEARS;
         curYear = years[years.length - 1];
-        loadGeoJson();
         clearPointSelection();
+        loadGeoJson();
     }
 
     function handleYearChange(event) {
         curYear = event.target.value;
-        loadGeoJson();
         clearPointSelection();
+        loadGeoJson();
     }
 
     function handlePartyChange(event) {
         curParty = event.target.value;
-        loadCorrelation();
         clearPointSelection();
+        loadCorrelation();
     }
 
     function loadCorrelation() {
@@ -89,8 +88,7 @@
     }
 
     function clearPointSelection() {
-        hoveredPoint = null;
-        selectedPoint = null;
+        activePoint = null;
     }
 
     function resetPointStyle(selection) {
@@ -195,62 +193,63 @@
         g.append("g").call(xAxis);
         g.append("g").call(yAxis);
 
-        // Append points to the main group
-        g.append("g")
+        const pointsGroup = g.append("g")
             .attr("stroke", "#1E3765")
-            .attr("stroke-width", 0)
-            .selectAll(".scatter-correlation-dot")  // Add specific class
+            .attr("stroke-width", 0);
+
+        pointsGroup.selectAll(".scatter-correlation-dot")
             .data(data)
             .join("circle")
-            .attr("class", "scatter-correlation-dot")  // Add specific class
+            .attr("class", "scatter-correlation-dot")
             .attr("cx", d => x(d.x))
             .attr("cy", d => y(d.y))
             .attr("r", 5)
             .attr("fill", PARTY_COLOURS[curParty])
             .on("mouseover", (event, d) => {
-                // Reset any previously hovered point (if not selected)
-                d3.select("#scatter-display")
-                    .selectAll("circle")
-                    .each(function(pd) {
-                        if (!selectedPoint || 
-                            pd.geoname !== selectedPoint.geoname) {
-                            resetPointStyle(d3.select(this));
-                        }
-                    });
+                event.stopPropagation();
+                activePoint = d;
                 
-                hoveredPoint = d;
-                if (!selectedPoint || d.geoname !== selectedPoint.geoname) {
-                    highlightPoint(d3.select(event.target));
-                }
-            })
-            .on("mouseout", (event, d) => {
-                if (!selectedPoint || d.geoname !== selectedPoint.geoname) {
-                    resetPointStyle(d3.select(event.target));
-                }
-                if (!selectedPoint) {
-                    hoveredPoint = null;
-                }
-            })
-            .on("click", (event, d) => {
-                // Reset all points first
                 d3.select("#scatter-display")
                     .selectAll("circle")
                     .each(function() {
                         resetPointStyle(d3.select(this));
                     });
-
-                // If clicking the same point that's selected, unselect it
-                if (selectedPoint && selectedPoint.geoname === d.geoname) {
-                    selectedPoint = null;
-                    hoveredPoint = null;
+                
+                highlightPoint(d3.select(event.target));
+            })
+            .on("mouseout", (event, d) => {
+                event.stopPropagation();
+                if (activePoint && activePoint.geoname === d.geoname && 
+                    event.target.__data__ === activePoint) {
+                    activePoint = null;
                     resetPointStyle(d3.select(event.target));
-                } else {
-                    // Select new point
-                    selectedPoint = d;
-                    hoveredPoint = d;
-                    highlightPoint(d3.select(event.target));
                 }
+            })
+            .on("click", (event, d) => {
+                event.stopPropagation();
+                activePoint = d;
+                
+                d3.select("#scatter-display")
+                    .selectAll("circle")
+                    .each(function() {
+                        resetPointStyle(d3.select(this));
+                    });
+                
+                highlightPoint(d3.select(event.target));
             });
+
+        // Add click handler to the SVG container
+        svg.on("click", (event) => {
+            // Only clear if clicking outside points (not a point or its children)
+            if (!event.target.classList.contains("scatter-correlation-dot")) {
+                activePoint = null;
+                d3.select("#scatter-display")
+                    .selectAll("circle")
+                    .each(function() {
+                        resetPointStyle(d3.select(this));
+                    });
+            }
+        });
 
         // Add correlation line
         const line = d3.line()
@@ -313,22 +312,22 @@
 
 <div>
     <div class="info-row">
-        {#if hoveredPoint || selectedPoint}
-            <p><b>{(hoveredPoint || selectedPoint).geoname}</b></p>
+        {#if activePoint}
+            <p><b>{activePoint.geoname}</b></p>
         {:else}
             <p><i>Hover/click on a point</i></p>
         {/if}
     </div>
     <div class="info-row">
-        {#if hoveredPoint || selectedPoint}
-            <p>Vote share = <b>{((hoveredPoint || selectedPoint).y).toFixed(1)}%</b></p>
+        {#if activePoint}
+            <p>Vote share = <b>{(activePoint.y).toFixed(1)}%</b></p>
         {:else} 
             <p>Vote share = <b>N/A</b></p>
         {/if}
     </div>
     <div class="info-row">
-        {#if hoveredPoint || selectedPoint}
-            <p>Percent immigrants = <b>{((hoveredPoint || selectedPoint).x).toFixed(1)}%</b></p>
+        {#if activePoint}
+            <p>Percent immigrants = <b>{(activePoint.x).toFixed(1)}%</b></p>
         {:else} 
             <p>Percent immigrants = <b>N/A</b></p>
         {/if}
