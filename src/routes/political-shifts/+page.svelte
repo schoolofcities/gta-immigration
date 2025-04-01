@@ -72,7 +72,18 @@
 
     <div class="text">
         <h2>Data & Methods</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        
+        <p>We obtained federal election results from <a href='https://github.com/Lucas-Czarnecki/Canadian-Federal-Elections/tree/main' target='_blank'>Lucas Czarnecki's database</a>, sourced from Canada's Library of Parliament (LOP), and Ontario election results from <a href='https://www.elections.on.ca/en/resource-centre/elections-results.html' target='_blank'>Elections Ontario</a>.</p>
+
+        <p>For consistency, we focused on the three major parties in Anglo-Canada—the <a href='https://en.wikipedia.org/wiki/Liberal_Party_of_Canada' target='_blank'>Liberals</a>, <a href='https://en.wikipedia.org/wiki/New_Democratic_Party' target='_blank'>New Democrats</a>, and Conservatives—while grouping all other parties under "Other". The label "Conservatives" refers to the dominant center-right/right-wing party in each context: the <a href='https://en.wikipedia.org/wiki/Progressive_Conservative_Party_of_Ontario' target='_blank'>Progressive Conservatives in Ontario</a>, the <a href='https://en.wikipedia.org/wiki/Progressive_Conservative_Party_of_Canada' target='_blank'>federal Progressive Conservatives</a> (until 2004), and the <a href='https://en.wikipedia.org/wiki/Conservative_Party_of_Canada' target='_blank'>Conservative Party of Canada</a> (from 2004 onward). The only exception was including the <a href='https://en.wikipedia.org/wiki/Reform_Party_of_Canada' target='_blank'>Reform</a>/<a href='https://en.wikipedia.org/wiki/Canadian_Alliance' target='_blank'>Alliance</a> parties in the three federal elections they contested (1993, 1997, and 2000).</p>
+
+        <p>Census data was drawn from <a href='https://observatory.uwo.ca/unicen/index.html' target='_blank'>UNI-CEN</a>, where we used census tract-level statistics starting in 1961. Immigration data is available from 1961 onward, household income from 1971 onward, and visible minority demographics from 2001 onward.</p>
+
+        <p>Because historical electoral ridings lack direct census data, we estimated statistics using areal interpolation. We calculated relevant statistics by aggregating all census tracts fully or partially within each riding (using these <a href='https://github.com/schoolofcities/gta-immigration/blob/main/analysis/get_ed_ct_coverage_gta.ipynb' target='_blank'>two</a> <a href='https://github.com/schoolofcities/gta-immigration/blob/main/analysis/get_ed_ct_stats_gta.ipynb' target='_blank'>scripts</a>), weighting partial overlaps by their proportional area.</p>
+
+        <p>The maps displayed and used for interpolation came from <a href='https://observatory.uwo.ca/unicen/index.html' target='_blank'>UNI-CEN</a> (federal ridings and census tracts) and <a href='http://election-atlas.ca' target='_blank'>election-atlas.ca</a> (Ontario ridings). We included only ridings where at least 75% of the area was covered by census tracts and 50% fell within the Greater Toronto Area.</p>
+
+        <p>The final dataset is <a href='https://github.com/schoolofcities/gta-immigration/tree/main/static/data/elections' target='_blank'>available here</a>, and all code for this project is in the <a href='https://github.com/schoolofcities/gta-immigration/tree/main' target='_blank'>GitHub repository</a>.</p>
     </div>
 </main>
 
