@@ -74,36 +74,87 @@
             .domain([-1, 1]) // Correlation ranges from -1 to 1
             .range([height, 0]);
 
-        // Modified x-axis
-        g.append("g")
+        // Add x-axis grid lines
+        g.selectAll(".x-grid-line")
+            .data(allYears)
+            .enter()
+            .append("line")
+            .attr("class", "x-grid-line")
+            .attr("x1", d => xScale(d))
+            .attr("x2", d => xScale(d))
+            .attr("y1", 0)
+            .attr("y2", height)
+            .attr("stroke", "#d3d3d3")
+            .attr("stroke-width", 0.5);
+
+        // Add y-axis grid lines
+        g.selectAll(".y-grid-line")
+            .data([-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1]) // Specific ticks
+            .enter()
+            .append("line")
+            .attr("class", "y-grid-line")
+            .attr("x1", 0)
+            .attr("x2", width)
+            .attr("y1", d => yScale(d))
+            .attr("y2", d => yScale(d))
+            .attr("stroke", "#d3d3d3")
+            .attr("stroke-width", 0.5);
+
+        // Modified x-axis with proper mobile rotation
+        const xAxis = g.append("g")
             .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(xScale).tickFormat(d3.format("d")))
-            .selectAll("text")
+            .call(d3.axisBottom(xScale)
+                .tickFormat(d3.format("d"))
+                .tickSize(0));
+        
+        xAxis.select(".domain").remove();
+        
+        // Add subtle tick marks that match grid lines (only on mobile)
+        if (containerWidth <= 700) {
+            xAxis.selectAll(".tick")
+                .append("line")
+                .attr("class", "x-tick-line")
+                .attr("x1", 0)
+                .attr("x2", 0)
+                .attr("y1", 0)
+                .attr("y2", 6)
+                .attr("stroke", "#d3d3d3")
+                .attr("stroke-width", 0.5);
+        }
+
+        // Style x-axis labels
+        xAxis.selectAll("text")
+            .style("font-size", "11px")
+            .style("font-family", "RobotoRegular")
             .style("text-anchor", containerWidth <= 700 ? "end" : "middle")
-            .attr("dx", containerWidth <= 700 ? "-0.8em" : "0")
-            .attr("dy", containerWidth <= 700 ? "0.15em" : "0.71em")
+            .attr("dx", containerWidth <= 700 ? "-0.5em" : "0")
+            .attr("dy", containerWidth <= 700 ? "1.2em" : "0.71em")
             .attr("transform", containerWidth <= 700 ? "rotate(-45)" : "rotate(0)");
 
-        // Year label
-        g.append("text")
-            .attr("fill", "#000")
-            .attr("x", width / 2)
-            .attr("y", height + (containerWidth <= 700 ? 45 : 40))
-            .attr("text-anchor", "middle")
-            .style("font-size", "11px")
-            .text("Election year");
+        // Modified y-axis with specific ticks
+        const yAxis = g.append("g")
+            .attr("transform", "translate(-5,0)")
+            .call(d3.axisLeft(yScale)
+                .tickValues([-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1])
+                .tickFormat(d => d.toFixed(2)) // Show 2 decimal places
+                .tickSize(0))
+            .select(".domain").remove();
 
-        // Modified y-axis with all ticks
-        g.append("g")
-            .call(d3.axisLeft(yScale))
-            .append("text")
-            .attr("fill", "#000")
+        // Style y-axis tick labels
+        yAxis.selectAll("text")
+            .attr("fill", "#666")
+            .style("font-size", "11px")
+            .style("font-family", "RobotoRegular");
+
+        // Add y-axis label
+        g.append("text")
             .attr("transform", "rotate(-90)")
             .attr("y", -50)
             .attr("x", -height / 2)
             .attr("dy", "0.71em")
             .attr("text-anchor", "middle")
             .style("font-size", "11px")
+            .style("font-family", "RobotoRegular")
             .text("Correlation");
 
         // Add dotted black line at y = 0
@@ -131,10 +182,10 @@
 
         // Position arrows based on screen width
         const arrowX = windowWidth <= 700 ? 10 : 20;
-        const lineHeight = 12; // Height between text lines
-        const textOffset = windowWidth <= 700 ? 3 : 5; // Smaller offset on mobile
+        const lineHeight = 12;
+        const textOffset = windowWidth <= 700 ? 3 : 5;
 
-        // Add up arrow (Overperforming)
+        // Add up arrow (Positive correlation)
         g.append("line")
             .attr("x1", arrowX)
             .attr("x2", arrowX)
@@ -144,23 +195,25 @@
             .attr("stroke-width", 1)
             .attr("marker-end", "url(#arrowhead)");
 
-        // Overperforming label - line 1
+        // Positive correlation label - line 1
         g.append("text")
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(0.85))
             .attr("dy", "0")
-            .style("font-size", "10px")
+            .style("font-size", "11px")
+            .style("font-family", "TradeGothicBold")
             .text("More votes where");
         
-        // Overperforming label - line 2
+        // Positive correlation label - line 2
         g.append("text")
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(0.85))
             .attr("dy", lineHeight + "px")
-            .style("font-size", "10px")
+            .style("font-size", "11px")
+            .style("font-family", "TradeGothicBold")
             .text("immigrants live");
 
-        // Add down arrow (Underperforming)
+        // Add down arrow (Negative correlation)
         g.append("line")
             .attr("x1", arrowX)
             .attr("x2", arrowX)
@@ -170,20 +223,22 @@
             .attr("stroke-width", 1)
             .attr("marker-end", "url(#arrowhead)");
 
-        // Underperforming label - line 1
+        // Negative correlation label - line 1
         g.append("text")
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(-0.85))
             .attr("dy", "0")
-            .style("font-size", "10px")
+            .style("font-size", "11px")
+            .style("font-family", "TradeGothicBold")
             .text("Less votes where");
         
-        // Underperforming label - line 2
+        // Negative correlation label - line 2
         g.append("text")
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(-0.85))
             .attr("dy", lineHeight + "px")
-            .style("font-size", "10px")
+            .style("font-size", "11px")
+            .style("font-family", "TradeGothicBold")
             .text("immigrants live");
 
         const line = d3.line()
@@ -245,5 +300,6 @@
 <style>
     svg {
         max-width: 100%;
+        font-family: RobotoRegular;
     }
 </style>

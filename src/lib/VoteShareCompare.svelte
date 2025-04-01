@@ -109,36 +109,87 @@
             .domain([-25, 35])
             .range([height, 0]);
 
-        // Modified x-axis
-        g.append("g")
+        // Add x-axis grid lines
+        g.selectAll(".x-grid-line")
+            .data(allYears)
+            .enter()
+            .append("line")
+            .attr("class", "x-grid-line")
+            .attr("x1", d => xScale(d))
+            .attr("x2", d => xScale(d))
+            .attr("y1", 0)
+            .attr("y2", height)
+            .attr("stroke", "#d3d3d3")
+            .attr("stroke-width", 0.5);
+
+        // Add y-axis grid lines
+        g.selectAll(".y-grid-line")
+            .data(d3.range(-20, 31, 10))
+            .enter()
+            .append("line")
+            .attr("class", "y-grid-line")
+            .attr("x1", 0)
+            .attr("x2", width)
+            .attr("y1", d => yScale(d))
+            .attr("y2", d => yScale(d))
+            .attr("stroke", "#d3d3d3")
+            .attr("stroke-width", 0.5);
+
+        // Modified x-axis with proper mobile rotation and alignment
+        const xAxis = g.append("g")
             .attr("transform", `translate(0,${height})`)
-            .call(d3.axisBottom(xScale).tickFormat(d3.format("d")))
-            .selectAll("text")
+            .call(d3.axisBottom(xScale)
+                .tickFormat(d3.format("d"))
+                .tickSize(0)); // Keep tick lines invisible
+        
+        xAxis.select(".domain").remove();
+        
+        // Add subtle tick marks that match grid lines (only on mobile)
+        if (containerWidth <= 700) {
+            xAxis.selectAll(".tick")
+                .append("line")
+                .attr("class", "x-tick-line")
+                .attr("x1", 0)
+                .attr("x2", 0)
+                .attr("y1", 0)
+                .attr("y2", 6) // Short tick length
+                .attr("stroke", "#d3d3d3") // Same as grid lines
+                .attr("stroke-width", 0.5);
+        }
+
+        // Style x-axis labels with adjusted positioning
+        xAxis.selectAll("text")
+            .style("font-size", "11px")
+            .style("font-family", "RobotoRegular")
             .style("text-anchor", containerWidth <= 700 ? "end" : "middle")
-            .attr("dx", containerWidth <= 700 ? "-0.8em" : "0")
-            .attr("dy", containerWidth <= 700 ? "0.15em" : "0.71em")
+            .attr("dx", containerWidth <= 700 ? "-0.5em" : "0") // Reduced from -0.8em
+            .attr("dy", containerWidth <= 700 ? "1.2em" : "0.71em") // Adjusted vertical position
             .attr("transform", containerWidth <= 700 ? "rotate(-45)" : "rotate(0)");
 
-        // Year label
-        g.append("text")
-            .attr("fill", "#000")
-            .attr("x", width / 2)
-            .attr("y", height + (containerWidth <= 700 ? 45 : 40))
-            .attr("text-anchor", "middle")
-            .style("font-size", "11px")
-            .text("Election year");
+        // Modified y-axis
+        const yAxis = g.append("g")
+            .attr("transform", "translate(-5,0)") 
+            .call(d3.axisLeft(yScale)
+                .ticks(6)
+                .tickFormat(d => d + "%")
+                .tickSize(0))
+            .select(".domain").remove();
 
-        // Modified y-axis with ticks every 10 units
-        g.append("g")
-            .call(d3.axisLeft(yScale).ticks(6)) // This will create ticks at -20, -10, 0, 10, 20, 30
-            .append("text")
-            .attr("fill", "#000")
+        // Style y-axis tick labels
+        yAxis.selectAll("text")
+            .attr("fill", "#666")
+            .style("font-size", "11px")
+            .style("font-family", "RobotoRegular");
+
+        // Add y-axis label
+        g.append("text")
             .attr("transform", "rotate(-90)")
             .attr("y", -50)
             .attr("x", -height / 2)
             .attr("dy", "0.71em")
             .attr("text-anchor", "middle")
             .style("font-size", "11px")
+            .style("font-family", "RobotoRegular")
             .text("Vote share difference");
 
         // Add dotted black line at y = 0
@@ -166,8 +217,8 @@
 
         // Position arrows based on screen width
         const arrowX = windowWidth <= 700 ? 10 : 20;
-        const lineHeight = 12; // Height between text lines
-        const textOffset = windowWidth <= 700 ? 3 : 5; // Smaller offset on mobile
+        const lineHeight = 12;
+        const textOffset = windowWidth <= 700 ? 3 : 5;
 
         // Add up arrow (Overperforming)
         g.append("line")
@@ -184,7 +235,8 @@
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(28))
             .attr("dy", "0")
-            .style("font-size", "10px")
+            .style("font-size", "11px") 
+            .style("font-family", "TradeGothicBold")
             .text("Overperforming in");
         
         // Overperforming label - line 2
@@ -192,7 +244,8 @@
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(28))
             .attr("dy", lineHeight + "px")
-            .style("font-size", "10px")
+            .style("font-size", "11px") 
+            .style("font-family", "TradeGothicBold")
             .text("high-immigrant ridings");
 
         // Add down arrow (Underperforming)
@@ -210,7 +263,8 @@
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(-18))
             .attr("dy", "0")
-            .style("font-size", "10px")
+            .style("font-size", "11px") 
+            .style("font-family", "TradeGothicBold")
             .text("Underperforming in");
         
         // Underperforming label - line 2
@@ -218,7 +272,8 @@
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(-18))
             .attr("dy", lineHeight + "px")
-            .style("font-size", "10px")
+            .style("font-size", "11px")
+            .style("font-family", "TradeGothicBold")
             .text("high-immigrant ridings");
 
         const line = d3.line()
