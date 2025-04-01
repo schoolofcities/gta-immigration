@@ -483,7 +483,7 @@
 <div class="container">
     <div class="sentence-controls">
         <p>
-            I want to see
+            I want to see data for the 
             <select onchange={handleYearChange} class="inline-select">
                 {#each years as y}
                     <option value={y} selected={y === curYear}>{y}</option>
@@ -491,10 +491,10 @@
             </select>
             <select onchange={handleRegionChange} class="inline-select">
                 <option value="federal" selected>federal</option>
-                <option value="ontario">ontario</option>
+                <option value="ontario">Ontario</option>
             </select>
-            election results.
-            Show me the party vote for the
+            election.
+            Show me the party vote share for the
             <select onchange={handlePartyChange} class="inline-select">
                 {#each curParties as party}
                     <option value={party.tag}>{party.name}</option>

@@ -281,7 +281,13 @@
 
 <div class="sentence-controls">
     <p>
-        I want to see
+        I want to see the correlation between percent immigrants and party vote share for the
+        <select onchange={handlePartyChange} class="inline-select">
+            {#each curParties as party}
+                <option value={party.tag}>{party.name}</option>
+            {/each}
+        </select>
+        in the 
         <select onchange={handleYearChange} class="inline-select">
             {#each years as y}
                 <option value={y} selected={y === curYear}>{y}</option>
@@ -291,12 +297,7 @@
             <option value="federal" selected>federal</option>
             <option value="ontario">ontario</option>
         </select>
-        election correlation plot. Show me the party correlation for the
-        <select onchange={handlePartyChange} class="inline-select">
-            {#each curParties as party}
-                <option value={party.tag}>{party.name}</option>
-            {/each}
-        </select>.
+        election.
     </p>
 </div>
 

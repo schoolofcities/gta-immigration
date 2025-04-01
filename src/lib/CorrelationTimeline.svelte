@@ -285,12 +285,12 @@
 <div>
     <div class="sentence-controls">
         <p>
-            Show me the correlation between party vote share and percent immigrants over time for the
+            Show me how the correlation between party vote share and percent immigrants changes over time in all
             <select onchange={handleRegionChange} class="inline-select">
                 <option value="federal" selected>federal</option>
-                <option value="ontario">ontario</option>
+                <option value="ontario">Ontario</option>
             </select>
-            level.
+            elections.
         </p>
     </div>
 </div>

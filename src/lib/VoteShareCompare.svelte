@@ -320,17 +320,17 @@
 
 <div class="sentence-controls">
     <p>
-        I want to see vote share difference for
+        Show me how the major parties perform in the top 5 most immigrant ridings over time for 
         <select onchange={handleRegionChange} class="inline-select">
             <option value="federal" selected>federal</option>
             <option value="ontario">ontario</option>
         </select>
-        elections in the
+        elections, compared to their performance in the 
         <select onchange={handleScopeChange} class="inline-select">
             <option value="gta" selected>GTA</option>
             <option value="full">full</option>
         </select>
-        {curScope === 'gta' ? 'only' : 'results'}.
+        {curScope === 'gta' ? 'alone' : 'election'}.
     </p>
 </div>
 
