@@ -48,16 +48,19 @@
         years = curRegion === "federal" ? FELXN_YEARS : ONTELXN_YEARS;
         curYear = years[years.length - 1];
         loadGeoJson();
+        clearPointSelection();
     }
 
     function handleYearChange(event) {
         curYear = event.target.value;
         loadGeoJson();
+        clearPointSelection();
     }
 
     function handlePartyChange(event) {
         curParty = event.target.value;
         loadCorrelation();
+        clearPointSelection();
     }
 
     function loadCorrelation() {
@@ -83,6 +86,11 @@
                 console.error('Error loading CSV file:', error);
                 correlation = 0; 
             });
+    }
+
+    function clearPointSelection() {
+        hoveredPoint = null;
+        selectedPoint = null;
     }
 
     function resetPointStyle(selection) {
