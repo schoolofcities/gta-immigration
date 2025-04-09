@@ -86,7 +86,7 @@ YEAR_CODES = {
     }, 
     1981: {
         'num_pop_tot': ['pop__tot1981ttd'],
-        'num_imm_tot': ['imag_tot1981ttd'],
+        'num_imm_tot': ['impi_tot1981ttd'],  # impi_tot1981ttd (CSD + CT) or imag_tot1981ttd (CT), the usual is broken
         'num_imm_new': ['impi197819811981tt1', 'impi197019771981tt1'],
         'num_imm_2nd_tot': [],
         'avg_hou_inc': ['ihat_avg1981ttn'],
