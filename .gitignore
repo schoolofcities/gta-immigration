@@ -27,6 +27,6 @@ vite.config.ts.timestamp-*
 *.sln
 *.sw?
 
-# Jupyter Notebooks
+# Jupyter Notebooks and Python
 .ipynb_checkpoints/
-
+__pycache__/
