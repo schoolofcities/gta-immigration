@@ -87,7 +87,7 @@ YEAR_CODES = {
     1981: {
         'num_pop_tot': ['pop__tot1981ttd'],
         'num_imm_tot': ['impi_tot1981ttd'],  # impi_tot1981ttd (CSD + CT) or imag_tot1981ttd (CT), the usual is broken
-        'num_imm_new': ['impi197819811981tt1', 'impi197019771981tt1'],
+        'num_imm_new': ['impi197819811981tt1'],  # 'impi197019771981tt1'
         'num_imm_2nd_tot': [],
         'avg_hou_inc': ['ihat_avg1981ttn'],
         'num_not_vm_tot': [],
@@ -98,7 +98,7 @@ YEAR_CODES = {
     1986: {
         'num_pop_tot': ['pop__tot1986ttd'],
         'num_imm_tot': ['imb__tot1986ttd'],
-        'num_imm_new': ['impi198319861986tt1', 'impi197819821986tt1'],
+        'num_imm_new': ['impi198319861986tt1'],  # 'impi197819821986tt1'
         'num_imm_2nd_tot': [],
         'avg_hou_inc': ['ihat_avg1986ttn'],
         'num_not_vm_tot': [],
@@ -109,7 +109,7 @@ YEAR_CODES = {
     1991: {
         'num_pop_tot': ['pop__tot1991ttd'],
         'num_imm_tot': ['imd__tot1991ttd'],
-        'num_imm_new': ['impi198819911991tt1', 'impi198119871991tt1'],
+        'num_imm_new': ['impi198819911991tt1'],  # 'impi198119871991tt1'
         'num_imm_2nd_tot': [],
         'avg_hou_inc': ['ihat_avg1991ttn'],
         'num_not_vm_tot': [],
@@ -120,7 +120,7 @@ YEAR_CODES = {
     1996: {
         'num_pop_tot': ['pop__tot1996ttd'],
         'num_imm_tot': ['imb__tot1996ttd'],
-        'num_imm_new': ['impi199119961996tt1', 'impi198119901996tt1'],
+        'num_imm_new': ['impi199119961996tt1'],  # 'impi198119901996tt1'
         'num_imm_2nd_tot': [],
         'avg_hou_inc': ['ihat_avg1996ttn'],
         'num_not_vm_tot': ['vminnvis1996tt1'],
@@ -131,7 +131,7 @@ YEAR_CODES = {
     2001: {
         'num_pop_tot': ['pop__tot2001ttd'],
         'num_imm_tot': ['imb__tot2001ttd'],
-        'num_imm_new': ['impi199620012001tt1'],
+        'num_imm_new': ['impi199620012001tt1'],  # 'impi199119952001tt1'
         'num_imm_2nd_tot': ['imgsgen22001tt1'],
         'avg_hou_inc': ['ihat_avg2001ttn'],
         'num_not_vm_tot': ['vminnvis2001tt1'],
@@ -142,7 +142,7 @@ YEAR_CODES = {
     2006: {
         'num_pop_tot': ['pop__tot2006ttd'],
         'num_imm_tot': ['imb__tot2006ttd'],
-        'num_imm_new': ['impi200120062006tt1', 'impi199620002006tt1'],
+        'num_imm_new': ['impi200120062006tt1'],  # 'impi199620002006tt1'
         'num_imm_2nd_tot': ['imgsgen22006tt1'],
         'avg_hou_inc': ['ihat_avg2006ttn'],
         'num_not_vm_tot': ['vminnvis2006tt1'],
@@ -153,7 +153,7 @@ YEAR_CODES = {
     2011: {
         'num_pop_tot': ['pop__tot2011ttd'],
         'num_imm_tot': ['imb__tot2011ttd'],
-        'num_imm_new': ['impi200620112011tt1', 'impi200120052011tt1'],
+        'num_imm_new': ['impi200620112011tt1'],  # 'impi200120052011tt1'
         'num_imm_2nd_tot': ['imgsgen22011tt1'],
         'avg_hou_inc': ['ihat_avg2011ttn'],
         'num_not_vm_tot': ['vminnvis2011tt1'],
@@ -164,7 +164,7 @@ YEAR_CODES = {
     2016: {
         'num_pop_tot': ['pop__tot2016ttd'],
         'num_imm_tot': ['imb__tot2016ttd'],
-        'num_imm_new': ['impi201120162016tt1', 'impi200620102016tt1'],
+        'num_imm_new': ['impi201120162016tt1'],  # 'impi200620102016tt1'
         'num_imm_2nd_tot': ['imgsgen22016tt1'],
         'avg_hou_inc': ['ihat_avg2016ttn'],
         'num_not_vm_tot': ['vminnvis2016tt1'],
@@ -175,7 +175,7 @@ YEAR_CODES = {
     2021: {
         'num_pop_tot': ['pop__tot2021ttd'],
         'num_imm_tot': ['imb__tot2021ttd'],
-        'num_imm_new': ['impi201620212021tt1', 'impi201120152021tt1'],
+        'num_imm_new': ['impi201620212021tt1'],  # 'impi201120152021tt1'
         'num_imm_2nd_tot': ['imgsgen22021tt1'],
         'avg_hou_inc': ['ihat_avg2021ttn'],
         'num_not_vm_tot': ['vminnvis2021tt1'],
