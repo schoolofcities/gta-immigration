@@ -15,33 +15,33 @@
             'breaks': [10, 20, 30, 40, 50, 60, 70],
             'breakSuffix': '%',
             'name': `Immigrant (% of population) in ${curYear}`,
-            'immDist': 10.0,
-            'notImmDist': 10.0,
-            'popDist': 10.0,
+            'immDist': 14.85,
+            'notImmDist': 19.51,
+            'popDist': 17.98,
         },
         1981: {
             'breaks': [10, 20, 30, 40, 50, 60, 70],
             'breakSuffix': '%',
             'name': `Immigrant (% of population) in ${curYear}`,
-            'immDist': 10.0,
-            'notImmDist': 10.0,
-            'popDist': 10.0,
+            'immDist': 23.62,
+            'notImmDist': 31.35,
+            'popDist': 28.61,
         },
         2001: {
             'breaks': [10, 20, 30, 40, 50, 60, 70],
             'breakSuffix': '%',
             'name': `Immigrant (% of population) in ${curYear}`,
-            'immDist': 10.0,
-            'notImmDist': 10.0,
-            'popDist': 10.0,
+            'immDist': 26.68,
+            'notImmDist': 35.81,
+            'popDist': 32.01,
         },
         2021: {
             'breaks': [10, 20, 30, 40, 50, 60, 70],
             'breakSuffix': '%',
             'name': `Immigrant (% of population) in ${curYear}`,
-            'immDist': 10.0,
-            'notImmDist': 10.0,
-            'popDist': 10.0,
+            'immDist': 31.58,
+            'notImmDist': 36.18,
+            'popDist': 34.15,
         },
     }
 
@@ -188,8 +188,8 @@
                     Total pop.
                 {/if}
             </text>
-            <rect class="bar" width="{250 * mapConfig[curYear][distKey] / 40}" height = "8" x="104" y="{22 + (i * 18)}" style="fill: #6D247A; stroke: white;"></rect>
-            <text class="label legend" x="{107 + 250 * mapConfig[curYear][distKey] / 40}" y="{30 + (i * 18)}" text-anchor="start">{mapConfig[curYear][distKey]} kilometers</text>
+            <rect class="bar" width="{200 * mapConfig[curYear][distKey] / 40}" height = "8" x="104" y="{22 + (i * 18)}" style="fill: #6D247A; stroke: white;"></rect>
+            <text class="label legend" x="{107 + 200 * mapConfig[curYear][distKey] / 40}" y="{30 + (i * 18)}" text-anchor="start">{mapConfig[curYear][distKey]} km</text>
         {/each}
     </svg>
 
