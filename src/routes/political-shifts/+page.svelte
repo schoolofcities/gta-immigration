@@ -1,5 +1,6 @@
 <script>
     import TopSofC from '$lib/TopSofC.svelte';
+    // import StaticCorrelationDisplay from '$lib/StaticCorrelationDisplay.svelte';
     import CensusVoteMaps from '$lib/CensusVoteMaps.svelte';
     import CorrelationDisplay from '$lib/CorrelationDisplay.svelte';
     import CorrelationTimeline from '$lib/CorrelationTimeline.svelte';
@@ -22,6 +23,8 @@
         </p>
     </div>
 
+    <!-- <StaticCorrelationDisplay /> -->
+
     <div class="text">
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -31,33 +34,31 @@
         </p>
     </div>
 
+    <!-- Dual panel of constituency maps: vote share & immigrant percent -->
+    <CensusVoteMaps />
+
     <div class="text">
         <h2>How do ridings compare?</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
-    <!-- Dual panel of constituency maps: vote share & immigrant percent -->
-    <CensusVoteMaps />
-
-    <br/>
-    <br/>
 
     <div class="text">
         <h2>Does party vote share correspond to where immigrants live?</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
-    
-    <!-- View graph of all data points and correlation year (choose party+year) -->
+
+    <!-- View trend line of correlation (choose party) -->
     <div class="container">
-        <CorrelationDisplay />
+        <CorrelationTimeline />
     </div>
 
     <div class="text">
         <p>tLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
 
-    <!-- View trend line of correlation (choose party) -->
+    <!-- View graph of all data points and correlation year (choose party+year) -->
     <div class="container">
-        <CorrelationTimeline />
+        <CorrelationDisplay />
     </div>
 
     <div class="text">
