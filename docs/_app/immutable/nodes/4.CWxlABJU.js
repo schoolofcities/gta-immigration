@@ -1,1 +1,0 @@
-import{t,a as o}from"../chunks/DcdbxLPF.js";import"../chunks/Cb7uVnio.js";const r=!0,m=Object.freeze(Object.defineProperty({__proto__:null,prerender:r},Symbol.toStringTag,{value:"Module"}));var n=t("<main><h1>Suburbanization</h1></main>");function u(e){var a=n();o(e,a)}export{u as component,m as universal};
