@@ -5,8 +5,8 @@
     const parties = PARTIES_INFO.filter(party => party.name !== 'Reform/Alliance');
 
     // State variables
-    let curRegion = $state("federal");
-    let curScope = $state("gta");
+    let curRegion = $state("ontario");
+    let curScope = $state("full");
 
     let curVoteShares = $state({
         "Liberals": [],
@@ -322,13 +322,13 @@
     <p>
         Show me how the major parties perform in the top 5 most immigrant ridings over time for 
         <select onchange={handleRegionChange} class="inline-select">
-            <option value="federal" selected>federal</option>
-            <option value="ontario">Ontario</option>
+            <option value="federal">federal</option>
+            <option value="ontario" selected>Ontario</option>
         </select>
         elections, compared to their performance in the 
         <select onchange={handleScopeChange} class="inline-select">
-            <option value="gta" selected>GTA</option>
-            <option value="full">full</option>
+            <option value="gta">GTA</option>
+            <option value="full" selected>full</option>
         </select>
         {curScope === 'gta' ? 'alone' : 'election'}.
     </p>

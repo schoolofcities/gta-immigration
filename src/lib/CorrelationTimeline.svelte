@@ -5,7 +5,7 @@
     const parties = PARTIES_INFO.filter(party => party.name !== 'Reform/Alliance');
 
     // State variables
-    let curRegion = $state("federal");
+    let curRegion = $state("ontario");
     let curCorrs = $state({
         "Liberals": [], // contains elements of the form [year, corr]
         "Conservatives": [],
@@ -287,8 +287,8 @@
         <p>
             Show me how the correlation between party vote share and percent immigrants changes over time in all
             <select onchange={handleRegionChange} class="inline-select">
-                <option value="federal" selected>federal</option>
-                <option value="ontario">Ontario</option>
+                <option value="federal">federal</option>
+                <option value="ontario" selected>Ontario</option>
             </select>
             elections.
         </p>

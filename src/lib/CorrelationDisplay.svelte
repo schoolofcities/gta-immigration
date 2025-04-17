@@ -4,16 +4,16 @@
     import { getRegionTag, updatePartyOptions } from "./utils.js";
     import * as d3 from 'd3';
 
-    let curRegion = $state("federal");
+    let curRegion = $state("ontario");
     let curRegionTag = $derived(getRegionTag(curRegion));
 
-    let years = $state(FELXN_YEARS);
-    let curYear = $state(2021);
+    let years = $state(ONTELXN_YEARS);
+    let curYear = $state(2025);
 
     let geoJsonData = $state(null);
 
     let curParties = $derived(updatePartyOptions(geoJsonData));
-    let curParty = $state("lib");
+    let curParty = $state("cons1");
 
     let correlation = $state(0);
     let activePoint = $state(null); 
@@ -291,7 +291,7 @@
         I want to see the correlation between percent immigrants and party vote share for the
         <select onchange={handlePartyChange} class="inline-select">
             {#each curParties as party}
-                <option value={party.tag}>{party.name}</option>
+                <option value={party.tag} selected={party.tag === curParty}>{party.name}</option>
             {/each}
         </select>
         in the 
@@ -301,8 +301,8 @@
             {/each}
         </select>
         <select onchange={handleRegionChange} class="inline-select">
-            <option value="federal" selected>federal</option>
-            <option value="ontario">Ontario</option>
+            <option value="federal">federal</option>
+            <option value="ontario" selected>Ontario</option>
         </select>
         election.
     </p>
