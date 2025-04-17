@@ -14,12 +14,12 @@
         <!-- <h1>Immigrant Political Shifts</h1> -->
         <h1>Changes in immigrant voting patterns in the Greater Toronto Area</h1>
         <p>
-            Aniket Kali,
-            Serene Tan,
-            Jeff Allen
+            <a href='https://www.linkedin.com/in/aniket-k-8a8b9921b/' target='_blank'>Aniket Kali</a>,
+            <a href='https://www.linkedin.com/in/serene-tan-530239113' target='_blank'>Serene Tan</a>,
+            <a href='https://jamaps.github.io/' target='_blank'>Jeff Allen</a>
             <br />
             <br />
-            March 2025
+            April 2025
         </p>
     </div>
 
@@ -38,7 +38,7 @@
     <CensusVoteMaps />
 
     <div class="text">
-        <h2>How do ridings compare?</h2>
+        <h2>How do different ridings compare geographically?</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
 
@@ -62,7 +62,7 @@
     </div>
 
     <div class="text">
-        <h2>How does party vote compare in immigrant dominated ridings?</h2>
+        <h2>Do parties over-perform in the most immigrant ridings?</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
 
