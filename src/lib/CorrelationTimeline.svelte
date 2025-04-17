@@ -35,6 +35,38 @@
         });
     }
 
+    function setLabelPos(partyName, region) {
+        let dx;
+        let dy;
+        let textAnchor = "start";
+
+        if (region === 'ontario') {
+            if (partyName === "Liberals") {
+                dx = 5; // to the right
+                dy = -5; // slightly above
+            } else if (partyName === "New Democrats") {
+                dx = 5; // to the right
+                dy = 0; // middle height
+            } else if (partyName === "Conservatives") {
+                dx = 5; // to the right
+                dy = 10; // slightly below
+            }
+        } else { // federal
+            if (partyName === "Liberals") {
+                dx = -20; // to the left
+                dy = -5; // slightly above
+            } else if (partyName === "New Democrats") {
+                dx = 5; // to the right
+                dy = -5; // slightly above
+            } else if (partyName === "Conservatives") {
+                dx = 5; // to the right
+                dy = 10; // slightly below
+            }
+        }
+
+        return { dx, dy, textAnchor };
+    }
+
     function drawGraph() {
         const svg = d3.select("#correlation-line-graph");
         svg.selectAll("*").remove();
@@ -267,6 +299,27 @@
                 .attr("cx", d => xScale(d[0]))
                 .attr("cy", d => yScale(d[1]))
                 .attr("fill", PARTY_COLOURS[party.tag]);
+
+            // Add party labels based on the requirements
+            const labelIndex = curRegion === 'ontario' ? 9 : 12;
+            if (partyData.length > labelIndex) {
+                const labelData = partyData[labelIndex];
+                const xPos = xScale(labelData[0]);
+                const yPos = yScale(labelData[1]);
+                
+                const { dx, dy, textAnchor } = setLabelPos(party.name, curRegion);
+
+                g.append("text")
+                    .attr("x", xPos)
+                    .attr("y", yPos)
+                    .attr("dx", dx)
+                    .attr("dy", dy)
+                    .attr("text-anchor", textAnchor)
+                    .style("font-size", "12px")
+                    .style("font-family", "TradeGothicBold")
+                    .style("fill", PARTY_COLOURS[party.tag])
+                    .text(party.name);
+            }
         });
     }
 

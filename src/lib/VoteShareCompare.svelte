@@ -7,7 +7,6 @@
     // State variables
     let curRegion = $state("ontario");
     let curScope = $state("full");
-
     let curVoteShares = $state({
         "Liberals": [],
         "Conservatives": [],
@@ -25,9 +24,41 @@
         curScope = event.target.value;
     }
 
+    function setLabelPos(partyName, region) {
+        let dx;
+        let dy;
+        let textAnchor = "start";
+
+        if (region === 'ontario') {
+            if (partyName === "Liberals") {
+                dx = 5; // to the right
+                dy = 5; // slightly below
+            } else if (partyName === "New Democrats") {
+                dx = 5; // to the right
+                dy = 5; // slightly below
+            } else if (partyName === "Conservatives") {
+                dx = 5; // to the right
+                dy = 10; // slightly below
+            }
+        } else { // federal
+            if (partyName === "Liberals") {
+                dx = 5; // to the right
+                dy = 10; // slightly below
+            } else if (partyName === "New Democrats") {
+                dx = 5; // to the right
+                dy = -5; // slightly above
+            } else if (partyName === "Conservatives") {
+                dx = 5; // to the right
+                dy = 10; // slightly below
+            }
+        }
+
+        return { dx, dy, textAnchor };
+    }
+
     // Function to load and process the CSV
     function loadVoteShares() {
-        const csvPath = "/gta-immigration/data/elections_analysis/ed_top_5_imm_results.csv"; // Static path to the CSV file
+        const csvPath = "/gta-immigration/data/elections_analysis/ed_top_5_imm_results.csv";
 
         d3.csv(csvPath)
             .then((data) => {
@@ -38,22 +69,20 @@
                 };
 
                 parties.forEach(party => {
-                    // Filter rows based on curRegion and current party
                     const filteredData = data.filter(
                         (row) => row.region === curRegion && row.party === party.tag
                     );
 
-                    // Group by year and extract the required columns
                     const result = [];
                     const years = new Set(filteredData.map((row) => row.year));
 
                     years.forEach((year) => {
                         const yearData = filteredData.filter((row) => row.year === year);
                         yearData.forEach((row) => {
-                            const firstElement = parseFloat(row.top_5_imm_pct); // Convert to number
+                            const firstElement = parseFloat(row.top_5_imm_pct);
                             const secondElement = curScope === 'gta' 
                                 ? parseFloat(row.gta_pct) 
-                                : parseFloat(row.full_pct); // Convert to number
+                                : parseFloat(row.full_pct);
                             if (!isNaN(firstElement) && !isNaN(secondElement)) {
                                 result.push([parseFloat(year), firstElement, secondElement]);
                             }
@@ -77,7 +106,7 @@
         const containerWidth = svg.node().parentElement.getBoundingClientRect().width || 700;
         const margin = { 
             top: 20, 
-            right: containerWidth <= 700 ? 40 : 30, // Increase right margin for smaller screens
+            right: containerWidth <= 700 ? 40 : 30,
             bottom: 50, 
             left: 60 
         };
@@ -302,6 +331,27 @@
                 .attr("cx", d => xScale(d[0]))
                 .attr("cy", d => yScale(d[1] - d[2]))
                 .attr("fill", PARTY_COLOURS[party.tag]);
+
+            // Add party labels based on the requirements
+            const labelIndex = curRegion === 'ontario' ? 9 : 9;
+            if (partyData.length > labelIndex) {
+                const labelData = partyData[labelIndex];
+                const xPos = xScale(labelData[0]);
+                const yPos = yScale(labelData[1] - labelData[2]);
+                
+                const { dx, dy, textAnchor } = setLabelPos(party.name, curRegion);
+
+                g.append("text")
+                    .attr("x", xPos)
+                    .attr("y", yPos)
+                    .attr("dx", dx)
+                    .attr("dy", dy)
+                    .attr("text-anchor", textAnchor)
+                    .style("font-size", "12px")
+                    .style("font-family", "TradeGothicBold")
+                    .style("fill", PARTY_COLOURS[party.tag])
+                    .text(party.name);
+            }
         });
     }
 
