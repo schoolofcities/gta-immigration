@@ -1,6 +1,6 @@
 <script>
     import TopSofC from '$lib/TopSofC.svelte';
-    // import StaticCorrelationDisplay from '$lib/StaticCorrelationDisplay.svelte';
+    import StaticCorrelationDisplay from '$lib/StaticCorrelationDisplay.svelte';
     import CensusVoteMaps from '$lib/CensusVoteMaps.svelte';
     import CorrelationDisplay from '$lib/CorrelationDisplay.svelte';
     import CorrelationTimeline from '$lib/CorrelationTimeline.svelte';
@@ -23,7 +23,7 @@
         </p>
     </div>
 
-    <!-- <StaticCorrelationDisplay /> -->
+    <StaticCorrelationDisplay />
 
     <div class="text">
         <p>
