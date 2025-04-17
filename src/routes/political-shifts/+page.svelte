@@ -15,7 +15,7 @@
 
 	<title>Changes in immigrant voting patterns in the Greater Toronto Area</title>
 
-	<meta name="description" content="Maps, charts, and rankings that compare 250 cities around the world">
+	<meta name="description" content="">
 	<meta name="author" content="Aniket Kali, Serene Tan, & Jeff Allen">
     
 	<meta property="og:title" content="Changes in immigrant voting patterns in the Greater Toronto Area" />
@@ -25,7 +25,7 @@
 	<!-- <meta property="og:image" content="https://schoolofcities.github.io/essential-spaces/web-card.png" /> -->
 	<meta property="og:locale" content="en_CA">
 
-	<meta name="twitter:card" content="summary_large_image" />
+	<!-- <meta name="twitter:card" content="summary_large_image" /> -->
 	<meta name="twitter:site" content="https://schoolofcities.github.io/gta-immigration/political-shifts" />
 	<meta name="twitter:creator" content="@UofTCities" />
 	<meta name="twitter:title" content="Changes in immigrant voting patterns in the Greater Toronto Area" />
