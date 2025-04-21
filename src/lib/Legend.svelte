@@ -50,7 +50,7 @@
 
 <style>
     .legend {
-        border-top: solid 1px var(--brandGray);
+        border-top: solid 1px #f0f0f0;
         margin: 0 auto;
         margin-top: 10px;
         margin-bottom: 10px;
@@ -63,10 +63,10 @@
     }
 
     .legend-title {
-        font-family: 'TradeGothicBold', sans-serif;
+        font-family: 'RobotoBold', sans-serif;
         font-weight: normal;
-        font-size: 20px;
-        fill: var(--brandDarkBlue);
+        font-size: 17px;
+        fill: var(--brandBlack);
     }
 
     .legend-label {

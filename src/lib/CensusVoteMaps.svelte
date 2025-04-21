@@ -63,6 +63,9 @@
 
     let curParties = $derived(updatePartyOptions(geoJsonData));
     let curParty = $state("cons1");
+    let curPartyName = $derived(() =>
+        PARTIES_INFO.find(p => p.tag === curParty)?.name
+    );
 
     let curCensusVars = $derived(updateCensusVarOptions(geoJsonData));
     let curCensusVariable = $state("pct_imm");
@@ -235,7 +238,7 @@
                     50, PARTY_SHADES[curParty][5], // 50-60%
                     60, PARTY_SHADES[curParty][6] // 60%+
                 ],
-                "fill-opacity": 0.9
+                "fill-opacity": 1
             }
         }, 'labels-layer');
 
@@ -483,7 +486,7 @@
 <div class="container">
     <div class="sentence-controls">
         <p>
-            I want to see data for the 
+            View data for the 
             <select onchange={handleYearChange} class="inline-select">
                 {#each years as y}
                     <option value={y} selected={y === curYear}>{y}</option>
@@ -494,13 +497,13 @@
                 <option value="ontario" selected>Ontario</option>
             </select>
             election.
-            Show me the party vote share for the
+            Show maps for vote share for the
             <select onchange={handlePartyChange} class="inline-select">
                 {#each curParties as party}
                     <option value={party.tag} selected={party.tag === curParty}>{party.name}</option>
                 {/each}
             </select>
-            with the census data for
+            compared to census data for
             <select onchange={handleCensusVariableChange} class="inline-select">
                 {#each curCensusVars as variable}
                     <option value={variable.propertyTag}>{variable.name.toLowerCase()}</option>
@@ -512,8 +515,8 @@
 
 <div class="map-container">
     <div class="map-section">
-        <Legend 
-            title="% Party Vote" 
+        <Legend
+            title="% voted for {curPartyName()}" 
             colors={PARTY_SHADES[curParty]} 
             labels={partyLabels}
         />
@@ -522,10 +525,10 @@
     <div class="map-section">
         <Legend 
             title={(
-                curCensusVariable === 'pct_imm' ? '% Immigrants' : // if 
-                curCensusVariable === 'pct_vm' ? "% Visible Minorities" : // else if 
-                curCensusVariable === 'avg_hou_inc' ? 'Avg. Household Income' : // else if 
-                null // else 
+                curCensusVariable === 'pct_imm' ? '% Immigrants' : 
+                curCensusVariable === 'pct_vm' ? "% Visible minority" :
+                curCensusVariable === 'avg_hou_inc' ? 'Average household income' : 
+                null
             )}
             colors={CENSUS_SHADES[curCensusVariable]} 
             labels={censusLabels}
@@ -536,11 +539,11 @@
 
 <div class="container">
     <!-- First Row: Riding Name -->
-    <div class="info-row">
+    <div class="info-row" >
         {#if hoveredRidingData}
             <p><b>{hoveredRidingData.name}</b></p>
         {:else}
-            <p><i>Hover/click on a riding</i></p>
+            <p><i>Hover or click on a riding</i></p>
         {/if}
     </div>
 
@@ -550,12 +553,12 @@
             {#if hoveredRidingData}
                 {@const party = PARTIES_INFO.find(p => p.tag === curParty)}
                 {#if hoveredRidingData[party.propertyTag] !== undefined}
-                    <p>Vote share = <b>{(hoveredRidingData[party.propertyTag]).toFixed(1)}%</b></p>
+                    <p>{curPartyName()} vote share = <b>{(hoveredRidingData[party.propertyTag]).toFixed(1)}%</b></p>
                 {:else}
-                    <p>Vote share = <b>N/A</b></p>
+                    <p>{curPartyName()} vote share = <b>N/A</b></p>
                 {/if}
             {:else}
-                <p>Vote share = <b>N/A</b></p>
+                <p>{curPartyName()} vote share = <b>N/A</b></p>
             {/if}
         {/if}
     </div>
@@ -589,7 +592,7 @@
 
 <style>
     .map-container {
-        max-width: 1600px;
+        max-width: 1200px;
         display: flex;
         gap: 10px;
         margin: 0 auto;
@@ -603,11 +606,11 @@
 
     .map {
         width: 100%;
-        height: 500px;
+        height: 400px;
         border: solid 1px var(--brandGray);
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 900px) {
         .map-container {
             flex-direction: column;
             gap: 10px;

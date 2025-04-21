@@ -2,6 +2,7 @@
     import { scaleLinear } from 'd3-scale';
     import { mean, deviation } from 'd3-array';
     import { PARTY_SHADES } from './constants';
+    import * as d3 from 'd3';
     
     let {
         points,
@@ -10,23 +11,28 @@
         showArrows = false,
     } = $props();
 
-    const plotWidth = 300;
-    const height = 200;
+    const plotWidth = 100;
+    const height = 100;
 
     const scales = {
         x: scaleLinear().domain([0, 70]).range([0, plotWidth]),
         y: scaleLinear().domain([0, 80]).range([height, 0])
     };
+
+    const colorScale = d3.scaleLinear()
+        .domain([-1.5, 0, 0.35])
+        .range(["#4d4d4d","#D0D1C9", "#007FA3"])
+        .interpolate(d3.interpolateLab);
   
+    const xMean = mean(points, d => d.x);
+    const yMean = mean(points, d => d.y);
+    const xDev = deviation(points, d => d.x);
+    const yDev = deviation(points, d => d.y);
+    
+    const slope = correlation * (yDev / xDev);
+    const intercept = yMean - slope * xMean;
+
     const correlationLine = (() => {
-        const xMean = mean(points, d => d.x);
-        const yMean = mean(points, d => d.y);
-        const xDev = deviation(points, d => d.x);
-        const yDev = deviation(points, d => d.y);
-        
-        const slope = correlation * (yDev / xDev);
-        const intercept = yMean - slope * xMean;
-        
         return {
             x1: scales.x(0),
             y1: scales.y(intercept),
@@ -41,9 +47,13 @@
 </script>
   
 <div class="scatter-plot" style="width: {plotWidth}px; height: {height}px;">
-    <svg width={plotWidth} {height}>
+    <svg
+        width={plotWidth}
+        height={height}
+        style="background-color: {colorScale(slope)}"
+    >
         <!-- Arrowhead definition -->
-        <defs>
+        <!-- <defs>
             <marker
                 id="arrowhead"
                 viewBox="0 -5 10 10"
@@ -55,10 +65,10 @@
             >
                 <path d="M0,-5L10,0L0,5" fill="black" />
             </marker>
-        </defs>
+        </defs> -->
   
         <!-- Grid lines -->
-        {#each [20, 40, 60] as value}
+        <!-- {#each [20, 40, 60] as value}
             <line
                 x1={scales.x(value)}
                 y1={0}
@@ -75,29 +85,31 @@
                 stroke="#eee"
                 stroke-width="1"
             />
-        {/each}
+        {/each} -->
       
-        <!-- Correlation line -->
-        <line
-            x1={correlationLine.x1}
-            y1={correlationLine.y1}
-            x2={correlationLine.x2}
-            y2={correlationLine.y2}
-            stroke="#666"
-            stroke-width="1"
-            stroke-dasharray="2,2"
-        />
+        
       
         <!-- Data points -->
         {#each points as point}
             <circle
                 cx={scales.x(point.x)}
                 cy={scales.y(point.y)}
-                r={3}
-                fill={PARTY_SHADES.cons1[6]}
-                fill-opacity="1"
+                r={2}
+                fill={"white"}
+                fill-opacity="0.75"
             />
         {/each}
+
+        <!-- Correlation line -->
+        <line
+            x1={correlationLine.x1}
+            y1={correlationLine.y1}
+            x2={correlationLine.x2}
+            y2={correlationLine.y2}
+            stroke="#ffffff"
+            stroke-width="5"
+            stroke-linecap="round"
+        />
   
         <!-- Arrows and labels -->
         {#if showArrows}
@@ -153,7 +165,7 @@
         {/if}
       
         <!-- Year label -->
-        <text x={scales.x(35)} y={20} text-anchor="middle" font-size="14" fill="black">
+        <text x={scales.x(35)} y={15} font-size=14>
             {year}
         </text>
     </svg>
@@ -162,15 +174,19 @@
 <style>
     .scatter-plot {
         margin: 0 auto;
-        background-color: white;
+        /* background-color: #6FC7EA; */
+        /* border-left: solid 2px #D0D1C9; */
+        /* border-bottom: solid 2px #D0D1C9; */
     }
     
     svg {
         display: block;
-        background-color: white;
+        /* background-color: #6FC7EA; */
     }
 
     text {
         font-family: TradeGothicBold;
+        fill: white;
+        text-anchor: middle;
     }
 </style>

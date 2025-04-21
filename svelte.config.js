@@ -10,6 +10,9 @@ const config = {
 		    pages: "docs",
 		    assets: "docs"
 		}),
+		prerender: {
+			entries: ['*'] // prerender everything
+		},
 		paths: {
 		    // change below to your repo name
 		    base: dev ? "" : "/gta-immigration",

@@ -18,9 +18,7 @@
     let correlation = $state(0);
     let activePoint = $state(null); 
 
-    let windowWidth = $state(window.innerWidth);
-    
-    window.addEventListener('resize', () => windowWidth = window.innerWidth);
+    let windowWidth = $state(400);
     
     function loadGeoJson() {
         const filePath = `/gta-immigration/data/elections/${curRegionTag}_stats_${curYear}.geojson`;
@@ -94,7 +92,7 @@
     function resetPointStyle(selection) {
         selection
             .attr("r", 5)
-            .attr("stroke", "#1E3765")
+            .attr("stroke", "#000000")
             .attr("stroke-width", 0)
             .attr("fill", PARTY_COLOURS[curParty]);
     }
@@ -102,7 +100,7 @@
     function highlightPoint(selection) {
         selection
             .attr("r", 6)
-            .attr("stroke", "#1E3765")
+            .attr("stroke", "#000000")
             .attr("stroke-width", 2);
     }
 
@@ -126,7 +124,7 @@
         // Create SVG with a viewBox for better responsiveness
         const containerWidth = Math.min(700, container.node().getBoundingClientRect().width);
         const width = containerWidth - margin.left - margin.right;
-        const height = 500 - margin.top - margin.bottom;
+        const height = 450 - margin.top - margin.bottom;
 
         const svg = container.append("svg")
             .attr("width", containerWidth)
@@ -157,15 +155,17 @@
                 .attr("stroke-width", 1) 
                 .attr("stroke-opacity", 0.1)) 
             .call(g => g.selectAll(".tick line") 
-                .attr("stroke", "#1E3765")) 
+                .attr("stroke", "#000000")) 
             .call(g => g.selectAll(".tick text") 
-                .attr("fill", "#1E3765")) 
+                .attr("fill", "#000000")) 
             .append("text")
-                .attr("x", width / 2)
+                .attr("x", width / 2 - 14)
                 .attr("y", 40)
-                .attr("fill", "#1E3765")
+                .attr("fill", "#000000")
                 .attr("text-anchor", "middle")
-                .text("Percentage of immigrants (%)");  
+                .text("Percentage of immigrants (%)")
+                .style("font-size", "13px")
+                .style("font-family", "RobotoRegular");  
 
         const yAxis = g => g
             .attr("transform", `translate(0,0)`)
@@ -178,23 +178,25 @@
                 .attr("stroke-width", 1) 
                 .attr("stroke-opacity", 0.1))
             .call(g => g.selectAll(".tick line") 
-                .attr("stroke", "#1E3765")) 
+                .attr("stroke", "#000000")) 
             .call(g => g.selectAll(".tick text") 
-                .attr("fill", "#1E3765")) 
+                .attr("fill", "#000000")) 
             .append("text")
                 .attr("x", -height / 2)
                 .attr("y", -40)
-                .attr("fill", "#1E3765")
+                .attr("fill", "#000000")
                 .attr("text-anchor", "middle")
                 .attr("transform", "rotate(-90)")
-                .text("Party vote share (%)");  
+                .text("Party vote share (%)")
+                .style("font-size", "13px")
+                .style("font-family", "RobotoRegular");  
 
         // Append axes to the main group
         g.append("g").call(xAxis);
         g.append("g").call(yAxis);
 
         const pointsGroup = g.append("g")
-            .attr("stroke", "#1E3765")
+            .attr("stroke", "#000000")
             .attr("stroke-width", 0);
 
         pointsGroup.selectAll(".scatter-correlation-dot")
@@ -270,9 +272,9 @@
         g.append("path")
             .datum(lineData)
             .attr("fill", "none")
-            .attr("stroke", "#00A189")
-            .attr("stroke-width", 3)
-            .attr("stroke-dasharray", "3,3")
+            .attr("stroke", "#000000")
+            .attr("stroke-width", 1.5)
+            .attr("stroke-dasharray", "8,2")
             .attr("d", line);
     }
 
@@ -286,57 +288,64 @@
     });
 </script>
 
-<div class="sentence-controls">
-    <p>
-        I want to see the correlation between percent immigrants and party vote share for the
-        <select onchange={handlePartyChange} class="inline-select">
-            {#each curParties as party}
-                <option value={party.tag} selected={party.tag === curParty}>{party.name}</option>
-            {/each}
-        </select>
-        in the 
-        <select onchange={handleYearChange} class="inline-select">
-            {#each years as y}
-                <option value={y} selected={y === curYear}>{y}</option>
-            {/each}
-        </select>
-        <select onchange={handleRegionChange} class="inline-select">
-            <option value="federal">federal</option>
-            <option value="ontario" selected>Ontario</option>
-        </select>
-        election.
-    </p>
-</div>
 
-<div id='scatter-display'></div>
+<div style="margin-bottom: 0px; margin-top: -25px;">
 
-<div>
-    <div class="info-row">
-        {#if activePoint}
-            <p><b>{activePoint.geoname}</b></p>
-        {:else}
-            <p><i>Hover/click on a point</i></p>
-        {/if}
+
+    <div class="sentence-controls">
+        <p>
+            I want to see the correlation between percent immigrants and party vote share for the
+            <select onchange={handlePartyChange} class="inline-select">
+                {#each curParties as party}
+                    <option value={party.tag} selected={party.tag === curParty}>{party.name}</option>
+                {/each}
+            </select>
+            in the 
+            <select onchange={handleYearChange} class="inline-select">
+                {#each years as y}
+                    <option value={y} selected={y === curYear}>{y}</option>
+                {/each}
+            </select>
+            <select onchange={handleRegionChange} class="inline-select">
+                <option value="federal">federal</option>
+                <option value="ontario" selected>Ontario</option>
+            </select>
+            election.
+        </p>
     </div>
-    <div class="info-row">
-        {#if activePoint}
-            <p>Vote share = <b>{(activePoint.y).toFixed(1)}%</b></p>
-        {:else} 
-            <p>Vote share = <b>N/A</b></p>
-        {/if}
+
+    <div id='scatter-display' bind:clientWidth={windowWidth}></div>
+
+    <div>
+        <div class="info-row" style="border-top: solid 1px #f0f0f0;">
+            {#if activePoint}
+                <p><b>{activePoint.geoname}</b></p>
+            {:else}
+                <p><i>Hover/click on a point</i></p>
+            {/if}
+        </div>
+        <div class="info-row">
+            {#if activePoint}
+                <p>Vote share = <b>{(activePoint.y).toFixed(1)}%</b></p>
+            {:else} 
+                <p>Vote share = <b>N/A</b></p>
+            {/if}
+        </div>
+        <div class="info-row">
+            {#if activePoint}
+                <p>Percent immigrants = <b>{(activePoint.x).toFixed(1)}%</b></p>
+            {:else} 
+                <p>Percent immigrants = <b>N/A</b></p>
+            {/if}
+        </div>
     </div>
-    <div class="info-row">
-        {#if activePoint}
-            <p>Percent immigrants = <b>{(activePoint.x).toFixed(1)}%</b></p>
-        {:else} 
-            <p>Percent immigrants = <b>N/A</b></p>
-        {/if}
-    </div>
+
 </div>
 
 <style>
     #scatter-display {
         width: 100%;
         max-width: 700px;
+        margin-bottom: -55px;
     }
 </style>
