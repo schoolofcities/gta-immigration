@@ -20,7 +20,7 @@
 	<meta name="author" content="Aniket Kali, Serene Tan, & Jeff Allen">
     
 	<meta property="og:title" content="Changes in immigrant voting patterns in the Greater Toronto Area" />
-	<meta property="og:description" content="" />
+	<meta property="og:description" content="Immigrants in the GTA have had many political shifts across time and geography" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://schoolofcities.github.io/gta-immigration/political-shifts" />
 	<meta property="og:image" content="https://schoolofcities.github.io/gta-immigration/web-card-political-shifts.png" />
@@ -30,7 +30,7 @@
 	<meta name="twitter:site" content="https://schoolofcities.github.io/gta-immigration/political-shifts" />
 	<meta name="twitter:creator" content="@UofTCities" />
 	<meta name="twitter:title" content="Changes in immigrant voting patterns in the Greater Toronto Area" />
-	<meta name="twitter:description" content="" />
+	<meta name="twitter:description" content="Immigrants in the GTA have had many political shifts across time and geography" />
 	<meta name="twitter:image" content="https://schoolofcities.github.io/gta-immigration/web-card-political-shifts.png" /> 
     
 </svelte:head>
