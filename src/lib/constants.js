@@ -16,21 +16,21 @@ export const PARTIES_INFO = [
 ]
 
 export const PARTY_COLOURS = {
-    lib: "#da121a",
-    cons1: "#15284c", 
-    cons2: "#2db56b", 
-    ndp: "#f07c00", 
+    lib: "#DC4633",
+    cons1: "#007FA3", 
+    cons2: "#00A189", 
+    ndp: "#EBA00F", 
 };
 
 export const PARTY_SHADES = {
-    lib: ["#f5c3c5", "#f1a6a9", "#ec888c", "#e76a6f", "#e34d53", "#de2f36", "#da121a"],
-    cons1: ["#c4c9d2", "#a7aebb", "#8a93a5", "#6c788f", "#4f5d78", "#324262", "#15284c"],
-    cons2: ["#caecda", "#b0e3c7", "#96dab5", "#7bd0a2", "#61c790", "#47be7d", "#2db56b"],
-    ndp: ["#fbdebf", "#f9cd9f", "#f7bd7f", "#f5ad5f", "#f39c3f", "#f18c1f", "#f07c00"],
+    lib: ["#fbeaea", "#fccfce", "#fbb4b0", "#f79a92", "#f17f73", "#e86353", "#dc4632"],
+    cons1: ["#ddeff8", "#b7cfde", "#94b0c5", "#7391ad", "#557296", "#39557e", "#1e3967"],
+    cons2: ["#cbf1ec", "#b1e4dd", "#97d7cd", "#7ccabd", "#5fbdac", "#3eb09c", "#00a38b"],
+    ndp: ["#f3e79b", "#f0d682", "#eec56a", "#ecb254", "#ec9f41", "#eb8a30", "#eb7324"],
 };
 
 export const CENSUS_SHADES = {
-    pct_imm: ["#d3f2a3", "#97e196", "#6cc08b", "#4c9b82", "#217a79", "#105965", "#074050"], // Emerald
-    avg_hou_inc: ["#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#a63603"], // Yellow-Red
-    pct_vm: ["#ede5cf", "#e0c2a2", "#d39c83", "#c1766f", "#a65461", "#813753", "#541f3f"],  // BrwnYl
+    pct_imm: ["#f5ebeb", "#e6c7cb", "#d5a4b2", "#c1819e", "#a9608f", "#8e4183", "#6d247a"], 
+    avg_hou_inc: ["#f2cf63", "#cccc5e", "#a6c761", "#82c16a", "#5eb875", "#39ae81", "#00a38b"], 
+    pct_vm: ["#fae5f0", "#eec6da", "#e2a7c4", "#d587ad", "#c86796", "#b9447f", "#aa1368"]
 };

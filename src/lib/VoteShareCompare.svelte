@@ -12,9 +12,8 @@
         "Conservatives": [],
         "New Democrats": []
     });
-    let windowWidth = $state(window.innerWidth);
+    let windowWidth = $state(400);
     
-    window.addEventListener('resize', () => windowWidth = window.innerWidth);
 
     function handleRegionChange(event) {
         curRegion = event.target.value;
@@ -135,7 +134,7 @@
             .range([0, width]);
 
         const yScale = d3.scaleLinear()
-            .domain([-25, 35])
+            .domain([-30, 33])
             .range([height, 0]);
 
         // Add x-axis grid lines
@@ -153,7 +152,7 @@
 
         // Add y-axis grid lines
         g.selectAll(".y-grid-line")
-            .data(d3.range(-20, 31, 10))
+            .data(d3.range(-30, 31, 10))
             .enter()
             .append("line")
             .attr("class", "y-grid-line")
@@ -217,7 +216,7 @@
             .attr("x", -height / 2)
             .attr("dy", "0.71em")
             .attr("text-anchor", "middle")
-            .style("font-size", "11px")
+            .style("font-size", "13px")
             .style("font-family", "RobotoRegular")
             .text("Vote share difference");
 
@@ -227,9 +226,8 @@
             .attr("x2", width)
             .attr("y1", yScale(0))
             .attr("y2", yScale(0))
-            .attr("stroke", "black")
-            .attr("stroke-width", 1)
-            .attr("stroke-dasharray", "4,4");
+            .attr("stroke", "#D0D1C9")
+            .attr("stroke-width", 2);
 
         // Add arrowhead definition
         svg.append("defs").append("marker")
@@ -246,8 +244,8 @@
 
         // Position arrows based on screen width
         const arrowX = windowWidth <= 700 ? 10 : 20;
-        const lineHeight = 12;
-        const textOffset = windowWidth <= 700 ? 3 : 5;
+        const lineHeight = 15;
+        const textOffset = 8;
 
         // Add up arrow (Overperforming)
         g.append("line")
@@ -264,8 +262,8 @@
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(28))
             .attr("dy", "0")
-            .style("font-size", "11px") 
-            .style("font-family", "TradeGothicBold")
+            .style("font-size", "14px")
+            .style("font-family", "RobotoRegular")
             .text("Overperforming in");
         
         // Overperforming label - line 2
@@ -273,8 +271,8 @@
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(28))
             .attr("dy", lineHeight + "px")
-            .style("font-size", "11px") 
-            .style("font-family", "TradeGothicBold")
+            .style("font-size", "14px")
+            .style("font-family", "RobotoRegular")
             .text("high-immigrant ridings");
 
         // Add down arrow (Underperforming)
@@ -282,7 +280,7 @@
             .attr("x1", arrowX)
             .attr("x2", arrowX)
             .attr("y1", yScale(-5))
-            .attr("y2", yScale(-20))
+            .attr("y2", yScale(-27))
             .attr("stroke", "black")
             .attr("stroke-width", 1)
             .attr("marker-end", "url(#arrowhead)");
@@ -290,19 +288,19 @@
         // Underperforming label - line 1
         g.append("text")
             .attr("x", arrowX + textOffset)
-            .attr("y", yScale(-18))
+            .attr("y", yScale(-24))
             .attr("dy", "0")
-            .style("font-size", "11px") 
-            .style("font-family", "TradeGothicBold")
+            .style("font-size", "14px")
+            .style("font-family", "RobotoRegular")
             .text("Underperforming in");
         
         // Underperforming label - line 2
         g.append("text")
             .attr("x", arrowX + textOffset)
-            .attr("y", yScale(-18))
+            .attr("y", yScale(-24))
             .attr("dy", lineHeight + "px")
-            .style("font-size", "11px")
-            .style("font-family", "TradeGothicBold")
+            .style("font-size", "14px")
+            .style("font-family", "RobotoRegular")
             .text("high-immigrant ridings");
 
         const line = d3.line()
@@ -320,7 +318,7 @@
                 .attr("fill", "none")
                 .attr("stroke", PARTY_COLOURS[party.tag])
                 .attr("stroke-width", 1.5)
-                .attr("stroke-dasharray", "3,3")
+                .attr("stroke-dasharray", "5,1")
                 .attr("d", line);
 
             g.selectAll(`vote-share-compare-dot-${party.tag}`)
@@ -347,8 +345,21 @@
                     .attr("dx", dx)
                     .attr("dy", dy)
                     .attr("text-anchor", textAnchor)
-                    .style("font-size", "12px")
-                    .style("font-family", "TradeGothicBold")
+                    .style("font-size", "14px")
+                    .style("font-family", "RobotoRegular")
+                    .style("fill", PARTY_COLOURS[party.tag])
+                    .style("stroke", "white")
+                    .style("stroke-width", "4px")
+                    .text(party.name);
+
+                g.append("text")
+                    .attr("x", xPos)
+                    .attr("y", yPos)
+                    .attr("dx", dx)
+                    .attr("dy", dy)
+                    .attr("text-anchor", textAnchor)
+                    .style("font-size", "14px")
+                    .style("font-family", "RobotoRegular")
                     .style("fill", PARTY_COLOURS[party.tag])
                     .text(party.name);
             }
@@ -368,23 +379,28 @@
     });
 </script>
 
-<div class="sentence-controls">
-    <p>
-        Show me how the major parties perform in the top 5 most immigrant ridings over time for 
-        <select onchange={handleRegionChange} class="inline-select">
-            <option value="federal">federal</option>
-            <option value="ontario" selected>Ontario</option>
-        </select>
-        elections, compared to their performance in the 
-        <select onchange={handleScopeChange} class="inline-select">
-            <option value="gta">GTA</option>
-            <option value="full" selected>full</option>
-        </select>
-        {curScope === 'gta' ? 'alone' : 'election'}.
-    </p>
-</div>
 
-<svg id="vote-share-graph" height="400"></svg>
+<div style="margin-bottom: -20px; margin-top: -25px;" bind:clientWidth={windowWidth}>
+
+    <div class="sentence-controls">
+        <p>
+            Show how the major parties perform in the top 5 most immigrant ridings over time for 
+            <select onchange={handleRegionChange} class="inline-select">
+                <option value="federal">federal</option>
+                <option value="ontario" selected>Ontario</option>
+            </select>
+            elections, compared to their performance in the 
+            <select onchange={handleScopeChange} class="inline-select">
+                <option value="gta">GTA</option>
+                <option value="full" selected>full</option>
+            </select>
+            {curScope === 'gta' ? 'alone' : 'election'}.
+        </p>
+    </div>
+
+    <svg id="vote-share-graph" height="400"></svg>
+
+</div>
 
 <style>
     svg {

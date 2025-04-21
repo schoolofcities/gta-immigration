@@ -1,0 +1,1 @@
+import{c as s,a as f}from"./Vr2pia1i.js";import{b as i,E as p,e as c,n as d,o as h,h as m,f as l,q as u}from"./DZbTvAr9.js";function v(e,t,...a){var n=e,o=d,r;i(()=>{o!==(o=t())&&(r&&(h(r),r=null),r=c(()=>o(n,...a)))},p),m&&(n=l)}function E(e,t){var a=s(),n=u(a);v(n,()=>t.children),f(e,a)}export{E as L};

@@ -29,18 +29,10 @@
 </svelte:head>
 
 <main>
-    <TopSofC/>
-
-    <div class="title">
-        <h1>Immigrants in the Greater Toronto Area</h1>
-        
-        <h3>
-            April 2025 - 
+    <!-- <TopSofC/> -->
             <a href='https://schoolofcities.github.io/gta-immigration/political-shifts'>
                 Changes in immigrant voting patterns in the Greater Toronto Area
             </a>
-        </h3>
-    </div>
 </main>
 
 <style>

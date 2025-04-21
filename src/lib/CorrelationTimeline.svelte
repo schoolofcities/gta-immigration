@@ -1,6 +1,7 @@
 <script>
     import { PARTIES_INFO, PARTY_COLOURS } from "../lib/constants.js";
     import * as d3 from 'd3';
+    import { browser } from '$app/environment';
 
     const parties = PARTIES_INFO.filter(party => party.name !== 'Reform/Alliance');
 
@@ -11,9 +12,27 @@
         "Conservatives": [],
         "New Democrats": [],
     });
-    let windowWidth = $state(window.innerWidth);
-    
-    window.addEventListener('resize', () => windowWidth = window.innerWidth);
+
+    let windowWidth = $state(0);
+
+    // Use $effect to run only in the browser environment
+    $effect(() => {
+        if (!browser) return; // Don't run on the server
+
+        // Set the initial width value
+        windowWidth = window.innerWidth;
+
+        // Define the function to update the width
+        const updateWidth = () => windowWidth = window.innerWidth;
+
+        // Add the resize event listener
+        window.addEventListener('resize', updateWidth);
+
+        // Clean up the event listener when the component is destroyed
+        return () => {
+            window.removeEventListener('resize', updateWidth);
+        };
+    });
 
     function handleRegionChange(event) {
         curRegion = event.target.value;
@@ -103,7 +122,7 @@
             .range([0, width]);
 
         const yScale = d3.scaleLinear()
-            .domain([-1, 1]) // Correlation ranges from -1 to 1
+            .domain([-0.98, 0.98]) // Correlation ranges from -1 to 1
             .range([height, 0]);
 
         // Add x-axis grid lines
@@ -121,7 +140,7 @@
 
         // Add y-axis grid lines
         g.selectAll(".y-grid-line")
-            .data([-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1]) // Specific ticks
+            .data([-0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75]) // Specific ticks
             .enter()
             .append("line")
             .attr("class", "y-grid-line")
@@ -167,7 +186,7 @@
         const yAxis = g.append("g")
             .attr("transform", "translate(-5,0)")
             .call(d3.axisLeft(yScale)
-                .tickValues([-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1])
+                .tickValues([-0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75])
                 .tickFormat(d => d.toFixed(2)) // Show 2 decimal places
                 .tickSize(0))
             .select(".domain").remove();
@@ -185,7 +204,7 @@
             .attr("x", -height / 2)
             .attr("dy", "0.71em")
             .attr("text-anchor", "middle")
-            .style("font-size", "11px")
+            .style("font-size", "13px")
             .style("font-family", "RobotoRegular")
             .text("Correlation");
 
@@ -195,9 +214,8 @@
             .attr("x2", width)
             .attr("y1", yScale(0))
             .attr("y2", yScale(0))
-            .attr("stroke", "black")
-            .attr("stroke-width", 1)
-            .attr("stroke-dasharray", "4,4");
+            .attr("stroke", "#D0D1C9")
+            .attr("stroke-width", 2);
 
         // Add arrowhead definition
         svg.append("defs").append("marker")
@@ -214,15 +232,15 @@
 
         // Position arrows based on screen width
         const arrowX = windowWidth <= 700 ? 10 : 20;
-        const lineHeight = 12;
-        const textOffset = windowWidth <= 700 ? 3 : 5;
+        const lineHeight = 15;
+        const textOffset = 8;
 
         // Add up arrow (Positive correlation)
         g.append("line")
             .attr("x1", arrowX)
             .attr("x2", arrowX)
             .attr("y1", yScale(0.2))
-            .attr("y2", yScale(0.9))
+            .attr("y2", yScale(0.95))
             .attr("stroke", "black")
             .attr("stroke-width", 1)
             .attr("marker-end", "url(#arrowhead)");
@@ -232,8 +250,8 @@
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(0.85))
             .attr("dy", "0")
-            .style("font-size", "11px")
-            .style("font-family", "TradeGothicBold")
+            .style("font-size", "14px")
+            .style("font-family", "RobotoRegular")
             .text("More votes where");
         
         // Positive correlation label - line 2
@@ -241,8 +259,8 @@
             .attr("x", arrowX + textOffset)
             .attr("y", yScale(0.85))
             .attr("dy", lineHeight + "px")
-            .style("font-size", "11px")
-            .style("font-family", "TradeGothicBold")
+            .style("font-size", "14px")
+            .style("font-family", "RobotoRegular")
             .text("immigrants live");
 
         // Add down arrow (Negative correlation)
@@ -258,19 +276,19 @@
         // Negative correlation label - line 1
         g.append("text")
             .attr("x", arrowX + textOffset)
-            .attr("y", yScale(-0.85))
+            .attr("y", yScale(-0.82))
             .attr("dy", "0")
-            .style("font-size", "11px")
-            .style("font-family", "TradeGothicBold")
-            .text("Less votes where");
+            .style("font-size", "14px")
+            .style("font-family", "RobotoRegular")
+            .text("Fewer votes where");
         
         // Negative correlation label - line 2
         g.append("text")
             .attr("x", arrowX + textOffset)
-            .attr("y", yScale(-0.85))
+            .attr("y", yScale(-0.82))
             .attr("dy", lineHeight + "px")
-            .style("font-size", "11px")
-            .style("font-family", "TradeGothicBold")
+            .style("font-size", "14px")
+            .style("font-family", "RobotoRegular")
             .text("immigrants live");
 
         const line = d3.line()
@@ -315,8 +333,21 @@
                     .attr("dx", dx)
                     .attr("dy", dy)
                     .attr("text-anchor", textAnchor)
-                    .style("font-size", "12px")
-                    .style("font-family", "TradeGothicBold")
+                    .style("font-size", "14px")
+                    .style("font-family", "RobotoRegular")
+                    .style("fill", PARTY_COLOURS[party.tag])
+                    .style("stroke", "white")
+                    .style("stroke-width", "4px")
+                    .text(party.name);
+
+                g.append("text")
+                    .attr("x", xPos)
+                    .attr("y", yPos)
+                    .attr("dx", dx)
+                    .attr("dy", dy)
+                    .attr("text-anchor", textAnchor)
+                    .style("font-size", "14px")
+                    .style("font-family", "RobotoRegular")
                     .style("fill", PARTY_COLOURS[party.tag])
                     .text(party.name);
             }
@@ -335,10 +366,10 @@
     });
 </script>
 
-<div>
+<div style="margin-bottom: -20px; margin-top: -25px;">
     <div class="sentence-controls">
         <p>
-            Show me how the correlation between party vote share and percent immigrants changes over time in all
+            Show how the correlation between party vote share and percentage of immigrants in each riding changes over time in all
             <select onchange={handleRegionChange} class="inline-select">
                 <option value="federal">federal</option>
                 <option value="ontario" selected>Ontario</option>
@@ -346,9 +377,10 @@
             elections.
         </p>
     </div>
-</div>
 
 <svg id="correlation-line-graph" height="400"></svg>
+
+</div>
 
 <style>
     svg {
