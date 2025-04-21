@@ -294,7 +294,7 @@
 
     <div class="sentence-controls">
         <p>
-            I want to see the correlation between percent immigrants and party vote share for the
+            View the correlation between percent immigrants and party vote share for the
             <select onchange={handlePartyChange} class="inline-select">
                 {#each curParties as party}
                     <option value={party.tag} selected={party.tag === curParty}>{party.name}</option>

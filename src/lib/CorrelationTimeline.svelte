@@ -369,12 +369,12 @@
 <div style="margin-bottom: -20px; margin-top: -25px;">
     <div class="sentence-controls">
         <p>
-            Show how the correlation between party vote share and percentage of immigrants in each riding changes over time in all
+            The plot below traces the correlation between party vote share and percentage of immigrants in each riding, for all 
             <select onchange={handleRegionChange} class="inline-select">
                 <option value="federal">federal</option>
                 <option value="ontario" selected>Ontario</option>
             </select>
-            elections.
+            elections. The closer to +1, the more likely a party is to receive votes in ridings with more immigrants. 
         </p>
     </div>
 
