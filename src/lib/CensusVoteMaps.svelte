@@ -190,7 +190,7 @@
     }
 
     function handleYearChange(event) {
-        curYear = event.target.value;
+        curYear = parseInt(event.target.value);  
         loadGeoJson();
     }
 
@@ -487,26 +487,27 @@
     <div class="sentence-controls">
         <p>
             View data for the 
-            <select onchange={handleYearChange} class="inline-select">
+            <select onchange={handleYearChange} class="inline-select" bind:value={curYear}>
                 {#each years as y}
                     <option value={y} selected={y === curYear}>{y}</option>
                 {/each}
             </select>
-            <select onchange={handleRegionChange} class="inline-select">
-                <option value="federal">federal</option>
-                <option value="ontario" selected>Ontario</option>
+            
+            <select onchange={handleRegionChange} class="inline-select" bind:value={curRegion}>
+                <option value="federal" selected={curRegion === 'federal'}>federal</option>
+                <option value="ontario" selected={curRegion === 'ontario'}>Ontario</option>
             </select>
             election.
             Show maps for vote share for the
-            <select onchange={handlePartyChange} class="inline-select">
+            <select onchange={handlePartyChange} class="inline-select" bind:value={curParty}>
                 {#each curParties as party}
                     <option value={party.tag} selected={party.tag === curParty}>{party.name}</option>
                 {/each}
             </select>
             compared to census data for
-            <select onchange={handleCensusVariableChange} class="inline-select">
+            <select onchange={handleCensusVariableChange} class="inline-select" bind:value={curCensusVariable}>
                 {#each curCensusVars as variable}
-                    <option value={variable.propertyTag}>{variable.name.toLowerCase()}</option>
+                    <option value={variable.propertyTag} selected={variable.propertyTag === curCensusVariable}>{variable.name.toLowerCase()}</option>
                 {/each}
             </select>.
         </p>

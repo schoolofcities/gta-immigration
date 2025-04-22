@@ -49,7 +49,7 @@
     }
 
     function handleYearChange(event) {
-        curYear = event.target.value;
+        curYear = parseInt(event.target.value);  
         clearPointSelection();
         loadGeoJson();
     }
@@ -295,20 +295,20 @@
     <div class="sentence-controls">
         <p>
             View the correlation between percent immigrants and party vote share for the
-            <select onchange={handlePartyChange} class="inline-select">
+            <select onchange={handlePartyChange} class="inline-select" bind:value={curParty}>
                 {#each curParties as party}
                     <option value={party.tag} selected={party.tag === curParty}>{party.name}</option>
                 {/each}
             </select>
             in the 
-            <select onchange={handleYearChange} class="inline-select">
+            <select onchange={handleYearChange} class="inline-select" bind:value={curYear}>
                 {#each years as y}
                     <option value={y} selected={y === curYear}>{y}</option>
                 {/each}
             </select>
-            <select onchange={handleRegionChange} class="inline-select">
-                <option value="federal">federal</option>
-                <option value="ontario" selected>Ontario</option>
+            <select onchange={handleRegionChange} class="inline-select" bind:value={curRegion}>
+                <option value="federal" selected={curRegion === 'federal'}>federal</option>
+                <option value="ontario" selected={curRegion === 'ontario'}>Ontario</option>
             </select>
             election.
         </p>
