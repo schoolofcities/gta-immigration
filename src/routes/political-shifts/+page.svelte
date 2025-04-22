@@ -9,11 +9,18 @@
 
     import Footnote from '$lib/Footnote.svelte';
 
-    // Footnote management
+    function parseMarkdown(text) {
+        return text
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')       // bold
+            .replace(/\*(?!\*)(.+?)\*/g, '<em>$1</em>')              // italics
+            .replace(/\[([^\]]+)]\(([^)]+)\)/g, '<a href="$2">$1</a>'); // links
+    }
+
     let footnotes = [];
     function addFootnote(text) {
         const id = footnotes.length + 1;
-        footnotes.push({ id, text });
+        const parsed = parseMarkdown(text);
+        footnotes.push({ id, text: parsed });
         return id;
     }
 </script>
@@ -69,7 +76,7 @@
         </p>
 
         <!-- <p>
-            Some text with a footnote<Footnote id={addFootnote("This is the footnote text")} />.
+            Some text with a footnote<Footnote id={addFootnote('*hello* [world](https://google.com)')} />.
         </p> -->
     </div>
 
@@ -230,7 +237,7 @@
             {#each footnotes as footnote (footnote.id)}
                 <div id={`footnote-${footnote.id}`} class="footnote-item">
                     <sup>{footnote.id}</sup>
-                    <span>{footnote.text}</span>
+                    <span>{@html footnote.text}</span>
 
                     <a href={`#footnote-ref-${footnote.id}`} class="backlink" on:click|preventDefault={() => {
                         const element = document.getElementById(`footnote-ref-${footnote.id}`);
