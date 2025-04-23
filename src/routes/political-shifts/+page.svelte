@@ -29,7 +29,7 @@
 
         `Lucia Lo, Amer Shalaby, and Baha Alshalalfah, "Relationship between Immigrant Settlement Patterns and Transit Use in the Greater Toronto Area", *Journal of Urban Planning and Development*, 137, no. 4 (2011), 470-476, [https://doi.org/10.1061/(ASCE)UP.1943-5444.0000080](https://shorturl.at/4t0DV)`,
 
-        `Triadafilos Triadafilopoulos, "Dismantling White Canada: Race, Rights, and the Origins of the Points System", in Wanted and Welcome? *Policies for Highly Skilled Immigrants in Comparative Perspective*, ed. Triadafilos Triadafilopoulos (Springer, 2013), 15-37`,
+        `Triadafilos Triadafilopoulos, "Dismantling White Canada: Race, Rights, and the Origins of the Points System", in *Wanted and Welcome? Policies for Highly Skilled Immigrants in Comparative Perspective*, ed. Triadafilos Triadafilopoulos (Springer, 2013), 15-37`,
 
         `See Erin Tolley, "Political Players or Partisan Pawns? Immigrants, Minorities, and Conservatives in Canada", in *The Blueprint: Conservative parties and their impact on Canadian politics*, ed. J.P. Lewis and Joanna Everitt (University of Toronto Press, 2017), 101; and Zack Taylor, "The Political Geography of Immigration: Party Competition for Immigrants' Votes in Canada, 1997–2019", *American Review of Canadian Studies* 51 no. 1(2021), 18-40, [https://doi.org/10.1080/02722011.2021.1874732](https://doi.org/10.1080/02722011.2021.1874732); Tolley, 2017`,
 
@@ -193,7 +193,7 @@
     </div>
 
     <div class="text">
-        <h2>Do parties over-perform in the most immigrant ridings?</h2>
+        <h2>Do parties over-perform in the most immigrant-heavy ridings?</h2>
 
         <p>
             Correlation and geography shed a lot of light on what is happening, and where. How much better or worse do parties perform in the most immigrant-heavy ridings, compared to elsewhere? Basically, when most people in a riding are immigrants, do we see the same trends and political preferences?
