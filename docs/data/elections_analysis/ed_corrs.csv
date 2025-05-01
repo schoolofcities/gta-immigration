@@ -16,7 +16,7 @@ year,region,corr_pct_imm_cons1,corr_pct_imm_cons2,corr_pct_imm_lib,corr_pct_imm_
 2014,ontario,-0.1168,,0.3496,-0.0987
 2018,ontario,0.2668,,0.1566,-0.2961
 2022,ontario,0.3508,,0.3512,-0.3652
-2025,ontario,0.3399,,0.1776,-0.3718
+2025,ontario,0.3797,,0.1776,-0.4023
 1962,federal,-0.4733,,0.3852,-0.0308
 1963,federal,-0.4478,,0.2842,-0.0389
 1965,federal,-0.4431,,0.5554,-0.1863
@@ -37,3 +37,4 @@ year,region,corr_pct_imm_cons1,corr_pct_imm_cons2,corr_pct_imm_lib,corr_pct_imm_
 2015,federal,-0.1354,,0.496,-0.1599
 2019,federal,0.0506,,0.4059,-0.2959
 2021,federal,-0.0675,,0.5293,-0.4363
+2025,federal,0.188,,-0.1016,-0.3206
