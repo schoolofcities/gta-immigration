@@ -90,6 +90,10 @@
 
     <div class="text">
         <p>
+            <em>NOTE: We wrote and published this article prior to the 2025 federal election. We've since added the data for that election, which shows a shift to the right in immigrant-heavy ridings – consistent with trends we found. For simplicity, we've kept the article text as it was, but the data is available for you to explore.</em>
+        </p>
+        
+        <p>
             Immigrant-heavy ridings across the Greater Toronto Area (GTA) have swung from being decisively against to decisively for the provincial Conservatives over these last 30 years. It's part of the trend we're seeing across North America where <a href='https://www.ft.com/content/a7607626-5491-48bd-aa56-5a10cbeeb768' target='_blank'>immigrants</a> and <a href='https://theconversation.com/why-are-so-many-second-generation-south-asian-and-chinese-canadians-planning-to-vote-conservative-253820' target='_blank'>minorities</a> are swinging to the political right; and it's also a story of how one of the GTA's largest constituencies is much more dynamic than we often realize.
         </p>
     </div>
