@@ -1,4 +1,5 @@
 <script>
+    import VMCorrelationDisplay from '$lib/conservative-minorities/VMCorrelationDisplay.svelte';
     import TopSofC from '$lib/TopSofC.svelte';
 
     import '../../assets/global-styles.css';
@@ -29,6 +30,8 @@
         <p>
             VIS: Correlation between %VM and %Cons over time, Ontario (1999-2025) and federal (1997-2025), showing a clear trend
         </p>
+
+        <VMCorrelationDisplay />
     </div>
 
     <div class="text">
