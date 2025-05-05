@@ -1,5 +1,7 @@
 <script>
     import TopSofC from '$lib/TopSofC.svelte';
+
+    import '../assets/global-styles.css';
 </script>
 
 <svelte:head>
