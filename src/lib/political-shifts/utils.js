@@ -1,4 +1,4 @@
-import { PARTIES_INFO } from "./constants";
+import { PARTIES_INFO } from "../constants";
 
 export function getRegionTag(region) {
     return region == "federal" ? "fed" : "ont-ed"

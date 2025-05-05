@@ -1,8 +1,8 @@
 <script>
     import { onMount } from 'svelte';
     import * as d3 from 'd3';
-    import { PARTY_COLOURS, PARTIES_INFO } from "./constants.js";
-    import SmallScatterPlot from './SmallScatterPlot.svelte';
+    import { PARTY_COLOURS, PARTIES_INFO } from "../constants.js";
+    import SmallScatterPlot from '../SmallScatterPlot.svelte';
 
     // Configuration
     const elections = [

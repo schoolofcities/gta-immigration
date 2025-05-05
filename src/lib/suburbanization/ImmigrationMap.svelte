@@ -4,7 +4,7 @@
     
     import { onMount } from "svelte";
     import { geoPath, geoMercator, scaleThreshold } from "d3"; 
-    import { CENSUS_SHADES } from "./constants";
+    import { CENSUS_SHADES } from "../constants";
 
     // Props
     let { curYear } = $props();

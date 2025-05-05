@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import { FELXN_YEARS, ONTELXN_YEARS, PARTY_COLOURS, PARTIES_INFO } from "../lib/constants.js";
+    import { FELXN_YEARS, ONTELXN_YEARS, PARTY_COLOURS, PARTIES_INFO } from "../constants.js";
     import { getRegionTag, updatePartyOptions } from "./utils.js";
     import * as d3 from 'd3';
 

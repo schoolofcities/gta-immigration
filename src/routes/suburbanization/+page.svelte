@@ -1,6 +1,8 @@
 <script>
     import TopSofC from '$lib/TopSofC.svelte';
-    import ImmigrationMap from '$lib/ImmigrationMap.svelte';
+    import ImmigrationMap from '$lib/suburbanization/ImmigrationMap.svelte';
+
+    import '../../assets/global-styles.css';
 </script>
 
 <main>

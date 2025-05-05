@@ -1,5 +1,5 @@
 <script>
-    import { PARTIES_INFO, PARTY_COLOURS } from "../lib/constants.js";
+    import { PARTIES_INFO, PARTY_COLOURS } from "../constants.js";
     import * as d3 from 'd3';
     import { browser } from '$app/environment';
 

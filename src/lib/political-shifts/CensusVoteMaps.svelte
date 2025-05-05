@@ -2,10 +2,10 @@
     import { onMount } from "svelte";
     import maplibregl from "maplibre-gl";
     import "maplibre-gl/dist/maplibre-gl.css";
-    import { FELXN_YEARS, ONTELXN_YEARS, PARTY_SHADES, CENSUS_SHADES, PARTIES_INFO } from "../lib/constants.js";
+    import { FELXN_YEARS, ONTELXN_YEARS, PARTY_SHADES, CENSUS_SHADES, PARTIES_INFO } from "../constants.js";
     import { getRegionTag, updateCensusVarOptions, updatePartyOptions } from "./utils.js";
     import Legend from './Legend.svelte';
-    import PlaceLabels from '../assets/municipality-place-labels.geo.json';
+    import PlaceLabels from '../../assets/municipality-place-labels.geo.json';
 
     let map1, map2;
 

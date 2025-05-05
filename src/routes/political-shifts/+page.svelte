@@ -1,10 +1,10 @@
 <script>
     import TopSofC from '$lib/TopSofC.svelte';
-    import StaticCorrelationDisplay from '$lib/StaticCorrelationDisplay.svelte';
-    import CensusVoteMaps from '$lib/CensusVoteMaps.svelte';
-    import CorrelationDisplay from '$lib/CorrelationDisplay.svelte';
-    import CorrelationTimeline from '$lib/CorrelationTimeline.svelte';
-    import VoteShareCompare from '$lib/VoteShareCompare.svelte';
+    import StaticCorrelationDisplay from '$lib/political-shifts/StaticCorrelationDisplay.svelte';
+    import CensusVoteMaps from '$lib/political-shifts/CensusVoteMaps.svelte';
+    import CorrelationDisplay from '$lib/political-shifts/CorrelationDisplay.svelte';
+    import CorrelationTimeline from '$lib/political-shifts/CorrelationTimeline.svelte';
+    import VoteShareCompare from '$lib/political-shifts/VoteShareCompare.svelte';
     import '../../assets/global-styles.css';
 
     import Footnote from '$lib/Footnote.svelte';
