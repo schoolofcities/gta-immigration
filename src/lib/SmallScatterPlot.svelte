@@ -9,10 +9,11 @@
         correlation = 0,
         year,
         showArrows = false,
+        height = 100,
+        plotWidth = 100,
+        colorStart = -1.5,
+        colorEnd = 0.35,
     } = $props();
-
-    const plotWidth = 100;
-    const height = 100;
 
     const scales = {
         x: scaleLinear().domain([0, 70]).range([0, plotWidth]),
@@ -20,7 +21,7 @@
     };
 
     const colorScale = d3.scaleLinear()
-        .domain([-1.5, 0, 0.35])
+        .domain([colorStart, 0, colorEnd])
         .range(["#4d4d4d","#D0D1C9", "#007FA3"])
         .interpolate(d3.interpolateLab);
   

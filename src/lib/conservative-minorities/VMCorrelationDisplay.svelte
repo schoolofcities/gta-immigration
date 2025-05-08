@@ -6,8 +6,8 @@
 
     // Configuration
     const ontElections = [
-        // { year: 1999, region: "ontario" },
-        // { year: 2003, region: "ontario" },
+        { year: 1999, region: "ontario" },
+        { year: 2003, region: "ontario" },
         { year: 2007, region: "ontario" },
         { year: 2011, region: "ontario" },
         { year: 2014, region: "ontario" },
@@ -19,8 +19,8 @@
     const fedElections = [
         // { year: 1997, region: "federal" },
         // { year: 2000, region: "federal" },
-        // { year: 2004, region: "federal" },
-        // { year: 2006, region: "federal" },
+        { year: 2004, region: "federal" },
+        { year: 2006, region: "federal" },
         { year: 2008, region: "federal" },
         { year: 2011, region: "federal" },
         { year: 2015, region: "federal" },
@@ -31,6 +31,11 @@
 
     const party = "cons1";
     const partyPropertyTag = PARTIES_INFO.find(p => p.tag === party).propertyTag;
+
+    const height = 75;
+    const plotWidth = 75;
+    const colorStart = -0.5;
+    const colorEnd = 0.25;
 
     // State variables
     let ontElectionData = $state([]);
@@ -87,10 +92,10 @@
 
 <div class="plots-title">
     <h4>
-        Ridings with more immigrants are increasingly voting Conservative
+        Ridings with more visible minorities are increasingly voting Conservative
     </h4>
     <p>
-        Correlation between immigrants (as % of population) and voting Conservative in Ontario provincial elections
+        Correlation between visible minorities (as % of population) and voting Conservative in Ontario elections
     </p>
 </div>
 <div class="plots-container">
@@ -100,13 +105,17 @@
             correlation={data.correlation} 
             year={data.year} 
             showArrows={false}
+            height={height}
+            plotWidth={plotWidth}
+            colorStart={colorStart}
+            colorEnd={colorEnd}
         />
     {/each}
 </div>
 <div class="plots-title">
     <h4></h4>
     <p>
-        Correlation between immigrants (as % of population) and voting Conservative in federal elections
+        Correlation between visible minorities (as % of population) and voting Conservative in federal elections
     </p>
 </div>
 <div class="plots-container">
@@ -116,6 +125,10 @@
             correlation={data.correlation} 
             year={data.year} 
             showArrows={false}
+            height={height}
+            plotWidth={plotWidth}
+            colorStart={colorStart}
+            colorEnd={colorEnd}
         />
     {/each}
 </div>
@@ -138,8 +151,8 @@
     .plots-container {
         max-width: 701px;
         display: grid;
-        grid-template-columns: repeat(6, 1fr);  /* 6 columns by default */
-        gap: 17px;
+        grid-template-columns: repeat(8, 1fr);  /* 6 columns by default */
+        gap: 12px;
         margin: 0 auto;
         margin-top: 24px;
     }
@@ -151,7 +164,7 @@
         }
         .plots-container {
             max-width: 340px;
-            grid-template-columns: repeat(3, 1fr);  /* 3 columns when the screen is less than 700px */
+            grid-template-columns: repeat(4, 1fr);  /* 3 columns when the screen is less than 700px */
         }
     }
 

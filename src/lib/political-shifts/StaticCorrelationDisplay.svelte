@@ -82,6 +82,10 @@
             correlation={data.correlation} 
             year={data.year} 
             showArrows={false}
+            height={100}
+            plotWidth={100}
+            colorStart={-1.5}
+            colorEnd={0.35}
         />
     {/each}
 </div>
