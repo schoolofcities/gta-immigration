@@ -35,3 +35,7 @@ export const CENSUS_SHADES = {
     avg_hou_inc: ["#f2cf63", "#cccc5e", "#a6c761", "#82c16a", "#5eb875", "#39ae81", "#00a38b"], 
     pct_vm: ["#fae5f0", "#eec6da", "#e2a7c4", "#d587ad", "#c86796", "#b9447f", "#aa1368"]
 };
+
+export const OTHER_SHADES = {
+    cons_change: ['#b7cfde', '#7391ad', '#39557e', '#1f3358', '#0d1a33'],
+}

@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import StaticGTARidingsMap from "./StaticGTARidingsMap.svelte";
-    import { CENSUS_SHADES, PARTY_SHADES } from "../constants";
+    import { CENSUS_SHADES, PARTY_SHADES, OTHER_SHADES } from "../constants";
 
     // State variables
     let electionData = $state(null);
@@ -11,16 +11,25 @@
     const mapConfigs = {
         'VM': {
             breaks: [10, 20, 30, 40, 50, 60],
+            breakPrefix: '',
             breakSuffix: '%',
             name: 'Visible Minority (% of population)',
             colours: CENSUS_SHADES.pct_vm,
         },
         'VoteShare': {
             breaks: [10, 20, 30, 40, 50, 60],
+            breakPrefix: '',
             breakSuffix: '%',
             name: 'Conservative Vote Share (%)',
             colours: PARTY_SHADES.cons1,
         },
+        'VoteShareChange': {
+            breaks: [5, 10, 15, 20],
+            breakPrefix: '+',
+            breakSuffix: '%',
+            name: 'Change in Conservative Vote Share (%)',
+            colours: OTHER_SHADES.cons_change,
+        }
     }
 
     onMount(async () => {
@@ -56,8 +65,8 @@
             <div class="map-section">
                 <StaticGTARidingsMap 
                     mapData={electionData} 
-                    mapConfig={mapConfigs.VoteShare} 
-                    dataKey="cons1_pct" 
+                    mapConfig={mapConfigs.VoteShareChange} 
+                    dataKey="cons_pct_change" 
                     year="2025" 
                 />
             </div>

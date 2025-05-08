@@ -82,7 +82,7 @@
                     y="55" 
                     text-anchor="middle"
                 >
-                    {breakNum}{mapConfig.breakSuffix}
+                    {mapConfig.breakPrefix}{breakNum}{mapConfig.breakSuffix}
                 </text>
             {/each}
         </svg>
