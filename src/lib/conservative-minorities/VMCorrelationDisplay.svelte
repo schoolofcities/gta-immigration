@@ -46,11 +46,10 @@
         loadElectionData(fedElections, 'federal');
     });
 
-    $effect(() => {
-        console.log($state.snapshot(ontElectionData));
-        console.log($state.snapshot(fedElectionData));
-        
-    })
+    // $effect(() => {
+    //     console.log($state.snapshot(ontElectionData));
+    //     console.log($state.snapshot(fedElectionData));
+    // })
 
     function loadElectionData(elections, region) {
         const promises = elections.map(election => {

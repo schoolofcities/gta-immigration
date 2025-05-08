@@ -1,6 +1,7 @@
 <script>
-    import VMCorrelationDisplay from '$lib/conservative-minorities/VMCorrelationDisplay.svelte';
     import TopSofC from '$lib/TopSofC.svelte';
+    import VMCorrelationDisplay from '$lib/conservative-minorities/VMCorrelationDisplay.svelte';
+    import VMVoteSharePanel from '$lib/conservative-minorities/VMVoteSharePanel.svelte';
 
     import '../../assets/global-styles.css';
 </script>
@@ -47,6 +48,8 @@
         <p>
             VIS: Map of %VM in GTA ridings
         </p>
+
+        <VMVoteSharePanel />
     </div>
 
     <div class="text">
