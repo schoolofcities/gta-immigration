@@ -13,14 +13,14 @@
     // State variables
     let divWidth = $state(null);
     let innerWidth = $derived(divWidth);
-    let height = $derived(innerWidth / 1.55);
+    let height = $derived(innerWidth / 1.4); // Increased aspect ratio slightly
 
     let projection = $derived(
         geoMercator()
-            .center([-79.4, 43.7])
-            .scale([innerWidth * 30])
-            .translate([(innerWidth / 2) - 50, (height / 2) + 110])
-            .angle([-30])
+            .center([-79.38, 43.68]) // Adjusted center slightly south and west
+            .scale([innerWidth * 32]) // Reduced scale to fit more content
+            .translate([innerWidth / 2.3, height / 1.4]) // Adjusted translation
+            .angle([-25]) // Slightly reduced angle
     );
 
     let path = $derived(geoPath(projection));

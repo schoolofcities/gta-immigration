@@ -45,18 +45,22 @@
         <p class="error">Error: {error}</p>
     {:else if electionData}
         <div class="maps-container">
-            <StaticGTARidingsMap 
-                mapData={electionData} 
-                mapConfig={mapConfigs.VM} 
-                dataKey="pct_vm" 
-                year="2025" 
-            />
-            <StaticGTARidingsMap 
-                mapData={electionData} 
-                mapConfig={mapConfigs.VoteShare} 
-                dataKey="cons1_pct" 
-                year="2025" 
-            />
+            <div class="map-section">
+                <StaticGTARidingsMap 
+                    mapData={electionData} 
+                    mapConfig={mapConfigs.VM} 
+                    dataKey="pct_vm" 
+                    year="2025" 
+                />
+            </div>
+            <div class="map-section">
+                <StaticGTARidingsMap 
+                    mapData={electionData} 
+                    mapConfig={mapConfigs.VoteShare} 
+                    dataKey="cons1_pct" 
+                    year="2025" 
+                />
+            </div>
         </div>
     {/if}
 </div>
@@ -64,15 +68,34 @@
 <style>
     .panel-container {
         width: 100%;
-        display: flex;
-        flex-direction: column;
     }
+
     .maps-container {
+        max-width: 1200px;
         display: flex;
-        flex-wrap: wrap;
         gap: 20px;
-        justify-content: center;
+        margin: 0 auto;
+        width: calc(100% - 20px);
     }
+
+    .map-section {
+        flex: 1;
+        min-width: 0;
+    }
+
+    @media (max-width: 900px) {
+        .maps-container {
+            flex-direction: column;
+            gap: 20px;
+            margin: 10px;
+            width: calc(100% - 20px);
+        }
+
+        .map-section {
+            width: 100%;
+        }
+    }
+
     .error {
         color: red;
     }
