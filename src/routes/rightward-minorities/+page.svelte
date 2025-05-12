@@ -1,9 +1,9 @@
 <script>
     import TopSofC from '$lib/TopSofC.svelte';
-    import VMCorrelationDisplay from '$lib/conservative-minorities/VMCorrelationDisplay.svelte';
-    import VMVoteSharePanel from '$lib/conservative-minorities/VMVoteSharePanel.svelte';
-    import Gen2ProfilesPanel from '$lib/conservative-minorities/Gen2ProfilesPanel.svelte';
-    import EthnicityVoteChartMultiples from '$lib/conservative-minorities/EthnicityVoteChartMultiples.svelte';
+    import VMCorrelationDisplay from '$lib/rightward-minorities/VMCorrelationDisplay.svelte';
+    import VMVoteSharePanel from '$lib/rightward-minorities/VMVoteSharePanel.svelte';
+    import Gen2ProfilesPanel from '$lib/rightward-minorities/Gen2ProfilesPanel.svelte';
+    import EthnicityVoteChartMultiples from '$lib/rightward-minorities/EthnicityVoteChartMultiples.svelte';
 
     import '../../assets/global-styles.css';
 </script>
