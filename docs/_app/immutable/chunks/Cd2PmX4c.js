@@ -1,1 +1,0 @@
-import{c as s,a as i}from"./Dyl4cNhN.js";import{h as f,E as p,n as c,z as d,A as h,i as m,o as l,B as u}from"./CCUDamnF.js";function v(t,e,...a){var n=t,o=d,r;f(()=>{o!==(o=e())&&(r&&(h(r),r=null),r=c(()=>o(n,...a)))},p),m&&(n=l)}function E(t,e){var a=s(),n=u(a);v(n,()=>e.children),i(t,a)}export{E as L};
