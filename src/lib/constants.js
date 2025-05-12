@@ -16,11 +16,20 @@ export const PARTIES_INFO = [
     {"name": "New Democrats", "tag": "ndp", "propertyTag": "ndp_pct"},
 ]
 
+export const PARTY_NAMES_SHORT = {
+    'lib': 'Libs.',
+    'cons1': 'Cons.',
+    'ndp': 'NDP',
+    'grn': 'Grn.',
+}
+
 export const PARTY_COLOURS = {
     lib: "#DC4633",
     cons1: "#007FA3", 
     cons2: "#00A189", 
     ndp: "#EBA00F", 
+    grn: '#1aa440',
+    NA: '#D3D3D3',
 };
 
 export const PARTY_SHADES = {

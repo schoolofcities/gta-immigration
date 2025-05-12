@@ -2,6 +2,7 @@
     import TopSofC from '$lib/TopSofC.svelte';
     import VMCorrelationDisplay from '$lib/conservative-minorities/VMCorrelationDisplay.svelte';
     import VMVoteSharePanel from '$lib/conservative-minorities/VMVoteSharePanel.svelte';
+    import Gen2ProfilesPanel from '$lib/conservative-minorities/Gen2ProfilesPanel.svelte';
 
     import '../../assets/global-styles.css';
 </script>
@@ -62,6 +63,8 @@
         <p>
             VIS*4: Riding, %VM, %Cons (federal and Ontario) – 2-3 sentence quote from qualitative data
         </p>
+
+        <Gen2ProfilesPanel />
     </div>
 
     <div class="text">
