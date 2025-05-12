@@ -29,31 +29,34 @@
     </div>
 
     <div class="container">
-        <p>
-            VIS: Correlation between %VM and %Cons over time, Ontario (1999-2025) and federal (1997-2025), showing a clear trend
-        </p>
-
         <VMCorrelationDisplay />
     </div>
 
     <div class="text">
+        <p>
+            Continued introduction
+        </p>
+    </div>
+
+    <div class="text">
+        <h2>What is happening?</h2>
         <p>
             Background, historical context, summary of what is driving these changes now
         </p>
     </div>
 
     <div>
-        <p>
-            VIS: Map of %Cons vote share change in the last (federal) election in GTA ridings
-        </p>
-        <p>
-            VIS: Map of %VM in GTA ridings
-        </p>
-
         <VMVoteSharePanel />
     </div>
 
     <div class="text">
+        <p>
+            Tie in to recent elections
+        </p>
+    </div>
+
+    <div class="text">
+        <h2>2nd Generation Immigrants</h2>
         <p>
             Discussion of 2nd gen visible minorities shifting right
         </p>
@@ -73,6 +76,13 @@
         </p>
     </div>
 
+    <div class="text">
+        <h2>South Asian Canadians and Chinese Canadians</h2>
+        <p>
+            Summary of these groups in particular
+        </p>
+    </div>
+
     <div class="container">
         <p>
             VIS: %Cons (federal and Ontario) ranked by %VM South Asian (maybe vs. ~2000)
@@ -86,7 +96,10 @@
         <p>
             Conservative shifts within South Asian and Chinese minorities – highlighting 2nd gen, but then broader discussion on why these communities are shifting right/who in them (from research + prior reporting). Note Mainstreet Research polling.
         </p>
+    </div>
 
+    <div class="text">
+        <h2>Conclusion</h2>
         <p>
             Discuss key factors we didn’t go into as much: income, turnout, disenfranchised
         </p>
@@ -94,6 +107,21 @@
         <p>
             Conclusion: why is this happening, what does it mean?
         </p>
+    </div>
+
+    <div class="text">
+        <br>
+        <br>
+
+        <div class="footnotes">
+            <h3>Data & Methods</h3>
+        </div>
+    </div>
+
+    <div class="text">
+        <div class="footnotes">
+            <h3>Footnotes</h3>
+        </div>
     </div>
 </main>
 
