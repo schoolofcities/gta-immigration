@@ -58,15 +58,11 @@
     <div class="text">
         <h2>2nd Generation Immigrants</h2>
         <p>
-            Discussion of 2nd gen visible minorities shifting right
+            Discussion of 2nd gen visible minorities shifting right - introduce the main study, qualitative data, etc.
         </p>
     </div>
 
     <div class="container">
-        <p>
-            VIS*4: Riding, %VM, %Cons (federal and Ontario) – 2-3 sentence quote from qualitative data
-        </p>
-
         <Gen2ProfilesPanel />
     </div>
 
