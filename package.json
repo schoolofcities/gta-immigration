@@ -20,6 +20,7 @@
 		"@sveltejs/adapter-static": "^3.0.8",
 		"d3": "^7.9.0",
 		"d3-array": "^3.2.4",
+		"d3-dsv": "^3.0.1",
 		"maplibre-gl": "^5.2.0",
 		"pmtiles": "^4.3.0",
 		"protomaps-themes-base": "^4.5.0"

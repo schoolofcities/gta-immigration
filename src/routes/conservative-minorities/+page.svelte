@@ -3,6 +3,7 @@
     import VMCorrelationDisplay from '$lib/conservative-minorities/VMCorrelationDisplay.svelte';
     import VMVoteSharePanel from '$lib/conservative-minorities/VMVoteSharePanel.svelte';
     import Gen2ProfilesPanel from '$lib/conservative-minorities/Gen2ProfilesPanel.svelte';
+    import EthnicityVoteChartMultiples from '$lib/conservative-minorities/EthnicityVoteChartMultiples.svelte';
 
     import '../../assets/global-styles.css';
 </script>
@@ -80,12 +81,7 @@
     </div>
 
     <div class="container">
-        <p>
-            VIS: %Cons (federal and Ontario) ranked by %VM South Asian (maybe vs. ~2000)
-        </p>
-        <p>
-            VIS: %Cons (federal and Ontario) ranked by %VM Chinese (maybe vs. ~2000)
-        </p>
+        <EthnicityVoteChartMultiples />
     </div>
 
     <div class="text">
