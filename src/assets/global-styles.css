@@ -203,6 +203,20 @@ a:hover {
 	color: var(--brandMedGreen);
 }
 
+/* Chart title and subtitle */
+.plots-title {
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+.plots-title p {
+	margin-top: -25px;
+	margin-bottom: -15px;
+	font-family: RobotoRegular;
+	font-size: 14.5px;
+	line-height: 20px;
+}
+
 /* Information display rows */
 .info-row {
 	border-bottom: solid 1px #f0f0f0;

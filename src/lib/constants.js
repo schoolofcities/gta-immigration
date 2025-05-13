@@ -24,13 +24,14 @@ export const PARTY_NAMES_SHORT = {
 }
 
 export const PARTY_COLOURS = {
-    lib: "#DC4633",
-    cons1: "#007FA3", 
-    cons2: "#00A189", 
-    ndp: "#EBA00F", 
-    grn: '#1aa440',
-    NA: '#D3D3D3',
-};
+    'lib': '#DC4633',
+    'cons1': '#1E3765',
+    'ndp': '#EBA00F',
+    'bloc': '#6FC7EA',
+    'grn': '#00A189',
+    'ppc': '#6D247A',
+    'NA': '#D3D3D3',
+}
 
 export const PARTY_SHADES = {
     lib: ["#fbeaea", "#fccfce", "#fbb4b0", "#f79a92", "#f17f73", "#e86353", "#dc4632"],

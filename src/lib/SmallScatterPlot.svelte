@@ -166,7 +166,7 @@
         {/if}
       
         <!-- Year label -->
-        <text x={scales.x(35)} y={15} font-size=14>
+        <text class="scatter-title" x={scales.x(35)} y={15} font-size=14>
             {year}
         </text>
     </svg>
@@ -185,7 +185,7 @@
         /* background-color: #6FC7EA; */
     }
 
-    text {
+    .scatter-title {
         font-family: TradeGothicBold;
         fill: white;
         text-anchor: middle;

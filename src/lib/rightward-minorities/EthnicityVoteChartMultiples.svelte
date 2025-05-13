@@ -3,17 +3,25 @@
     import { csvParse } from 'd3-dsv';
     import CircleBarChart from "./CircleBarChart.svelte";
 
+    let {
+        ethnicType,
+        title,
+        subtitle,
+    } = $props();
+
     const NUM_RIDINGS = 5;
-    const electionsInfo = [
+    const electionsInfoSA = [
         {'region': 'ont-', 'vm_type': 'sa', 'vm_field': 'pct_vm_sa', 'year': 2014, 'pct_cons_total': 31.2},
         {'region': 'ont-', 'vm_type': 'sa', 'vm_field': 'pct_vm_sa', 'year': 2025, 'pct_cons_total': 43.0},
         {'region': 'f', 'vm_type': 'sa', 'vm_field': 'pct_vm_sa', 'year': 2015, 'pct_cons_total': 31.9},
         {'region': 'f', 'vm_type': 'sa', 'vm_field': 'pct_vm_sa', 'year': 2025, 'pct_cons_total': 41.3},
+    ];
+    const electionsInfoChn = [
         {'region': 'ont-', 'vm_type': 'chn', 'vm_field': 'pct_vm_chn', 'year': 2014, 'pct_cons_total': 31.2},
         {'region': 'ont-', 'vm_type': 'chn', 'vm_field': 'pct_vm_chn', 'year': 2025, 'pct_cons_total': 43.0},
         {'region': 'f', 'vm_type': 'chn', 'vm_field': 'pct_vm_chn', 'year': 2015, 'pct_cons_total': 31.9},
         {'region': 'f', 'vm_type': 'chn', 'vm_field': 'pct_vm_chn', 'year': 2025, 'pct_cons_total': 41.3},
-    ];
+    ]
 
     let electionsData = $state([]);
 
@@ -31,6 +39,13 @@
     }
 
     onMount(async () => {
+        let electionsInfo;
+        if (ethnicType === 'sa') {
+            electionsInfo = electionsInfoSA;
+        } else if (ethnicType === 'chn') {
+            electionsInfo = electionsInfoChn;
+        }
+
         electionsData = await Promise.all(
             electionsInfo.map(async info => ({
                 info,
@@ -40,6 +55,14 @@
     });
 </script>
 
+<div class="plots-title">
+    <h4>
+        {title}
+    </h4>
+    <p>
+        {subtitle}
+    </p>
+</div>
 <div class="charts-grid">
     {#if electionsData}
         {#each electionsData as election}
@@ -57,6 +80,7 @@
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 10px;
+        margin-top: 20px;
     }
 
     @media (max-width: 700px) {

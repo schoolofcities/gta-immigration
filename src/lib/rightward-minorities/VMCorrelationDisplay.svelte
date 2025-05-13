@@ -134,18 +134,7 @@
 
 <style>
 
-    .plots-title {
-        max-width: 700px;
-        margin: 0 auto;
-    }
 
-    .plots-title p {
-        margin-top: -25px;
-        margin-bottom: -15px;
-        font-family: RobotoRegular;
-        font-size: 14.5px;
-        line-height: 20px;
-    }
 
     .plots-container {
         max-width: 701px;

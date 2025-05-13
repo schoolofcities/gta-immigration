@@ -81,10 +81,31 @@
     </div>
 
     <div class="container">
-        <EthnicityVoteChartMultiples />
+        <EthnicityVoteChartMultiples
+            ethnicType='sa'
+            title='Conservatives now do better in South Asian-heavy ridings versus in general'
+            subtitle="Conservative vote share (%) and South Asian (% of population) in the GTA's five most South Asian ridings"
+        />
     </div>
 
     <div class="text">
+        <p>
+            Discussion on South Asian Canadians.
+        </p>
+    </div>
+
+    <div class="container">
+        <EthnicityVoteChartMultiples
+            ethnicType='chn'
+            title='Conservatives also do better in Chinese-heavy ridings, but more in Ontario'
+            subtitle="Conservative vote share (%) and Chinese (% of population) in the GTA's five most Chinese ridings"
+        />
+    </div>
+
+    <div class="text">
+        <p>
+            Discussion on Chinese Canadians
+        </p>
         <p>
             Conservative shifts within South Asian and Chinese minorities – highlighting 2nd gen, but then broader discussion on why these communities are shifting right/who in them (from research + prior reporting). Note Mainstreet Research polling.
         </p>

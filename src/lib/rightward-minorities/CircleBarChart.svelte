@@ -1,4 +1,5 @@
 <script>
+    import { PARTY_COLOURS } from '$lib/constants';
     import { scaleLinear } from 'd3-scale';
 
     export let info;
@@ -8,7 +9,7 @@
     let containerWidth = 300;
     const containerHeight = 134;
     const margin = { top: 20, right: 5, bottom: 20, left: 6 };
-    
+
     $: innerWidth = containerWidth - margin.left - margin.right;
     $: innerHeight = containerHeight - margin.top - margin.bottom;
 
@@ -19,12 +20,12 @@
     const startY = 10;
 
     $: xScale = scaleLinear()
-        .domain([0, 70])
+        .domain([0, 75])
         .range([0, innerWidth]);
 
     $: regionName = info.region === 'ont-' ? 'Ontario' : 'Federal';
     $: vmName = info.vm_type === 'sa' ? 'South Asian' : 'Chinese';
-    $: title = `${regionName} ${info.year} - ${vmName}`;
+    $: title = `${regionName} ${info.year}`;
 </script>
 
 <div class="chart-container" bind:clientWidth={containerWidth}>
@@ -47,9 +48,9 @@
                 <g transform={`translate(0,${innerHeight})`}>
                     {#each [0, 20, 40, 60] as tick}
                         <text
+                            class="bar-chart-tick"
                             x={xScale(tick)}
-                            y={15}
-                            text-anchor="middle"
+                            y={10}
                             font-size="9"
                         >
                             {tick}%
@@ -58,25 +59,18 @@
                 </g>
 
                 <!-- Title -->
-                <text
-                    x={innerWidth / 2}
-                    y={-5}
-                    text-anchor="middle"
-                    font-size="10"
-                    font-weight="bold"
-                >
+                <text class="bar-chart-title" x={innerWidth / 2} y={-5} font-size=14>
                     {title}
                 </text>
 
-                <!-- Bars and dots -->
+                <!-- Conservative vote bar -->
                 {#each data as d, i}
-                    <!-- Conservative vote bar -->
                     <rect
                         x={0}
                         y={startY + i * rowHeight - barHeight/2}
                         width={xScale(+d.cons1_pct)}
                         height={barHeight}
-                        fill="#007FA3"
+                        fill={PARTY_COLOURS.cons1}
                         rx={1}
                         ry={1}
                     />
@@ -90,19 +84,19 @@
                     y2={innerHeight}
                     stroke="#000000"
                     stroke-width="1"
-                    stroke-dasharray="2,2"
+                    stroke-dasharray="4,3"
                     opacity="1"
                 />
 
+                <!-- Visible minority dot -->
                 {#each data as d, i}
-                    <!-- Visible minority dot -->
                     <circle
                         cx={xScale(+d[vmField])}
                         cy={startY + i * rowHeight}
                         r={dotSize}
-                        fill="#6d247a"
+                        fill="#00A189"
                         stroke="white"
-                        stroke-width="0.5"
+                        stroke-width="0"
                     />
                 {/each}
             </g>
@@ -114,5 +108,17 @@
     .chart-container {
         height: 160px;
         min-width: 0;
+    }
+
+    .bar-chart-tick {
+        /* font-family: TradeGothicLTLight; */
+        fill: black;
+        text-anchor: middle;
+    }
+
+    .bar-chart-title {
+        font-family: TradeGothicBold;
+        fill: black;
+        text-anchor: middle;
     }
 </style>
