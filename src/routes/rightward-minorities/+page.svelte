@@ -8,6 +8,33 @@
     import '../../assets/global-styles.css';
 </script>
 
+<svelte:head>
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1, minimum-scale=1"
+	/>
+
+	<title>Rightward shifts amongst visible minorities in the Greater Toronto Area | School of Cities</title>
+
+	<meta name="description" content="">
+	<meta name="author" content="Emine Fidan Elcioglu, Aniket Kali, Serene Tan, & Jeff Allen">
+    
+	<meta property="og:title" content="Rightward shifts amongst visible minorities in the Greater Toronto Area" />
+	<meta property="og:description" content="Visible minorities in the GTA have begun to shift to the Conservatives" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://schoolofcities.github.io/gta-immigration/rightward-minorities" />
+	<!-- <meta property="og:image" content="https://schoolofcities.github.io/gta-immigration/web-card-rightward-minorities.png" /> -->
+	<meta property="og:locale" content="en_CA">
+
+	<!-- <meta name="twitter:card" content="summary_large_image" /> -->
+	<meta name="twitter:site" content="https://schoolofcities.github.io/gta-immigration/rightward-minorities" />
+	<meta name="twitter:creator" content="@UofTCities" />
+	<meta name="twitter:title" content="Rightward shifts amongst visible minorities in the Greater Toronto Area" />
+	<meta name="twitter:description" content="Visible minorities in the GTA have begun to shift to the Conservatives" />
+	<!-- <meta name="twitter:image" content="https://schoolofcities.github.io/gta-immigration/web-card-rightward-minorities.png" />  -->
+    
+</svelte:head>
+
 <main>
     <TopSofC/>
 
