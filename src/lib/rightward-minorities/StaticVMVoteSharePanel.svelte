@@ -27,7 +27,7 @@
             breaks: [5, 10, 15, 20],
             breakPrefix: '+',
             breakSuffix: '%',
-            name: 'Change in Conservative Vote Share (%)',
+            name: 'Change in Conservative Vote Share, 2021-2025 (%)',
             colours: OTHER_SHADES.cons_change,
         }
     }

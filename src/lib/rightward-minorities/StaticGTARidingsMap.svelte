@@ -41,6 +41,8 @@
         }
         return colours[colours.length - 1];
     }
+
+    // stroke-width={(feature.properties['cons_pct_change'] > 7.6) ? 1.0 : 0.3}
 </script>
 
 <div class="map-inner-container" bind:offsetWidth={divWidth}>
@@ -59,6 +61,7 @@
             {#each mapData as feature}
                 <path 
                     class="riding" 
+                    stroke-width=0.3
                     d={path(feature)} 
                     fill={getColour(feature.properties[dataKey])}
                 />
@@ -74,6 +77,27 @@
                     style="fill:{colour}; stroke: white;"
                 />
             {/each}
+
+            {#if dataKey === 'cons_pct_change'}
+                <!-- Add line and text at 7.6% mark (second rectangle) -->
+                <line 
+                    x1={5 + 40 + 20} 
+                    y1="30" 
+                    x2={5 + 40 + 20} 
+                    y2="60" 
+                    stroke="var(--brandDarkBlue)" 
+                    stroke-width="1"
+                    stroke-dasharray="4,3"
+                />
+                <text 
+                    class="legend-note" 
+                    x={5 + 40 + 20} 
+                    y="70" 
+                    text-anchor="middle"
+                >
+                    Cons. gained 7.6% nationally
+                </text>
+            {/if}
 
             {#each mapConfig.breaks as breakNum, i}
                 <text 
@@ -95,21 +119,30 @@
         max-width: 600px;
         min-width: 400px;
     }
+
     .riding {
         stroke: white;
-        stroke-width: 0.05px;
-        opacity: 0.75;
+        /* stroke-width: 0.5px; */
+        opacity: 1;
     }
+
     .box {
-        opacity: 0.75;
+        opacity: 1;
     }
+
     .label {
         font-size: 15px;
         font-weight: 600;
         fill: var(--brandDarkBlue);
     }
+
     .legend {
         font-size: 13px;
         font-weight: 400;
+    }
+
+    .legend-note {
+        font-size: 10px;
+        fill: var(--brandDarkBlue);
     }
 </style>
