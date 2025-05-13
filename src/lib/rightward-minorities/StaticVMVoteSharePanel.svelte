@@ -53,6 +53,14 @@
     {:else if error}
         <p class="error">Error: {error}</p>
     {:else if electionData}
+        <div class="plots-title">
+            <h4>
+                Conservatives made major gains in the visible minority-heavy GTA suburbs
+            </h4>
+            <p>
+                Many ridings saw gains far in excess of their national vote share change of 7.6%. In Brampton West, a riding where just under 90% of the population are visible minorities, the Conservatives gained 22% and flipped the seat - their 4th largest gain in the country.
+            </p>
+        </div>
         <div class="maps-container">
             <div class="map-section">
                 <StaticGTARidingsMap 
@@ -85,6 +93,7 @@
         gap: 20px;
         margin: 0 auto;
         width: calc(100% - 20px);
+        margin-top: 20px;
     }
 
     .map-section {
