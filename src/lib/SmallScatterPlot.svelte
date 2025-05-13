@@ -8,7 +8,7 @@
         points,
         correlation = 0,
         year,
-        showArrows = false,
+        xEnd = 70,
         height = 100,
         plotWidth = 100,
         colorStart = -1.5,
@@ -16,7 +16,7 @@
     } = $props();
 
     const scales = {
-        x: scaleLinear().domain([0, 70]).range([0, plotWidth]),
+        x: scaleLinear().domain([0, xEnd]).range([0, plotWidth]),
         y: scaleLinear().domain([0, 80]).range([height, 0])
     };
 
@@ -37,8 +37,8 @@
         return {
             x1: scales.x(0),
             y1: scales.y(intercept),
-            x2: scales.x(70),
-            y2: scales.y(slope * 70 + intercept)
+            x2: scales.x(xEnd),
+            y2: scales.y(slope * xEnd + intercept)
         };
     })();
   
@@ -53,43 +53,6 @@
         height={height}
         style="background-color: {colorScale(slope)}"
     >
-        <!-- Arrowhead definition -->
-        <!-- <defs>
-            <marker
-                id="arrowhead"
-                viewBox="0 -5 10 10"
-                refX="5"
-                refY="0"
-                markerWidth="6"
-                markerHeight="6"
-                orient="auto"
-            >
-                <path d="M0,-5L10,0L0,5" fill="black" />
-            </marker>
-        </defs> -->
-  
-        <!-- Grid lines -->
-        <!-- {#each [20, 40, 60] as value}
-            <line
-                x1={scales.x(value)}
-                y1={0}
-                x2={scales.x(value)}
-                y2={height}
-                stroke="#eee"
-                stroke-width="1"
-            />
-            <line
-                x1={0}
-                y1={scales.y(value)}
-                x2={plotWidth}
-                y2={scales.y(value)}
-                stroke="#eee"
-                stroke-width="1"
-            />
-        {/each} -->
-      
-        
-      
         <!-- Data points -->
         {#each points as point}
             <circle
@@ -111,62 +74,9 @@
             stroke-width="5"
             stroke-linecap="round"
         />
-  
-        <!-- Arrows and labels -->
-        {#if showArrows}
-            <!-- Horizontal arrow (More immigrants) -->
-            <line
-                x1={scales.x(15)}
-                y1={height - 15}
-                x2={scales.x(55)}
-                y2={height - 15}
-                stroke="black"
-                stroke-width="1"
-                marker-end="url(#arrowhead)"
-            />
-            <text
-                x={scales.x(50)}
-                y={height - 3}
-                text-anchor="middle"
-                font-size="11px"
-                font-family=""
-                fill="black"
-            >
-                More immigrants
-            </text>
-    
-            <!-- Vertical arrow (More conservative) -->
-            <line
-                x1={arrowX}
-                y1={scales.y(25)}
-                x2={arrowX}
-                y2={scales.y(75)}
-                stroke="black"
-                stroke-width="1"
-                marker-end="url(#arrowhead)"
-            />
-            <text
-                x={arrowX + 5}
-                y={scales.y(75)}
-                font-size="11px"
-                font-family=""
-                fill="black"
-            >
-                More
-            </text>
-            <text
-                x={arrowX + 5}
-                y={scales.y(70)}
-                font-size="11px"
-                font-family=""
-                fill="black"
-            >
-                conservative
-            </text>
-        {/if}
       
         <!-- Year label -->
-        <text class="scatter-title" x={scales.x(35)} y={15} font-size=14>
+        <text class="scatter-title" x={scales.x(xEnd / 2)} y={15} font-size=14>
             {year}
         </text>
     </svg>

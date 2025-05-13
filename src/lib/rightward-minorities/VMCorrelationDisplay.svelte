@@ -103,7 +103,7 @@
             points={data.points} 
             correlation={data.correlation} 
             year={data.year} 
-            showArrows={false}
+            xEnd={100}
             height={height}
             plotWidth={plotWidth}
             colorStart={colorStart}
@@ -123,7 +123,7 @@
             points={data.points} 
             correlation={data.correlation} 
             year={data.year} 
-            showArrows={false}
+            xEnd={100}
             height={height}
             plotWidth={plotWidth}
             colorStart={colorStart}

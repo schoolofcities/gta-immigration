@@ -81,7 +81,7 @@
             points={data.points} 
             correlation={data.correlation} 
             year={data.year} 
-            showArrows={false}
+            xEnd={70}
             height={100}
             plotWidth={100}
             colorStart={-1.5}
