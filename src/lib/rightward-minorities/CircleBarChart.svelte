@@ -80,7 +80,21 @@
                         rx={1}
                         ry={1}
                     />
+                {/each}
 
+                <!-- Conservative total line -->
+                <line
+                    x1={xScale(info.pct_cons_total)}
+                    y1={0}
+                    x2={xScale(info.pct_cons_total)}
+                    y2={innerHeight}
+                    stroke="#000000"
+                    stroke-width="1"
+                    stroke-dasharray="2,2"
+                    opacity="1"
+                />
+
+                {#each data as d, i}
                     <!-- Visible minority dot -->
                     <circle
                         cx={xScale(+d[vmField])}

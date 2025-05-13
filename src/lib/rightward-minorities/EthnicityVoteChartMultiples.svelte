@@ -5,14 +5,14 @@
 
     const NUM_RIDINGS = 5;
     const electionsInfo = [
-        {'region': 'ont-', 'vm_type': 'sa', 'year': 2014, 'vm_field': 'pct_vm_sa'},
-        {'region': 'ont-', 'vm_type': 'sa', 'year': 2025, 'vm_field': 'pct_vm_sa'},
-        {'region': 'f', 'vm_type': 'sa', 'year': 2015, 'vm_field': 'pct_vm_sa'},
-        {'region': 'f', 'vm_type': 'sa', 'year': 2025, 'vm_field': 'pct_vm_sa'},
-        {'region': 'ont-', 'vm_type': 'chn', 'year': 2014, 'vm_field': 'pct_vm_chn'},
-        {'region': 'ont-', 'vm_type': 'chn', 'year': 2025, 'vm_field': 'pct_vm_chn'},
-        {'region': 'f', 'vm_type': 'chn', 'year': 2015, 'vm_field': 'pct_vm_chn'},
-        {'region': 'f', 'vm_type': 'chn', 'year': 2025, 'vm_field': 'pct_vm_chn'},
+        {'region': 'ont-', 'vm_type': 'sa', 'vm_field': 'pct_vm_sa', 'year': 2014, 'pct_cons_total': 31.2},
+        {'region': 'ont-', 'vm_type': 'sa', 'vm_field': 'pct_vm_sa', 'year': 2025, 'pct_cons_total': 43.0},
+        {'region': 'f', 'vm_type': 'sa', 'vm_field': 'pct_vm_sa', 'year': 2015, 'pct_cons_total': 31.9},
+        {'region': 'f', 'vm_type': 'sa', 'vm_field': 'pct_vm_sa', 'year': 2025, 'pct_cons_total': 41.3},
+        {'region': 'ont-', 'vm_type': 'chn', 'vm_field': 'pct_vm_chn', 'year': 2014, 'pct_cons_total': 31.2},
+        {'region': 'ont-', 'vm_type': 'chn', 'vm_field': 'pct_vm_chn', 'year': 2025, 'pct_cons_total': 43.0},
+        {'region': 'f', 'vm_type': 'chn', 'vm_field': 'pct_vm_chn', 'year': 2015, 'pct_cons_total': 31.9},
+        {'region': 'f', 'vm_type': 'chn', 'vm_field': 'pct_vm_chn', 'year': 2025, 'pct_cons_total': 41.3},
     ];
 
     let electionsData = $state([]);
