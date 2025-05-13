@@ -34,8 +34,8 @@
 
     const height = 75;
     const plotWidth = 75;
-    const colorStart = -0.5;
-    const colorEnd = 0.25;
+    const colorStart = -0.3;
+    const colorEnd = 0.15;
 
     // State variables
     let ontElectionData = $state([]);
@@ -133,9 +133,6 @@
 </div>
 
 <style>
-
-
-
     .plots-container {
         max-width: 701px;
         display: grid;
@@ -146,10 +143,6 @@
     }
 
     @media (max-width: 700px) {
-        .plots-title {
-            margin-left: 15px;
-            margin-right: 15px;
-        }
         .plots-container {
             max-width: 340px;
             grid-template-columns: repeat(4, 1fr);  /* 3 columns when the screen is less than 700px */
