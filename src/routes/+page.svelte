@@ -31,10 +31,31 @@
 </svelte:head>
 
 <main>
-    <!-- <TopSofC/> -->
-            <a href='https://schoolofcities.github.io/gta-immigration/political-shifts'>
-                Changes in immigrant voting patterns in the Greater Toronto Area
-            </a>
+    <TopSofC/>
+
+	<div class="title">
+		<h3>
+			April 2025 - 
+			<a href='../gta-immigration/political-shifts'>
+				Changes in immigrant voting patterns in the Greater Toronto Area
+			</a>
+		</h3>
+
+		<!-- <h3>
+			May 2025 - 
+			<a href='../gta-immigration/rightward-minorities'>
+				Rightward shifts amongst visible minorities in the Greater Toronto Area
+			</a>
+		</h3> -->
+
+		<!-- <h3>
+			June 2025 - 
+			<a href='../gta-immigration/suburbanization'>
+				Suburbanization of immigration in the Greater Toronto Area
+			</a>
+		</h3> -->
+	</div>
+
 </main>
 
 <style>
