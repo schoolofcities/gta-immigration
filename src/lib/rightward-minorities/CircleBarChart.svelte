@@ -129,7 +129,7 @@
                         class="bar-chart-label" 
                         x={xScale(info.pct_cons_total) + 2} 
                         y={2} 
-                        font-size=14
+                        font-size=13
                     >
                         National average
                     </text>

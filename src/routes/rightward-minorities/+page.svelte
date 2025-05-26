@@ -128,7 +128,7 @@
     <div class="container">
         <EthnicityVoteChartMultiples
             ethnicType='sa'
-            title='Conservatives now do better in South Asian-heavy ridings versus in general'
+            title='Conservatives now do better in South Asian-heavy ridings'
             subtitle="Conservative vote share (%) and South Asian (% of population) in the GTA's five most South Asian ridings"
             subtitleGroup="South Asian"
         />
