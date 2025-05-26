@@ -130,6 +130,7 @@
             ethnicType='sa'
             title='Conservatives now do better in South Asian-heavy ridings versus in general'
             subtitle="Conservative vote share (%) and South Asian (% of population) in the GTA's five most South Asian ridings"
+            subtitleGroup="South Asian"
         />
     </div>
 
@@ -147,6 +148,7 @@
             ethnicType='chn'
             title='Conservatives also do better in Chinese-heavy ridings, but more in Ontario'
             subtitle="Conservative vote share (%) and Chinese (% of population) in the GTA's five most Chinese ridings"
+            subtitleGroup="Chinese"
         />
     </div>
 

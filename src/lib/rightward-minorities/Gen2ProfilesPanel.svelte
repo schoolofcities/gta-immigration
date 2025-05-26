@@ -27,17 +27,23 @@
     const electionLabels = ["Fed. 2015", "Ont. 2018", "Fed. 2019", "Fed. 2021", "Ont. 2022"];
 </script>
 
-<div class="profiles-grid">
-    {#each profiles as profile, i}
-        <Gen2Profile 
-            profile={profile}
-            showLabels={i === 0}
-            electionLabels={electionLabels}
-        />
-    {/each}
+<div class="profiles-container">
+    <h4>This graphic should probably have a title</h4>
+    <div class="profiles-grid">
+        {#each profiles as profile, i}
+            <Gen2Profile 
+                profile={profile}
+                showLabels={i === 0}
+                electionLabels={electionLabels}
+            />
+        {/each}
+    </div>
 </div>
 
 <style>
+    .profiles-container {
+        margin-top: -30px;
+    }
     .profiles-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

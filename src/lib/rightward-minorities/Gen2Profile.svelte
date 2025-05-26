@@ -12,13 +12,14 @@
     let rectWidth = $derived(Math.max(40, Math.floor(availableWidth / 5)));
     
     // Always use the same dimensions regardless of showLabels
-    const rectHeight = 20;
+    const rectHeight = 30;
     const svgHeight = 40; 
-    const textYOffset = 29; 
+    const textYOffset = 32; 
     const rectsYPosition = 15;
 </script>
 
 <div class="profile-container" bind:clientWidth={containerWidth}>
+    
     <svg width="100%" height={svgHeight} viewBox={`0 0 ${rectWidth * 5} ${svgHeight}`} preserveAspectRatio="xMinYMin meet">
         <!-- Always reserve space for labels, only show when flag is true -->
         {#each electionLabels as label, i}
@@ -69,11 +70,14 @@
     }
     
     .header {
-        font-weight: bold;
+        font-family: RobotoBold;
+        color: var(--brandGray90);
         margin-top: 2px;  
     }
     
     .description {
         margin-top: 2px;  
+        font-family: RobotoRegular;
+        color: var(--brandGray90);
     }
 </style>
