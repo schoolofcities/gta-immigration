@@ -81,11 +81,10 @@
     }
 
     .maps-container {
-        max-width: 740px;
+        max-width: 1200px;
         display: flex;
         gap: 5px;
         margin: 0 auto;
-        padding-left: 30px;
         width: calc(100% - 20px);
         margin-top: 25px;
     }
@@ -93,19 +92,16 @@
     .map-section {
         flex: 1;
         min-width: 0;
-        max-width: 500px;
     }
 
     @media (max-width: 900px) {
         .maps-container {
             flex-direction: column;
-            max-width: 700px;
             gap: 20px;
             margin: 0 auto;
             padding-top: 20px;
             width: calc(100% - 20px);
         }
-
         .map-section {
             width: 100%;
         }
