@@ -77,13 +77,15 @@
 <style>
     .panel-container {
         width: 100%;
+        margin-top: -30px;
     }
 
     .maps-container {
-        max-width: 1200px;
+        max-width: 740px;
         display: flex;
-        gap: 20px;
+        gap: 5px;
         margin: 0 auto;
+        padding-left: 30px;
         width: calc(100% - 20px);
         margin-top: 25px;
     }
@@ -91,13 +93,16 @@
     .map-section {
         flex: 1;
         min-width: 0;
+        max-width: 500px;
     }
 
     @media (max-width: 900px) {
         .maps-container {
             flex-direction: column;
+            max-width: 700px;
             gap: 20px;
-            margin: 10px;
+            margin: 0 auto;
+            padding-top: 20px;
             width: calc(100% - 20px);
         }
 

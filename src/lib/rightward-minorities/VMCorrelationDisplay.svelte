@@ -133,6 +133,11 @@
 </div>
 
 <style>
+
+    .plots-title h4 {
+        margin-top: 0px;
+    }
+
     .plots-container {
         max-width: 701px;
         display: grid;
@@ -140,6 +145,7 @@
         gap: 12px;
         margin: 0 auto;
         margin-top: 24px;
+        margin-bottom: 50px;
     }
 
     @media (max-width: 700px) {

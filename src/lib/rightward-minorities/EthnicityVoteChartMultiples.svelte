@@ -1,12 +1,13 @@
 <script>
     import { onMount } from "svelte";
     import { csvParse } from 'd3-dsv';
-    import CircleBarChart from "./CircleBarChart.svelte";
+    import DoubleBarChart from "./DoubleBarChart.svelte";
 
     let {
         ethnicType,
         title,
         subtitle,
+        subtitleGroup
     } = $props();
 
     const NUM_RIDINGS = 5;
@@ -60,13 +61,14 @@
         {title}
     </h4>
     <p>
-        {subtitle}
+        <span id="partyName">Conservative vote share</span> (%) and <span id="groupName">{subtitleGroup}</span> (% of population) in the GTA's five most {subtitleGroup} ridings
+        
     </p>
 </div>
 <div class="charts-grid">
     {#if electionsData}
         {#each electionsData as election}
-            <CircleBarChart 
+            <DoubleBarChart 
                 info={election.info}
                 data={election.data}
                 vmField={election.info.vm_field}
@@ -78,7 +80,7 @@
 <style>
     .charts-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
         margin-top: 20px;
     }
@@ -87,5 +89,14 @@
         .charts-grid {
             grid-template-columns: repeat(2, 1fr);
         }
+    }
+
+    #partyName {
+        color: var(--brandMedBlue);
+        border-bottom: solid 2px var(--brandMedBlue);
+    }
+    #groupName {
+        background-color: var(--brandYellow);
+        border-bottom: solid 2px var(--brandYellow);
     }
 </style>
