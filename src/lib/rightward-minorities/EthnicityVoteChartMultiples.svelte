@@ -1,7 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import { csvParse } from 'd3-dsv';
-    import CircleBarChart from "./CircleBarChart.svelte";
+    import DoubleBarChart from "./DoubleBarChart.svelte";
 
     let {
         ethnicType,
@@ -68,7 +68,7 @@
 <div class="charts-grid">
     {#if electionsData}
         {#each electionsData as election}
-            <CircleBarChart 
+            <DoubleBarChart 
                 info={election.info}
                 data={election.data}
                 vmField={election.info.vm_field}

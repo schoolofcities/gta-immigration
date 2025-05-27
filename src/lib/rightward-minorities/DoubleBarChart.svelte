@@ -131,7 +131,7 @@
                         y={2} 
                         font-size=13
                     >
-                        National average
+                        Election average
                     </text>
                 {/if}
 
