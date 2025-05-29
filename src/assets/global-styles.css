@@ -87,17 +87,19 @@ main {
 	margin-top: 125px;
 	padding-left: 15px;
 	padding-right: 15px;
+	padding-bottom: 15px;
 	margin-bottom: 0px;
 	position: relative;
-	
+	border-bottom: solid 1px var(--brandGray);
+}
+
+.title h1 {
+	margin-bottom: 20px;
 }
 
 .title p {
-	margin-top: 20px;
-    line-height: 18px;
+    line-height: 8px;
     font-size: 16px;
-	padding-bottom: 36px;
-	border-bottom: solid 1px var(--brandGray);
 }
 
 .text {

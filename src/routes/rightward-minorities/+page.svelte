@@ -28,10 +28,10 @@
 	<title>Rightward shifts amongst visible minorities in the Greater Toronto Area | School of Cities</title>
 
 	<meta name="description" content="">
-	<meta name="author" content="Emine Fidan Elcioglu, Aniket Kali, Serene Tan, & Jeff Allen">
+	<meta name="author" content="Emine Fidan Elcioglu">
     
 	<meta property="og:title" content="Rightward shifts amongst visible minorities in the Greater Toronto Area" />
-	<meta property="og:description" content="Visible minorities in the GTA have begun to shift to the Conservatives" />
+	<meta property="og:description" content="Visible minorities in the GTA have been shifting to the Conservatives" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://schoolofcities.github.io/gta-immigration/rightward-minorities" />
 	<!-- <meta property="og:image" content="https://schoolofcities.github.io/gta-immigration/web-card-rightward-minorities.png" /> -->
@@ -41,7 +41,7 @@
 	<meta name="twitter:site" content="https://schoolofcities.github.io/gta-immigration/rightward-minorities" />
 	<meta name="twitter:creator" content="@UofTCities" />
 	<meta name="twitter:title" content="Rightward shifts amongst visible minorities in the Greater Toronto Area" />
-	<meta name="twitter:description" content="Visible minorities in the GTA have begun to shift to the Conservatives" />
+	<meta name="twitter:description" content="Visible minorities in the GTA have been shifting to the Conservatives" />
 	<!-- <meta name="twitter:image" content="https://schoolofcities.github.io/gta-immigration/web-card-rightward-minorities.png" />  -->
     
 </svelte:head>
@@ -52,12 +52,20 @@
     <div class="title">
         <h1>Rightward shifts amongst visible minorities in the Greater Toronto Area</h1>
         <p>
-            <a href='https://fidanelcioglu.com/' target='_blank'>Emine Fidan Elcioglu</a>,
+            Writing & Research: 
+            <a href='https://fidanelcioglu.com/' target='_blank'>Emine Fidan Elcioglu</a>
+        </p>
+        <p>
+            Maps & Graphics:
             <a href='https://www.linkedin.com/in/aniket-k-8a8b9921b/' target='_blank'>Aniket Kali</a>,
-            <a href='https://www.linkedin.com/in/serene-tan-530239113' target='_blank'>Serene Tan</a>,
             <a href='https://jamaps.github.io/' target='_blank'>Jeff Allen</a>
-            |
-            May 2025
+        </p>
+        <p>
+            Editing: 
+            Felicity Heyworth, Aniket Kali
+        </p>
+        <p>
+            June 2025
         </p>
     </div>
 
