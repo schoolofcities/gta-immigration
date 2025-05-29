@@ -8,21 +8,11 @@
     import '../../assets/global-styles.css';
 
     import Footnote from '$lib/Footnote.svelte';
+    import Footnotes from '$lib/Footnotes.svelte';
+    import { createFootnoteStore } from '$lib/footnoteUtils';
 
-    function parseMarkdown(text) {
-        return text
-            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')       // bold
-            .replace(/\*(?!\*)(.+?)\*/g, '<em>$1</em>')              // italics
-            .replace(/\[([^\]]+)]\(([^)]+)\)/g, '<a href="$2">$1</a>'); // links
-    }
-
-    let footnotes = [];
-    function addFootnote(text) {
-        const id = footnotes.length + 1;
-        const parsed = parseMarkdown(text);
-        footnotes.push({ id, text: parsed });
-        return id;
-    }
+    const footnoteStore = createFootnoteStore();
+    const { footnotes, addFootnote } = footnoteStore;
 
     const fns = [
         `See, for example, Brian K. Ray, Greg Halseth, and Benjamin Johnson, "The Changing 'Face' of the Suburbs: Issues of Ethnicity and Residential Change in Suburban Vancouver", *International Journal of Urban and Regional Research* 21, no. 1 (1997), 75-99, [https://doi.org/10.1111/1468-2427.00059](https://doi.org/10.1111/1468-2427.00059); Harald Bauder and Bob Sharpe, "Residential segregation of visible minorities in Canada's gateway cities", *The Canadian Geographer* 46, no. 3 (2002), 204-222, [https://doi.org/10.1111/j.1541-0064.2002.tb00741.x](https://doi.org/10.1111/j.1541-0064.2002.tb00741.x); Robert Murdie and Carlos Teixeira, "Towards a Comfortable Neighbourhood and Appropriate Housing: Immigrant Experiences in Toronto", ed. Paul Anisef and Michael Lanphier (eds.) *The World in a City* (University of Toronto Press, 2003); Virpal Kataure and Margaret Walton-Roberts "The housing preferences and location choices of second-generation South Asians living in ethnic enclaves", *South Asian Diaspora* 5, no. 1 (2013), 57-76, [https://doi.org/10.1080/19438192.2013.722385](https://doi.org/10.1080/19438192.2013.722385); Shuguang Wang and Jason Zhong, "Delineating Ethnoburbs in Metropolitan Toronto", CERIS Working Paper No. 100 (2013); Mireille Vézina and René Houle, "Settlement patterns and social integration of the population with an immigrant background in the Montréal, Toronto and Vancouver metropolitan areas", Statistics Canada Ethnicity, Language and Immigration Thematic Series (2017), Catalogue no. 89-657-X2016002`,
@@ -249,45 +239,9 @@
     </div>
 
     <div class="text">
-        <div class="footnotes">
-            <h3>Footnotes</h3>
-            {#each footnotes as footnote (footnote.id)}
-                <div id={`footnote-${footnote.id}`} class="footnote-item">
-                    <sup>{footnote.id}</sup>
-                    <p style="display:inline">{@html footnote.text}</p>
-
-                    <a href={`#footnote-ref-${footnote.id}`} class="backlink" on:click|preventDefault={() => {
-                        const element = document.getElementById(`footnote-ref-${footnote.id}`);
-                        const yOffset = -100;
-                        if (element) {
-                            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                            window.scrollTo({ top: y, behavior: 'auto' });
-                        }
-                    }}>
-                        ↩
-                    </a>
-                </div>
-            {/each}
-        </div>
+        <Footnotes footnotes={footnotes} />
     </div>
 </main>
 
 <style>
-    .footnote-item {
-        margin-bottom: 0.5em;
-        line-height: 1.4;
-        position: relative;
-        padding-left: 1.5em;
-    }
-
-    .footnote-item sup {
-        position: absolute;
-        left: 0;
-    }
-
-    .backlink {
-        margin-left: 0.5em;
-        text-decoration: none;
-        color: #007FA3;
-    }
 </style>

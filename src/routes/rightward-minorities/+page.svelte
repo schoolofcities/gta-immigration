@@ -6,6 +6,17 @@
     import EthnicityVoteChartMultiples from '$lib/rightward-minorities/EthnicityVoteChartMultiples.svelte';
 
     import '../../assets/global-styles.css';
+
+    import Footnote from '$lib/Footnote.svelte';
+    import Footnotes from '$lib/Footnotes.svelte';
+    import { createFootnoteStore } from '$lib/footnoteUtils';
+
+    const footnoteStore = createFootnoteStore();
+    const { footnotes, addFootnote } = footnoteStore;
+
+    const fns = [
+        `hello *world*`
+    ]
 </script>
 
 <svelte:head>
@@ -52,7 +63,7 @@
 
     <div class="text">
         <p>
-            Lorem ipsum, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Lorem ipsum, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<Footnote id={addFootnote(fns[0])} /> 
         </p>
     </div>
 
@@ -185,9 +196,7 @@
     </div>
 
     <div class="text">
-        <div class="footnotes">
-            <h3>Footnotes</h3>
-        </div>
+        <Footnotes footnotes={footnotes} />
     </div>
 </main>
 
