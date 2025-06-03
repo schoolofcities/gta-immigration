@@ -5,17 +5,17 @@
         {
             'votes': ['lib', 'cons1', 'cons1', 'cons1', 'cons1'],
             'header': 'Syed, b. 1990, Don Valley East',
-            'description': "Syed's parents, both working-class immigrants, spent decades navigating underemployment and Islamophobic stereotypes—especially after 9/11. Syed completed some university and now works as a personal banker. In his early twenties, he began moving right. By the time of our interview, he was a committed Conservative. When asked why, he said simply: “I began to think more like a Canadian—and less like a Pakistani.”",
+            'description': "Syed's parents, both working-class immigrants, spent decades navigating underemployment and Islamophobic stereotypes—especially after 9/11. Syed completed some university and now works as a personal banker. In his early twenties, he began moving right. By the time of our interview, he was a committed Conservative. When asked why, he said simply: **“I began to think more like a Canadian – and less like a Pakistani.”**",
         },
         {
             'votes': ['NA', 'cons1', 'cons1', 'cons1', 'cons1'],
             'header': 'Jessie, b. 2001, Scarborough Southwest',
-            'description': "Jessie was raised by his single mother, a South Asian immigrant from Guyana. During his childhood, Jessie's mother refused social assistance even during their most difficult years. That lesson stuck. For Jessie, voting Conservative was not just about policy – it was a way to distance himself from the racialized stigma around welfare and to honour that ethic of self-reliance and prove that he belongs. “You've arrived. You're a Canadian. So, start voting like one,” he told me.",
+            'description': "Jessie was raised by his single mother, a South Asian immigrant from Guyana. During his childhood, Jessie's mother refused social assistance even during their most difficult years. That lesson stuck. For Jessie, voting Conservative was not just about policy – it was a way to distance himself from the racialized stigma around welfare and to honour that ethic of self-reliance and prove that he belongs. **“You've arrived. You're a Canadian. So, start voting like one,”** he told me.",
         },
         {
             'votes': ['NA', 'cons1', 'cons1', 'cons1', 'cons1'],
             'header': 'Naomi, b. 1997, Don Valley North',
-            'description': "Naomi's parents arrived from China with master's degrees but spent years in low-wage work, quietly rebuilding their lives in pursuit of middle-class stability. Naomi came of age in a household where success meant being dependable, discreet, and above all, respectable – leading her to avoid activist spaces, lest she be seen as ungrateful or difficult. Aligning with the right offered a kind of protection: a way to distance herself from racial grievance and to quietly belong. “The Conservatives just seem... reasonable,” she said. “They don't make everything about race.”",
+            'description': "Naomi's parents arrived from China with master's degrees but spent years in low-wage work, quietly rebuilding their lives in pursuit of middle-class stability. Naomi came of age in a household where success meant being dependable, discreet, and above all, respectable – leading her to avoid activist spaces, lest she be seen as ungrateful or difficult. Aligning with the right offered a kind of protection: a way to distance herself from racial grievance and to quietly belong. **“The Conservatives just seem... reasonable,”** she said. **“They don't make everything about race.”**",
         },
         {
             'votes': ['lib', 'NA', 'lib', 'cons1', 'NA'],
@@ -25,7 +25,7 @@
         {
             'votes': ['ndp', 'lib', 'lib', 'cons1', 'cons1'],
             'header': 'Kevin, b. 1989, Mississauga East-Cooksville',
-            'description': "Kevin, a second-generation Chinese Canadian, used to be a committed progressive. But after struggling with delayed career prospects and watching his parents' retirement savings dwindle, he started to see the Conservatives as the only party speaking to “people like me who are trying to make it without [asking for] handouts.”",
+            'description': "Kevin, a second-generation Chinese Canadian, used to be a committed progressive. But after struggling with delayed career prospects and watching his parents' retirement savings dwindle, he started to see the Conservatives as the only party speaking to **“people like me who are trying to make it without [asking for] handouts.”**",
         },
     ]
     

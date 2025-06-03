@@ -1,5 +1,6 @@
 <script>
     import { PARTY_NAMES_SHORT, PARTY_COLOURS } from "$lib/constants";
+    import { parseMarkdown } from "$lib/footnoteUtils";
 
     let {
         profile,
@@ -61,7 +62,7 @@
     </svg>
     
     <div class="header">{profile.header}</div>
-    <div class="description">{profile.description}</div>
+    <div class="description">{@html parseMarkdown(profile.description)}</div>
 </div>
 
 <style>
