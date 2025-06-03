@@ -56,13 +56,9 @@
             <a href='https://fidanelcioglu.com/' target='_blank'>Emine Fidan Elcioglu</a>
         </p>
         <p>
-            Maps & Graphics:
-            <a href='https://www.linkedin.com/in/aniket-k-8a8b9921b/' target='_blank'>Aniket Kali</a>,
+            Maps, Graphics, & Editing:
+            <a href='https://www.an-k.ca/contact/' target='_blank'>Aniket Kali</a>,
             <a href='https://jamaps.github.io/' target='_blank'>Jeff Allen</a>
-        </p>
-        <p>
-            Editing: 
-            Felicity Heyworth, Aniket Kali
         </p>
         <p>
             June 2025
@@ -71,7 +67,15 @@
 
     <div class="text">
         <p>
-            Lorem ipsum, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<Footnote id={addFootnote(fns[0])} /> 
+            <em>MEDIA: In order to seek comment or an interview, please send all media inquiries to communication.sofc@utoronto.ca</em>
+        </p>
+        
+        <p>
+            Visible minority voters are reshaping Canadian politics. Nowhere is this more evident than in the Greater Toronto Area (GTA), where more than half the population identifies as non-white. With over 50 federal seats, the GTA isn’t just Canada’s most diverse region – it’s also its most competitive. <a href='https://www.cbc.ca/news/canada/toronto/canada-election-gta-905-greater-toronto-area-target-ridings-1.7512080' target='_blank'>Win here, and you can win the country.</a>
+        </p>
+
+        <p>
+            That’s why a quiet political shift is making so much noise. Over the past two decades, ridings with large visible minority populations have become more likely to vote Conservative. What used to be a weak spot for the right is now a growing base. The data shows a clear reversal: the more diverse the riding, the stronger the Conservative numbers, both provincially and federally.
         </p>
     </div>
 
@@ -81,17 +85,7 @@
 
     <div class="text">
         <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-    </div>
-
-    <div class="text">
-        <h2>What is happening?</h2>
-        <p>
-            Lorem ipsum, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-        <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Take Brampton West as an example. In the 2025 federal election, the Conservatives gained 22 percentage points in this riding alone, one of their biggest jumps in the country. That riding is 88 percent visible minority. Similar patterns are emerging across other suburban ridings from Scarborough to Mississauga, where demographic change is reshaping the electoral landscape.
         </p>
     </div>
 
@@ -101,23 +95,81 @@
 
     <div class="text">
         <p>
-            Lorem ipsum, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            What makes this trend especially striking is that the Conservative Party has long been associated with Canada’s <a href='https://theconversation.com/from-dog-whistles-to-blaring-horns-poilievre-makes-his-case-246970' target='_blank'>white</a>, <a href='https://www.policyalternatives.ca/news-research/platform-crunch-comparing-all-parties-tax-cut-and-cash-transfers-promises/#conservative-proposal-hands-largest-benefit-to-the-richest-30-per-cent' target='_blank'>affluent</a> majority. For much of the country’s political history, it was seen as the party of property owners, business leaders, and traditional elites, an image that made it an unlikely vehicle for the aspirations of visible minority voters.
         </p>
+
         <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            So who exactly are we talking about when we talk about visible minorities? The term comes from <a href='https://www23.statcan.gc.ca/imdb/p3Var.pl?Function=DEC&Id=45152' target='_blank'>Statistics Canada</a> and refers to people who are racialized as non-white or non-Caucasian, excluding Indigenous peoples. This includes communities such as South Asian, Chinese, Black, Filipino, Arab, Latin American, and others. In the GTA, this group overlaps significantly with immigration: <a href='https://www150.statcan.gc.ca/n1/pub/36-28-0001/2023008/article/00001-eng.htm' target='_blank'>more than 90 percent</a> of visible minorities are either immigrants or the Canadian-born children of immigrants. A <a href='https://schoolofcities.github.io/gta-immigration/political-shifts' target='_blank'>recent study</a> by the School of Cities found that the Conservatives have made significant inroads into immigrant-heavy ridings across the GTA as well.
+        </p>
+
+        <p>
+            This report discusses the GTA’s rightward shift as it becomes a region increasingly shaped by visible minority voters. Using voting data, census figures, and recent research, it explores how and why the Conservative Party is gaining ground, and what this tells us about Canada’s changing political landscape.
         </p>
     </div>
 
     <div class="text">
-        <h2>2nd Generation Immigrants</h2>
+        <h2>Multiculturalism and the "model minority"</h2>
         <p>
-            Discussion of 2nd gen visible minorities shifting right - introduce the main study, qualitative data, etc.
+            What explains the rightward turn among visible minorities in the GTA? The answer lies not in a single moment or election cycle, but in a longer arc of demographic, policy, and political change.
         </p>
+
         <p>
-            Lorem ipsum, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Over the past half-century, Canada’s immigration story has changed dramatically. The introduction of the points-based selection system in 1967 replaced race-based quotas with a framework that prioritized education, language skills, and work experience. While pre-1967 restrictions selected for mostly white and European immigrants, since the shift to the points-based system, most newcomers arrive from the Global South and are officially classified as visible minorities. In places like the GTA, this demographic shift is especially pronounced. <a href='https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?topic=10&lang=e&dguid=2021S0503535' target='_blank'>Close to half of the city’s population</a> are immigrants, of which most are from Asia, particularly India and China. And, <a href='https://www12.statcan.gc.ca/census-recensement/2021/as-sa/fogs-spg/page.cfm?topic=10&lang=e&dguid=2021S0503535' target='_blank'>more than half</a> the population identifies as a visible minority.
         </p>
+
         <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            But while immigration policies today may aim to look race-neutral on paper, many racialized immigrants continue to face steep barriers once they arrive. A major one is deskilling. A <a href='https://www.cbc.ca/news/canada/edmonton/edmonton-alberta-employment-immigration-professional-1.7425256' target='_blank'>2024 CBC poll</a> found that more than half of internationally trained professionals in Canada have never worked in their field. Employers often demand “Canadian experience” while disregarding foreign credentials. For many immigrant families, this has meant years of underemployment and economic sacrifice. And for their Canadian-born children, it means growing up in households shaped by long hours, stalled careers, and a promise of upward mobility that often feels out of reach.
+        </p>
+
+        <p>
+            These dynamics are not just the result of poor planning or bureaucratic oversight. They reflect a deeper reality: Canadian society remains organized by long standing <a href="https://www.policyalternatives.ca/wp-content/uploads/attachments/Canada's%20Colour%20Coded%20Income%20Inequality.pdf" target='_blank'>hierarchies of race and class</a>. Despite official commitments to multiculturalism and meritocracy, access to opportunity is unevenly distributed. Racialized and working-class communities are more likely to experience economic insecurity, institutional surveillance, and political exclusion. In the face of such structural barriers, appeals to individual responsibility can resonate by offering a sense of control in an unequal system.
+        </p>
+
+        <p>
+            It was against this backdrop of frustration, stalled mobility, and unresolved aspiration that conservative politicians began to recalibrate. In the 1990s, however, the Reform Party—a populist, Western-based party that would later help form the modern Conservative Party of Canada—largely failed to gain traction among racialized and immigrant communities. Rather than addressing the structural challenges these communities faced, Reform leaders leaned into exclusionary rhetoric. They called for cuts to immigration, defunding of ethnic organizations, and an end to official bilingualism. While insisting they weren’t racist, they frequently cast newcomers as cultural threats and questioned whether too many “non-traditional” (read: non-white) immigrants were coming to Canada. Unsurprisingly, the party found little support among racialized voters.
+        </p>
+
+        <p>
+            Reform rebranded as the Canadian Alliance in 2000 and merged with the federal Progressive Conservative Party in 2003 to form the Conservative Party of Canada. That merger marked a strategic turning point. Recognizing they couldn’t win nationally without immigrant voters, the new party launched a calculated makeover. Under Stephen Harper—and with Jason Kenney acting as the unofficial minister of outreach—the Conservatives rolled out a full-scale ethnic outreach strategy. They ran multilingual ads in ethnic media, attended religious festivals, apologized for the Chinese head tax, and recruited visible minority candidates in key suburban ridings.
+        </p>
+
+        <p>
+            These weren’t just symbolic gestures. The party was tapping into what some called “model minority” politics, celebrating immigrants who embraced hard work, family values, and economic success, while sidelining those who pushed for systemic change. As political scientist Laura Kwak argues, this shift reframed racial diversity as proof of national progress, even as the party doubled down on neoliberal economic policies and a narrow vision of belonging.
+        </p>
+
+        <p>
+            While the Conservatives were actively reshaping their image, the Liberal Party was standing still. For many visible minority voters, the party of multiculturalism had become a party of broken promises, offering symbolic inclusion while failing to address <a href='https://www150.statcan.gc.ca/n1/daily-quotidien/240516/dq240516b-eng.htm' target='_blank'>racism</a>, <a href='https://housingrightscanada.com/racialized-communities-newcomers-and-people-with-disabilities-experience-high-levels-of-discrimination-in-rental-housing-across-canada' target='_blank'>housing</a> <a href='https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/housing-research/research-reports/housing-needs/core-housing-need-transitions-racialized-communities-canada' target='_blank'>precarity</a>, or <a href='https://www.statcan.gc.ca/en/consultation/2021/ucrs' target='_blank'>unequal</a> <a href='https://www150.statcan.gc.ca/n1/daily-quotidien/230331/dq230331c-eng.htm' target='_blank'>policing</a>. Between <a href='https://en.wikipedia.org/wiki/Results_breakdown_of_the_2015_Canadian_federal_election#cite_note-20' target='_blank'>2015</a> and <a href='https://en.wikipedia.org/wiki/Results_breakdown_of_the_2019_Canadian_federal_election' target='_blank'>2019</a>, Liberal support declined sharply among key groups. Among Chinese Canadians, it dropped from 47 to 41 percent. Among Indian Canadians, it fell from 62 to 53 percent. These shifts suggest the political realignment was already underway well before the most recent federal election. Unsurprisingly, therefore, by January 2025, an <a href='https://angusreid.org/trudeau-resignation/' target='_blank'>Angus Reid poll</a> report found that public support for Trudeau had hit historic lows, reflecting widespread frustration with the party’s direction and credibility.
+        </p>
+
+        <p>
+            The rightward shift among visible minorities, then, is not simply a matter of partisanship. It reflects broader tensions in Canadian multiculturalism, the erosion of redistributive politics, and the way race, class, and citizenship intersect in an era of precarity.
+        </p>
+
+        <p>
+            This realignment came into sharper focus in the 2025 federal election. In key GTA ridings, Conservative candidates made direct appeals to second-generation voters and immigrant homeowners, often emphasizing affordability, crime, and education; these issues resonated with many suburban families. The election results suggest that the growing support for the Conservatives among visible minorities is no longer a blip, but a trend with staying power.
+        </p>
+    </div>
+
+    <div class="text">
+        <h2>Second-generation Canadians</h2>
+        <p>
+            Most research about racialized voters starts at the top – that is, they tend to focus on what political parties say, how politicians frame multiculturalism, or which communities parties target during election season. But I recently published a <a href='https://theconversation.com/why-are-so-many-second-generation-south-asian-and-chinese-canadians-planning-to-vote-conservative-253820' target='_blank'>study</a> that took the reverse approach. Using a bottom-up, extended case approach, I examined how second-generation Canadians make sense of politics and voting in their own lives.
+        </p>
+
+        <p>
+            Specifically, I conducted 50 in-depth interviews with adults living in the GTA, all born in Canada to immigrant parents. Half supported the Conservative Party of Canada (CPC); the other half supported the New Democratic Party (NDP). Respondents identified as South Asian (n = 20), Chinese (n = 20), or white (n = 10). Most were in their 20s and early 30s, and many were navigating transitions into full-time work and financial independence. I approached each interview as a case that could reveal how broader social forces – such as class, race, and immigration policy – take shape in everyday life. Using the extended case method, I traced how individual histories both reflect and challenge these larger structures.
+        </p>
+
+        <p>
+            Take Syed, a second-generation Pakistani Canadian born in 1990 and living in Don Valley East. His parents, both working-class immigrants, spent decades navigating underemployment and Islamophobic stereotypes – especially after 9/11. Syed completed some university and now works as a personal banker. In his early twenties, he began moving right. By the time of our interview, he was a committed Conservative. When asked why, he said simply: “I began to think more like a Canadian—and less like a Pakistani.”
+        </p>
+
+        <p>
+            That wasn’t just a shift in policy views. It was a rejection of the identity he saw attached to his parents’ generation – an identity marked by racialization, perceived dependency, and Liberal multiculturalism. Voting Conservative, for Syed, was a way to say: I don’t need special treatment. I’m not part of that group. I belong on the inside.
+        </p>
+
+        <p>
+            His story points to a larger dynamic. In a country where power remains closely tied to whiteness, some second-generation Canadians use conservative politics as a racial strategy, or a way to align themselves with dominant norms and claim proximity to the white mainstream. This strategy is shaped, in part, by the model minority myth, which casts Asians as hardworking, self-reliant, and apolitical. But this status is precarious. In times of crisis – such as 9/11 or COVID-19 – those once celebrated as “good immigrants” can be quickly recast as threats. For some, embracing conservative politics is a way to stabilize their place, to signal that they’re not outsiders but responsible, modern citizens.
         </p>
     </div>
 
@@ -127,20 +179,22 @@
 
     <div class="text">
         <p>
-            Lorem ipsum, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-        <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            For many respondents, voting Conservative reflected a search for stability, respectability, and recognition in a society where racialized immigrants and their children are often expected to prove their worth. Whether distancing themselves from the stigma of welfare dependency, rejecting racial grievance politics, or responding to perceived policy failures around housing and immigration, second-generation Canadians turned to conservatism as a way to manage the frustrations of stalled mobility and unmet expectations. In doing so, they were not abandoning the values they grew up with, but recalibrating their political choices to align with what they saw as the most realistic – if imperfect – path toward middle-class security and belonging.
         </p>
     </div>
 
     <div class="text">
         <h2>South Asian Canadians and Chinese Canadians</h2>
         <p>
-            Lorem ipsum, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            South Asian and Chinese Canadians are not only the two largest visible minority groups in the Greater Toronto Area; they are also at the center of the region’s political transformation. Long viewed as reliable Liberal voters, these communities are now shifting rightward, with recent polling showing equal or greater support for the Conservative Party compared to white Canadians.
         </p>
+
         <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            According to polling done by Mainstreet Research from September 2024 to April 2025, Conservative support among both groups not only matched but at times surpassed that of white Canadians. Among South Asians, Conservative backing peaked at 56 percent, compared to just 44 percent among whites. Support among Chinese Canadians had peaked nearly as high, reaching 53 percent.
+        </p>
+
+        <p>
+            While Liberal support began to rebound across all groups following the inauguration of the Trump administration – especially after the U.S. declared steep tariffs on Canadian goods and openly challenged Canadian sovereignty – this rightward shift still marks a dramatic departure from past voting patterns. As the bar graphs below show, Conservative support within ridings high in South Asian and Chinese residents in the GTA remains significantly higher today than it was in the 2015 federal or 2014 provincial elections.
         </p>
     </div>
 
@@ -151,15 +205,6 @@
             subtitle="Conservative vote share (%) and South Asian (% of population) in the GTA's five most South Asian ridings"
             subtitleGroup="South Asian"
         />
-    </div>
-
-    <div class="text">
-        <p>
-            Lorem ipsum, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        </p>
-        <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
     </div>
 
     <div class="container">
@@ -173,24 +218,50 @@
 
     <div class="text">
         <p>
-            Lorem ipsum, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Such shifts are more than just individual preference and disillusionment with one party. For Chinese Canadians in the GTA, it reflects a <a href='https://briarpatchmagazine.com/articles/view/organizing-the-suburbs' target='_blank'>concerted outreach effort</a> by the Conservatives through churches and ethnic media, especially on social issues. Likewise, tensions between the Canadian and Indian governments <a href='https://thelocal.to/india-canada-hindu-voters-liberal-conservative-modi/' target='_blank'>left an opening</a> for Conservative outreach to South Asian Canadians in the Peel region—reflecting deeper questions about identity, belonging, and political strategy in a multiracial democracy. 
         </p>
+
         <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            For second-generation Canadians especially, voting Conservative can become a way to manage the contradictions of being racialized in a country that prides itself on multiculturalism but continues to reward proximity to whiteness. In <a href='https://www.environicsinstitute.org/projects/project-details/canadians-and-the-u.s.-presidential-election-(2024)' target='_blank'>one 2024 survey</a>, young Canadian men were evenly split between Kamala Harris and Donald Trump – a dramatic change from 2020, when Biden had a clear lead. While this doesn’t map directly onto second-generation voting in Canada, it signals a growing openness to right-wing populism, even among younger and racialized voters. In this context, the rightward turn among South Asian and Chinese Canadians may reflect not just disillusionment, but a rethinking of what inclusion and political respectability require.
         </p>
+
         <p>
-            Conservative shifts within South Asian and Chinese minorities – highlighting 2nd gen, but then broader discussion on why these communities are shifting right/who in them (from research + prior reporting). Note Mainstreet Research polling.
+            But this strategy also carries consequences. Aligning with a political project that prioritizes order, individualism, and status over equity may help some second-generation Canadians feel recognized. It does so, however, on terms set by those already in power. In distancing themselves from racial grievance or redistributive demands, the children of racialized Canadians may gain personal legitimacy while reinforcing the very structures that limit collective mobility. These dynamics aren’t limited to those born in Canada. Recent polling suggests that many immigrants – particularly those who arrived in earlier waves – are growing critical of newcomers.
+        </p>
+
+        <p>
+            A <a href='https://www.cbc.ca/newsinteractives/features/immigration-survey' target='_blank'>2024 CBC survey</a> found that four in five recent immigrants believe Canada has accepted too many international students and migrants without adequate planning. These sentiments often reflect not xenophobia, but a desire to preserve hard-won status. In that sense, exclusionary views can themselves be aspirational – an effort to hold on to a tenuous place within Canada’s racial and economic hierarchy.
+        </p>
+
+        <p>
+            None of this should be mistaken for political confusion. For many, voting Conservative is a calculated response to a society that signals inclusion but rewards conformity. It reflects a pragmatic understanding of how power operates and of what is required to appear as a “model citizen” in a stratified, settler-colonial state.
+        </p>
+
+        <p>
+            Still, it would be a mistake to suppose that these rightward shifts are the only or unifying answer these groups have to deeply felt issues. In contrast, some South Asian Canadians in Brampton <a href='https://www.insauga.com/student-encampment-shuts-down-after-nearly-150-days-of-protest-in-brampton/' target='_blank'>have pushed</a> for a more just immigration policy and <a href='https://www.cbc.ca/news/canada/toronto/convoy-protests-ignoring-real-hardships-truckers-face-peel-drivers-warn-1.6340263' target='_blank'>against</a> exploitative working conditions, particularly for international students. Other visible minority youth, in Scarborough, have <a href='https://www.tvo.org/video/how-ontario-youth-groups-are-changing-the-narrative' target='_blank'>spoken out</a> against the rise in anti-immigrant racism, especially <a href='https://www.cbc.ca/news/canada/asian-racism-hate-canada-pandemic-1.5959788' target='_blank'>against</a> Chinese Canadians following COVID-19. This approach has a history in Canada, too: in 1981, a <a href='https://definingmomentscanada.ca/all-for-9/historical-articles/1981-cupw-strike-parental-rights/' target='_blank'>42-day strike</a> by postal workers – many of them women, many of them immigrants – won 17 weeks of paid maternity leave, popularizing the idea that everyone should have access to parental leave, and showing how when racialized and working-class communities organize for each other, they can <a href='https://briarpatchmagazine.com/articles/view/raising-the-floor' target='_blank'>raise the floor</a> for everyone. Sociologist Ruha Benjamin calls this ethic linked fate: meaningful freedom comes by recognizing our lives are bound up with each other and requires collective transformation. 
+        </p>
+
+        <p>
+            If the goal is a more equitable and inclusive politics, this moment requires more than critique. It calls for a deeper reckoning with the conditions that define who belongs, who is heard, and who benefits, not only in formal party platforms, but in everyday understandings of who deserves to be here, and on what terms. The challenge going forward is not simply to recognize these rightward shifts, but to ask what kinds of narratives, policies, and coalitions might offer a genuine alternative.
         </p>
     </div>
 
     <div class="text">
         <h2>Conclusion</h2>
         <p>
-            Discuss key factors we didn’t go into as much: income, turnout, disenfranchised
+            This report has traced how second-generation South Asian and Chinese Canadians are contributing to the political realignment underway in the Greater Toronto Area. But other factors driving this realignment warrant closer attention. One is income. While many of my respondents were middle class in terms of education or household wealth, they often described feeling economically precarious. <a href='https://www150.statcan.gc.ca/n1/daily-quotidien/241119/dq241119b-eng.htm' target='_blank'>Rising housing costs</a>, <a href='https://www.bankofcanada.ca/2024/10/staff-analytical-note-2024-23/' target='_blank'>stagnant</a> <a href='https://economics.td.com/ca-productivity-bad-to-worse' target='_blank'>wages</a>, and <a href='https://www.ipsos.com/en-ca/53-percent-of-canadas-post-secondary-students-claim-financial-independence' target='_blank'>delayed financial independence</a> shaped how these younger voters evaluated which parties addressed their concerns and which did not.
         </p>
 
         <p>
-            Conclusion: why is this happening, what does it mean?
+            Another key factor is turnout. The people I spoke to for my study, more often than not, voted when the occasion arose. But many others remain on the margins of electoral politics. Turnout among low-income and racialized Canadians is uneven, shaped by disillusionment, structural barriers, and time constraints. In some cases, disenfranchisement due to <a href='https://ccla.org/get-informed/talk-rights/non-citizen-voting-rights/' target='_blank'>immigration status</a> limits formal participation altogether. As a result, those most affected by systemic inequality are often excluded from shaping political outcomes. Meanwhile, the immigrant voters who do participate may disproportionately represent those who have achieved a degree of economic or social stability.
+        </p>
+
+        <p>
+            These dynamics suggest that the rightward turn cannot be fully explained by party messaging or short-term dissatisfaction. It reflects deeper shifts in how race, class, and national belonging are being interpreted and enacted. For some second-generation Canadians, voting Conservative signals self-reliance and alignment with dominant social expectations. Yet in pursuing political legitimacy through these channels, they may be reinforcing structures that maintain broader patterns of exclusion. The pursuit of inclusion, in this case, can coincide with the reproduction of inequality.
+        </p>
+
+        <p>
+            A fuller understanding of these shifts demands that we move beyond both celebratory accounts of multicultural progress and simplistic narratives of backlash. The future of Canadian politics hinges on how issues of race, class, and nationalism are confronted – not just in campaign platforms, but across public discourse, media, and everyday civic life. The questions are pressing: Who gets to feel at home in this country? Whose frustrations are validated, and whose are dismissed? What kinds of futures are being imagined – and for whom – in the name of national unity?
         </p>
     </div>
 
@@ -200,6 +271,26 @@
 
         <div class="footnotes">
             <h3>Data & Methods</h3>
+
+            <p>
+                We obtained federal election results from <a href='https://github.com/Lucas-Czarnecki/Canadian-Federal-Elections/tree/main' target="_blank">Lucas Czarnecki's database</a>, sourced from Canada's Library of Parliament (LoP), and Ontario election results from Elections Ontario. Results for the 2025 federal and Ontario elections were manually added.
+            </p>
+
+            <p>
+                Census data was drawn from <a href='https://observatory.uwo.ca/unicen/index.html' target="_blank">UNI-CEN</a>, where we used census tract-level statistics from 1996 onward for visible minority demographics, and 2001 onward for South Asian and Chinese Canadian demographics.
+            </p>
+
+            <p>
+                Because historical electoral ridings lack direct census data, we estimated statistics using areal interpolation. We calculated relevant statistics by aggregating all census tracts fully or partially within each riding (using these <a href='https://github.com/schoolofcities/gta-immigration/blob/main/analysis/get_ed_ct_coverage_gta.ipynb' target="_blank">two</a> <a href='https://github.com/schoolofcities/gta-immigration/blob/main/analysis/get_ed_ct_stats_gta.ipynb' target="_blank">scripts</a>), weighting partial overlaps by their proportional area.
+            </p>
+
+            <p>
+                The maps displayed for the 2025 federal election came from the <a href='https://open.canada.ca/data/en/dataset/18bf3ea7-1940-46ec-af52-9ba3f77ed708' target="_blank">latest representation order</a>, while we used <a href='https://observatory.uwo.ca/unicen/index.html' target="_blank">UNI-CEN</a> (federal ridings and census tracts) and <a href='http://election-atlas.ca' target="_blank">election-atlas.ca</a> (Ontario ridings) for all previous elections. We included only ridings where at least 75% of the area was covered by census tracts and 50% fell within the Greater Toronto Area.
+            </p>
+
+            <p>
+                The final dataset is <a href='https://github.com/schoolofcities/gta-immigration/tree/main/static/data/elections' target="_blank">available here</a>, and all code for this project is in the <a href='https://github.com/schoolofcities/gta-immigration/tree/main' target="_blank">GitHub repository</a>.
+            </p>
         </div>
     </div>
 

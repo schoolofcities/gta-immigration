@@ -50,7 +50,7 @@
                 Conservatives made major gains in the visible minority-heavy GTA suburbs
             </h4>
             <p>
-                Many ridings saw gains far in excess of their national vote share change of 7.6%. In Brampton West, a riding where 88% of the population are visible minorities, the Conservatives gained 22% and flipped the seat - their 4th largest gain in the country.
+                Many ridings saw gains far in excess of their national vote share change of 7.6%.
             </p>
         </div>
         <div class="maps-container">
