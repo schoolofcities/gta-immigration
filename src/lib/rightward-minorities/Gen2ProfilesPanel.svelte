@@ -34,14 +34,14 @@
 
 <div class="profiles-container">
     <div class="plots-title">
-        <h4>Many second-generation Canadians speak about disillusionment driving them right</h4>
-        <p>Quotes from interviews with Conservative supporters</p>
+        <h4>Visible minority youth see the Conservatives as a path to belonging, against their disillusionment with an incomplete multiculturalism</h4>
+        <p>Five quotes from Conservative supporters interviewed in the study that explains their motivations</p>
     </div>
     <div class="profiles-grid">
         {#each profiles as profile, i}
             <Gen2Profile 
                 profile={profile}
-                showLabels={i === 0}
+                showLabels={true}
                 electionLabels={electionLabels}
             />
         {/each}

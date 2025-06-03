@@ -83,18 +83,17 @@
         </p>
         <p>
             Maps, Graphics, & Editing:
-            <a href='https://www.an-k.ca/contact/' target='_blank'>Aniket Kali</a>,
-            <a href='https://jamaps.github.io/' target='_blank'>Jeff Allen</a>
+            <a href='https://www.an-k.ca/contact/' target='_blank'>Aniket Kali</a>
         </p>
         <p>
             June 2025
         </p>
+        <!-- <p>
+            <em>Media inquiries: communication.sofc@utoronto.ca</em>
+        </p> -->
     </div>
 
     <div class="text">
-        <p>
-            <em>MEDIA: In order to seek comment or an interview, please send all media inquiries to communication.sofc@utoronto.ca</em>
-        </p>
         
         <p>
             Visible minority voters are reshaping Canadian politics. Nowhere is this more evident than in the Greater Toronto Area (GTA), where more than half the population identifies as non-white. With over 50 federal seats, the GTA isn't just Canada's most diverse region – it's also its most competitive. <a href='https://www.cbc.ca/news/canada/toronto/canada-election-gta-905-greater-toronto-area-target-ridings-1.7512080' target='_blank'>Win here, and you can win the country.</a>

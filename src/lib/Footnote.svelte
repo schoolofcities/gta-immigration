@@ -1,7 +1,7 @@
 <script>
-    export let id;
-    let footnoteId = `footnote-${id}`;
-    let refId = `footnote-ref-${id}`;
+  export let id;
+  let footnoteId = `footnote-${id}`;
+  let refId = `footnote-ref-${id}`;
 </script>
 
 <span class="footnote-ref-wrapper">
@@ -16,7 +16,7 @@
 <style>
   .footnote-ref-wrapper {
     position: relative;
-    font-size: 0.8em;
+    font-size: 1em;
     line-height: 1;
     display: inline-block;
   }
@@ -27,7 +27,11 @@
     margin-left: 0;
     margin-right: 0.1em; /* slight breathing room after */
     text-decoration: none;
-    color: #007FA3;
+    color: #AB1368;
     white-space: nowrap;
+  }
+
+  .footnote-ref:hover {
+    color: #500931;
   }
 </style>

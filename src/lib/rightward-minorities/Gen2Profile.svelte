@@ -78,7 +78,7 @@
     
     .description {
         margin-top: 2px;  
-        font-family: RobotoRegular;
+        font-family: SourceSerif;
         color: var(--brandGray90);
     }
 </style>
