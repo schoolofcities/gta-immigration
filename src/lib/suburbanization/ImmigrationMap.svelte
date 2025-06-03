@@ -114,12 +114,8 @@
     });
 </script>
 
-
-
 <div class="map-inner-container" bind:offsetWidth={divWidth}>
-
 	<svg width={innerWidth} {height} id={curYear}>
-
         <defs>
             <pattern id="diagonalHatch" patternUnits="userSpaceOnUse" width="4" height="4">
                 <path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" 
@@ -171,10 +167,9 @@
         {#each mapConfig[curYear].breaks as breakNum, i}
             <text class="label legend" x={5 + ((i + 1) * 40)} y="55" text-anchor="middle">{mapConfig[curYear]["breaks"][i]+ mapConfig[curYear].breakSuffix}</text>
         {/each}
-        
     </svg>
 
-    <svg width={innerWidth} height="78">
+    <!-- <svg width={innerWidth} height="78">
 
         <text class="label" x="5" y="{12}" text-anchor="start">Mean distance to Toronto city center:</text>
 
@@ -191,11 +186,8 @@
             <rect class="bar" width="{200 * mapConfig[curYear][distKey] / 40}" height = "8" x="104" y="{22 + (i * 18)}" style="fill: #6D247A; stroke: white;"></rect>
             <text class="label legend" x="{107 + 200 * mapConfig[curYear][distKey] / 40}" y="{30 + (i * 18)}" text-anchor="start">{mapConfig[curYear][distKey]} km</text>
         {/each}
-    </svg>
-
+    </svg> -->
 </div>
-
-
 
 <style>
     .map-inner-container {

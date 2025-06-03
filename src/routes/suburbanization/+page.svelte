@@ -3,6 +3,17 @@
     import ImmigrationMap from '$lib/suburbanization/ImmigrationMap.svelte';
 
     import '../../assets/global-styles.css';
+
+    import Footnote from '$lib/Footnote.svelte';
+    import Footnotes from '$lib/Footnotes.svelte';
+    import { createFootnoteStore } from '$lib/footnoteUtils';
+
+    const footnoteStore = createFootnoteStore();
+    const { footnotes, addFootnote } = footnoteStore;
+
+    const fns = [
+        `hello *world*`
+    ]
 </script>
 
 <main>
@@ -13,9 +24,8 @@
             Aniket Kali,
             Serene Tan,
             Jeff Allen
-            <br />
-            <br />
-            April 2025
+            |
+            June 2025
         </p>
     </div>
 
@@ -53,8 +63,16 @@
     </div>
 
     <div class="text">
-        <h2>Data & Methods</h2>
-        <p>information...</p>
+        <br>
+        <br>
+
+        <div class="footnotes">
+            <h3>Data & Methods</h3>
+        </div>
+    </div>
+
+    <div class="text">
+        <Footnotes footnotes={footnotes} />
     </div>
 </main>
 
