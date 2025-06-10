@@ -24,9 +24,6 @@
 </div>
 
 <style>
-    .footnotes {
-        margin-top: 2em;
-    }
     
     .footnote-item {
         margin-bottom: 0.5em;

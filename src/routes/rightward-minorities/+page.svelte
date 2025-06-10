@@ -295,6 +295,12 @@
         <br>
 
         <div class="footnotes">
+            <h3>Acknowledgements</h3>
+
+            <p>
+                We thank Felicity Heyworth and <a href="https://jamaps.github.io/" target="_blank">Jeff Allen</a> for their contribution to editing the text and graphics of this article respectively.
+            </p>
+
             <h3>Data & Methods</h3>
 
             <p>
