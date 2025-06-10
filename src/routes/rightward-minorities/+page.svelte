@@ -60,15 +60,15 @@
 	<meta property="og:description" content="Visible minorities in the GTA have been shifting to the Conservatives" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://schoolofcities.github.io/gta-immigration/rightward-minorities" />
-	<!-- <meta property="og:image" content="https://schoolofcities.github.io/gta-immigration/web-card-rightward-minorities.png" /> -->
+	<meta property="og:image" content="https://schoolofcities.github.io/gta-immigration/web-card-rightward-minorities.png" />
 	<meta property="og:locale" content="en_CA">
 
-	<!-- <meta name="twitter:card" content="summary_large_image" /> -->
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="https://schoolofcities.github.io/gta-immigration/rightward-minorities" />
 	<meta name="twitter:creator" content="@UofTCities" />
 	<meta name="twitter:title" content="Rightward shifts amongst visible minorities in the Greater Toronto Area" />
 	<meta name="twitter:description" content="Visible minorities in the GTA have been shifting to the Conservatives" />
-	<!-- <meta name="twitter:image" content="https://schoolofcities.github.io/gta-immigration/web-card-rightward-minorities.png" />  -->
+	<meta name="twitter:image" content="https://schoolofcities.github.io/gta-immigration/web-card-rightward-minorities.png" /> 
     
 </svelte:head>
 
