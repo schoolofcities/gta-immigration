@@ -41,12 +41,12 @@
 			</a>
 		</h3>
 
-		<!-- <h3>
+		<h3>
 			June 2025 - 
 			<a href='../gta-immigration/rightward-minorities'>
 				Rightward shifts amongst visible minorities in the Greater Toronto Area
 			</a>
-		</h3> -->
+		</h3>
 
 		<!-- <h3>
 			June 2025 - 

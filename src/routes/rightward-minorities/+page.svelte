@@ -88,9 +88,9 @@
         <p>
             June 2025
         </p>
-        <!-- <p>
+        <p>
             <em>Media inquiries: communication.sofc@utoronto.ca</em>
-        </p> -->
+        </p>
     </div>
 
     <div class="text">
