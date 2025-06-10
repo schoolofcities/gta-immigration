@@ -35,7 +35,7 @@
 <div class="profiles-container">
     <div class="plots-title">
         <h4>Visible minority youth see the Conservatives as a path to belonging, against their disillusionment with an incomplete multiculturalism</h4>
-        <p>Five quotes from Conservative supporters interviewed in the study that explains their motivations</p>
+        <p>Five quotes and voting records of Conservative supporters interviewed in the study.</p>
     </div>
     <div class="profiles-grid">
         {#each profiles as profile, i}

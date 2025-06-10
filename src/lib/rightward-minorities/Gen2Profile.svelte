@@ -81,4 +81,8 @@
         font-family: SourceSerif;
         color: var(--brandGray90);
     }
+
+    .description strong {
+        font-family: SourceSerifBold;
+    }
 </style>
