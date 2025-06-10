@@ -50,7 +50,7 @@
                 Conservatives made major gains in the visible minority-heavy GTA suburbs
             </h4>
             <p>
-                Many ridings saw gains far in excess of their national vote share change of 7.6%.
+                Many ridings saw gains far in excess of their national vote share change of 7.6%, peaking at a 22% gain in Brampton West – the fourth greatest in the country.
             </p>
         </div>
         <div class="maps-container">

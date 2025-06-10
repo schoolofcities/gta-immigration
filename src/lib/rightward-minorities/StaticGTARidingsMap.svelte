@@ -42,7 +42,9 @@
         return colours[colours.length - 1];
     }
 
-    // stroke-width={(feature.properties['cons_pct_change'] > 7.6) ? 1.0 : 0.3}
+    // Calculate Brampton West position
+    let bramptonWestFeature = $derived(mapData.find(f => f.properties.geoname === 'Brampton West'));
+    let bramptonWestCentroid = $derived(bramptonWestFeature ? path.centroid(bramptonWestFeature) : null);
 </script>
 
 <div class="map-inner-container" bind:offsetWidth={divWidth}>
@@ -61,7 +63,7 @@
             {#each mapData as feature}
                 <path 
                     class="riding" 
-                    stroke-width=0.3
+                    stroke-width={feature.properties.geoname === 'Brampton West'? 1 : 0.3}
                     d={path(feature)} 
                     fill={getColour(feature.properties[dataKey])}
                 />
@@ -77,6 +79,25 @@
                     style="fill:{colour}; stroke: white;"
                 />
             {/each}
+
+            <!-- Brampton West Label - positioned relative to centroid -->
+            {#if bramptonWestCentroid}
+                <line 
+                    x1={bramptonWestCentroid[0] - 20} 
+                    y1={bramptonWestCentroid[1] - 55} 
+                    x2={bramptonWestCentroid[0]} 
+                    y2={bramptonWestCentroid[1]} 
+                    stroke="black" 
+                    stroke-width="1"
+                />
+                <text 
+                    class="riding-label" 
+                    x={bramptonWestCentroid[0] - 35} 
+                    y={bramptonWestCentroid[1] - 60} 
+                >
+                    Brampton West
+                </text>
+            {/if}
 
             {#if dataKey === 'cons_pct_change'}
                 <!-- Add line and text at 7.6% mark (second rectangle) -->
@@ -132,6 +153,12 @@
 
     .label {
         font-size: 15px;
+        font-weight: 600;
+        fill: var(--brandDarkBlue);
+    }
+
+    .riding-label {
+        font-size: 10px;
         font-weight: 600;
         fill: var(--brandDarkBlue);
     }
