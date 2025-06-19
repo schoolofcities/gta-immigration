@@ -1,6 +1,7 @@
 <script>
     import TopSofC from '$lib/TopSofC.svelte';
-    import ImmigrationMap from '$lib/suburbanization/ImmigrationMap.svelte';
+    import ImmigrationMapContainer from '$lib/suburbanization/ImmigrationMapContainer.svelte';
+    // import ImmigrationMap from '$lib/suburbanization/ImmigrationMap.svelte';
     import LineGraphTime from '$lib/suburbanization/LineGraphTime.svelte';
 
     import '../../assets/global-styles.css';
@@ -36,21 +37,8 @@
         </p>
     </div>
 
-    <div class="map-grid">
-        <div class="map-outer-container">
-            <ImmigrationMap curYear={1961} />
-        </div>
-        <div class="map-outer-container">
-            <ImmigrationMap curYear={1981} />
-        </div>
-        <div class="map-outer-container">
-            <ImmigrationMap curYear={2001} />
-        </div>
-        <div class="map-outer-container">
-            <ImmigrationMap curYear={2021} />
-        </div>
-    </div>
-
+    <ImmigrationMapContainer />
+    
     <div class="text">
         <h2>How do immigrants compare to the general population?</h2>
         <p>information...</p>
@@ -80,27 +68,4 @@
 </main>
 
 <style>
-    /* Default styles for the container and divs */
-    .map-grid {
-        margin: 0 auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        max-width: 1200px;
-        gap: 20px;
-    }
-
-    .map-outer-container {
-        width: 100%; /* Default to 100% width on mobile */
-        box-sizing: border-box;
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-
-    /* Media query for larger screens */
-    @media (min-width: 768px) {
-        .map-outer-container {
-            width: calc(50% - 10px); /* Two per row with gap */
-        }
-    }
 </style>
