@@ -1,6 +1,7 @@
 <script>
     import TopSofC from '$lib/TopSofC.svelte';
     import ImmigrationMap from '$lib/suburbanization/ImmigrationMap.svelte';
+    import LineGraphTime from '$lib/suburbanization/LineGraphTime.svelte';
 
     import '../../assets/global-styles.css';
 
@@ -19,7 +20,7 @@
 <main>
     <TopSofC/>
     <div class="title">
-        <h1>Changes in Immigrant Settlement Patterns in the Greater Toronto Area</h1>
+        <h1>The Suburbanization of Immigration in the Greater Toronto Area</h1>
         <p>
             Aniket Kali,
             Serene Tan,
@@ -56,6 +57,7 @@
     </div>
 
     <!-- LINE GRAPH -->
+    <LineGraphTime />
 
     <div class="text">
         <p>explanation...</p>
