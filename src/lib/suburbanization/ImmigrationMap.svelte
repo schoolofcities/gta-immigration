@@ -58,11 +58,14 @@
     let innerWidth = $derived(divWidth);
     let height = $derived(innerWidth / 1.55);
 
+    let scaleFactor = $derived(innerWidth <= 500 ? 25 : 30);
+    let heightOffset = $derived(innerWidth <= 500 ? 85 : 100)
+
     let projection = $derived(
         geoMercator()
             .center([-79.4, 43.7])
-            .scale([innerWidth * 30])
-            .translate([(innerWidth / 2) - 50, (height / 2) + 110])
+            .scale([innerWidth * scaleFactor])
+            .translate([(innerWidth / 2) - 50, (height / 2) + heightOffset])
             .angle([-30])
     );
     let path = $derived(geoPath(projection));
@@ -82,9 +85,6 @@
         else if (percentage < 30) return colours[1];
         else if (percentage < 45) return colours[2];
         else if (percentage < 60) return colours[3];
-        // else if (percentage < 50) return colours[4];
-        // else if (percentage < 60) return colours[5];
-        // else if (percentage < 70) return colours[6];
         else return colours[4];
     }
 
@@ -111,10 +111,6 @@
             });
     }
 
-    // $effect(() => {
-    //     console.log(immData);
-    // });
-    
     onMount(() => {
         loadGeoJson();
     });
@@ -142,37 +138,17 @@
                 d={path(data)} 
                 fill={data.properties.colour} 
                 stroke={data.properties.colour} 
-                stroke-width="0.4"
             />
         {/each}
 
         {#each colours as colour, i} 
-            <rect class="box" width="40" height="12" x={5 + (i * 40)} y="30" style="fill:{colours[i]}; stroke: white;"></rect>
+            <rect class="box" width="50" height="12" x={5 + (i * 50)} y="30" style="fill:{colours[i]}; stroke: white;"></rect>
         {/each}
 
         {#each mapConfig[curYear].breaks as breakNum, i}
-            <text class="label legend" x={5 + ((i + 1) * 40)} y="55" text-anchor="middle">{mapConfig[curYear]["breaks"][i]+ mapConfig[curYear].breakSuffix}</text>
+            <text class="label legend" x={5 + ((i + 1) * 50)} y="55" text-anchor="middle">{mapConfig[curYear]["breaks"][i]+ mapConfig[curYear].breakSuffix}</text>
         {/each}
     </svg>
-
-    <!-- <svg width={innerWidth} height="78">
-
-        <text class="label" x="5" y="{12}" text-anchor="start">Mean distance to Toronto city center:</text>
-
-        {#each ['immDist', 'notImmDist', 'popDist'] as distKey, i}
-            <text class="label legend" x="100" y="{30 + (i * 18)}" text-anchor="end">
-                {#if distKey == 'immDist'}
-                    Immigrants
-                {:else if distKey == 'notImmDist'}
-                    Non-immigrants
-                {:else}
-                    Total pop.
-                {/if}
-            </text>
-            <rect class="bar" width="{200 * mapConfig[curYear][distKey] / 40}" height = "8" x="104" y="{22 + (i * 18)}" style="fill: #6D247A; stroke: white;"></rect>
-            <text class="label legend" x="{107 + 200 * mapConfig[curYear][distKey] / 40}" y="{30 + (i * 18)}" text-anchor="start">{mapConfig[curYear][distKey]} km</text>
-        {/each}
-    </svg> -->
 </div>
 
 <style>
@@ -181,19 +157,21 @@
         max-width: 600px;
         min-width: 400px;
     }
+
     .ct {
-        /* stroke: var(--brandWhite); */
-        /* stroke-width: 0.05px; */
+        stroke-width: 0.4;
+    }
+
+    .box {
         /* opacity: 0.75; */
     }
-    .box {
-        opacity: 0.75;
-    }
+
     .label {
         font-size: 15px;
         font-weight: 600;
         fill: var(--brandDarkBlue);
     }
+
     .legend {
         font-size: 13px;
         font-weight: 400;

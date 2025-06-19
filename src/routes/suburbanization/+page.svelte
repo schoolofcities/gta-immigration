@@ -93,8 +93,8 @@
     .map-outer-container {
         width: 100%; /* Default to 100% width on mobile */
         box-sizing: border-box;
-        margin-top: 10px;
-        margin-bottom: 20px;
+        margin-top: 0px;
+        margin-bottom: 0px;
     }
 
     /* Media query for larger screens */
