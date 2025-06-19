@@ -9,10 +9,16 @@
     // Props
     let { curYear } = $props();
     
-    const colours = CENSUS_SHADES['pct_imm'].concat(['#002b36']);
+    const colours = [
+        CENSUS_SHADES['pct_imm'][0], 
+        CENSUS_SHADES['pct_imm'][2], 
+        CENSUS_SHADES['pct_imm'][4], 
+        CENSUS_SHADES['pct_imm'][6], 
+        "#4b0f5c"
+    ];
     const mapConfig = {
         1961: {
-            'breaks': [10, 20, 30, 40, 50, 60, 70],
+            'breaks': [15, 30, 45, 60],
             'breakSuffix': '%',
             'name': `Immigrant (% of population) in ${curYear}`,
             'immDist': 14.85,
@@ -20,7 +26,7 @@
             'popDist': 17.98,
         },
         1981: {
-            'breaks': [10, 20, 30, 40, 50, 60, 70],
+            'breaks': [15, 30, 45, 60],
             'breakSuffix': '%',
             'name': `Immigrant (% of population) in ${curYear}`,
             'immDist': 23.62,
@@ -28,7 +34,7 @@
             'popDist': 28.61,
         },
         2001: {
-            'breaks': [10, 20, 30, 40, 50, 60, 70],
+            'breaks': [15, 30, 45, 60],
             'breakSuffix': '%',
             'name': `Immigrant (% of population) in ${curYear}`,
             'immDist': 26.68,
@@ -36,7 +42,7 @@
             'popDist': 32.01,
         },
         2021: {
-            'breaks': [10, 20, 30, 40, 50, 60, 70],
+            'breaks': [15, 30, 45, 60],
             'breakSuffix': '%',
             'name': `Immigrant (% of population) in ${curYear}`,
             'immDist': 31.58,
@@ -72,14 +78,14 @@
             return "url(#diagonalHatch)"; // For diagonal lines
             // return "#cccccc"; // for simple light gray
         }
-        else if (percentage < 10) return colours[0];
-        else if (percentage < 20) return colours[1];
-        else if (percentage < 30) return colours[2];
-        else if (percentage < 40) return colours[3];
-        else if (percentage < 50) return colours[4];
-        else if (percentage < 60) return colours[5];
-        else if (percentage < 70) return colours[6];
-        else return colours[7];
+        else if (percentage < 15) return colours[0];
+        else if (percentage < 30) return colours[1];
+        else if (percentage < 45) return colours[2];
+        else if (percentage < 60) return colours[3];
+        // else if (percentage < 50) return colours[4];
+        // else if (percentage < 60) return colours[5];
+        // else if (percentage < 70) return colours[6];
+        else return colours[4];
     }
 
     function loadGeoJson() {
@@ -131,34 +137,14 @@
         {/each} -->
 
         {#each immData as data}
-            <path class="ct" d={path(data)} fill={data.properties.colour}/>
+            <path 
+                class="ct" 
+                d={path(data)} 
+                fill={data.properties.colour} 
+                stroke={data.properties.colour} 
+                stroke-width="0.4"
+            />
         {/each}
-
-        <!-- {#each border.features as data}
-            <path d={path(data)} stroke="#1E3765" stroke-width=1 fill=none opacity=0.8/>
-        {/each} -->
-
-        <!-- {#each municipalPoints.features as data}
-			<text
-				class="legend"
-				x={projection(data.geometry.coordinates)[0]}
-				y={projection(data.geometry.coordinates)[1]}
-				text-anchor="middle"
-				stroke="white"
-				stroke-width=2.5
-				font-size=12
-				opacity=0.7
-				>{data.properties.AREA_NAME}
-			</text>
-			<text
-				class="legend"
-				x={projection(data.geometry.coordinates)[0]}
-				y={projection(data.geometry.coordinates)[1]}
-				text-anchor="middle"
-				font-size=12
-				>{data.properties.AREA_NAME}
-			</text>
-		{/each} -->
 
         {#each colours as colour, i} 
             <rect class="box" width="40" height="12" x={5 + (i * 40)} y="30" style="fill:{colours[i]}; stroke: white;"></rect>
@@ -196,9 +182,9 @@
         min-width: 400px;
     }
     .ct {
-        stroke: var(--brandWhite);
-        stroke-width: 0.05px;
-        opacity: 0.75;
+        /* stroke: var(--brandWhite); */
+        /* stroke-width: 0.05px; */
+        /* opacity: 0.75; */
     }
     .box {
         opacity: 0.75;

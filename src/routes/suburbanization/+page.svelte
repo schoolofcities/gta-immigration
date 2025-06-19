@@ -56,9 +56,10 @@
         <p>information...</p>
     </div>
 
-    <!-- LINE GRAPH -->
     <LineGraphTime />
 
+    <!-- Chart multiples comparing distribution of immigrants/non-immigrants -->
+    
     <div class="text">
         <p>explanation...</p>
         <p>conclusion...</p>
