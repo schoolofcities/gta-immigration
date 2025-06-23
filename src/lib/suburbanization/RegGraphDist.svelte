@@ -9,8 +9,18 @@
     export let showXAxisTicks = false;
 
     let containerWidth = 600;
-    const containerHeight = 125; // Half of the original height
-    const margin = { top: 20, right: 30, bottom: 30, left: 50 };
+    const baseHeight = 125;
+    const extraLabelSpace = 20;
+    
+    // Base margins (used for all graphs)
+    const baseMargin = { top: 20, right: 30, bottom: 20, left: 50 };
+    
+    // Calculate actual height and margin based on whether we need the label space
+    $: containerHeight = showXAxisLabel ? baseHeight + extraLabelSpace : baseHeight;
+    $: margin = {
+        ...baseMargin,
+        bottom: showXAxisLabel ? baseMargin.bottom + extraLabelSpace : baseMargin.bottom
+    };
 
     $: innerWidth = containerWidth - margin.left - margin.right;
     $: innerHeight = containerHeight - margin.top - margin.bottom;
@@ -65,13 +75,25 @@
     {#if data.length > 0}
         <svg width={containerWidth} height={containerHeight}>
             <g transform={`translate(${margin.left},${margin.top})`}>
-                <!-- Y-axis grid lines -->
+                <!-- Y-axis grid lines (horizontal) -->
                 {#each [0, 30000, 60000] as tick}
                     <line
                         x1={0}
                         y1={yScale(tick)}
                         x2={innerWidth}
                         y2={yScale(tick)}
+                        stroke="#e0e0e0"
+                        stroke-width="1"
+                    />
+                {/each}
+
+                <!-- X-axis grid lines (vertical) -->
+                {#each [10, 20, 30, 40] as tick}
+                    <line
+                        x1={xScale(tick)}
+                        y1={5}
+                        x2={xScale(tick)}
+                        y2={innerHeight - 5}
                         stroke="#e0e0e0"
                         stroke-width="1"
                     />
@@ -84,7 +106,7 @@
                             <text
                                 class="tick-label"
                                 x={xScale(tick)}
-                                y={20}
+                                y={15}  
                                 text-anchor="middle"
                                 font-size="12"
                             >
@@ -99,7 +121,7 @@
                     {#each [0, 30000, 60000] as tick}
                         <text
                             class="tick-label"
-                            x={-10}
+                            x={-10}  
                             y={yScale(tick)}
                             text-anchor="end"
                             dominant-baseline="middle"
@@ -114,10 +136,10 @@
                 {#if showYAxisLabel}
                     <text
                         class="axis-label"
-                        x={-30}
+                        x={-40}  
                         y={innerHeight / 2}
                         text-anchor="middle"
-                        transform="rotate(-90, -30, {innerHeight / 2})"
+                        transform="rotate(-90, -40, {innerHeight / 2})"
                         font-size="12"
                     >
                         Population
@@ -129,7 +151,7 @@
                     <text
                         class="axis-label"
                         x={innerWidth / 2}
-                        y={innerHeight + margin.bottom - 5}
+                        y={innerHeight + 35}  
                         text-anchor="middle"
                         font-size="12"
                     >
