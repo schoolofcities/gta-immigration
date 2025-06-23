@@ -1,8 +1,8 @@
 <script>
     import TopSofC from '$lib/TopSofC.svelte';
     import ImmigrationMapContainer from '$lib/suburbanization/ImmigrationMapContainer.svelte';
-    // import ImmigrationMap from '$lib/suburbanization/ImmigrationMap.svelte';
     import LineGraphTime from '$lib/suburbanization/LineGraphTime.svelte';
+    import RegGraphContainer from '$lib/suburbanization/RegGraphContainer.svelte';
 
     import '../../assets/global-styles.css';
 
@@ -46,7 +46,7 @@
 
     <LineGraphTime />
 
-    <!-- Chart multiples comparing distribution of immigrants/non-immigrants -->
+    <RegGraphContainer />
     
     <div class="text">
         <p>explanation...</p>
