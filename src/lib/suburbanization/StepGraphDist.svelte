@@ -1,6 +1,5 @@
 <script>
-    import { scaleLinear, line } from 'd3';
-    import { regressionLoess } from "d3-regression";
+    import { scaleLinear, line, curveStepBefore } from 'd3';
     import { onMount } from 'svelte';
 
     export let year;
@@ -68,32 +67,30 @@
             };
         });
 
-        data = [{ dist_km: 0, num_not_imm_tot: 0, num_imm_tot: 0 }, ...parsedData];
+        // Setting initial value to 0 does not lead to a complementary value at the end easily
+        data = [{ dist_km: 0, num_not_imm_tot: parsedData[0].num_not_imm_tot, num_imm_tot: parsedData[0].num_imm_tot }, ...parsedData];
     });
+
+    const ySteps = [0, 40000, 80000];
 
     $: xScale = scaleLinear()
         .domain([0, 50])
         .range([0, innerWidth]);
 
     $: yScale = scaleLinear()
-        .domain([0, 60000])
+        .domain([0, ySteps[2]])
         .range([innerHeight, 0]);
 
-    // Regression for non-immigrants
-    $: notImmRegression = regressionLoess()
-        .x(d => d.dist_km)
-        .y(d => d.num_not_imm_tot)
-        .bandwidth(0.3)(data);
-
-    // Regression for immigrants
-    $: immRegression = regressionLoess()
-        .x(d => d.dist_km)
-        .y(d => d.num_imm_tot)
-        .bandwidth(0.3)(data);
-
+    // Line generator for step lines
     $: lineGenerator = line()
-        .x(d => xScale(d[0]))
-        .y(d => yScale(d[1]));
+        .x(d => xScale(d.dist_km))
+        .y(d => yScale(d.num_not_imm_tot))
+        .curve(curveStepBefore);
+
+    $: immLineGenerator = line()
+        .x(d => xScale(d.dist_km))
+        .y(d => yScale(d.num_imm_tot))
+        .curve(curveStepBefore);
 </script>
 
 <div class="chart-container" bind:clientWidth={containerWidth}>
@@ -133,7 +130,7 @@
                 {/if}
 
                 <!-- Y-axis grid lines (horizontal) -->
-                {#each [0, 30000, 60000] as tick}
+                {#each ySteps as tick}
                     <line
                         x1={0}
                         y1={yScale(tick)}
@@ -175,7 +172,7 @@
 
                 <!-- Y-axis ticks and labels -->
                 <g>
-                    {#each [0, 30000, 60000] as tick}
+                    {#each ySteps as tick}
                         <text
                             class="tick-label"
                             x={-10}  
@@ -216,16 +213,16 @@
                     </text>
                 {/if}
 
-                <!-- Regression lines -->
+                <!-- Step lines -->
                 <path
-                    d={lineGenerator(notImmRegression)}
+                    d={lineGenerator(data)}
                     fill="none"
                     stroke="#0D534D"
                     stroke-width="2"
                 />
 
                 <path
-                    d={lineGenerator(immRegression)}
+                    d={immLineGenerator(data)}
                     fill="none"
                     stroke="#F1C500"
                     stroke-width="2"

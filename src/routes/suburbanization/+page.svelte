@@ -2,7 +2,7 @@
     import TopSofC from '$lib/TopSofC.svelte';
     import ImmigrationMapContainer from '$lib/suburbanization/ImmigrationMapContainer.svelte';
     import LineGraphTime from '$lib/suburbanization/LineGraphTime.svelte';
-    import RegGraphContainer from '$lib/suburbanization/RegGraphContainer.svelte';
+    import StepGraphContainer from '$lib/suburbanization/StepGraphContainer.svelte';
 
     import '../../assets/global-styles.css';
 
@@ -46,7 +46,7 @@
 
     <LineGraphTime />
 
-    <RegGraphContainer />
+    <StepGraphContainer />
     
     <div class="text">
         <p>explanation...</p>
