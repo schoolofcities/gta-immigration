@@ -7,25 +7,37 @@
     export let showYAxisLabel = false;
     export let showXAxisLabel = false;
     export let showXAxisTicks = false;
+    export let showLocationLabels = false;
 
     let containerWidth = 600;
     const baseHeight = 125;
-    const extraLabelSpace = 20;
+    const extraBottomSpace = 20; // For x-axis label
+    const extraTopSpace = 20;    // For location labels
     
     // Base margins (used for all graphs)
     const baseMargin = { top: 20, right: 30, bottom: 20, left: 50 };
     
-    // Calculate actual height and margin based on whether we need the label space
-    $: containerHeight = showXAxisLabel ? baseHeight + extraLabelSpace : baseHeight;
+    // Calculate actual height and margin based on what we need to show
+    $: containerHeight = (showXAxisLabel ? baseHeight + extraBottomSpace : baseHeight) + 
+                         (showLocationLabels ? extraTopSpace : 0);
     $: margin = {
         ...baseMargin,
-        bottom: showXAxisLabel ? baseMargin.bottom + extraLabelSpace : baseMargin.bottom
+        top: showLocationLabels ? baseMargin.top + extraTopSpace : baseMargin.top,
+        bottom: showXAxisLabel ? baseMargin.bottom + extraBottomSpace : baseMargin.bottom
     };
 
     $: innerWidth = containerWidth - margin.left - margin.right;
     $: innerHeight = containerHeight - margin.top - margin.bottom;
 
     let data = [];
+
+    // Location markers data
+    const locationMarkers = [
+        { start: 0, end: 10, label: "Old Toronto" },
+        { start: 10, end: 20, label: "Inner Suburbs" },
+        { start: 20, end: 30, label: "Outer Suburbs" },
+        { start: 30, end: 50, label: "Exurbs" }
+    ];
 
     onMount(async () => {
         const response = await fetch(`/gta-immigration/data/immigration_analysis/imm_dist_${year}.csv`);
@@ -42,7 +54,6 @@
             };
         });
 
-        // Add (0,0) point at the beginning
         data = [{ dist_km: 0, num_not_imm_tot: 0, num_imm_tot: 0 }, ...parsedData];
     });
 
@@ -75,6 +86,35 @@
     {#if data.length > 0}
         <svg width={containerWidth} height={containerHeight}>
             <g transform={`translate(${margin.left},${margin.top})`}>
+                <!-- Location labels at top (if enabled) -->
+                {#if showLocationLabels}
+                    <g class="location-labels">
+                        <!-- Vertical lines (5px to 20px from top) -->
+                        {#each [10, 20, 30] as tick}
+                            <line
+                                x1={xScale(tick)}
+                                y1={-5}  
+                                x2={xScale(tick)}
+                                y2={-20}  
+                                stroke="#e0e0e0"
+                                stroke-width="1"
+                            />
+                        {/each}
+
+                        <!-- Location labels -->
+                        {#each locationMarkers as loc}
+                            <text
+                                x={xScale((loc.start + loc.end) / 2)}
+                                y={-9} 
+                                text-anchor="middle"
+                                font-size="12"
+                            >
+                                {loc.label}
+                            </text>
+                        {/each}
+                    </g>
+                {/if}
+
                 <!-- Y-axis grid lines (horizontal) -->
                 {#each [0, 30000, 60000] as tick}
                     <line
