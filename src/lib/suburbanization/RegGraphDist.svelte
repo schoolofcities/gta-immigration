@@ -10,9 +10,11 @@
     export let showLocationLabels = false;
 
     let containerWidth = 600;
+    $: isMobile = containerWidth <= 600;
+
     const baseHeight = 125;
     const extraBottomSpace = 20; // For x-axis label
-    const extraTopSpace = 20;    // For location labels
+    $: extraTopSpace = isMobile ? 40 : 20
     
     // Base margins (used for all graphs)
     const baseMargin = { top: 20, right: 30, bottom: 20, left: 50 };
@@ -38,6 +40,18 @@
         { start: 20, end: 30, label: "Outer Suburbs" },
         { start: 30, end: 50, label: "Exurbs" }
     ];
+
+    function getLabelParts(label) {
+        if (!isMobile || label === "Exurbs") return [label];
+        return label.split(' ');
+    }
+
+    function getLabelY(label, i) {
+        if (!isMobile) return -9;
+        else if (label === "Exurbs") return -19;
+        else if (i === 0) return -25;
+        else return -13;
+    }
 
     onMount(async () => {
         const response = await fetch(`/gta-immigration/data/immigration_analysis/imm_dist_${year}.csv`);
@@ -95,7 +109,7 @@
                                 x1={xScale(tick)}
                                 y1={-5}  
                                 x2={xScale(tick)}
-                                y2={-20}  
+                                y2={isMobile ? -40 : -20}  
                                 stroke="#e0e0e0"
                                 stroke-width="1"
                             />
@@ -103,14 +117,17 @@
 
                         <!-- Location labels -->
                         {#each locationMarkers as loc}
-                            <text
-                                x={xScale((loc.start + loc.end) / 2)}
-                                y={-9} 
-                                text-anchor="middle"
-                                font-size="12"
-                            >
-                                {loc.label}
-                            </text>
+                            {@const labelParts = getLabelParts(loc.label)}
+                            {#each labelParts as part, i}
+                                <text
+                                    x={xScale((loc.start + loc.end) / 2)}
+                                    y={getLabelY(part, i)} 
+                                    text-anchor="middle"
+                                    font-size="12"
+                                >
+                                    {part}
+                                </text>
+                            {/each}
                         {/each}
                     </g>
                 {/if}
