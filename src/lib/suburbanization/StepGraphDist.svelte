@@ -1,4 +1,5 @@
 <script>
+    import { CENSUS_COLOURS } from '$lib/constants';
     import { scaleLinear, line, curveStepBefore } from 'd3';
     import { onMount } from 'svelte';
 
@@ -59,16 +60,25 @@
         // Parse CSV data and add (0,0) point
         const rows = csvText.split('\n').slice(1); // Skip header
         const parsedData = rows.filter(row => row.trim() !== '').map(row => {
-            const [dist_km, num_pop_tot, num_not_imm_tot, num_imm_tot] = row.split(',');
+            const [dist_km, num_pop_tot, num_not_imm_tot, num_imm_tot, num_imm_new] = row.split(',');
             return {
                 dist_km: +dist_km,
                 num_not_imm_tot: +num_not_imm_tot,
-                num_imm_tot: +num_imm_tot
+                num_imm_tot: +num_imm_tot,
+                num_imm_new: +num_imm_new,
             };
         });
 
         // Setting initial value to 0 does not lead to a complementary value at the end easily
-        data = [{ dist_km: 0, num_not_imm_tot: parsedData[0].num_not_imm_tot, num_imm_tot: parsedData[0].num_imm_tot }, ...parsedData];
+        data = [
+            { 
+                dist_km: 0, 
+                num_not_imm_tot: parsedData[0].num_not_imm_tot, 
+                num_imm_tot: parsedData[0].num_imm_tot,
+                num_imm_new: parsedData[0].num_imm_new,
+            }, 
+            ...parsedData
+        ];
     });
 
     const ySteps = [0, 40000, 80000];
@@ -90,6 +100,11 @@
     $: immLineGenerator = line()
         .x(d => xScale(d.dist_km))
         .y(d => yScale(d.num_imm_tot))
+        .curve(curveStepBefore);
+
+    $: newImmLineGenerator = line()
+        .x(d => xScale(d.dist_km))
+        .y(d => yScale(d.num_imm_new))
         .curve(curveStepBefore);
 </script>
 
@@ -217,14 +232,21 @@
                 <path
                     d={lineGenerator(data)}
                     fill="none"
-                    stroke="#0D534D"
+                    stroke={CENSUS_COLOURS.not_imm}
                     stroke-width="2"
                 />
 
                 <path
                     d={immLineGenerator(data)}
                     fill="none"
-                    stroke="#F1C500"
+                    stroke={CENSUS_COLOURS.imm}
+                    stroke-width="2"
+                />
+
+                <path
+                    d={newImmLineGenerator(data)}
+                    fill="none"
+                    stroke={CENSUS_COLOURS.new_imm}
                     stroke-width="2"
                 />
             </g>

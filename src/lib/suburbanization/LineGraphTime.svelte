@@ -1,4 +1,5 @@
 <script>
+    import { CENSUS_COLOURS } from '$lib/constants';
     import { scaleLinear, scaleTime, line } from 'd3';
     import { onMount } from 'svelte';
 
@@ -45,6 +46,7 @@
 
     $: immLineData = data.map(d => ({ year: d.year, value: d.imm }));
     $: notImmLineData = data.map(d => ({ year: d.year, value: d.not_imm }));
+    $: newImmLineData = data.map(d => ({ year: d.year, value: d.imm_new })).filter(d => (d.value !== null));
 </script>
 
 
@@ -120,23 +122,30 @@
                 <path
                     d={lineGenerator(immLineData)}
                     fill="none"
-                    stroke="#F1C500"
+                    stroke={CENSUS_COLOURS.imm}
                     stroke-width="4"
                 />
 
                 <path
                     d={lineGenerator(notImmLineData)}
                     fill="none"
-                    stroke="#0D534D"
+                    stroke={CENSUS_COLOURS.not_imm}
+                    stroke-width="4"
+                />
+
+                <path
+                    d={lineGenerator(newImmLineData)}
+                    fill="none"
+                    stroke={CENSUS_COLOURS.new_imm}
                     stroke-width="4"
                 />
 
                 <!-- Line labels -->
                 <text
                     class="line-label"
-                    x={xScale(new Date(2001))}
-                    y={yScale(23)}
-                    fill="#F1C500"
+                    x={xScale(new Date(1991))}
+                    y={yScale(27)}
+                    fill={CENSUS_COLOURS.imm}
                     font-weight="bold"
                     text-anchor="middle"
                     font-size="12"
@@ -148,12 +157,24 @@
                     class="line-label"
                     x={xScale(new Date(1981))}
                     y={yScale(34)}
-                    fill="#0D534D"
+                    fill={CENSUS_COLOURS.not_imm}
                     font-weight="bold"
                     text-anchor="middle"
                     font-size="12"
                 >
                     Non-immigrant
+                </text>
+
+                <text
+                    class="line-label"
+                    x={xScale(new Date(2001))}
+                    y={yScale(19)}
+                    fill={CENSUS_COLOURS.new_imm}
+                    font-weight="bold"
+                    text-anchor="middle"
+                    font-size="12"
+                >
+                    New immigrant
                 </text>
             </g>
         </svg>

@@ -33,6 +33,12 @@ export const PARTY_COLOURS = {
     'NA': '#D3D3D3',
 }
 
+export const CENSUS_COLOURS = {
+    'imm': '#6D247A',
+    'not_imm': '#F1C500',
+    'new_imm': '#007FA3',
+}
+
 export const PARTY_SHADES = {
     lib: ["#fbeaea", "#fccfce", "#fbb4b0", "#f79a92", "#f17f73", "#e86353", "#dc4632"],
     cons1: ["#ddeff8", "#b7cfde", "#94b0c5", "#7391ad", "#557296", "#39557e", "#1e3967"],
