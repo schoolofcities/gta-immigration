@@ -44,7 +44,7 @@ YEAR_CODES = {
     1961: {
         'num_pop_tot': ['pop__tot1961ttd'],
         'num_imm_tot': ['imb__tot1961ttd'],
-        'num_imm_new': ['impi19611961tt1', 'impi19601961tt1', 'impi195819591961tt1', 'impi195619571961tt1', 'impi195119551961tt1'],
+        'num_imm_new': ['impi19611961tt1', 'impi19601961tt1', 'impi195819591961tt1', 'impi195619571961tt1'],  # , 'impi195119551961tt1'
         'num_imm_2nd_tot': [],
         'avg_hou_inc': [],
         'num_not_vm_tot': [],
