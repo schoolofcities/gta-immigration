@@ -248,7 +248,18 @@
                     fill="none"
                     stroke={CENSUS_COLOURS.new_imm}
                     stroke-width="2"
+                    stroke-dasharray={year === 1981 ? "4,1.5" : "none"}
                 />
+
+                <!-- Year -->
+                <text
+                    class="year-label"
+                    x={innerWidth}
+                    y={15}  
+                    text-anchor="end"
+                >
+                    {year}
+                </text>
             </g>
         </svg>
     {/if}
@@ -268,5 +279,11 @@
 
     .axis-label {
         fill: #000;
+    }
+
+    .year-label {
+        fill: #000;
+        font-size: 12px;
+        font-weight: bolder;
     }
 </style>

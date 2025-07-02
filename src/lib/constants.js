@@ -36,7 +36,7 @@ export const PARTY_COLOURS = {
 export const CENSUS_COLOURS = {
     'imm': '#6D247A',
     'not_imm': '#F1C500',
-    'new_imm': '#007FA3',
+    'new_imm': '#d5a4b2',
 }
 
 export const PARTY_SHADES = {
