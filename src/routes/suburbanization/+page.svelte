@@ -21,11 +21,11 @@
 <main>
     <TopSofC/>
     <div class="title">
-        <h1>The Suburbanization of Immigration in the Greater Toronto Area</h1>
+        <h1>The Suburbanization of Immigrants in the Greater Toronto Area</h1>
         <p>
-            Aniket Kali,
-            Serene Tan,
-            Jeff Allen
+            <a href='https://www.linkedin.com/in/aniket-k-8a8b9921b/' target='_blank'>Aniket Kali</a>,
+            <a href='https://www.linkedin.com/in/serene-tan-530239113' target='_blank'>Serene Tan</a>,
+            <a href='https://jamaps.github.io/' target='_blank'>Jeff Allen</a>
             |
             June 2025
         </p>

@@ -4,10 +4,10 @@
 
 <div class="container plots-title">
     <h4>
-        The suburbs host an increasing concentration of immigrants, while non-immigrants remain dispersed fairly equally
+        The suburbs hosts more and more immigrants, while non-immigrants live all over the region
     </h4>
     <p>
-        Number of immigrants and non-immigrants in 1km-bands away from Toronto's city center
+        Number of non-immigrants, all immigrants, and new immigrants in 1km-bands away from Toronto's city center.
     </p>
 </div>
 

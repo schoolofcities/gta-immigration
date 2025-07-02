@@ -4,10 +4,10 @@
 
 <div class="container plots-title">
     <h4>
-        Immigrants used to settle in downtown Toronto, but over time increasingly settle in the suburbs
+        Downtown Toronto used to be the hub of the region's immigrants, but now, it's the suburbs
     </h4>
     <p>
-        Percentage of population that are immigrants per census tract
+        Percentage of population that are immigrants per census tract in 20-year intervals
     </p>
 </div>
 

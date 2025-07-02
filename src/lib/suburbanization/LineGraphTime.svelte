@@ -53,10 +53,10 @@
 
 <div class="container plots-title">
     <h4>
-        Immigrants followed non-immigrants by settling in the suburbs
+        Like non-immigrant Canadians, immigrants new and old are moving to the suburbs
     </h4>
     <p>
-        Average distance of immigrants and non-immigrants from Toronto's city center
+        Average distance from Toronto's city center for non-immigrants, all immigrants, and new immigrants. A "new immigrant" arrived in the last 3 years (for 1991 and before), or last 5 years (for 1996 onwards), and is part of the "all immigrants" category.
     </p>
 </div>
 
@@ -159,7 +159,7 @@
                     text-anchor="middle"
                     font-size="12"
                 >
-                    Immigrant
+                    All immigrants
                 </text>
 
                 <text
@@ -171,7 +171,7 @@
                     text-anchor="middle"
                     font-size="12"
                 >
-                    Non-immigrant
+                    Non-immigrants
                 </text>
 
                 <text
@@ -183,7 +183,7 @@
                     text-anchor="middle"
                     font-size="12"
                 >
-                    New immigrant
+                    New immigrants
                 </text>
             </g>
         </svg>
