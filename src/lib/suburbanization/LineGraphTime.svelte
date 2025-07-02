@@ -46,7 +46,8 @@
 
     $: immLineData = data.map(d => ({ year: d.year, value: d.imm }));
     $: notImmLineData = data.map(d => ({ year: d.year, value: d.not_imm }));
-    $: newImmLineData = data.map(d => ({ year: d.year, value: d.imm_new })).filter(d => (d.value !== null));
+    $: newImmLineData3 = data.map(d => ({ year: d.year, value: d.imm_new })).filter(d => (d.value !== null && d.year <= 1996));
+    $: newImmLineData5 = data.map(d => ({ year: d.year, value: d.imm_new })).filter(d => (d.value !== null && d.year >= 1996));
 </script>
 
 
@@ -134,7 +135,15 @@
                 />
 
                 <path
-                    d={lineGenerator(newImmLineData)}
+                    d={lineGenerator(newImmLineData3)}
+                    fill="none"
+                    stroke={CENSUS_COLOURS.new_imm}
+                    stroke-width="4"
+                    stroke-dasharray="4,2"
+                />
+
+                <path
+                    d={lineGenerator(newImmLineData5)}
                     fill="none"
                     stroke={CENSUS_COLOURS.new_imm}
                     stroke-width="4"
