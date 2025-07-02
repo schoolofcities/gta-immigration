@@ -7,7 +7,7 @@
         The suburbs hosts more and more immigrants, while non-immigrants live all over the region
     </h4>
     <p>
-        Number of non-immigrants, all immigrants, and new immigrants in 1km-bands away from Toronto's city center.
+        Number of <span id="non-imm">non-immigrants</span>, <span id="imm">all immigrants</span>, and <span id="new-imm">new immigrants</span> in 1km-bands away from Toronto's city center.
     </p>
 </div>
 
@@ -17,3 +17,21 @@
     <StepGraphDist year={2001} />
     <StepGraphDist year={2021} showXAxisLabel={true} showXAxisTicks={true} />
 </div>
+
+<style>
+    #non-imm {
+        background-color: var(--brandYellow);
+        border-bottom: solid 2px var(--brandYellow);
+    }
+
+    #imm {
+        color: #ffffff;
+        background-color: var(--brandPurple);
+        border-bottom: solid 2px var(--brandPurple);
+    }
+
+    #new-imm {
+        background-color: #d5a4b2;
+        border-bottom: solid 2px #d5a4b2;
+    }
+</style>
