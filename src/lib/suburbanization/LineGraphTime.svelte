@@ -56,7 +56,7 @@
         Like non-immigrant Canadians, immigrants new and old are moving to the suburbs
     </h4>
     <p>
-        Average distance from Toronto's city center for non-immigrants, all immigrants, and new immigrants. A "new immigrant" arrived in the last 3 years (for 1991 and before), or last 5 years (for 1996 onwards), and is part of the "all immigrants" category.
+        Average distance from Toronto's city center for non-immigrants, all immigrants, and new immigrants. A "new immigrant" arrived in the last 3 years (for 1981, 1986, and 1991), or last 5 years (for 1996 onwards), and is part of the "all immigrants" category.
     </p>
 </div>
 
