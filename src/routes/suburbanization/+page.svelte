@@ -18,6 +18,33 @@
     ]
 </script>
 
+<svelte:head>
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1, minimum-scale=1"
+	/>
+
+	<title>The Suburbanization of Immigrants in the Greater Toronto Area | School of Cities</title>
+
+	<meta name="description" content="">
+	<meta name="author" content="Aniket Kali, Serene Tan, & Jeff Allen">
+    
+	<meta property="og:title" content="The Suburbanization of Immigrants in the Greater Toronto Area" />
+	<meta property="og:description" content="Immigrants have increasingly moved to the suburbs over the years" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://schoolofcities.github.io/gta-immigration/suburbanization" />
+	<meta property="og:image" content="https://schoolofcities.github.io/gta-immigration/web-card-suburbanization.png" />
+	<meta property="og:locale" content="en_CA">
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="https://schoolofcities.github.io/gta-immigration/suburbanization" />
+	<meta name="twitter:creator" content="@UofTCities" />
+	<meta name="twitter:title" content="The Suburbanization of Immigrants in the Greater Toronto Area" />
+	<meta name="twitter:description" content="Immigrants have increasingly moved to the suburbs over the years" />
+	<meta name="twitter:image" content="https://schoolofcities.github.io/gta-immigration/web-card-suburbanization.png" /> 
+    
+</svelte:head>
+
 <main>
     <TopSofC/>
     <div class="title">
@@ -40,7 +67,7 @@
     <ImmigrationMapContainer />
     
     <div class="text">
-        <h2>How do immigrants compare to the general population?</h2>
+        <h2>Why the move to the suburbs?</h2>
         <p>information...</p>
     </div>
 

@@ -48,12 +48,12 @@
 			</a>
 		</h3>
 
-		<!-- <h3>
-			June 2025 - 
+		<h3>
+			July 2025 - 
 			<a href='../gta-immigration/suburbanization'>
-				Suburbanization of immigration in the Greater Toronto Area
+				Suburbanization of immigrants in the Greater Toronto Area
 			</a>
-		</h3> -->
+		</h3>
 	</div>
 
 </main>
