@@ -1,6 +1,6 @@
 <script>
     import { CENSUS_COLOURS } from '$lib/constants';
-    import { scaleLinear, line, curveStepBefore } from 'd3';
+    import { scaleLinear, line, curveStepBefore, area } from 'd3';
     import { onMount } from 'svelte';
 
     export let year;
@@ -12,7 +12,7 @@
     let containerWidth = 600;
     $: isMobile = containerWidth <= 600;
 
-    const baseHeight = 125;
+    const baseHeight = 200;
     const extraBottomSpace = 20; // For x-axis label
     $: extraTopSpace = isMobile ? 40 : 20
     
@@ -35,10 +35,10 @@
 
     // Location markers data
     const locationMarkers = [
-        { start: 0, end: 10, label: "Old Toronto" },
-        { start: 10, end: 20, label: "Inner Suburbs" },
-        { start: 20, end: 30, label: "Outer Suburbs" },
-        { start: 30, end: 50, label: "Exurbs" }
+        { start: 0, end: 10, label: "~Old Toronto" },
+        { start: 10, end: 20, label: "~Inner Suburbs" },
+        { start: 20, end: 30, label: "~Outer Suburbs" },
+        { start: 30, end: 50, label: "~Exurbs" }
     ];
 
     function getLabelParts(label) {
@@ -106,6 +106,28 @@
         .x(d => xScale(d.dist_km))
         .y(d => yScale(d.num_imm_new))
         .curve(curveStepBefore);
+
+    
+    // Area generators for filled areas
+    $: areaGenerator = area()
+        .x(d => xScale(d.dist_km))
+        .y0(yScale(0))
+        .y1(d => yScale(d.num_not_imm_tot))
+        .curve(curveStepBefore);
+
+    $: areaGeneratorImm = area()
+        .x(d => xScale(d.dist_km))
+        .y0(yScale(0))
+        .y1(d => yScale(d.num_imm_tot))
+        .curve(curveStepBefore);
+
+     $: areaGeneratorImmNew = area()
+        .x(d => xScale(d.dist_km))
+        .y0(yScale(0))
+        .y1(d => yScale(d.num_imm_new))
+        .curve(curveStepBefore);
+
+
 </script>
 
 <div class="chart-container" bind:clientWidth={containerWidth}>
@@ -168,6 +190,18 @@
                     />
                 {/each}
 
+                {#each [...Array(51).keys()] as tick}
+                    <line
+                        x1={xScale(tick)}
+                        y1={innerHeight - 4}
+                        x2={xScale(tick)}
+                        y2={innerHeight + 4}
+                        stroke="#e0e0e0"
+                        stroke-width="1"
+                    />
+                    
+                {/each}
+
                 <!-- X-axis ticks and labels -->
                 {#if showXAxisTicks}
                     <g transform={`translate(0,${innerHeight})`}>
@@ -224,9 +258,31 @@
                         text-anchor="middle"
                         font-size="12"
                     >
-                        Distance (km)
+                        Distance (km) from Toronto's city centre
                     </text>
                 {/if}
+
+                <!-- Filled areas -->
+                <path
+                    d={areaGenerator(data)}
+                    fill={CENSUS_COLOURS.not_imm}
+                    fill-opacity="0.03"
+                    stroke="none"
+                />
+
+                <path
+                    d={areaGeneratorImm(data)}
+                    fill={CENSUS_COLOURS.imm}
+                    fill-opacity="0.03"
+                    stroke="none"
+                />
+
+                <path
+                    d={areaGeneratorImmNew(data)}
+                    fill={CENSUS_COLOURS.new_imm}
+                    fill-opacity="0.06"
+                    stroke="none"
+                />
 
                 <!-- Step lines -->
                 <path
@@ -237,18 +293,18 @@
                 />
 
                 <path
+                    d={newImmLineGenerator(data)}
+                    fill="none"
+                    stroke={CENSUS_COLOURS.new_imm}
+                    stroke-width="1.5"
+                    stroke-dasharray={year === 1981 ? "4,1.5" : "none"}
+                />
+
+                <path
                     d={immLineGenerator(data)}
                     fill="none"
                     stroke={CENSUS_COLOURS.imm}
                     stroke-width="2"
-                />
-
-                <path
-                    d={newImmLineGenerator(data)}
-                    fill="none"
-                    stroke={CENSUS_COLOURS.new_imm}
-                    stroke-width="2"
-                    stroke-dasharray={year === 1981 ? "4,1.5" : "none"}
                 />
 
                 <!-- Year -->
@@ -273,17 +329,18 @@
     }
 
     .tick-label {
-        fill: #000;
+        fill: var(--brandGray80);
         font-size: 12px;
     }
 
     .axis-label {
-        fill: #000;
+        fill:  var(--brandGray80);
     }
 
     .year-label {
-        fill: #000;
-        font-size: 12px;
-        font-weight: bolder;
+        fill: var(--brandBlack);
+        font-size: 16px;
+        font-family: RobotoBold;
+        font-weight: normal;
     }
 </style>
