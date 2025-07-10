@@ -60,24 +60,59 @@
 
     <div class="text">
         <p>
-            introduction...
+            It’s said that Canada is a nation of immigrants, and nowhere has that been more evident than the Greater Toronto Area, with about one-third of all new immigrants choosing the region in 2021. This isn’t too surprising - Toronto has long been the immigrant hub of the country, with its foreign-born population exceeding the national average consistently. It’s where they’ve ended up that’s really changed: before, it was the downtown, and now, it’s the suburbs. 
         </p>
     </div>
 
     <ImmigrationMapContainer />
     
     <div class="text">
-        <h2>Why the move to the suburbs?</h2>
-        <p>information...</p>
+        <p>
+            As postwar immigration boomed, many immigrants chose downtown Toronto as their new home, with some neighbourhoods home to a majority of immigrants. Over time however, immigrants dispersed: first into the inner suburbs like North York and Scarborough, and later into the outer suburbs and beyond, like Brampton and Markham. 
+        </p>
+        <p>
+            Since the early 2000s especially, immigrants have been more likely to settle in these peripheral municipalities.
+        </p>
+        <p>
+            It’s not just newcomers, though. Whether it’s Italian immigrants moving to Vaughan, or Portuguese immigrants moving to North York, once settled, older immigrants have also chosen to leave the downtown for the suburbs.
+        </p>
+        <h2>
+            Why the move to the suburbs?
+        </h2>
+        <p>
+            In the early and mid 20th century, it was commonplace for immigrants across North America to settle in downtown neighbourhoods. Many new immigrants were working-class, and the downtown provided opportunities to make a living: a short commute to work and jobs, cheap and easy access to housing, and social support through nearby family and ethnic communities. 
+        </p>
+        <p>
+            As early as the 1940s, Toronto’s planners actively paved the path toward suburban growth. New highways were built to make it easier to live in the suburbs, and density was far lower than in the downtown. Unlike the downtown - the densest and poorest part of the city - the suburbs appealed to those who could afford it as roomier, home to better services and schools, and an easy commute to downtown Toronto. 
+        </p>
     </div>
 
     <LineGraphTime />
 
+    <div class="text">
+        <p>
+            In 1967, Canada ended race and nationality quotas for immigration in favour of a points-based system, focused on likelihood of integration. The program favoured younger people with higher educational attainment, work experience, and English or French language abilities. Increasingly, new immigrants arrived with professional qualifications and the means to afford the spaciousness of a suburban home, who did not have to settle in the smaller and tenanted housing of downtown areas. With the growing development of industrial and business parks in the peripheral municipalities, there were also desirable jobs in the suburbs.
+        </p>
+        <p>
+            The Canadian immigrant investor program (1986-2014) also contributed to this trend. This program required applicants to invest a minimum of $800,000 in the country and have a minimum of $1,600,000 net worth to qualify for immigration.  
+        </p>
+        <p>
+            As immigrants from the world over have settled across the GTA, they’ve created new cultural hubs and moved cultural services along with them - most notably with South Asian Canadians in Brampton, and Chinese Canadians in Markham. These, too, attract immigrants to settle in target suburbs, where their old home may not feel as far away. 
+        </p>
+    </div>  
+
     <StepGraphContainer />
     
     <div class="text">
-        <p>explanation...</p>
-        <p>conclusion...</p>
+        <p>
+            No doubt the appeal of the suburbs and ethnic communities form a strong part of the story, but it would be a mistake to leave it there. While it’s true that the downtown was once poorer, recent decades have seen a switch: a wealthier and gentrifying downtown against rising suburban poverty. Many immigrants, particularly poorer immigrants new and old, are likely victims to become part of the suburban poor.
+        </p>
+        <p>
+            At the end of the day, the immigrant story of settlement isn’t all that different in the larger tale of suburbanization: immigrants settled in and moved to suburban areas of large Canadian cities for the same reasons that non-immigrants had. Some considered them to be better places with larger homes and better schools, others sought out their own communities, and many went where their wallet would let them. 
+        </p>
+        <p>
+            Immigrants, just like all the residents in Toronto, are a diverse group. While wealthier immigrants take the option of making new homes in the spacious properties of Toronto’s peripheral municipalities, so do working class immigrants continue to settle in the low-cost rental units in the high-rise apartments of the city’s inner suburbs.
+        </p>
     </div>
 
     <div class="text">
@@ -86,11 +121,24 @@
 
         <div class="footnotes">
             <h3>Data & Methods</h3>
+            <p>
+                We used census data published through UNI-CEN from 1961 onwards for this project. Our analysis considers census data that falls within the Greater Toronto Area (GTA). Specifically, we collected census tract (CT) and census subdivision (CSD) level data, where 50% and 25% of the geometry was within the GTA respectively. We only used CSD data to cover regions where CT data was missing, and weighted CSD data proportionately to the cut used, using this script. In 1961 and 1971, parts of the GTA had no CSD data available, so we used placeholder geometry with null values. 
+            </p>
+            <p>
+                Our main object of interest was immigration data: the total number of immigrants as well as the number of new immigrants. The precise census codes can be found here. We took “new immigrants” to mean “immigrated in the last 5 years”, as is conventional in most census data. Due to irregularities in the census, we sometimes had to define this as the last 3 years (1981, 1986, 1991) or were unable to retrieve the data (1971). 
+            </p>
+            <p>
+                In order to measure distance, we computed the distance from the centroid of a given CT or CSD to Nathan Philipps Square. For mean distance in a year, we weighted them by the normalized number of immigrants, and for 1km-bands, we classified them within 1km buckets, using this script.
+            </p>
+            <p>
+                The final dataset is available here, and all code for this project is in the GitHub repository.
+            </p>
         </div>
     </div>
 
     <div class="text">
         <Footnotes footnotes={footnotes} />
+        
     </div>
 </main>
 
