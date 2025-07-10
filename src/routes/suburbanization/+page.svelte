@@ -4,6 +4,12 @@
     import LineGraphTime from '$lib/suburbanization/LineGraphTime.svelte';
     import StepGraphContainer from '$lib/suburbanization/StepGraphContainer.svelte';
 
+    import mapLegend from './assets/map-legend.svg?raw';
+    import map1961 from './assets/map-1961.svg?raw';
+    import map1981 from './assets/map-1981.svg?raw';
+    import map2001 from './assets/map-2001.svg?raw';
+    import map2021 from './assets/map-2021.svg?raw';
+
     import '../../assets/global-styles.css';
 
     import Footnote from '$lib/Footnote.svelte';
@@ -54,19 +60,45 @@
             <a href='https://www.linkedin.com/in/serene-tan-530239113' target='_blank'>Serene Tan</a>,
             <a href='https://jamaps.github.io/' target='_blank'>Jeff Allen</a>
             |
-            June 2025
+            July 2025
         </p>
     </div>
 
+    <div class="text">
+
+        {@html mapLegend}
+        
+    </div>
+
+    <div class="map-container">
+
+        <!-- copy this into the .svg to scale by aspect ratio for small screens, preserveAspectRatio="xMidYMid meet" -->
+
+        <div class="map">
+            {@html map1961}
+        </div>
+
+        <div class="map">
+            {@html map1981}
+        </div>
+
+        <div class="map">
+            {@html map2001}
+        </div>
+
+        <div class="map">
+            {@html map2021}
+        </div>
+
+    </div>
+
+    <!-- <ImmigrationMapContainer /> -->
+    
     <div class="text">
         <p>
             It’s said that Canada is a nation of immigrants, and nowhere has that been more evident than the Greater Toronto Area, with about one-third of all new immigrants choosing the region in 2021. This isn’t too surprising - Toronto has long been the immigrant hub of the country, with its foreign-born population exceeding the national average consistently. It’s where they’ve ended up that’s really changed: before, it was the downtown, and now, it’s the suburbs. 
         </p>
-    </div>
 
-    <ImmigrationMapContainer />
-    
-    <div class="text">
         <p>
             As postwar immigration boomed, many immigrants chose downtown Toronto as their new home, with some neighbourhoods home to a majority of immigrants. Over time however, immigrants dispersed: first into the inner suburbs like North York and Scarborough, and later into the outer suburbs and beyond, like Brampton and Markham. 
         </p>
@@ -143,4 +175,40 @@
 </main>
 
 <style>
+
+    .map-container {
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-width: 1400px;
+        gap: 20px;
+        margin-top: 25px;
+    }
+
+    .map {
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 700px;
+        margin: 0 auto;
+        position: relative;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border: solid 1px #e9e9e9;
+    }
+
+    @media (min-width: 1200px) {
+        .map {
+            width: calc(50% - 10px); /* Two per row with gap */
+        }
+    }
+
+    .map svg {
+        width: 30px;
+        height: auto;
+        display: block;
+    }
+
 </style>

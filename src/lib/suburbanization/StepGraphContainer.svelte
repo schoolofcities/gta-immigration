@@ -4,7 +4,7 @@
 
 <div class="container plots-title">
     <h4>
-        The suburbs hosts more and more immigrants, while non-immigrants spread out across the region
+        The suburbs have hosted more and more immigrants, while non-immigrants spread out across the region
     </h4>
     <p>
         Population of <span id="non-imm">non-immigrants</span>, <span id="imm">all immigrants</span>, and <span id="new-imm">new immigrants</span> in 1km-bands away from central Toronto.
