@@ -4,7 +4,7 @@
     import { onMount } from 'svelte';
 
     let containerWidth = 600;
-    const containerHeight = 250;
+    const containerHeight = 300;
     const margin = { top: 30, right: 30, bottom: 50, left: 50 };
 
     $: innerWidth = containerWidth - margin.left - margin.right;
@@ -48,15 +48,16 @@
     $: notImmLineData = data.map(d => ({ year: d.year, value: d.not_imm }));
     $: newImmLineData3 = data.map(d => ({ year: d.year, value: d.imm_new })).filter(d => (d.value !== null && d.year <= 1996));
     $: newImmLineData5 = data.map(d => ({ year: d.year, value: d.imm_new })).filter(d => (d.value !== null && d.year >= 1996));
+
 </script>
 
 
 <div class="container plots-title">
     <h4>
-        Like non-immigrant Canadians, immigrants new and old are moving to the suburbs
+        Immigrants new and old are moving to the suburbs
     </h4>
     <p>
-        Average distance from Toronto's city center for <span id="non-imm">non-immigrants</span>, <span id="imm">all immigrants</span>, and <span id="new-imm">new immigrants</span>. A "new immigrant" arrived in the last 3 years (for 1981, 1986, and 1991), or last 5 years (for 1996 onwards), and is part of the "all immigrants" category.
+        Average distance in kilometres that residents in the Greater Toronto Area live from Toronto's city center among <span id="non-imm">non-immigrants</span>, <span id="imm">all immigrants</span>, and <span id="new-imm">new immigrants</span>.
     </p>
 </div>
 
@@ -102,13 +103,13 @@
                             dominant-baseline="middle"
                             font-size="12"
                         >
-                            {tick}
+                            {tick} km
                         </text>
                     {/each}
                 </g>
 
                 <!-- Y-axis label -->
-                <text
+                <!-- <text
                     class="axis-label"
                     x={-30}
                     y={innerHeight / 2}
@@ -117,37 +118,83 @@
                     font-size="12"
                 >
                     Average distance (km)
-                </text>
+                </text> -->
+
+
 
                 <!-- Lines -->
                 <path
                     d={lineGenerator(immLineData)}
                     fill="none"
                     stroke={CENSUS_COLOURS.imm}
-                    stroke-width="4"
+                    stroke-width="3"
                 />
+
+                {#each immLineData as d}
+                    <circle
+                        cx={xScale(new Date(d.year))}
+                        cy={yScale(d.value)}
+                        r="4"
+                        fill={CENSUS_COLOURS.imm}
+                        stroke="white"
+                        stroke-width="1"
+                    />
+                {/each}
 
                 <path
                     d={lineGenerator(notImmLineData)}
                     fill="none"
                     stroke={CENSUS_COLOURS.not_imm}
-                    stroke-width="4"
+                    stroke-width="3"
                 />
+
+                {#each notImmLineData as d}
+                    <circle
+                        cx={xScale(new Date(d.year))}
+                        cy={yScale(d.value)}
+                        r="4"
+                        fill={CENSUS_COLOURS.not_imm}
+                        stroke="white"
+                        stroke-width="1"
+                    />
+                {/each}
 
                 <path
                     d={lineGenerator(newImmLineData3)}
                     fill="none"
                     stroke={CENSUS_COLOURS.new_imm}
-                    stroke-width="4"
+                    stroke-width="3"
                     stroke-dasharray="4,2"
                 />
+
+                {#each newImmLineData3 as d}
+                    <circle
+                        cx={xScale(new Date(d.year))}
+                        cy={yScale(d.value)}
+                        r="4"
+                        fill={CENSUS_COLOURS.new_imm}
+                        stroke="white"
+                        stroke-width="1"
+                    />
+                {/each}
 
                 <path
                     d={lineGenerator(newImmLineData5)}
                     fill="none"
                     stroke={CENSUS_COLOURS.new_imm}
-                    stroke-width="4"
+                    stroke-width="3"
                 />
+
+                {#each newImmLineData5 as d}
+                    <circle
+                        cx={xScale(new Date(d.year))}
+                        cy={yScale(d.value)}
+                        r="4"
+                        fill={CENSUS_COLOURS.new_imm}
+                        stroke="white"
+                        stroke-width="1"
+                    />
+                {/each}
 
                 <!-- Line labels -->
                 <text
@@ -155,7 +202,6 @@
                     x={xScale(new Date(1991))}
                     y={yScale(27)}
                     fill={CENSUS_COLOURS.imm}
-                    font-weight="bold"
                     text-anchor="middle"
                     font-size="12"
                 >
@@ -167,7 +213,6 @@
                     x={xScale(new Date(1981))}
                     y={yScale(34)}
                     fill={CENSUS_COLOURS.not_imm}
-                    font-weight="bold"
                     text-anchor="middle"
                     font-size="12"
                 >
@@ -179,7 +224,6 @@
                     x={xScale(new Date(2001))}
                     y={yScale(19)}
                     fill={CENSUS_COLOURS.new_imm}
-                    font-weight="bold"
                     text-anchor="middle"
                     font-size="12"
                 >
@@ -190,6 +234,12 @@
     {/if}
 </div>
 
+<div class="container plots-title">
+    <p style="color: var(--brandGray80); font-size: 12px;">
+        Data are from the Canadian census. A new immigrant is based on arriving in 3 years prior to the census for 1981, 1986, and 1991 and 5 years prior to the census for 1996 to 2021. New immigrants are part of the all immigrants category.
+    </p>
+</div>
+
 <style>
     .chart-container {
         width: 100%;
@@ -198,12 +248,16 @@
     }
 
     .tick-label {
-        fill: #000;
+        fill: var(--brandGray80);
         font-size: 12px;
     }
 
     .axis-label {
-        fill: #000;
+        fill: var(--brandGray90);
+    }
+
+    .line-label {
+        font-family: RobotoRegular, sans-serif;
     }
 
     .line-label {
@@ -211,18 +265,18 @@
     }
 
     #non-imm {
-        background-color: var(--brandYellow);
-        border-bottom: solid 2px var(--brandYellow);
+        /* background-color: var(--brandYellow); */
+        border-bottom: solid 2px var(--brandLightGreen);
     }
 
     #imm {
-        color: #ffffff;
-        background-color: var(--brandPurple);
+        /* color: #ffffff; */
+        /* background-color: var(--brandPurple); */
         border-bottom: solid 2px var(--brandPurple);
     }
 
     #new-imm {
-        background-color: #d5a4b2;
-        border-bottom: solid 2px #d5a4b2;
+        /* background-color: #d5a4b2; */
+        border-bottom: solid 2px var(--brandPink);
     }
 </style>
