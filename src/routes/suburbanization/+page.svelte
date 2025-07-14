@@ -34,7 +34,7 @@
 
         `Jeff Allen, Steven Farber, and Ignacio Tiznado-Aitken, “Pathways to suburban poverty in nine Canadian metropolitan areas”, *Cities* 147, (2024), 104848, [https://doi.org/10.1016/j.cities.2024.104848](https://doi.org/10.1016/j.cities.2024.104848)`,
 
-        `Sutama Ghosh, “Everyday Lives in Vertical Neighbourhoods: Exploring Bangladeshi Residential Spaces in Toronto’s Inner Suburbs”, *International Journal of Urban and Regional Research* 38, no. 6 (2014): 2008–24. [https://doi.org/10.1111/1468-2427.12170](https://doi.org/10.1111/1468-2427.12170); and Robert A. Murdie, Carlos Teixeira, Michael Lanphier, and Paul Anisef, “Towards a Comfortable Neighbourhood and Appropriate Housing: Immigrant Experiences in Toronto”, in *The World in a City*, (University of Toronto Press, 2003), 132.`,
+        `Sutama Ghosh, “Everyday Lives in Vertical Neighbourhoods: Exploring Bangladeshi Residential Spaces in Toronto's Inner Suburbs”, *International Journal of Urban and Regional Research* 38, no. 6 (2014): 2008–24. [https://doi.org/10.1111/1468-2427.12170](https://doi.org/10.1111/1468-2427.12170); and Robert A. Murdie, Carlos Teixeira, Michael Lanphier, and Paul Anisef, “Towards a Comfortable Neighbourhood and Appropriate Housing: Immigrant Experiences in Toronto”, in *The World in a City*, (University of Toronto Press, 2003), 132.`,
     ]
 </script>
 
@@ -110,7 +110,7 @@
     
     <div class="text">
         <p>
-            It’s said that Canada is a nation of immigrants, and nowhere has that been more evident than the Greater Toronto Area, with about one-third of all new immigrants choosing the region in 2021.<Footnote id={addFootnote(fns[0])} /> This isn’t too surprising - Toronto has long been the immigrant hub of the country, with its foreign-born population exceeding the national average consistently. It’s where they’ve ended up that’s really changed: before, it was the downtown, and now, it’s the suburbs. 
+            It's said that Canada is a nation of immigrants, and nowhere has that been more evident than the Greater Toronto Area, with about one-third of all new immigrants choosing the region in 2021.<Footnote id={addFootnote(fns[0])} /> This isn't too surprising – Toronto has long been the immigrant hub of the country, with its foreign-born population exceeding the national average consistently. It's where they've ended up that's really changed: before, it was the downtown, and now, it's the suburbs. 
         </p>
 
         <p>
@@ -120,7 +120,7 @@
             Since the early 2000s especially, immigrants have been more likely to settle in these peripheral municipalities.<Footnote id={addFootnote(fns[1])} />
         </p>
         <p>
-            It’s not just newcomers, though. Whether it’s Italian immigrants moving to Vaughan, or Portuguese immigrants moving to North York, once settled, older immigrants have also chosen to leave the downtown for the suburbs.
+            It's not just newcomers, though. Whether it's Italian immigrants moving to Vaughan, or Portuguese immigrants moving to North York, once settled, older immigrants have also chosen to leave the downtown for the suburbs.
         </p>
         <h2>
             Why the move to the suburbs?
@@ -129,7 +129,7 @@
             In the early and mid 20th century, it was commonplace for immigrants across North America to settle in downtown neighbourhoods. Many new immigrants were working-class, and the downtown provided opportunities to make a living: a short commute to work and jobs, cheap and easy access to housing, and social support through nearby family and ethnic communities. 
         </p>
         <p>
-            As early as the 1940s, Toronto’s planners actively paved the path toward suburban growth. New highways were built to make it easier to live in the suburbs, and density was far lower than in the downtown.<Footnote id={addFootnote(fns[2])} /> Unlike the downtown - the densest and poorest part of the city - the suburbs appealed to those who could afford it as roomier, home to better services and schools, and an easy commute to downtown Toronto. 
+            As early as the 1940s, Toronto's planners actively paved the path toward suburban growth. New highways were built to make it easier to live in the suburbs, and density was far lower than in the downtown.<Footnote id={addFootnote(fns[2])} /> Unlike the downtown – the densest and <a href='https://schoolofcities.github.io/neighbourhood-income-toronto-2020/' target="_blank">poorest</a> part of the city – the suburbs appealed to those who could afford it as roomier, home to better services and schools, and an easy commute to downtown Toronto. 
         </p>
     </div>
 
@@ -143,7 +143,7 @@
             The Canadian immigrant investor program (1986-2014) also contributed to this trend. This program required applicants to invest a minimum of $800,000 in the country and have a minimum of $1,600,000 net worth to qualify for immigration.<Footnote id={addFootnote(fns[4])} />
         </p>
         <p>
-            As immigrants from the world over have settled across the GTA, they’ve created new cultural hubs and moved cultural services along with them - most notably with South Asian Canadians in Brampton, and Chinese Canadians in Markham.<Footnote id={addFootnote(fns[5])} /> These, too, attract immigrants to settle in target suburbs, where their old home may not feel as far away. 
+            As immigrants from the world over have settled across the GTA, they've created new cultural hubs and moved cultural services along with them – most notably with South Asian Canadians in Brampton, and Chinese Canadians in Markham.<Footnote id={addFootnote(fns[5])} /> These, too, attract immigrants to settle in target suburbs, where their old home may not feel as far away. 
         </p>
     </div>  
 
@@ -151,13 +151,13 @@
     
     <div class="text">
         <p>
-            No doubt the appeal of the suburbs and ethnic communities form a strong part of the story, but it would be a mistake to leave it there. While it’s true that the downtown was once poorer, recent decades have seen a switch: a wealthier and gentrifying downtown against rising suburban poverty.<Footnote id={addFootnote(fns[6])} /> Immigrants remain amongst the most likely victims to become part of the suburban poor, amidst a cost-of-living crisis, a lack of affordable housing, and “deskilling” where exactly those qualifications that gave them the points to immigrate are seen as invalid and inferior to Canadian credentials. 
+            No doubt the appeal of the suburbs and ethnic communities form a strong part of the story, but it would be a mistake to leave it there. While it's true that the downtown was once poorer, recent decades have seen a switch: a <a href="https://schoolofcities.github.io/neighbourhood-income-toronto-2020/" target="_blank">wealthier</a> and <a href="https://www.theguardian.com/cities/2020/jan/14/my-parkdale-is-gone-how-gentrification-reached-the-one-place-that-seemed-immune" target="_blank">gentrifying</a> downtown against rising suburban poverty.<Footnote id={addFootnote(fns[6])} /> Immigrants remain amongst the most likely victims to become part of the suburban poor, amidst a cost-of-living crisis, a lack of affordable housing, and “<a href="https://www.thestar.com/news/canada/immigrants-to-canada-have-long-found-their-qualifications-questioned-and-careers-crushed-things-were-supposed/article_c3ed7483-40f0-4acc-9e76-c8036f8f3270.html" target="_blank">deskilling</a>” where exactly those qualifications that gave them the points to immigrate are seen as invalid and inferior to Canadian credentials. 
         </p>
         <p>
             In that context, wealthier immigrants can afford spacious suburban homes, yes, but working-class immigrants are more often limited to low-cost rental units in high-rise apartments in the inner suburbs.<Footnote id={addFootnote(fns[7])} />
         </p>
         <p>
-            At the end of the day, the immigrant story of settlement isn’t all that different in the larger tale of suburbanization: immigrants settled in and moved to suburban areas of large Canadian cities for the same reasons that non-immigrants had. Some considered them to be better places with larger homes and better schools, others sought out their own communities, and many went where their wallet would let them. 
+            At the end of the day, the immigrant story of settlement isn't all that different in the larger tale of suburbanization: immigrants settled in and moved to suburban areas of large Canadian cities for the same reasons that non-immigrants had. Some considered them to be better places with larger homes and better schools, others sought out their own communities, and many went where their wallet would let them. 
         </p>
     </div>
 
@@ -168,16 +168,16 @@
         <div class="footnotes">
             <h3>Data & Methods</h3>
             <p>
-                We used census data published through UNI-CEN from 1961 onwards for this project. Our analysis considers census data that falls within the Greater Toronto Area (GTA). Specifically, we collected census tract (CT) and census subdivision (CSD) level data, where 50% and 25% of the geometry was within the GTA respectively. We only used CSD data to cover regions where CT data was missing, and weighted CSD data proportionately to the cut used, using this script. In 1961 and 1971, parts of the GTA had no CSD data available, so we used placeholder geometry with null values. 
+                We used census data published through <a href="https://observatory.uwo.ca/unicen/index.html" target="_blank">UNI-CEN</a> from 1961 onwards for this project. Our analysis considers census data that falls within the Greater Toronto Area (GTA). Specifically, we collected census tract (CT) and census subdivision (CSD) level data, where 50% and 25% of the geometry was within the GTA respectively. We only used CSD data to cover regions where CT data was missing, and weighted CSD data proportionately to the cut used, using <a href="https://github.com/schoolofcities/gta-immigration/blob/main/analysis/join_ct_csd_imm_stats_gta.ipynb" target="_blank">this script</a>. In 1961 and 1971, parts of the GTA had no CSD data available, so we used placeholder geometry with null values. 
             </p>
             <p>
-                Our main object of interest was immigration data: the total number of immigrants as well as the number of new immigrants. The precise census codes can be found here. We took “new immigrants” to mean “immigrated in the last 5 years”, as is conventional in most census data. Due to irregularities in the census, we sometimes had to define this as the last 3 years (1981, 1986, 1991) or were unable to retrieve the data (1971). 
+                Our main object of interest was immigration data: the total number of immigrants as well as the number of new immigrants. The precise census codes can be <a href="https://github.com/schoolofcities/gta-immigration/blob/main/analysis/constants.py" target="_blank">found here</a>. We took “new immigrants” to mean “immigrated in the last 5 years”, as is conventional in most census data. Due to irregularities in the census, we sometimes had to define this as the last 3 years (1981, 1986, 1991) or were unable to retrieve the data (1971). 
             </p>
             <p>
-                In order to measure distance, we computed the distance from the centroid of a given CT or CSD to Nathan Philipps Square. For mean distance in a year, we weighted them by the normalized number of immigrants, and for 1km-bands, we classified them within 1km buckets, using this script.
+                In order to measure distance, we computed the distance from the centroid of a given CT or CSD to Nathan Philipps Square. For mean distance in a year, we weighted them by the normalized number of immigrants, and for 1km-bands, we classified them within 1km buckets, using <a href="https://github.com/schoolofcities/gta-immigration/blob/main/analysis/analyze_imm_stats.ipynb" target="_blank">this script</a>.
             </p>
             <p>
-                The final dataset is available here, and all code for this project is in the GitHub repository.
+                The final dataset is <a href="https://github.com/schoolofcities/gta-immigration/tree/main/static/data" target="_blank">available here</a>, and all code for this project is in the <a href="https://github.com/schoolofcities/gta-immigration" target="_blank">GitHub repository</a>.
             </p>
         </div>
     </div>
