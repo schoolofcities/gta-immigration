@@ -79,7 +79,7 @@
 
                 <!-- X-axis ticks and labels (every 10 years) -->
                 <g transform={`translate(0,${innerHeight})`}>
-                    {#each data.filter(d => d.year % 5 === 1) as d}
+                    {#each data.filter(d => d.year % 10 === 1) as d}
                         <text
                             class="tick-label"
                             x={xScale(new Date(d.year))}
