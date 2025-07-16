@@ -28,7 +28,7 @@
 
         `Sandeep Kumar and Bonica Leung, “Formation of an Ethnic Enclave: Process and Motivations,” *Plan Canada*, 45:2 (2005), 43-45.`,
 
-        `Citizenship and Immigration Canada, “New federal Immigrant Investor Program will bring to Canada more resources to fund economic development and job creation initiatives” (November 10, 2010.) Archived at [https://web.archive.org/web/20101115061929/http://www.cic.gc.ca/english/department/media/backgrounders/2010/2010-11-10a.asp](https://web.archive.org/web/20101115061929/http://www.cic.gc.ca/english/department/media/backgrounders/2010/2010-11-10a.asp)`,
+        `Citizenship and Immigration Canada, “New federal Immigrant Investor Program will bring to Canada more resources to fund economic development and job creation initiatives” (November 10, 2010.) Archived at [Interactive Archive](https://web.archive.org/web/20101115061929/http://www.cic.gc.ca/english/department/media/backgrounders/2010/2010-11-10a.asp)`,
 
         `Shuguang Wang and Jason Zhong, "Delineating Ethnoburbs in Metropolitan Toronto", CERIS Working Paper No. 100 (2013)`,
 
