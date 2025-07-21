@@ -57,7 +57,7 @@
         Immigrants new and old are moving to the suburbs
     </h4>
     <p>
-        Average distance in kilometres that residents in the Greater Toronto Area live from Toronto's city center among <span id="non-imm">non-immigrants</span>, <span id="imm">all immigrants</span>, and <span id="new-imm">new immigrants</span>.
+        Average distance in kilometres that residents in the Greater Toronto Area live from Toronto's city centre among <span id="non-imm">non-immigrants</span>, <span id="imm">all immigrants</span>, and <span id="new-imm">new immigrants</span>.
     </p>
 </div>
 
@@ -236,7 +236,7 @@
 
 <div class="container plots-title">
     <p style="color: var(--brandGray80); font-size: 12px;">
-        Data are from the Canadian census. A new immigrant is based on arriving in 3 years prior to the census for 1981, 1986, and 1991 and 5 years prior to the census for 1996 to 2021. New immigrants are part of the all immigrants category.
+        Data are from the Canadian census. A new immigrant is defined as arriving in the 3 years prior to the census for 1981, 1986, and 1991 and in the 5 years prior to the census for 1996 to 2021. New immigrants are part of the “all immigrants” category.
     </p>
 </div>
 
