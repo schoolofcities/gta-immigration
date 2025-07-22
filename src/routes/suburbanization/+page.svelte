@@ -112,7 +112,7 @@
     
     <div class="text">
         <p>
-            It's said that Canada is a nation of immigrants, and nowhere has that been more evident than the Greater Toronto Area (GTA), with about one-third of all new immigrants choosing the region in 2021.<Footnote id={addFootnote(fns[0])} /> This isn't too surprising – Toronto has long been the immigrant hub of the country, with its foreign-born population consistently exceeding the national average. It's where they've ended up that's really changed: before, it was thedowntown, and now, it's the suburbs.
+            It's said that Canada is a nation of immigrants, and nowhere has that been more evident than the Greater Toronto Area (GTA), with about one-third of all new immigrants choosing the region in 2021.<Footnote id={addFootnote(fns[0])} /> This isn't too surprising – Toronto has long been the immigrant hub of the country, with its foreign-born population consistently exceeding the national average. It's where they've ended up that's really changed: before, it was the downtown, and now, it's the suburbs.
         </p>
 
         <p>
